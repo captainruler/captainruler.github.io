@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title></title>
+      <link href="/2022/12/21/tuo-ke/"/>
+      <url>/2022/12/21/tuo-ke/</url>
+      
+        <content type="html"><![CDATA[<p>#对于脱壳一些题型的记录</p><p>对于手动脱壳，我们有两种常用的安全工具，一个是od,另一个是ida。两个方法略有不同。对于脱一般的程序壳的时候，我主要用的是ida来脱壳，一般ida实在脱不了了再想到用od来脱，od,，所以我记录的大多都是用的ida来脱的。</p><h3 id="大致步骤"><a href="#大致步骤" class="headerlink" title="大致步骤"></a>大致步骤</h3><h5 id="1、寻找oep"><a href="#1、寻找oep" class="headerlink" title="1、寻找oep"></a>1、寻找oep</h5><p>因为我们的壳经过运行之后，会慢慢的自动解开壳，我们就要去寻找解开后的那个时候的程序入口。而oep就是程序的入口。</p><h5 id="2、寻找到加密函数"><a href="#2、寻找到加密函数" class="headerlink" title="2、寻找到加密函数"></a>2、寻找到加密函数</h5><p>找到oep之后，运行下来，我们的程序就出来了。我们就可以去寻找了。string里面去寻找字符串，然后再跳到函数里面，去就可以直接分析了。</p><p>#####3、dump与修复</p><p>有些时候，可能我们要将程序剥离出来，这个时候就在oep口的地方将全部程序dump出来即可，dump出来之后还要进行修复文件，因为它的程序地址那些会发生改变，因此我们需要修复IAT。</p><p><strong>对于脱壳运用最多的方法，一个是单步调试法，另一个就是ESP定律来脱壳</strong></p><h3 id="单步调试法"><a href="#单步调试法" class="headerlink" title="单步调试法"></a>单步调试法</h3><p>正如其名，单步调试法就是进行动态调试文件，分析汇编指令，找到关键点,寻找oep</p><h3 id="esp定律（堆栈平衡）"><a href="#esp定律（堆栈平衡）" class="headerlink" title="esp定律（堆栈平衡）"></a>esp定律（堆栈平衡）</h3><p>由于我们壳会在内存中还原程序，跳到oep，执行我们的程序。大致过程就是运行壳程序解壳，然后退出解壳程序，加载原本程序。有着壳程序的运行与退出，根据堆栈平衡原理，壳退出后，必然会操作堆栈指针为进入之前的堆栈指针。因此根据这个原理，我们可以在堆栈处，设置访问断点，让程序运行，当程序暂停的时候，就是壳程序即将执行完的时候，然后在其附近单步跟踪就可以找到原始OEP了。</p><h3 id="UPX"><a href="#UPX" class="headerlink" title="UPX"></a>UPX</h3><p>###题目一： 链接：<a class="link" href="https://pan.baidu.com/s/1teQgV5kgKpuNJ60o0byYVg?pwd=j8mj">https://pan.baidu.com/s/1teQgV5kgKpuNJ60o0byYVg?pwd=j8mj<i class="fas fa-external-link-alt"></i></a> </p><p>提取码：j8mj</p><pre><code>  ###### 单步调试法</code></pre><p><img lazyload="" src="/images/loading.svg" data-src="/image-20221221172644959.png" alt="image-20221221172644959"></p><p>这个jmp非常可疑（一般那种jmp有大跳转就要注意），我们在这里按下f2 下断点，运行之后，按f7跟入。</p><p><img lazyload="" src="/images/loading.svg" data-src="/image-20221221174102488.png" alt="image-20221221174102488"></p><p>到这里大致就可以猜出我们找对了。</p><p>按f8，运行到  jmp,f7跟入</p><p><img lazyload="" src="/images/loading.svg" data-src="/image-20221221175001632.png" alt="image-20221221175001632"></p><p>到这里就差不多知道找到oep了，由于这样ida没有将它分析出来，我们按p，将其分析出来</p><p><img lazyload="" src="/images/loading.svg" data-src="/image-20221221175423558.png" alt="image-20221221175423558"></p><p>进行反汇编之后发现看不懂，也没有找到我们的函数。这里有两个方法，一个就是单步，直到程序等待输入，另一个方法就是直接去string中搜索，字符串。我运用的是第二种。</p><p><img lazyload="" src="/images/loading.svg" data-src="/image-20221221203234327.png"></p><p><img lazyload="" src="/images/loading.svg" data-src="/image-20221221203609175.png" alt="image-20221221203609175"></p><p>按键盘上的X快捷键。</p><p><img lazyload="" src="/images/loading.svg" data-src="/../../%E8%84%B1%E5%A3%B3/image-20221221203438864-1671634100072-1-1671634255795-5.png" alt="image-20221221203438864-1671634100072-1"></p><p><img lazyload="" src="/images/loading.svg" data-src="/image-20221221203345394.png" alt="image-20221221203345394"></p><p>查询交叉引用就可以找到我们的加密函数，按f5反汇编即可。然后进行分析即可。</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>第二章信息的表示和处理</title>
       <link href="/2022/12/21/csapp-di-er-zhang-xin-xi-de-biao-shi-he-chu-li/"/>
       <url>/2022/12/21/csapp-di-er-zhang-xin-xi-de-biao-shi-he-chu-li/</url>
