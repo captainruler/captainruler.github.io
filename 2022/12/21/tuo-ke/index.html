@@ -204,12 +204,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>765 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>1k 字</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>2 分钟</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>3 分钟</span>
         </span>
     
     
@@ -232,7 +232,7 @@
 <p><strong>对于脱壳运用最多的方法，一个是单步调试法，另一个就是ESP定律来脱壳</strong></p>
 <h3 id="单步调试法"><a href="#单步调试法" class="headerlink" title="单步调试法"></a>单步调试法</h3><p>正如其名，单步调试法就是进行动态调试文件，分析汇编指令，找到关键点,寻找oep</p>
 <h3 id="esp定律（堆栈平衡）"><a href="#esp定律（堆栈平衡）" class="headerlink" title="esp定律（堆栈平衡）"></a>esp定律（堆栈平衡）</h3><p>由于我们壳会在内存中还原程序，跳到oep，执行我们的程序。大致过程就是运行壳程序解壳，然后退出解壳程序，加载原本程序。有着壳程序的运行与退出，根据堆栈平衡原理，壳退出后，必然会操作堆栈指针为进入之前的堆栈指针。因此根据这个原理，我们可以在堆栈处，设置访问断点，让程序运行，当程序暂停的时候，就是壳程序即将执行完的时候，然后在其附近单步跟踪就可以找到原始OEP了。</p>
-<h3 id="UPX"><a href="#UPX" class="headerlink" title="UPX"></a>UPX</h3><h3 id="题目一：-链接：https-pan-baidu-com-s-1teQgV5kgKpuNJ60o0byYVg-pwd-j8mj"><a href="#题目一：-链接：https-pan-baidu-com-s-1teQgV5kgKpuNJ60o0byYVg-pwd-j8mj" class="headerlink" title="题目一： 链接：https://pan.baidu.com/s/1teQgV5kgKpuNJ60o0byYVg?pwd=j8mj"></a>题目一： 链接：<a class="link" target="_blank" rel="noopener" href="https://pan.baidu.com/s/1teQgV5kgKpuNJ60o0byYVg?pwd=j8mj">https://pan.baidu.com/s/1teQgV5kgKpuNJ60o0byYVg?pwd=j8mj<i class="fas fa-external-link-alt"></i></a></h3><h3 id="提取码：j8mj"><a href="#提取码：j8mj" class="headerlink" title="提取码：j8mj"></a>提取码：j8mj</h3><h6 id="单步调试法-1"><a href="#单步调试法-1" class="headerlink" title="单步调试法"></a>单步调试法</h6><p><img lazyload="" src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221221172644959.png" alt="image-20221221172644959"></p>
+<h3 id="UPX"><a href="#UPX" class="headerlink" title="UPX"></a>UPX</h3><h3 id="题目一："><a href="#题目一：" class="headerlink" title="题目一："></a>题目一：</h3><h3 id="链接：https-pan-baidu-com-s-1teQgV5kgKpuNJ60o0byYVg-pwd-j8mj"><a href="#链接：https-pan-baidu-com-s-1teQgV5kgKpuNJ60o0byYVg-pwd-j8mj" class="headerlink" title="链接：https://pan.baidu.com/s/1teQgV5kgKpuNJ60o0byYVg?pwd=j8mj"></a>链接：<a class="link" target="_blank" rel="noopener" href="https://pan.baidu.com/s/1teQgV5kgKpuNJ60o0byYVg?pwd=j8mj">https://pan.baidu.com/s/1teQgV5kgKpuNJ60o0byYVg?pwd=j8mj<i class="fas fa-external-link-alt"></i></a></h3><h3 id="提取码：j8mj"><a href="#提取码：j8mj" class="headerlink" title="提取码：j8mj"></a>提取码：j8mj</h3><h6 id="单步调试法-1"><a href="#单步调试法-1" class="headerlink" title="单步调试法"></a>单步调试法</h6><p><img lazyload="" src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221221172644959.png" alt="image-20221221172644959"></p>
 <p>这个jmp非常可疑（一般那种jmp有大跳转就要注意），我们在这里按下f2 下断点，运行之后，按f7跟入。</p>
 <p><img lazyload="" src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221221174102488.png" alt="image-20221221174102488"></p>
 <p>到这里大致就可以猜出我们找对了。</p>
@@ -246,6 +246,30 @@
 <p>按键盘上的X快捷键。<img lazyload="" src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221221203438864-1671634100072-1.png" alt="image-20221221203438864-1671634100072-1"></p>
 <p><img lazyload="" src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221221203345394.png" alt="image-20221221203345394"></p>
 <p>查询交叉引用就可以找到我们的加密函数，按f5反汇编即可。然后进行分析即可。</p>
+<h3 id="题目二"><a href="#题目二" class="headerlink" title="题目二"></a>题目二</h3><h3 id="链接：https-pan-baidu-com-s-1-e-A7gJow71q4s8KYs0JfQ-pwd-fycv"><a href="#链接：https-pan-baidu-com-s-1-e-A7gJow71q4s8KYs0JfQ-pwd-fycv" class="headerlink" title="链接：https://pan.baidu.com/s/1_e_A7gJow71q4s8KYs0JfQ?pwd=fycv"></a>链接：<a class="link" target="_blank" rel="noopener" href="https://pan.baidu.com/s/1_e_A7gJow71q4s8KYs0JfQ?pwd=fycv">https://pan.baidu.com/s/1_e_A7gJow71q4s8KYs0JfQ?pwd=fycv<i class="fas fa-external-link-alt"></i></a></h3><h3 id="提取码：fycv"><a href="#提取码：fycv" class="headerlink" title="提取码：fycv"></a>提取码：fycv</h3><p><img lazyload="" src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227095122670.png" alt="image-20221227095122670"></p>
+<p>直接在程序的第一条指令上下一个断点。然后运行，寻找可疑点。</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227095328753.png" alt="image-20221227095328753"></p>
+<p>指令的最后有个retn,这里我们按f4运行到此处，再按f7跟入。</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227095542230.png" alt="image-20221227095542230"></p>
+<p>进入之后发现最后的jmp,我们继续像先前一样，f4,f7跟入。</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227095720390.png" alt="image-20221227095720390"></p>
+<p>继续重复上面步骤。</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/image-20221227095757480.png" alt="image-20221227095757480"></p>
+<p>继续</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227095822799.png" alt="image-20221227095822799"></p>
+<p>继续</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227095854783.png" alt="image-20221227095854783"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227095925714.png" alt="image-20221227095925714"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227095948589.png" alt="image-20221227095948589"></p>
+<p>跟到了这里我们就大致可以知道了，我们马上成功了，我们找到了oep。继续</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227103349134.png" alt="image-20221227103349134"></p>
+<p>到这里之后按p分析，就成了现在的样子，到这里就找到了我们的oep了。</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227103532762.png" alt="image-20221227103532762"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227103552479.png" alt="image-20221227103552479"></p>
+<p>在这里按c,再按p，再反汇编就可以得到我们的加密函数了</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227103659899.png" alt="image-20221227103659899"></p>
+<hr>
+<p>通过这两到题，我们大致可以发现，upx脱壳，就是去寻找可疑点，jmp,或者ret，因为壳是一个程序，因此我们脱壳就是要其运行完成的结果，所以我们在脱壳过程中总是要跳到ret，也就是这个原因。最后到oep的时候也很有特点，多脱几次就有感觉了。</p>
 
             </div>
 
@@ -332,7 +356,7 @@
                 <div class="post-toc-wrap">
     <div class="post-toc">
         <div style="font-size: 1.3rem;margin-top: 0; margin-bottom: 0.8rem; transition-duration: 0.1s;"><i class="fa-solid fa-list"></i> <strong>目录</strong></div>
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%B9%E4%BA%8E%E8%84%B1%E5%A3%B3%E4%B8%80%E4%BA%9B%E9%A2%98%E5%9E%8B%E7%9A%84%E8%AE%B0%E5%BD%95"><span class="nav-number">1.</span> <span class="nav-text">对于脱壳一些题型的记录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%A7%E8%87%B4%E6%AD%A5%E9%AA%A4"><span class="nav-number">1.0.1.</span> <span class="nav-text">大致步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1%E3%80%81%E5%AF%BB%E6%89%BEoep"><span class="nav-number">1.0.1.0.1.</span> <span class="nav-text">1、寻找oep</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2%E3%80%81%E5%AF%BB%E6%89%BE%E5%88%B0%E5%8A%A0%E5%AF%86%E5%87%BD%E6%95%B0"><span class="nav-number">1.0.1.0.2.</span> <span class="nav-text">2、寻找到加密函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3%E3%80%81dump%E4%B8%8E%E4%BF%AE%E5%A4%8D"><span class="nav-number">1.0.1.0.3.</span> <span class="nav-text">3、dump与修复</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E6%AD%A5%E8%B0%83%E8%AF%95%E6%B3%95"><span class="nav-number">1.0.2.</span> <span class="nav-text">单步调试法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#esp%E5%AE%9A%E5%BE%8B%EF%BC%88%E5%A0%86%E6%A0%88%E5%B9%B3%E8%A1%A1%EF%BC%89"><span class="nav-number">1.0.3.</span> <span class="nav-text">esp定律（堆栈平衡）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UPX"><span class="nav-number">1.0.4.</span> <span class="nav-text">UPX</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E4%B8%80%EF%BC%9A-%E9%93%BE%E6%8E%A5%EF%BC%9Ahttps-pan-baidu-com-s-1teQgV5kgKpuNJ60o0byYVg-pwd-j8mj"><span class="nav-number">1.0.5.</span> <span class="nav-text">题目一： 链接：https:&#x2F;&#x2F;pan.baidu.com&#x2F;s&#x2F;1teQgV5kgKpuNJ60o0byYVg?pwd&#x3D;j8mj</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E5%8F%96%E7%A0%81%EF%BC%9Aj8mj"><span class="nav-number">1.0.6.</span> <span class="nav-text">提取码：j8mj</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%8D%95%E6%AD%A5%E8%B0%83%E8%AF%95%E6%B3%95-1"><span class="nav-number">1.0.6.0.0.1.</span> <span class="nav-text">单步调试法</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%B9%E4%BA%8E%E8%84%B1%E5%A3%B3%E4%B8%80%E4%BA%9B%E9%A2%98%E5%9E%8B%E7%9A%84%E8%AE%B0%E5%BD%95"><span class="nav-number">1.</span> <span class="nav-text">对于脱壳一些题型的记录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%A7%E8%87%B4%E6%AD%A5%E9%AA%A4"><span class="nav-number">1.0.1.</span> <span class="nav-text">大致步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1%E3%80%81%E5%AF%BB%E6%89%BEoep"><span class="nav-number">1.0.1.0.1.</span> <span class="nav-text">1、寻找oep</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2%E3%80%81%E5%AF%BB%E6%89%BE%E5%88%B0%E5%8A%A0%E5%AF%86%E5%87%BD%E6%95%B0"><span class="nav-number">1.0.1.0.2.</span> <span class="nav-text">2、寻找到加密函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3%E3%80%81dump%E4%B8%8E%E4%BF%AE%E5%A4%8D"><span class="nav-number">1.0.1.0.3.</span> <span class="nav-text">3、dump与修复</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E6%AD%A5%E8%B0%83%E8%AF%95%E6%B3%95"><span class="nav-number">1.0.2.</span> <span class="nav-text">单步调试法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#esp%E5%AE%9A%E5%BE%8B%EF%BC%88%E5%A0%86%E6%A0%88%E5%B9%B3%E8%A1%A1%EF%BC%89"><span class="nav-number">1.0.3.</span> <span class="nav-text">esp定律（堆栈平衡）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UPX"><span class="nav-number">1.0.4.</span> <span class="nav-text">UPX</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E4%B8%80%EF%BC%9A"><span class="nav-number">1.0.5.</span> <span class="nav-text">题目一：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%BE%E6%8E%A5%EF%BC%9Ahttps-pan-baidu-com-s-1teQgV5kgKpuNJ60o0byYVg-pwd-j8mj"><span class="nav-number">1.0.6.</span> <span class="nav-text">链接：https:&#x2F;&#x2F;pan.baidu.com&#x2F;s&#x2F;1teQgV5kgKpuNJ60o0byYVg?pwd&#x3D;j8mj</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E5%8F%96%E7%A0%81%EF%BC%9Aj8mj"><span class="nav-number">1.0.7.</span> <span class="nav-text">提取码：j8mj</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%8D%95%E6%AD%A5%E8%B0%83%E8%AF%95%E6%B3%95-1"><span class="nav-number">1.0.7.0.0.1.</span> <span class="nav-text">单步调试法</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E4%BA%8C"><span class="nav-number">1.0.8.</span> <span class="nav-text">题目二</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%BE%E6%8E%A5%EF%BC%9Ahttps-pan-baidu-com-s-1-e-A7gJow71q4s8KYs0JfQ-pwd-fycv"><span class="nav-number">1.0.9.</span> <span class="nav-text">链接：https:&#x2F;&#x2F;pan.baidu.com&#x2F;s&#x2F;1_e_A7gJow71q4s8KYs0JfQ?pwd&#x3D;fycv</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E5%8F%96%E7%A0%81%EF%BC%9Afycv"><span class="nav-number">1.0.10.</span> <span class="nav-text">提取码：fycv</span></a></li></ol></li></ol></li></ol>
     </div>
 </div>
             </div>
