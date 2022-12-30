@@ -248,7 +248,7 @@
 <li>共享目标文件。特殊的可重定位目标文件，可以在加载或者运行时被动态的加载内存并链接。</li>
 </ul>
 <h2 id="可重定位目标文件"><a href="#可重定位目标文件" class="headerlink" title="可重定位目标文件"></a>可重定位目标文件</h2><p>​      一个可重定位文件的组成如图所示：</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2022/12/27/di-qi-zhang-lian-jie/image-20221229165252297.png" alt="image-20221229165252297"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./image-20221229165252297.png" alt="image-20221229165252297"></p>
 <p><strong>elf头</strong>：描述了该文件的系统字的大小与字节顺序，还有帮助链接器语法分析和解释目标文件的信息。包括， elf头的大小，目标文件的类型（上面提到的三种），机器类型（X86-64）,字节头部表的文件偏移，节头部表中条目的大小和数量。</p>
 <p><strong>.text</strong>  :已经编译程序的机器代码。</p>
 <p><strong>.rodata</strong> :只读数据，如在printf语句中的格式串和开关语句的跳转表。</p>
@@ -262,7 +262,7 @@
 <p><strong>.line</strong> : 原始c源程序的行号和.text节中机器指令之间的映射。</p>
 <p><strong>.strtab</strong> : 一个字符表，其中内容包括.symtab和.debug节的符号表，以及节头部中的节名字。</p>
 <h3 id="符号和符号表"><a href="#符号和符号表" class="headerlink" title="符号和符号表"></a>符号和符号表</h3><p><strong>符号有三种</strong> ：</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2022/12/27/di-qi-zhang-lian-jie/image-20221229203235962.png" alt="image-20221229203235962"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./image-20221229203235962.png" alt="image-20221229203235962"></p>
 <p><strong>符号表</strong> </p>
 <p>由汇编器构造，使用编译器输入到汇编语言.s文件中的符号</p>
 <h3 id="符号解析"><a href="#符号解析" class="headerlink" title="符号解析"></a>符号解析</h3><p>链接器解析符号引用的方法是将每个引用与它输入的可重定位目标文件的符号表中的一个确定的符号定义关联起来。</p>
@@ -283,10 +283,10 @@
 <ul>
 <li>代码重定位条目放在.rel.text中，而已初始化了的放在.rel.data中。</li>
 </ul>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2022/12/27/di-qi-zhang-lian-jie/image-20221230145928033.png" alt="image-20221230145928033"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./image-20221230145928033.png" alt="image-20221230145928033"></p>
 <p>（书p517）</p>
 <h2 id="可执行目标文件"><a href="#可执行目标文件" class="headerlink" title="可执行目标文件"></a>可执行目标文件</h2><p>一个比较典型的ELF可执行文件：</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2022/12/27/di-qi-zhang-lian-jie/image-20221230150344932.png" alt="image-20221230150344932"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./image-20221230150344932.png" alt="image-20221230150344932"></p>
 <p>可执行文件与可重定位目标文件有些许差别：</p>
 <ul>
 <li>ELF头描述文件的总体格式，包括程序的入口点（oep）.</li>
@@ -304,7 +304,7 @@
         <li>本文作者：二木</li>
         <li>创建时间：2022-12-27 23:09:55</li>
         <li>
-            本文链接：https://captainruler.github.io/2022/12/27/di-qi-zhang-lian-jie/
+            本文链接：https://captainruler.github.io/2022/12/27/csapp-di-qi-zhang-lian-jie/
         </li>
         <li>
             版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -319,6 +319,21 @@
 
             
                 <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                            rel="prev"
+                            href="/2022/12/30/csapp-di-ba-zhang-yi-chang-kong-zhi-liu/"
+                            >
+                                <span class="left arrow-icon flex-center">
+                                <i class="fas fa-chevron-left"></i>
+                                </span>
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">csapp 第八章 异常控制流</span>
+                                    <span class="post-nav-item">上一篇</span>
+                                </span>
+                            </a>
+                        </div>
                     
                     
                         <div class="article-next">
