@@ -204,12 +204,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>2k 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>2.1k 字</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>6 分钟</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>7 分钟</span>
         </span>
     
     
@@ -237,15 +237,21 @@
 </ul>
 <h3 id="静态链接"><a href="#静态链接" class="headerlink" title="静态链接"></a>静态链接</h3><p>静态链接器以一组可重定位目标文件和命令行参数作为输入，生成一个完全的链接的，可以加载和运行的执行目标文件作为输出 。简单来说就是，把我们的程序由不可执行变成了可执行文件。在此过程中链接器需要完成的任务：</p>
 <ul>
-<li><strong>符号解释</strong>  将我们的数据，比如全局变量，静态变量等，属于static声明的数据，用链接器自己的符号来关联起来</li>
-<li><strong>重定位</strong>  编译器与汇编器生成从0开始的地址，链接器将先前关联起来的符号，再与内存关联起来，就重定位了这些数据，然后再修改所有对这些符号的引用，使得它们指向内存的这个位置。</li>
+<li><p><strong>符号解释</strong>  将我们的数据，比如全局变量，静态变量等，属于static声明的数据，用链接器自己的符号来关联起来</p>
+<blockquote>
+<p><strong>符号</strong> 就是我们平常声明的那些东西比如int  a,char arr[5],等等</p>
+<p><strong>符号表</strong> 将符号整合在一起就形成了符号表。</p>
+</blockquote>
+</li>
+<li><p><strong>重定位</strong>  编译器与汇编器生成从0开始的地址，链接器将先前关联起来的符号，再与内存关联起来，就重定位了这些数据，然后再修改所有对这些符号的引用，使得它们指向内存的这个位置。</p>
+</li>
 </ul>
 <p>总得来说，链接器就是将我们程序的各种块连接起来，然后再确定这些块的运行位置，并且定位这些块。</p>
-<h3 id="目标文件"><a href="#目标文件" class="headerlink" title="目标文件"></a>目标文件</h3><p>目标文件有三种：</p>
+<h3 id="目标文件"><a href="#目标文件" class="headerlink" title="目标文件"></a>目标文件</h3><p>目标文件可以分为三种：</p>
 <ul>
 <li>可重定位目标文件。 二进制代码和数据，在编译的时候可以与其他可重定位目标文件合并在一起，形成一个可执行目标文件。</li>
 <li>可执行目标文件。包含二进制代码和数据，可以直接复制到内存中执行。</li>
-<li>共享目标文件。特殊的可重定位目标文件，可以在加载或者运行时被动态的加载内存并链接。</li>
+<li>共享目标文件。特殊的可重定位目标文件，可以在加载或者运行时被动态的加载内存并链接。（也就是我们常说的动态链接库那些）</li>
 </ul>
 <h2 id="可重定位目标文件"><a href="#可重定位目标文件" class="headerlink" title="可重定位目标文件"></a>可重定位目标文件</h2><p>​      一个可重定位文件的组成如图所示：</p>
 <p><img lazyload="" src="/images/loading.svg" data-src="/2022/12/27/csapp-di-qi-zhang-lian-jie/image-20221229165138290.png" alt="image-20221229165138290"></p>
@@ -255,13 +261,14 @@
 <p><strong>.data</strong> ：已经初始化的全局和静态变量。而局部变量保存在栈中，没出现在.data和.bss区中。</p>
 <p><strong>.bss</strong> :未初始化的全局和静态变量，和所有被初始为0的全局或者静态变量。在目标文件中这个节不占实际的空间，仅占位符。</p>
 <p>（将目标文件格式区分为已初始化和未初始化变量是为了空间效率，为初始化变量不需要占用任何实际的磁盘空间。运行时，在内存中分配这些变量，初始值为0）</p>
-<p><strong>.symtab</strong> 一个 :符号表。存放着程序中定义和引用的函数和全局变量的信息。（每个可重定位目标文件在.symtab中都有一张符号表）</p>
-<p><strong>rel.text</strong> : .text节中位置的列表，当链接器把这个目标文件和其他文件组合在一起时，需要修改这些位置。一般的，任何调用外部函数或者引用全局变量的指令都需要需改。</p>
-<p><strong>rel.data</strong> : 被模块引用或定义的所有全局变量的重定位信息。一般的，任何已被初始化的全局变量，如果它的初始值是一个全局变量地址或者外部定义的地址，都需要被修改。</p>
+<p><strong>.symtab</strong> 一个 符号表。存放着程序中定义和引用的函数和全局变量的信息。（每个可重定位目标文件在.symtab中都有一张符号表）</p>
+<p><strong>rel.text</strong> : .text节中位置的列表，当链接器把这个目标文件和其他文件组合在一起时，需要修改这些位置。一般的，任何调用外部函数或者引用全局变量的指令都需要需改。（后面会讲，更好理解一些）</p>
+<p><strong>rel.data</strong> : 被模块引用或定义的所有全局变量的重定位信息。一般的，任何已被初始化的全局变量，如果它的初始值是一个全局变量地址或者外部定义的地址，都需要被修改。(后面会讲，更好理解一些)</p>
 <p><strong>debug</strong> :一个调试符号表。</p>
 <p><strong>.line</strong> : 原始c源程序的行号和.text节中机器指令之间的映射。</p>
 <p><strong>.strtab</strong> : 一个字符表，其中内容包括.symtab和.debug节的符号表，以及节头部中的节名字。</p>
-<h3 id="符号和符号表"><a href="#符号和符号表" class="headerlink" title="符号和符号表"></a>符号和符号表</h3><p><strong>符号有三种</strong> ：</p>
+<p><strong>符号和符号表</strong></p>
+<p><strong>符号有三种</strong> ：</p>
 <p><img lazyload="" src="/images/loading.svg" data-src="/./image-20221229203235962.png" alt="image-20221229203235962"></p>
 <p><strong>符号表</strong> </p>
 <p>由汇编器构造，使用编译器输入到汇编语言.s文件中的符号</p>
@@ -379,7 +386,7 @@
                 <div class="post-toc-wrap">
     <div class="post-toc">
         <div style="font-size: 1.3rem;margin-top: 0; margin-bottom: 0.8rem; transition-duration: 0.1s;"><i class="fa-solid fa-list"></i> <strong>目录</strong></div>
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E9%93%BE%E6%8E%A5"><span class="nav-number">1.</span> <span class="nav-text">静态链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E6%96%87%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">目标文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E9%87%8D%E5%AE%9A%E4%BD%8D%E7%9B%AE%E6%A0%87%E6%96%87%E4%BB%B6"><span class="nav-number"></span> <span class="nav-text">可重定位目标文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%A6%E5%8F%B7%E5%92%8C%E7%AC%A6%E5%8F%B7%E8%A1%A8"><span class="nav-number">1.</span> <span class="nav-text">符号和符号表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%A6%E5%8F%B7%E8%A7%A3%E6%9E%90"><span class="nav-number">2.</span> <span class="nav-text">符号解析</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E5%BA%93%E9%93%BE%E6%8E%A5%EF%BC%88P511%EF%BC%89"><span class="nav-number">2.0.1.</span> <span class="nav-text">静态库链接（P511）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E5%AE%9A%E4%BD%8D"><span class="nav-number">3.</span> <span class="nav-text">重定位</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E6%89%A7%E8%A1%8C%E7%9B%AE%E6%A0%87%E6%96%87%E4%BB%B6"><span class="nav-number"></span> <span class="nav-text">可执行目标文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E5%85%B1%E4%BA%AB%E5%BA%93"><span class="nav-number"></span> <span class="nav-text">动态链接共享库</span></a>
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E9%93%BE%E6%8E%A5"><span class="nav-number">1.</span> <span class="nav-text">静态链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E6%96%87%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">目标文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E9%87%8D%E5%AE%9A%E4%BD%8D%E7%9B%AE%E6%A0%87%E6%96%87%E4%BB%B6"><span class="nav-number"></span> <span class="nav-text">可重定位目标文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%A6%E5%8F%B7%E8%A7%A3%E6%9E%90"><span class="nav-number">1.</span> <span class="nav-text">符号解析</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E5%BA%93%E9%93%BE%E6%8E%A5%EF%BC%88P511%EF%BC%89"><span class="nav-number">1.0.1.</span> <span class="nav-text">静态库链接（P511）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E5%AE%9A%E4%BD%8D"><span class="nav-number">2.</span> <span class="nav-text">重定位</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E6%89%A7%E8%A1%8C%E7%9B%AE%E6%A0%87%E6%96%87%E4%BB%B6"><span class="nav-number"></span> <span class="nav-text">可执行目标文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E5%85%B1%E4%BA%AB%E5%BA%93"><span class="nav-number"></span> <span class="nav-text">动态链接共享库</span></a>
     </div>
 </div>
             </div>
