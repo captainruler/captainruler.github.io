@@ -8,7 +8,7 @@
       <link href="/2023/02/09/csapp-di-shi-er-zhang-bing-fa-bian-cheng/"/>
       <url>/2023/02/09/csapp-di-shi-er-zhang-bing-fa-bian-cheng/</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<h1 id="并发编程"><a href="#并发编程" class="headerlink" title="并发编程"></a>并发编程</h1><p>什么是并发？我们可以这样理解就是同时运行，做多件事情，比如，我们在看剧的同时，吃着薯片，像这种，在时间上重叠的现象，就是并发、</p><p><strong>并发的作用</strong> </p><ul><li><p>访问慢速i\o设备。访问慢速的i\o设备的时候，内核可以同时运行一些其他的数据，来等待。</p></li><li><p>与人进行交互。我们一般打开电脑，都会同时运行好几个程序。</p></li><li><p>服务器服务多个网络客户端。</p></li><li><p>在多核机器上进行并行计算。</p></li><li><p>多线程运行。</p><h3 id="基于进程的并发编程"><a href="#基于进程的并发编程" class="headerlink" title="基于进程的并发编程"></a>基于进程的并发编程</h3><p><img lazyload="" src="/images/loading.svg" data-src="/image-20230226165229824.png" alt="image-20230226165229824"></p></li></ul>]]></content>
       
       
       
