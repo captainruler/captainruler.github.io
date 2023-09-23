@@ -224,32 +224,32 @@
 
             <div class="article-content markdown-body">
                 <h1 id="虎符CTF2022-—shellcode"><a href="#虎符CTF2022-—shellcode" class="headerlink" title="虎符CTF2022 —shellcode"></a>虎符CTF2022 —shellcode</h1><p>打开这道题，我们可以发现这个是进行加壳了的软件</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2023/09/21/hu-fu-ctf2022-shellcode-df67931495854300957b88abb372a0af/Untitled.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/2023/09/21/hu-fu-ctf2022-shellcode-df67931495854300957b88abb372a0af/Untitled-16954558518861.png" alt="Untitled"></p>
 <p>我们进行动态调试，先准备手动脱壳的，脱的时候发现居然有反调试，准备动态调试将反调试的patch但是发现很难脱，脱了半天还在循环，可能太菜的原因（T _ T）。但是我们脱的时候可以发现，这个就是themida的壳。去网上一搜，果然是强壳，难脱。。。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled%201.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/./Untitled%201.png" alt="Untitled"></p>
 <p>去网上找了一个可以绕过这个壳反调试</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled%202.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/./Untitled%202.png" alt="Untitled"></p>
 <p>下载下来后拷贝对应版本的插件到你的x64dbg插件目录,如64位,拷贝SharpOD x64.dp64文件,然后重启调试器在插件菜单中配置</p>
 <p>再将这个选中。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled%203.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/./Untitled%203.png" alt="Untitled"></p>
 <p>这样我们就可以愉快的脱壳了。</p>
 <p>将程序放入X32DBGz中进行分析，我们按F9运行几次，我们就可以运行到我们的OPE之中了。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled%204.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/./Untitled%204.png" alt="Untitled"></p>
 <p>我们使用Syclla插件将可以将这个dump出来</p>
 <p>或者记下这个地址，我们使用IDA的附加调试，将IDA附加到程序上，因为程序运行到了打印字符 了，所以壳肯定是解开了。因此我们可以就此直接找到解密后的代码处。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled%205.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/./Untitled%205.png" alt="Untitled"></p>
 <p>我们可以找到我们的解密后的代码 开始分析</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled%206.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/./Untitled%206.png" alt="Untitled"></p>
 <p>首先我们可以知道，我们需要输入的shellcode是352位</p>
 <p>进入这个函数</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled%207.png" alt="Untitled"></p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled%208.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/./Untitled%207.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/./Untitled%208.png" alt="Untitled"></p>
 <p>进入之后，我们进行简单的分析可以发现，这个函数实现的是base64加密</p>
 <p>往后分析我们可以发现有一个将数据右移了3位</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled%209.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/./Untitled%209.png" alt="Untitled"></p>
 <p>这里特征很明显0x61C88647 和加密特征很明显，是xxtea加密，我们对比原版的XXtea我们可以发现</p>
 <p>就进行魔改后的</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled%2010.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/./Untitled%2010.png" alt="Untitled"></p>
 <p>由此shellcode解密分析完毕，我们写一个脚本将其shellcoe出来</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h&gt;</span></span>

@@ -225,27 +225,27 @@
             <div class="article-content markdown-body">
                 <h1 id="强网杯-2022-GameMaster"><a href="#强网杯-2022-GameMaster" class="headerlink" title="强网杯-2022-GameMaster"></a>强网杯-2022-GameMaster</h1><p>刚开始看这道题的时候，其实是有点懵的，还是自己做的题太少了T _ T.就此为了加深印象，复现这道题。</p>
 <p>丢进Exeinfo PE中，可以发现是c#写的.net程序，我们用Dnspy打开（一个专门反编译c#，.net等的一个软件）。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/%E5%BC%BA%E7%BD%91%E6%9D%AF-2022-GameMaster%20110de77af2d24015be62f1704ce21b76/Untitled.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled.png"></p>
 <p>我们直接找到此软件的主函数，分析其逻辑</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/%E5%BC%BA%E7%BD%91%E6%9D%AF-2022-GameMaster%20110de77af2d24015be62f1704ce21b76/Untitled%201.png" alt="Untitled"></p>
+<p>![Untitled](/Untitled 1-16954559556731.png)</p>
 <p>这里我们可以发现，是读取了我们的附件所给的gamemesage里面的数据，读取到filestream,</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/%E5%BC%BA%E7%BD%91%E6%9D%AF-2022-GameMaster%20110de77af2d24015be62f1704ce21b76/Untitled%202.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled%202.png" alt="Untitled"></p>
 <p>分析下面的代码，可以知道，这部分实现的代码，就是根据我们的按键，施行对应的操作，其中Enter键和space键，对应的函数下都有deal和stand,hit键，如果简单的玩过一下这个游戏，我们很容易知道，这几个函数实现的功能就是进行输赢的判断和检测自己的金钱还有多少，游戏是否继续。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/%E5%BC%BA%E7%BD%91%E6%9D%AF-2022-GameMaster%20110de77af2d24015be62f1704ce21b76/Untitled%203.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled%203.png" alt="Untitled"></p>
 <p>我们分析之后，发现这个esc这个键下的函数十分的可疑，我们跟进去看看。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/%E5%BC%BA%E7%BD%91%E6%9D%AF-2022-GameMaster%20110de77af2d24015be62f1704ce21b76/Untitled%204.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled%204.png" alt="Untitled"></p>
 <p>整体来说，这个函数并没有做什么，但是这个函数中调用的另一个函数，goldFUNC，我们继续跟进。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/%E5%BC%BA%E7%BD%91%E6%9D%AF-2022-GameMaster%20110de77af2d24015be62f1704ce21b76/Untitled%205.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled%205.png" alt="Untitled"></p>
 <p>发现这个函数里面全是flag判断啥的异常处理函数，这里应该就是我们关键的加密函数了，但是这些判断看起来一头雾水，我们继续分析。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/%E5%BC%BA%E7%BD%91%E6%9D%AF-2022-GameMaster%20110de77af2d24015be62f1704ce21b76/Untitled%206.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled%206.png" alt="Untitled"></p>
 <p>我们翻到后面我们发现了一个非常不一样的异常处理函数，而且这里出现了Program.memory，这个就是程序的开头，将我们文件读取的数据存储的地方。我们继续向下分析，看还有没有同样的操作。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/%E5%BC%BA%E7%BD%91%E6%9D%AF-2022-GameMaster%20110de77af2d24015be62f1704ce21b76/Untitled%207.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled%207.png" alt="Untitled"></p>
 <p>这里有一个AES-ECB的加密</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/%E5%BC%BA%E7%BD%91%E6%9D%AF-2022-GameMaster%20110de77af2d24015be62f1704ce21b76/Untitled%208.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled%208.png" alt="Untitled"></p>
 <p>我们发现了一个函数调用，我们进去看看。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/%E5%BC%BA%E7%BD%91%E6%9D%AF-2022-GameMaster%20110de77af2d24015be62f1704ce21b76/Untitled%209.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled%209.png" alt="Untitled"></p>
 <p>这里也是AES-ECB加密，但是我们分析之后，我们可以发现它并没有对我们的文件的数据进行改变，因此我们不管它。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/%E5%BC%BA%E7%BD%91%E6%9D%AF-2022-GameMaster%20110de77af2d24015be62f1704ce21b76/Untitled%2010.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled%2010.png" alt="Untitled"></p>
 <p>到这里我们就可以知道了，我们的gamemesage是被加密过的文件，首先异或了34，之后又进行了AES-ECB加密，我们写一个脚本进行解密即可</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> Crypto<span class="token punctuation">.</span>Cipher <span class="token keyword">import</span> AES
 
@@ -272,15 +272,15 @@ plaintext <span class="token operator">=</span> cipher<span class="token punctua
 
 <p>将解密后的文件输出到data</p>
 <p>我们放入winhex中分析，可以发现是.net的一个输出文件，但是并未有文件头，我们在这里面进行搜索，看看是否能找到一些看信息</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/%E5%BC%BA%E7%BD%91%E6%9D%AF-2022-GameMaster%20110de77af2d24015be62f1704ce21b76/Untitled%2011.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled%2011.png" alt="Untitled"></p>
 <p>我们可以找到一个MZ的头，我们将其前面的数据删除，然后将其加入dll的后缀，因为此文件是以dll文件的形式载入我们的程序的</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/%E5%BC%BA%E7%BD%91%E6%9D%AF-2022-GameMaster%20110de77af2d24015be62f1704ce21b76/Untitled%2012.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled%2012.png" alt="Untitled"></p>
 <p>我们将其放入dnspy中分析。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/%E5%BC%BA%E7%BD%91%E6%9D%AF-2022-GameMaster%20110de77af2d24015be62f1704ce21b76/Untitled%2013.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled%2013.png" alt="Untitled"></p>
 <p>有两个关键函数,分析这两个函数是将先前的三段数据进行求解,下一个函数就是将解变成密钥后对我们的数据进行异或,我们先写个脚本爆破出x,y,z.</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/%E5%BC%BA%E7%BD%91%E6%9D%AF-2022-GameMaster%20110de77af2d24015be62f1704ce21b76/Untitled%2014.png" alt="Untitled"></p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/%E5%BC%BA%E7%BD%91%E6%9D%AF-2022-GameMaster%20110de77af2d24015be62f1704ce21b76/Untitled%2015.png" alt="Untitled"></p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/%E5%BC%BA%E7%BD%91%E6%9D%AF-2022-GameMaster%20110de77af2d24015be62f1704ce21b76/Untitled%2016.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled%2014.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled%2015.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled%2016.png" alt="Untitled"></p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> z3 <span class="token keyword">import</span> <span class="token operator">*</span>
 
 x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> z <span class="token operator">=</span> BitVecs<span class="token punctuation">(</span><span class="token string">'x y z'</span><span class="token punctuation">,</span> <span class="token number">64</span><span class="token punctuation">)</span>
