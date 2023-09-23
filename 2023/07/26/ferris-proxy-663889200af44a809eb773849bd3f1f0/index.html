@@ -40,7 +40,7 @@
     <script id="hexo-configurations">
     let REDEFINE = window.REDEFINE || {};
     REDEFINE.hexo_config = {"hostname":"captainruler.github.io","root":"/","language":"zh-CN","path":"search.xml"};
-    REDEFINE.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#005080","avatar":"/images/7.webp","favicon":"/images/9.webp","article_img_align":"center","right_side_width":"210px","content_max_width":"1000px","nav_color":{"left":"#f78746","right":"#367d37","transparency":30},"hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_image":{"light":"/images/2.jpg","dark":"/images/1.jpg"},"title_color":{"light":"#fff","dark":"#d1d1b6"},"description":"好戏都在烟火中"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"0.3.5\nSearch"};
+    REDEFINE.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#005080","avatar":"/images/7.webp","favicon":"/images/9.webp","article_img_align":"center","right_side_width":"210px","content_max_width":"1000px","nav_color":{"left":"#f78746","right":"#367d37","transparency":30},"hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_image":{"light":"/images/2.jpg","dark":"/images/1.jpg"},"title_color":{"light":"#fff","dark":"#d1d1b6"},"description":"生活不止眼前的苟且"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"0.3.5\nSearch"};
     REDEFINE.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
   </script>
 <meta name="generator" content="Hexo 6.3.0">
@@ -188,7 +188,7 @@
                         <div class="author">
                             <span class="name">二木</span>
                             
-                                <span class="author-label">lol</span>
+                                <span class="author-label">王者</span>
                             
                         </div>
                         <div class="meta-info">
@@ -204,7 +204,7 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>1.3k 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.2k 字</span>
         </span>
     
     
@@ -225,7 +225,8 @@
             
 
             <div class="article-content markdown-body">
-                <h1 id="Ferris-proxy"><a href="#Ferris-proxy" class="headerlink" title="Ferris proxy"></a>Ferris proxy</h1><p>按照着wp的思路，照着走一遍之后，大致理清楚了这道题的加密思路</p>
+                <p><img lazyload="" src="/images/loading.svg" data-src="https://pic.imgdb.cn/item/650eca9bc458853aef197538.jpg" alt="Untitled"></p>
+<p>按照着wp的思路，照着走一遍之后，大致理清楚了这道题的加密思路</p>
 <p><img lazyload="" src="/images/loading.svg" data-src="/Ferris%20proxy%20663889200af44a809eb773849bd3f1f0/Untitled.png" alt="Untitled"></p>
 <p>通过wireshark我们可以将server发送到clientd的数据提取出来</p>
 <p><img lazyload="" src="/images/loading.svg" data-src="/Ferris%20proxy%20663889200af44a809eb773849bd3f1f0/Untitled%201.png" alt="Untitled"></p>
@@ -239,47 +240,20 @@
 <p>我们可以得到如下图的流量</p>
 <p><img lazyload="" src="/images/loading.svg" data-src="/Ferris%20proxy%20663889200af44a809eb773849bd3f1f0/Untitled%203.png" alt="Untitled"></p>
 <p>对于第一个字节表示得是数据长度</p>
-<pre class="line-numbers language-rust" data-language="rust"><code class="language-rust"><span class="token number">00000008</span> <span class="token operator">|</span> <span class="token number">00000000</span> <span class="token number">00000000</span> 表示这里有<span class="token number">0x08</span> <span class="token operator">=</span> <span class="token number">8</span> bytes 的数据
-0000000a <span class="token operator">|</span> <span class="token number">00000001</span> <span class="token number">00000000</span> b30c 表示这里有<span class="token number">0x0a</span> <span class="token operator">=</span> <span class="token number">10</span> bytes 的数据，以此类推<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<div class="highlight-container" data-rel="Rust"><figure class="iseeu highlight rust"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">00000008</span> | <span class="number">00000000</span> <span class="number">00000000</span> 表示这里有<span class="number">0x08</span> = <span class="number">8</span> bytes 的数据</span><br><span class="line"><span class="number">0000000</span>a | <span class="number">00000001</span> <span class="number">00000000</span> b30c 表示这里有<span class="number">0x0a</span> = <span class="number">10</span> bytes 的数据，以此类推</span><br></pre></td></tr></tbody></table></figure></div>
 
 <p>对于第二数，我们可以发现其值为0,1,2,三个数，通过socket的server和client编写经验,再加上“猜”，我们可知其中，0代表开启一个stream（进行连接），1是正在传输数据，2代表接收完成，关闭。</p>
 <p>第三个，通过我们编写一个客户端与服务端的经验，一个服务端一般会对应的接收来自多个客户端传入的数据，为了分辨传输给谁和谁传输的，就需要一个id进行识别，因此这里我们猜测这个是stream-id(流id）</p>
 <p>后面的数据自然而然就知道是我们传输的数据了。</p>
 <p>由此我们的协议组成就是：**数据总长度(**4 bytes) + <strong>状态表示</strong> (4 bytes) + <strong>流id</strong> (4 bytes) + <strong>传输数据</strong>(x bytes)</p>
 <h1 id="密钥对接"><a href="#密钥对接" class="headerlink" title="密钥对接"></a>密钥对接</h1><p>通过提取传入的字符串，我们可以发现，rsa加密后的公钥与私钥</p>
-<pre class="line-numbers language-rust" data-language="rust"><code class="language-rust">```
-pubkey<span class="token punctuation">:</span> <span class="token closure-params"><span class="token closure-punctuation punctuation">|</span>
-    <span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token constant">BEGIN</span> <span class="token constant">RSA</span> <span class="token constant">PUBLIC</span> <span class="token constant">KEY</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span>
-    <span class="token class-name">MIIBCgKCAQEA231sNrX6WxlQpfsy8u6VR9rw4H4lY93fspAmXefjDhQhYCPM</span><span class="token operator">+</span><span class="token class-name">Syp</span>
-    <span class="token punctuation">(</span><span class="token punctuation">..</span><span class="token punctuation">)</span>
-    <span class="token class-name">H5YyTi1cOvMFsN</span><span class="token operator">+</span>oPGxgBGpSqYCxmPwINwIDAQAB
-    <span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token constant">END</span> <span class="token constant">RSA</span> <span class="token constant">PUBLIC</span> <span class="token constant">KEY</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span>
-
-mkey<span class="token punctuation">:</span> explorer
-
-privkey<span class="token punctuation">:</span> <span class="token closure-punctuation punctuation">|</span></span>
-    <span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token constant">BEGIN</span> <span class="token constant">PRIVATE</span> <span class="token constant">KEY</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span>
-    <span class="token class-name">MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC93GDINPM6HX2</span><span class="token operator">+</span>
-    <span class="token punctuation">(</span><span class="token punctuation">..</span><span class="token punctuation">)</span>
-    p2eXdqH59DvauggbiS3h4p9k2kxWTocztarvdftMW0ncmA4yCKiUQEmWD784JCyx
-    <span class="token class-name">OupNNfr2rgViWggVBEtJUIg</span><span class="token operator">=</span>
-    <span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token constant">END</span> <span class="token constant">PRIVATE</span> <span class="token constant">KEY</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-none"><code class="language-none">
-![Untitled](Ferris%20proxy%20663889200af44a809eb773849bd3f1f0/Untitled%204.png)
-
-![Untitled](Ferris%20proxy%20663889200af44a809eb773849bd3f1f0/Untitled%205.png)
-
-在key_exchange中，我们可以看到这里rand生成了数据存储在了，v59中16个字节
-
-[rand：Rust随机数库简介 | 子飞的网络日志 (chirsz.cc)](https://chirsz.cc/blog/2019-08/introduce-rust-random.html)
-
-[生成随机值 - Rust Cookbook 中文版 (rustwiki.org)](https://rustwiki.org/zh-CN/rust-cookbook/algorithms/randomness.html)
-
-```rust
-use rand::{thread_rng, Rng};
-let mut rng = thread_rng();
-let x: u128 = rng.gen();
-println!("{}", x);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<div class="highlight-container" data-rel="Rust"><figure class="iseeu highlight rust"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">pubkey: |</span><br><span class="line">    -----BEGIN RSA PUBLIC KEY----</span><br><span class="line">    MIIBCgKCAQEA231sNrX6WxlQpfsy8u6VR9rw4H4lY93fspAmXefjDhQhYCPM+<span class="title function_ invoke__">Syp</span></span><br><span class="line">    (..)</span><br><span class="line">    H5YyTi1cOvMFsN+oPGxgBGpSqYCxmPwINwIDAQAB</span><br><span class="line">    -----END RSA PUBLIC KEY-----</span><br><span class="line"></span><br><span class="line">mkey: explorer</span><br><span class="line"></span><br><span class="line">privkey: |</span><br><span class="line">    -----BEGIN PRIVATE KEY-----</span><br><span class="line">    MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC93GDINPM6HX2+</span><br><span class="line">    (..)</span><br><span class="line">    p2eXdqH59DvauggbiS3h4p9k2kxWTocztarvdftMW0ncmA4yCKiUQEmWD784JCyx</span><br><span class="line">    OupNNfr2rgViWggVBEtJUIg=</span><br><span class="line">    -----END PRIVATE KEY-----</span><br></pre></td></tr></tbody></table></figure></div>
+<p><img lazyload="" src="/images/loading.svg" data-src="/Ferris%20proxy%20663889200af44a809eb773849bd3f1f0/Untitled%204.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/Ferris%20proxy%20663889200af44a809eb773849bd3f1f0/Untitled%205.png" alt="Untitled"></p>
+<p>在key_exchange中，我们可以看到这里rand生成了数据存储在了，v59中16个字节</p>
+<p><a class="link" target="_blank" rel="noopener" href="https://chirsz.cc/blog/2019-08/introduce-rust-random.html">rand：Rust随机数库简介 | 子飞的网络日志 (chirsz.cc)<i class="fas fa-external-link-alt"></i></a></p>
+<p><a class="link" target="_blank" rel="noopener" href="https://rustwiki.org/zh-CN/rust-cookbook/algorithms/randomness.html">生成随机值 - Rust Cookbook 中文版 (rustwiki.org)<i class="fas fa-external-link-alt"></i></a></p>
+<div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">use rand::{thread_rng, Rng};</span><br><span class="line">let mut rng = thread_rng();</span><br><span class="line">let x: u128 = rng.gen();</span><br><span class="line">println!(<span class="string">"{}"</span>, x);</span><br></pre></td></tr></tbody></table></figure></div>
 
 <p><img lazyload="" src="/images/loading.svg" data-src="/Ferris%20proxy%20663889200af44a809eb773849bd3f1f0/Untitled%206.png" alt="Untitled"></p>
 <p>这里将我们的rand出来的16比特的数，进行了rsa加密，从而使得我们的key变成了256位的密钥</p>
@@ -305,23 +279,6 @@ println!("{}", x);<span aria-hidden="true" class="line-numbers-rows"><span></spa
 
             </div>
 
-            
-                <div class="post-copyright-info">
-                    <div class="article-copyright-info-container">
-    <ul>
-        <li>本文标题：Ferris proxy</li>
-        <li>本文作者：二木</li>
-        <li>创建时间：2023-07-26 14:03:33</li>
-        <li>
-            本文链接：https://captainruler.github.io/2023/07/26/ferris-proxy-663889200af44a809eb773849bd3f1f0/
-        </li>
-        <li>
-            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
-        </li>
-    </ul>
-</div>
-
-                </div>
             
 
             
@@ -388,7 +345,7 @@ println!("{}", x);<span aria-hidden="true" class="line-numbers-rows"><span></spa
                 <div class="post-toc-wrap">
     <div class="post-toc">
         <div style="font-size: 1.3rem;margin-top: 0; margin-bottom: 0.8rem; transition-duration: 0.1s;"><i class="fa-solid fa-list"></i> <strong>目录</strong></div>
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Ferris-proxy"><span class="nav-number">1.</span> <span class="nav-text">Ferris proxy</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%86%E9%92%A5%E5%AF%B9%E6%8E%A5"><span class="nav-number">2.</span> <span class="nav-text">密钥对接</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%B9%E5%8C%85%E5%8A%A0%E5%AF%86%E7%9A%84%E4%BC%A0%E8%BE%93"><span class="nav-number">3.</span> <span class="nav-text">对包加密的传输</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%9A%84%E5%8A%A0%E5%AF%86%E6%80%9D%E8%B7%AF%EF%BC%9A"><span class="nav-number">4.</span> <span class="nav-text">总的加密思路：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0%EF%BC%9A"><span class="nav-number">5.</span> <span class="nav-text">参考文章：</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%86%E9%92%A5%E5%AF%B9%E6%8E%A5"><span class="nav-number">1.</span> <span class="nav-text">密钥对接</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%B9%E5%8C%85%E5%8A%A0%E5%AF%86%E7%9A%84%E4%BC%A0%E8%BE%93"><span class="nav-number">2.</span> <span class="nav-text">对包加密的传输</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%9A%84%E5%8A%A0%E5%AF%86%E6%80%9D%E8%B7%AF%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">总的加密思路：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0%EF%BC%9A"><span class="nav-number">4.</span> <span class="nav-text">参考文章：</span></a></li></ol>
     </div>
 </div>
             </div>

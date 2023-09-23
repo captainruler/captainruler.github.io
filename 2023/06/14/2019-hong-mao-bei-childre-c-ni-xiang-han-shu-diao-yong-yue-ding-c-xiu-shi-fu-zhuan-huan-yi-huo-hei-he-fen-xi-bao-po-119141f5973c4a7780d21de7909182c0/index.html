@@ -40,7 +40,7 @@
     <script id="hexo-configurations">
     let REDEFINE = window.REDEFINE || {};
     REDEFINE.hexo_config = {"hostname":"captainruler.github.io","root":"/","language":"zh-CN","path":"search.xml"};
-    REDEFINE.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#005080","avatar":"/images/7.webp","favicon":"/images/9.webp","article_img_align":"center","right_side_width":"210px","content_max_width":"1000px","nav_color":{"left":"#f78746","right":"#367d37","transparency":30},"hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_image":{"light":"/images/2.jpg","dark":"/images/1.jpg"},"title_color":{"light":"#fff","dark":"#d1d1b6"},"description":"好戏都在烟火中"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"0.3.5\nSearch"};
+    REDEFINE.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#005080","avatar":"/images/7.webp","favicon":"/images/9.webp","article_img_align":"center","right_side_width":"210px","content_max_width":"1000px","nav_color":{"left":"#f78746","right":"#367d37","transparency":30},"hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_image":{"light":"/images/2.jpg","dark":"/images/1.jpg"},"title_color":{"light":"#fff","dark":"#d1d1b6"},"description":"生活不止眼前的苟且"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"0.3.5\nSearch"};
     REDEFINE.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
   </script>
 <meta name="generator" content="Hexo 6.3.0">
@@ -188,7 +188,7 @@
                         <div class="author">
                             <span class="name">二木</span>
                             
-                                <span class="author-label">lol</span>
+                                <span class="author-label">王者</span>
                             
                         </div>
                         <div class="meta-info">
@@ -204,7 +204,7 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>358 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>359 字</span>
         </span>
     
     
@@ -248,42 +248,13 @@
 <p>可以发现我们输入的数据被打乱了</p>
 <p>我们输入31个有序数据，12345ABCDEFGHIJKLMNOPQRSTUWXYZ，</p>
 <p>得出乱序后的表，然后写脚本进行还原。</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;string.h&gt;</span></span>
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-	<span class="token keyword">char</span> name<span class="token punctuation">[</span><span class="token number">32</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"?My_Aut0_PWN@R0Pxx@@AAEPADPAE@Z"</span><span class="token punctuation">;</span>
-	<span class="token keyword">int</span> biao<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">0x50</span><span class="token punctuation">,</span> <span class="token number">0x51</span><span class="token punctuation">,</span> <span class="token number">0x48</span><span class="token punctuation">,</span> <span class="token number">0x52</span><span class="token punctuation">,</span> <span class="token number">0x53</span><span class="token punctuation">,</span> <span class="token number">0x49</span><span class="token punctuation">,</span> <span class="token number">0x44</span><span class="token punctuation">,</span> <span class="token number">0x54</span><span class="token punctuation">,</span> <span class="token number">0x55</span><span class="token punctuation">,</span> <span class="token number">0x4a</span><span class="token punctuation">,</span> <span class="token number">0x56</span><span class="token punctuation">,</span> <span class="token number">0x57</span><span class="token punctuation">,</span> <span class="token number">0x4b</span><span class="token punctuation">,</span> <span class="token number">0x45</span><span class="token punctuation">,</span> <span class="token number">0x42</span><span class="token punctuation">,</span> <span class="token number">0x58</span><span class="token punctuation">,</span> <span class="token number">0x59</span><span class="token punctuation">,</span> <span class="token number">0x4c</span><span class="token punctuation">,</span> <span class="token number">0x5a</span><span class="token punctuation">,</span> <span class="token number">0x5b</span><span class="token punctuation">,</span> <span class="token number">0x4d</span><span class="token punctuation">,</span> <span class="token number">0x46</span><span class="token punctuation">,</span> <span class="token number">0x5c</span><span class="token punctuation">,</span> <span class="token number">0x5d</span><span class="token punctuation">,</span> <span class="token number">0x4e</span><span class="token punctuation">,</span> <span class="token number">0x5e</span><span class="token punctuation">,</span> <span class="token number">0x5f</span><span class="token punctuation">,</span> <span class="token number">0x4f</span><span class="token punctuation">,</span> <span class="token number">0x47</span><span class="token punctuation">,</span> <span class="token number">0x43</span><span class="token punctuation">,</span> <span class="token number">65</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
-	<span class="token keyword">char</span> input<span class="token punctuation">[</span><span class="token number">32</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">0</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
-	<span class="token keyword">int</span> i<span class="token punctuation">;</span>
-	<span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token function">strlen</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-		input<span class="token punctuation">[</span>biao<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">65</span><span class="token punctuation">]</span> <span class="token operator">=</span> name<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
-	<span class="token function">puts</span><span class="token punctuation">(</span>input<span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="type">char</span> name[<span class="number">32</span>] = <span class="string">"?My_Aut0_PWN@R0Pxx@@AAEPADPAE@Z"</span>;</span><br><span class="line">	<span class="type">int</span> biao[] = { <span class="number">0x50</span>, <span class="number">0x51</span>, <span class="number">0x48</span>, <span class="number">0x52</span>, <span class="number">0x53</span>, <span class="number">0x49</span>, <span class="number">0x44</span>, <span class="number">0x54</span>, <span class="number">0x55</span>, <span class="number">0x4a</span>, <span class="number">0x56</span>, <span class="number">0x57</span>, <span class="number">0x4b</span>, <span class="number">0x45</span>, <span class="number">0x42</span>, <span class="number">0x58</span>, <span class="number">0x59</span>, <span class="number">0x4c</span>, <span class="number">0x5a</span>, <span class="number">0x5b</span>, <span class="number">0x4d</span>, <span class="number">0x46</span>, <span class="number">0x5c</span>, <span class="number">0x5d</span>, <span class="number">0x4e</span>, <span class="number">0x5e</span>, <span class="number">0x5f</span>, <span class="number">0x4f</span>, <span class="number">0x47</span>, <span class="number">0x43</span>, <span class="number">65</span> };</span><br><span class="line">	<span class="type">char</span> input[<span class="number">32</span>] = { <span class="number">0</span> };</span><br><span class="line">	<span class="type">int</span> i;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="built_in">strlen</span>(name); i++)</span><br><span class="line">		input[biao[i] - <span class="number">65</span>] = name[i];</span><br><span class="line">	<span class="built_in">puts</span>(input);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div>
 
 <p>得出Z0@tRAEyuP@xAAA?M_A0_WNPx@@EPDP</p>
 <p>然后将我们函数进行md5加密即可</p>
 
             </div>
 
-            
-                <div class="post-copyright-info">
-                    <div class="article-copyright-info-container">
-    <ul>
-        <li>本文标题：2019红帽杯-CHILDRE(c++逆向+函数调用约定+c++修饰符转换+异或+黑盒分析+爆破)</li>
-        <li>本文作者：二木</li>
-        <li>创建时间：2023-06-14 09:45:43</li>
-        <li>
-            本文链接：https://captainruler.github.io/2023/06/14/2019-hong-mao-bei-childre-c-ni-xiang-han-shu-diao-yong-yue-ding-c-xiu-shi-fu-zhuan-huan-yi-huo-hei-he-fen-xi-bao-po-119141f5973c4a7780d21de7909182c0/
-        </li>
-        <li>
-            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
-        </li>
-    </ul>
-</div>
-
-                </div>
             
 
             

@@ -40,7 +40,7 @@
     <script id="hexo-configurations">
     let REDEFINE = window.REDEFINE || {};
     REDEFINE.hexo_config = {"hostname":"captainruler.github.io","root":"/","language":"zh-CN","path":"search.xml"};
-    REDEFINE.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#005080","avatar":"/images/7.webp","favicon":"/images/9.webp","article_img_align":"center","right_side_width":"210px","content_max_width":"1000px","nav_color":{"left":"#f78746","right":"#367d37","transparency":30},"hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_image":{"light":"/images/2.jpg","dark":"/images/1.jpg"},"title_color":{"light":"#fff","dark":"#d1d1b6"},"description":"好戏都在烟火中"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"0.3.5\nSearch"};
+    REDEFINE.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#005080","avatar":"/images/7.webp","favicon":"/images/9.webp","article_img_align":"center","right_side_width":"210px","content_max_width":"1000px","nav_color":{"left":"#f78746","right":"#367d37","transparency":30},"hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_image":{"light":"/images/2.jpg","dark":"/images/1.jpg"},"title_color":{"light":"#fff","dark":"#d1d1b6"},"description":"生活不止眼前的苟且"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"0.3.5\nSearch"};
     REDEFINE.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
   </script>
 <meta name="generator" content="Hexo 6.3.0">
@@ -188,7 +188,7 @@
                         <div class="author">
                             <span class="name">二木</span>
                             
-                                <span class="author-label">lol</span>
+                                <span class="author-label">王者</span>
                             
                         </div>
                         <div class="meta-info">
@@ -204,7 +204,7 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>261 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>259 字</span>
         </span>
     
     
@@ -226,69 +226,13 @@
 
             <div class="article-content markdown-body">
                 <h1 id="柏鹭杯-2021-baby-python（pyinstaller打包后进行了AES加密）"><a href="#柏鹭杯-2021-baby-python（pyinstaller打包后进行了AES加密）" class="headerlink" title="[柏鹭杯 2021]baby_python（pyinstaller打包后进行了AES加密）"></a>[柏鹭杯 2021]baby_python（pyinstaller打包后进行了AES加密）</h1><p>找到主函数引用的文件，然后对应的将其解密</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python">inf <span class="token operator">=</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">r'PYZ-00.pyz_extracted\baby_python\baby_core.pyc.encrypted'</span><span class="token punctuation">,</span> <span class="token string">'rb'</span><span class="token punctuation">)</span>
-c <span class="token operator">=</span> Cipher<span class="token punctuation">(</span><span class="token punctuation">)</span>
-
-buf <span class="token operator">=</span> c<span class="token punctuation">.</span>decrypt<span class="token punctuation">(</span>inf<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-buf <span class="token operator">=</span> zlib<span class="token punctuation">.</span>decompress<span class="token punctuation">(</span>buf<span class="token punctuation">)</span> <span class="token comment"># 查看这个代码文件能发现密文是用zlib压缩过的所以需要解压缩</span>
-
-out <span class="token operator">=</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">r'PYZ-00.pyz_extracted\baby_python\baby_core.pyc'</span><span class="token punctuation">,</span> <span class="token string">'wb'</span><span class="token punctuation">)</span>
-out<span class="token punctuation">.</span>write<span class="token punctuation">(</span>buf<span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'written down %d bytes'</span> <span class="token operator">%</span> <span class="token builtin">len</span><span class="token punctuation">(</span>buf<span class="token punctuation">)</span><span class="token punctuation">)</span>
-
-inf<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
-out<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">inf = <span class="built_in">open</span>(<span class="string">r'PYZ-00.pyz_extracted\baby_python\baby_core.pyc.encrypted'</span>, <span class="string">'rb'</span>)</span><br><span class="line">c = Cipher()</span><br><span class="line"></span><br><span class="line">buf = c.decrypt(inf.read())</span><br><span class="line">buf = zlib.decompress(buf) <span class="comment"># 查看这个代码文件能发现密文是用zlib压缩过的所以需要解压缩</span></span><br><span class="line"></span><br><span class="line">out = <span class="built_in">open</span>(<span class="string">r'PYZ-00.pyz_extracted\baby_python\baby_core.pyc'</span>, <span class="string">'wb'</span>)</span><br><span class="line">out.write(buf)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">'written down %d bytes'</span> % <span class="built_in">len</span>(buf))</span><br><span class="line"></span><br><span class="line">inf.close()</span><br><span class="line">out.close()</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure></div>
 
 <p><a class="link" target="_blank" rel="noopener" href="https://bbs.kanxue.com/thread-271253.htm">[原创]Python逆向——Pyinstaller逆向-软件逆向-看雪-安全社区|安全招聘|kanxue.com<i class="fas fa-external-link-alt"></i></a></p>
 <p>另外一个可以参考的脚本</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">#!/usr/bin/env python3</span>
-<span class="token keyword">import</span> tinyaes
-<span class="token keyword">import</span> zlib
- 
-CRYPT_BLOCK_SIZE <span class="token operator">=</span> <span class="token number">16</span>
- 
-<span class="token comment"># 从crypt_key.pyc获取key，也可自行反编译获取</span>
-key <span class="token operator">=</span> <span class="token builtin">bytes</span><span class="token punctuation">(</span><span class="token string">'MySup3rS3cr3tK3y'</span><span class="token punctuation">,</span> <span class="token string">'utf-8'</span><span class="token punctuation">)</span>
- 
-inf <span class="token operator">=</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">'baby_core.pyc.encrypted'</span><span class="token punctuation">,</span> <span class="token string">'rb'</span><span class="token punctuation">)</span> <span class="token comment"># 打开加密文件</span>
-outf <span class="token operator">=</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">'baby_core.pyc'</span><span class="token punctuation">,</span> <span class="token string">'wb'</span><span class="token punctuation">)</span> <span class="token comment"># 输出文件</span>
- 
-<span class="token comment"># 按加密块大小进行读取</span>
-iv <span class="token operator">=</span> inf<span class="token punctuation">.</span>read<span class="token punctuation">(</span>CRYPT_BLOCK_SIZE<span class="token punctuation">)</span>
- 
-cipher <span class="token operator">=</span> tinyaes<span class="token punctuation">.</span>AES<span class="token punctuation">(</span>key<span class="token punctuation">,</span> iv<span class="token punctuation">)</span>
- 
-<span class="token comment"># 解密</span>
-plaintext <span class="token operator">=</span> zlib<span class="token punctuation">.</span>decompress<span class="token punctuation">(</span>cipher<span class="token punctuation">.</span>CTR_xcrypt_buffer<span class="token punctuation">(</span>inf<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
- 
-<span class="token comment"># 补pyc头(最后自己补也行)</span>
-outf<span class="token punctuation">.</span>write<span class="token punctuation">(</span><span class="token string">b'\x55\x0d\x00\x00\0\0\0\0\0\0\0\0\0\0\0\0'</span><span class="token punctuation">)</span>
- 
-<span class="token comment"># 写入解密数据</span>
-outf<span class="token punctuation">.</span>write<span class="token punctuation">(</span>plaintext<span class="token punctuation">)</span>
- 
-inf<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
-outf<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="keyword">import</span> tinyaes</span><br><span class="line"><span class="keyword">import</span> zlib</span><br><span class="line"> </span><br><span class="line">CRYPT_BLOCK_SIZE = <span class="number">16</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 从crypt_key.pyc获取key，也可自行反编译获取</span></span><br><span class="line">key = <span class="built_in">bytes</span>(<span class="string">'MySup3rS3cr3tK3y'</span>, <span class="string">'utf-8'</span>)</span><br><span class="line"> </span><br><span class="line">inf = <span class="built_in">open</span>(<span class="string">'baby_core.pyc.encrypted'</span>, <span class="string">'rb'</span>) <span class="comment"># 打开加密文件</span></span><br><span class="line">outf = <span class="built_in">open</span>(<span class="string">'baby_core.pyc'</span>, <span class="string">'wb'</span>) <span class="comment"># 输出文件</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 按加密块大小进行读取</span></span><br><span class="line">iv = inf.read(CRYPT_BLOCK_SIZE)</span><br><span class="line"> </span><br><span class="line">cipher = tinyaes.AES(key, iv)</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 解密</span></span><br><span class="line">plaintext = zlib.decompress(cipher.CTR_xcrypt_buffer(inf.read()))</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 补pyc头(最后自己补也行)</span></span><br><span class="line">outf.write(<span class="string">b'\x55\x0d\x00\x00\0\0\0\0\0\0\0\0\0\0\0\0'</span>)</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 写入解密数据</span></span><br><span class="line">outf.write(plaintext)</span><br><span class="line"> </span><br><span class="line">inf.close()</span><br><span class="line">outf.close()</span><br></pre></td></tr></tbody></table></figure></div>
             </div>
 
-            
-                <div class="post-copyright-info">
-                    <div class="article-copyright-info-container">
-    <ul>
-        <li>本文标题：柏鹭杯-2021-baby_python（pyinstaller打包后进行了AES加密）</li>
-        <li>本文作者：二木</li>
-        <li>创建时间：2023-09-22 01:14:32</li>
-        <li>
-            本文链接：https://captainruler.github.io/2023/09/22/bo-lu-bei-2021-baby-python-pyinstaller-da-bao-hou-jin-xing-liao-aes-jia-mi-9152683296194b56a51b277fbc669217/
-        </li>
-        <li>
-            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
-        </li>
-    </ul>
-</div>
-
-                </div>
             
 
             

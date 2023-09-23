@@ -40,7 +40,7 @@
     <script id="hexo-configurations">
     let REDEFINE = window.REDEFINE || {};
     REDEFINE.hexo_config = {"hostname":"captainruler.github.io","root":"/","language":"zh-CN","path":"search.xml"};
-    REDEFINE.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#005080","avatar":"/images/7.webp","favicon":"/images/9.webp","article_img_align":"center","right_side_width":"210px","content_max_width":"1000px","nav_color":{"left":"#f78746","right":"#367d37","transparency":30},"hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_image":{"light":"/images/2.jpg","dark":"/images/1.jpg"},"title_color":{"light":"#fff","dark":"#d1d1b6"},"description":"好戏都在烟火中"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"0.3.5\nSearch"};
+    REDEFINE.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#005080","avatar":"/images/7.webp","favicon":"/images/9.webp","article_img_align":"center","right_side_width":"210px","content_max_width":"1000px","nav_color":{"left":"#f78746","right":"#367d37","transparency":30},"hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_image":{"light":"/images/2.jpg","dark":"/images/1.jpg"},"title_color":{"light":"#fff","dark":"#d1d1b6"},"description":"生活不止眼前的苟且"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"0.3.5\nSearch"};
     REDEFINE.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
   </script>
 <meta name="generator" content="Hexo 6.3.0">
@@ -188,7 +188,7 @@
                         <div class="author">
                             <span class="name">二木</span>
                             
-                                <span class="author-label">lol</span>
+                                <span class="author-label">王者</span>
                             
                         </div>
                         <div class="meta-info">
@@ -204,7 +204,7 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>992 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>995 字</span>
         </span>
     
     
@@ -229,43 +229,20 @@
 <p>对于编译dll文件，有两种，一种是使用我们强大的环境，vs ，另一种就是使用我们强大的编译器gcc。这里对于这两种方式进行简单的演示。</p>
 <h3 id="gcc编译链接dll文件"><a href="#gcc编译链接dll文件" class="headerlink" title="gcc编译链接dll文件"></a>gcc编译链接dll文件</h3><p>对于gcc，我们首先写三个文件</p>
 <p>一个头文件head.h，这个头文件很有必要，一方面在dll文件中的表明我们要导出哪些函数，在main.c文件中表明dll文件中被导出的文件有哪些。</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">ifdef</span> <span class="token expression">__cplusplus</span></span>
-<span class="token keyword">extern</span> <span class="token string">"C"</span>  <span class="token comment">//指定某个函数按照 C 语言方式编译和链接。在 C++ 中，函数名会被编译器进行名称修饰（name mangling），以支持函数重载和命名空间等特性。而在 C 语言中，函数名没有被修饰</span>
-<span class="token punctuation">{</span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span></span>
-
-    <span class="token function">__declspec</span><span class="token punctuation">(</span>dllexport<span class="token punctuation">)</span> <span class="token keyword">int</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//导出函数(格式)</span>
-<span class="token comment">//声明了该函数将被导出到 DLL 文件中，以便其他程序可以使用。其它程序可以通过 DLL 导出表来查找这个函数，从而进行调用。</span>
-
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">ifdef</span> <span class="token expression">__cplusplus</span></span>
-<span class="token punctuation">}</span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifdef</span> __cplusplus</span></span><br><span class="line"><span class="keyword">extern</span> <span class="string">"C"</span>  <span class="comment">//指定某个函数按照 C 语言方式编译和链接。在 C++ 中，函数名会被编译器进行名称修饰（name mangling），以支持函数重载和命名空间等特性。而在 C 语言中，函数名没有被修饰</span></span><br><span class="line">{</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line">    __declspec(dllexport) <span class="type">int</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span>; <span class="comment">//导出函数(格式)</span></span><br><span class="line"><span class="comment">//声明了该函数将被导出到 DLL 文件中，以便其他程序可以使用。其它程序可以通过 DLL 导出表来查找这个函数，从而进行调用。</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> __cplusplus</span></span><br><span class="line">}</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></tbody></table></figure></div>
 
 <p>一个要编译成dll的文件，mydll.c</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">"head.h"</span></span>
-<span class="token comment">//导出函数的实现</span>
-<span class="token keyword">int</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token keyword">return</span> a <span class="token operator">+</span> b<span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">"head.h"</span></span></span><br><span class="line"><span class="comment">//导出函数的实现</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span><br><span class="line">{</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div>
 
 <p>最后一个我们要执行的程序，main.c</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">"head.h"</span></span>
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">,</span> b <span class="token operator">=</span> <span class="token number">20</span><span class="token punctuation">;</span>
-    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d + %d = %d\n"</span><span class="token punctuation">,</span> a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> <span class="token function">add</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">"head.h"</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">{</span><br><span class="line">    <span class="type">int</span> a = <span class="number">10</span>, b = <span class="number">20</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d + %d = %d\n"</span>, a, b, add(a, b));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div>
 
 <p>准备工作做完了，开始进行我们的gcc编译</p>
 <p>首先，先将我们的mydll.c文件编译成mydll.dll形式</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c">gcc <span class="token operator">-</span>shared <span class="token operator">-</span>o mydll<span class="token punctuation">.</span>dll mydll<span class="token punctuation">.</span>c<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -shared -o mydll.dll mydll.c</span><br></pre></td></tr></tbody></table></figure></div>
 
 <p>之后再将dll文件链接到我们的main.c中形成main.exe文件</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c">gcc <span class="token operator">-</span>o main<span class="token punctuation">.</span>exe main<span class="token punctuation">.</span>c <span class="token operator">-</span>L <span class="token punctuation">.</span> <span class="token operator">-</span>l mydll<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -o main.exe main.c -L . -l mydll</span><br></pre></td></tr></tbody></table></figure></div>
 
 <p>L 表示链接库的目录(这里我们是本目录下，以输入得是 . )，-l（小写L）表示链接库名称(编译器会自动添加.dll或者.so后缀)</p>
 <p>这样就完成了我们的dll文件编写与链入</p>
@@ -278,49 +255,12 @@
 <p>分别创建两个源文件，就先前gcc那样</p>
 <p><img lazyload="" src="/images/loading.svg" data-src="/%E5%A6%82%E4%BD%95%E4%BB%8E0%E5%88%B01%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AAdll%E6%96%87%E4%BB%B6%20c6594ccdd993460ab9a316426ab8ed5a/Untitled%203.png" alt="Untitled"></p>
 <p>在main.c里面写</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">"windows.h"</span></span>
-
-<span class="token keyword">typedef</span> <span class="token keyword">int</span><span class="token punctuation">(</span><span class="token operator">*</span>e_add<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">//定义一个函数指针声明</span>
-
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    HMODULE    hDll <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>   <span class="token comment">//声明一个HMODULE类型(句柄指针)的变量 </span>
-    e_add  add1 <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>       <span class="token comment">// 声明一个函数指针，用于接收我们的add函数</span>
-
-    hDll <span class="token operator">=</span> <span class="token function">LoadLibraryA</span><span class="token punctuation">(</span><span class="token string">"mydll.dll"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">//加载我们的dll文件，获取导出函数表</span>
-
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>hDll <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>                <span class="token comment">//如果加载dll文件失败,打印提示</span>
-    <span class="token punctuation">{</span>
-        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"LoadLibrary(%s) failed!!! [%d]"</span><span class="token punctuation">,</span> <span class="token string">"mydll"</span><span class="token punctuation">,</span> <span class="token function">GetLastError</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    
-    add1   <span class="token operator">=</span> <span class="token punctuation">(</span>e_add<span class="token punctuation">)</span><span class="token function">GetProcAddress</span><span class="token punctuation">(</span>hDll<span class="token punctuation">,</span> <span class="token string">"add"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">//获取我们add导出函数的地址</span>
-
-    <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">,</span> b <span class="token operator">=</span> <span class="token number">20</span><span class="token punctuation">;</span>
-    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d + %d = %d\n"</span><span class="token punctuation">,</span> a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> <span class="token function">add1</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//调用函数</span>
-    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">"windows.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="title function_">int</span><span class="params">(*e_add)</span><span class="params">(<span class="type">int</span>, <span class="type">int</span>)</span>;  <span class="comment">//定义一个函数指针声明</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">{</span><br><span class="line">    HMODULE    hDll = <span class="literal">NULL</span>;   <span class="comment">//声明一个HMODULE类型(句柄指针)的变量 </span></span><br><span class="line">    e_add  add1 = <span class="literal">NULL</span>;       <span class="comment">// 声明一个函数指针，用于接收我们的add函数</span></span><br><span class="line"></span><br><span class="line">    hDll = LoadLibraryA(<span class="string">"mydll.dll"</span>);  <span class="comment">//加载我们的dll文件，获取导出函数表</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (hDll == <span class="literal">NULL</span>)                <span class="comment">//如果加载dll文件失败,打印提示</span></span><br><span class="line">    {</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"LoadLibrary(%s) failed!!! [%d]"</span>, <span class="string">"mydll"</span>, GetLastError());</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    }</span><br><span class="line">    </span><br><span class="line">    add1   = (e_add)GetProcAddress(hDll, <span class="string">"add"</span>);   <span class="comment">//获取我们add导出函数的地址</span></span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> a = <span class="number">10</span>, b = <span class="number">20</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d + %d = %d\n"</span>, a, b, add1(a, b)); <span class="comment">//调用函数</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div>
 
 <p>注意这里的名称需要一样，生成的dll文件名称是按照项目名称来的</p>
 <p><img lazyload="" src="/images/loading.svg" data-src="/%E5%A6%82%E4%BD%95%E4%BB%8E0%E5%88%B01%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AAdll%E6%96%87%E4%BB%B6%20c6594ccdd993460ab9a316426ab8ed5a/Untitled%204.png" alt="Untitled"></p>
 <p>在mydll中写</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
-
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">ifdef</span> <span class="token expression">__cplusplus</span></span>
-<span class="token keyword">extern</span> <span class="token string">"C"</span>
-<span class="token punctuation">{</span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span></span>
-
-    <span class="token function">__declspec</span><span class="token punctuation">(</span>dllexport<span class="token punctuation">)</span> <span class="token keyword">int</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">)</span> <span class="token comment">//导出函数</span>
-    <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> a <span class="token operator">+</span> b<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">ifdef</span> <span class="token expression">__cplusplus</span></span>
-<span class="token punctuation">}</span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> __cplusplus</span></span><br><span class="line"><span class="keyword">extern</span> <span class="string">"C"</span></span><br><span class="line">{</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line">    __declspec(dllexport) <span class="type">int</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> <span class="comment">//导出函数</span></span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">return</span> a + b;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> __cplusplus</span></span><br><span class="line">}</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></tbody></table></figure></div>
 
 <p>下面在mydll项目右键，点击属性</p>
 <p><img lazyload="" src="/images/loading.svg" data-src="/%E5%A6%82%E4%BD%95%E4%BB%8E0%E5%88%B01%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AAdll%E6%96%87%E4%BB%B6%20c6594ccdd993460ab9a316426ab8ed5a/Untitled%205.png" alt="Untitled"></p>
@@ -336,23 +276,6 @@
 
             </div>
 
-            
-                <div class="post-copyright-info">
-                    <div class="article-copyright-info-container">
-    <ul>
-        <li>本文标题：如何从0到1编写一个dll文件</li>
-        <li>本文作者：二木</li>
-        <li>创建时间：2023-06-05 13:45:56</li>
-        <li>
-            本文链接：https://captainruler.github.io/2023/06/05/ru-he-cong-0-dao-1-bian-xie-yi-ge-dll-wen-jian-c6594ccdd993460ab9a316426ab8ed5a/
-        </li>
-        <li>
-            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
-        </li>
-    </ul>
-</div>
-
-                </div>
             
 
             

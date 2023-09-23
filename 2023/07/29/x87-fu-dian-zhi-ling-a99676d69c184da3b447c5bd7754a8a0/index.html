@@ -40,7 +40,7 @@
     <script id="hexo-configurations">
     let REDEFINE = window.REDEFINE || {};
     REDEFINE.hexo_config = {"hostname":"captainruler.github.io","root":"/","language":"zh-CN","path":"search.xml"};
-    REDEFINE.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#005080","avatar":"/images/7.webp","favicon":"/images/9.webp","article_img_align":"center","right_side_width":"210px","content_max_width":"1000px","nav_color":{"left":"#f78746","right":"#367d37","transparency":30},"hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_image":{"light":"/images/2.jpg","dark":"/images/1.jpg"},"title_color":{"light":"#fff","dark":"#d1d1b6"},"description":"好戏都在烟火中"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"0.3.5\nSearch"};
+    REDEFINE.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#005080","avatar":"/images/7.webp","favicon":"/images/9.webp","article_img_align":"center","right_side_width":"210px","content_max_width":"1000px","nav_color":{"left":"#f78746","right":"#367d37","transparency":30},"hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_image":{"light":"/images/2.jpg","dark":"/images/1.jpg"},"title_color":{"light":"#fff","dark":"#d1d1b6"},"description":"生活不止眼前的苟且"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"0.3.5\nSearch"};
     REDEFINE.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
   </script>
 <meta name="generator" content="Hexo 6.3.0">
@@ -188,7 +188,7 @@
                         <div class="author">
                             <span class="name">二木</span>
                             
-                                <span class="author-label">lol</span>
+                                <span class="author-label">王者</span>
                             
                         </div>
                         <div class="meta-info">
@@ -264,75 +264,38 @@
 <h1 id="x87部分指令演示"><a href="#x87部分指令演示" class="headerlink" title="x87部分指令演示"></a>x87部分指令演示</h1><p>x87指令集是用于处理浮点数运算的指令集，它提供了一组用于执行浮点操作的指令。x87指令集在现代x86处理器中仍然存在，但由于SSE（Streaming SIMD Extensions）和AVX（Advanced Vector Extensions）等更现代的指令集的引入，使用x87指令集的情况相对较少。在这里，我将详细介绍x87指令集中常见的指令以及它们的用途，并为每个指令提供一个简单的示例。</p>
 <ol>
 <li><p><strong>FLD - Load Floating-Point Value:</strong> 从内存中加载一个浮点数值到x87 FPU栈顶。</p>
- <pre class="line-numbers language-none"><code class="language-none">
-fld dword [float_value]
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+ <div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">fld dword [float_value]</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure></div>
 </li>
 <li><p><strong>FST - Store Floating-Point Value:</strong> 将x87 FPU栈顶的浮点数值存储到内存中。</p>
- <pre class="line-numbers language-none"><code class="language-none">
-fst dword [result]
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+ <div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">fst dword [result]</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure></div>
 </li>
 <li><p><strong>FADD - Add:</strong> 将栈顶的两个浮点数值相加，并将结果存储在栈顶。</p>
- <pre class="line-numbers language-none"><code class="language-none">
-fadd
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+ <div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">fadd</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure></div>
 </li>
 <li><p><strong>FSUB - Subtract:</strong> 从栈顶的浮点数中减去下一个浮点数，并将结果存储在栈顶。</p>
- <pre class="line-numbers language-none"><code class="language-none">
-fsub
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+ <div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">fsub</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure></div>
 </li>
 <li><p><strong>FMUL - Multiply:</strong> 将栈顶的两个浮点数值相乘，并将结果存储在栈顶。</p>
- <pre class="line-numbers language-none"><code class="language-none">
-fmul
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+ <div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">fmul</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure></div>
 </li>
 <li><p><strong>FDIV - Divide:</strong> 用栈顶的浮点数除以下一个浮点数，并将结果存储在栈顶。</p>
- <pre class="line-numbers language-none"><code class="language-none">
-fdiv
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+ <div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">fdiv</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure></div>
 </li>
 <li><p><strong>FIST - Store Integer after FPU Comparison:</strong> 将FPU栈顶的浮点数转换为整数，并存储在内存中。</p>
- <pre class="line-numbers language-none"><code class="language-none">
-fist dword [integer_value]
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+ <div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">fist dword [integer_value]</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure></div>
 </li>
 <li><p><strong>FISTP - Store Integer and Pop:</strong> 和FIST类似，但在转换后将结果弹出栈。</p>
- <pre class="line-numbers language-none"><code class="language-none">
-fistp dword [integer_value]
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+ <div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">fistp dword [integer_value]</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure></div>
 </li>
 <li><p><strong>FCOM - Compare Floating-Point Values:</strong> 比较栈顶的两个浮点数，并设置状态寄存器中的标志。</p>
- <pre class="line-numbers language-none"><code class="language-none">
-fcom
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+ <div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">fcom</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure></div>
 </li>
 <li><p><strong>FUCOM - Unordered Compare Floating-Point Values:</strong> 类似于FCOM，但处理未规范的操作数（NaN）。</p>
-<pre class="line-numbers language-none"><code class="language-none">
-fucom
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">fucom</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure></div></li>
 </ol>
 
             </div>
 
-            
-                <div class="post-copyright-info">
-                    <div class="article-copyright-info-container">
-    <ul>
-        <li>本文标题：X87浮点指令</li>
-        <li>本文作者：二木</li>
-        <li>创建时间：2023-07-29 19:42:09</li>
-        <li>
-            本文链接：https://captainruler.github.io/2023/07/29/x87-fu-dian-zhi-ling-a99676d69c184da3b447c5bd7754a8a0/
-        </li>
-        <li>
-            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
-        </li>
-    </ul>
-</div>
-
-                </div>
             
 
             
