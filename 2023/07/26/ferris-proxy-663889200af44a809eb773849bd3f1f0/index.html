@@ -9,6 +9,8 @@
     
     <title>
         
+            Ferris proxy |
+        
         二木的博客小屋
     </title>
     
@@ -38,7 +40,7 @@
     <script id="hexo-configurations">
     let REDEFINE = window.REDEFINE || {};
     REDEFINE.hexo_config = {"hostname":"captainruler.github.io","root":"/","language":"zh-CN","path":"search.xml"};
-    REDEFINE.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#005080","avatar":"/images/7.webp","favicon":"/images/9.webp","article_img_align":"center","right_side_width":"210px","content_max_width":"1000px","nav_color":{"left":"#f78746","right":"#367d37","transparency":30},"hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_image":{"light":"/images/2.jpg","dark":"/images/1.jpg"},"title_color":{"light":"#fff","dark":"#d1d1b6"},"description":"好戏都在烟火中"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"0.3.5\nSearch"};
+    REDEFINE.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#005080","avatar":"/images/7.webp","favicon":"/images/9.webp","article_img_align":"center","right_side_width":"210px","content_max_width":"1000px","nav_color":{"left":"#f78746","right":"#367d37","transparency":30},"hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_image":{"light":"/images/2.jpg","dark":"/images/1.jpg"},"title_color":{"light":"#fff","dark":"#d1d1b6"},"description":"好戏都在烟火中"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"0.3.5\nSearch"};
     REDEFINE.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
   </script>
 <meta name="generator" content="Hexo 6.3.0">
@@ -174,7 +176,7 @@
     <div class="post-page-container">
         <div class="article-content-container">
             <div class="article-title">
-                <span class="title-hover-animation"><h1 style="font-size:2rem; font-weight: bold; margin: 10px 0;"></h1></span>
+                <span class="title-hover-animation"><h1 style="font-size:2rem; font-weight: bold; margin: 10px 0;">Ferris proxy</h1></span>
             </div>
 
             
@@ -224,18 +226,18 @@
 
             <div class="article-content markdown-body">
                 <h1 id="Ferris-proxy"><a href="#Ferris-proxy" class="headerlink" title="Ferris proxy"></a>Ferris proxy</h1><p>按照着wp的思路，照着走一遍之后，大致理清楚了这道题的加密思路</p>
-<p><img lazyload src="/images/loading.svg" data-src="/Ferris%20proxy%20663889200af44a809eb773849bd3f1f0/Untitled.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/Ferris%20proxy%20663889200af44a809eb773849bd3f1f0/Untitled.png" alt="Untitled"></p>
 <p>通过wireshark我们可以将server发送到clientd的数据提取出来</p>
-<p><img lazyload src="/images/loading.svg" data-src="/Ferris%20proxy%20663889200af44a809eb773849bd3f1f0/Untitled%201.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/Ferris%20proxy%20663889200af44a809eb773849bd3f1f0/Untitled%201.png" alt="Untitled"></p>
 <p>通过分析我们可以得知，对于整个TCP流，是运用了rc4的加密方式，通过动态调试，我们可以调试出密钥为explorer</p>
-<p><img lazyload src="/images/loading.svg" data-src="/Ferris%20proxy%20663889200af44a809eb773849bd3f1f0/Untitled%202.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/Ferris%20proxy%20663889200af44a809eb773849bd3f1f0/Untitled%202.png" alt="Untitled"></p>
 <p>通过解密（解密后如下）我们我们可以看出这个是有着头的流量，因为前面我们知道，对于流量是有加密层的，因此我们不能直接看出流量中的数据是什么、</p>
 <hr>
 <p>00000008000000000000000000000008000000000000000100000048000000010000000001001db2ee547837c2b0394f9316a3c672109c854769d9627ce715aa82ae76af4fc7d468903ffa4f7c9d4afcf139528ceb24cb5f64a192287282ee7fd076992f000000480000000100000000e73f0a730b98e032e90afaf73b8ddab1e821432c3e1c2c51396914f53fb304f26cbc8f85ec68462ff85dfb0979648d43003291ccb9418e7b4016f5d3325d4083000000480000000100000000d44c5aff410f28c841fb51c2e982244d7f7370fb6b73d6e5caba56c1b4b8f96bea190aa8d66e7e37d76fe2e5fef7f78b0de90e12eefda3a36177583412ca074e00000048000000010000000096a1796af867e440a72ee81e36e05f3b73c3341f6166b804bf83c3d0b47df74cc77405595ce44d3ccfb739496b8acb78fdb02bcd510851b3e3de015fc06eadb40000000a00000001000000000f8e0000004800000001000000010100320b119809b793abf357a7f78b0742ee93a957e563a5a94fdb09804e89596f2597a2cb9ae9f5161d5fda88ff050e47b1d28bebc6563465d2e7959e8a624a000000480000000100000001cd39b2053c17021f93030e3b9bc7149ff5423faf64693932f76a8dbffa526fff7c076845b1d31967efca0b56b066e8bacedc1927e629c6d0e87f61bf14ee3039000000480000000100000001053d668ef1855426257ce68cdbc2f66919a2f9efbcb632daa6170cb8246ab7a2348032f48cefdbc3aadcee6b9ab867371346bbe90fd69d213705ed1de38922b300000048000000010000000145bbbf8e0b10c5436e5974f46426d3efdbeaba819ea5d049bb420219a426336e14bc36e5753cb71fb21a2b78f699918a0045a8badddd69646ed65a59e17feec80000000a0000000100000001b30c000000280000000100000001503fdd267309866142ae96b3197515b72ccd766dedbc09d61c25f0c3fa79ebd40000002800000001000000002accc966ccaf48a147471171fb9589c95c561100d6548ad979f328e43bcfe0750000002c00000001000000000000001023a5457e1fa2e2f4a23242b1e61a597d1458bee4871e6f44e9296820014728300000002c000000010000000100000010bd688bc8657972730f1d9a5c340cd555602957fa44cf643423bb23734bf8490b0000003c000000010000000000000020a6f95ec809bac678aa1f4a74a0094e00d33e42da057331c95a61c6b5c3cd24daefeb367e01d3765e91643e37e2ac95e90000003c000000010000000100000020184ff5940c47e4fc42a2bd1f61b304f5fdfc5e453104a3946d06c4897a86f7d2872c948ff06b270b4d024446df8b60fa0000004800000001000000000000020044f4cf64a905e470a2d8091e5320c0b8a370193fe44728340c454361c84578f3b469963d12fa608ab96bf2e8c9c2116010d50e151b6407308d3cb6a2000000480000000100000000bc02026a76b5be1d66cf03d90ea5303a5091b48d370ac186402138606da35c90fe7efb0a21f0a177896f496ba40f02e079b82218be0124ab7de5d4f48cfd921e000000480000000100000000323d2847d03880fa5cb48533939141115c3dc15fa32a82be59d78826e3d37f5cac12010ce10c850df63626f94657a5beacf7d502b59fc10f571959ce6101b8d6000000480000000100000000704e541c930ca3a8d156d7f6122fda7bbdffed9b9bc6160f4ec8ace48978bd458869a636a7d8798d7dbd503e0c41aad82496578df4fbffbd3c5c885dc0bd3dee0000004800000001000000006d6af1efc82365f1619286e7a612155d87038f4ccb39e25e0660f9f2d320ae4321996b69187ba68abdf3e6ab41abfa2dd359c7eaa5d344fc1acb97b58dd44d86000000480000000100000000d444d17c165ee78e1d55f5c42b1f1bcf9c0f302588b68d26d2a308250c42d1df13be07693aa0f42cefcb9dc1688216478a1a041c9a0c66308b3e4a5135fd2f0f0000004800000001000000002c7d9df81c7c9ccb7422089f94c0fa54067e6c4fc634c725c9aa9710aaedd671f72cf9287f38de6111ace6c0c32ed568569b45743abfc519e23aabccdf30a9af000000480000000100000000d1bbcab1224daf8ccfb5e6dbf42ee924935b990eee7abe70ac5537426236e0ff1b2ac4748c665d3aba61c4685798ae62126d89220cd5ae8c6a7c32e33ce1236d0000001c0000000100000000b802088e5e303c8389880c09c3925053cc210825000000080000000200000000000000480000000100000001000001d06fe6d3c4b7761ffea3dea5ca1b75305f3bd828925e041baabc00aa51f93e5d59aa6c5c024e1de93ccabbcc7736271de03665a2b170a42faca2e869980000004800000001000000016c6b50fecd4e0e1a9ca070fafa04c06a12f27af94d5430ccce129ada67c3040d444b772758195366025267bfea9e35cbaaf816022b34755d5ac2a4d7df857732000000480000000100000001ede0bf60b0ca23f40635dcbda76eaf3b59faa140dee0b2480aacd8df765ba5cfd1347f22c9415006210eb4f224332b5cfcac7be98e0da94f74693d8af22e1fad0000004800000001000000010614feada5c2aa494e61a0b2a848b82833860d6c1213c4aceebcbe55f419403ecd843835f14f2caa8310be6bfad7ad2054df500a54268b17530183ef4c49f1c50000004800000001000000011ed33f223e632356012a42484c1241d41ec5426ba94c0c4887a8206b86b41ac73ca8b79d90256d391190bcb2256e881642c5a0fbc178691cf9ec983e1f1db4000000004800000001000000012c5043530d28ce81e89c0a71baeb821ff0240d18fbac0e01b0952bb62b91354597b9061dc440318ce3eabd95742607546c414ebf3da32879b2af3500d08cb4e9000000480000000100000001b404a5293b85aadaa3d595d38992c219ddd7a4e5f00c09af477eea99477b3d53ac6b67c49f0cbd5a7ff038904dfc1a3b58cabe2c25dcb86fa55a53f3d362f0510000002c000000010000000128bf591667dcd1d600abe1db48f49b17a5ad9d5650f7793af7a24341b771a9247f1eb4800000000800000002000000010000000800000000000000020000000800000000000000030000004800000001000000030100abcf924576de63087c8695ccda3705e8670c770f2bfda1dafdeddcd09b2aa6d485c6a87ff31c14300ddb660576ceed52047318a30d3c05c9848b0a1fb05300000048000000010000000387d378e9cbb8914e496a633595c7f68da097afd4fbd0380b4eafe790ffe999b81ceeff32eea4d8fa4279606c7c491ec4eb4a7ef5bf614307c21bd3a314db9d2e000000480000000100000003e9f505f08c464e1f5f123bcc180305bb5a30f2c382493a1cc6d6e5e189e75950f75c8a790aef2c1fae18436c9d6f4840a9eacbf04139a2b25042c27f3a3fd756000000480000000100000003faeaff92d731e354d03dc46cbe8a001188dde35e753c259de359181678d94e47d90709345f6c9975288dbecfe1a6cf2eb7a14978854bbc73d3ac7d0a72cc3ef40000000a0000000100000003c41a0000004800000001000000020100d92f41b75bb8ced6be2fbbc0ba1cfeeebdf15826ce92ba78ef4cd0f6d47ff04e9e593cfc5fc7eac8109effce7e75f547873ab559186885edf0e519f73aed00000048000000010000000243421e08dea79fd12889b2845ca365803bb4aa23c50d0c298e6649121b6d9101f32d15a043ffdbc93e7665617fa7b4b3f01db76f5472c5aa3a085da5683efcc4000000480000000100000002bf9a240df9afc3596d4b3613ae9a2184340561c896a60cc577e6ca507b5e6548ccfcd8bccf27de73deaaf04fab707a20c6aa94febdf8a0a5532c0f4c73958e11000000480000000100000002fc1437567ccd886b5496cabb117993f31afe25f53d92721877892e472bf8bba1743b827e277f500d51b7f74f4682e943be0d3ebfdc30742e211dc3eba51dac8b0000000a00000001000000029074000000280000000100000003e836256016a5f8ca1e29732b7332d9776bdc6694a9df6c1172183f65916f83d50000002c000000010000000300000010f46cbf6896be858f5c2f86ee3c162359c545b1f5bd1eec0cd03e2b7bf9c1b4b90000003c000000010000000300000020c580aa8aad81a2800fadf74749e79c323da65a6d11e8fb517d60ba36a0113b345be7c0fce390fba664776b676d82fdbe000000480000000100000003000002002292a593b68fdbf615d43c123747cf1f1583619708368b471b4a37c8eed21e07d14a7bf309f45335592134c5cc7a18152de20bb7d2fb753bee9131d90000004800000001000000033076a9d57efa379e4f7f4700116d786c586b49523454dd9b3ae7cfde0416d9bfbb486eed31f88fec8128cd1e0bf783c8978c04fde5f1bbe67ecbe1c76e0596f5000000480000000100000003579bbdb311093c2a3bb58b848be88302ab2bb6c24bf076a694de2b2fa1a8eff53fcaa6800e938bdeee831498fcc72cc9b822dad5b2074d5bc292c766e44c13e000000048000000010000000331fffa94345676f294eceb259baa51107267136af1e829868e1a3c5e2514517bfcfaec78783afde2874c6d2f4cb8436ed421e67fe327e8c67c851da9446ef226000000480000000100000003daff3194609bf5a05c1e6ec1e085854275ee81dbee01c92e2cb357faeba811424b80bd9b204d70675aaf026f2f23bb0e882271bad34ff5294cc05cd7fc0740ac0000004800000001000000034b5b49ca009d1836cfa176112aaf7775fa8c241bd45f861c1eec34dd2b9654e8144c74c1f80c9e0f23cae4503ae85de975f74d250be667a1f6285c9951a8f8c90000004800000001000000032fb4e2dd32d6fdd7e93fe24e23b9762099e1b12f5d9cae6dae7df3401e33931a8af65803c1538716bdba05948c8818f92791010ef8d6d315fb97bccdf2c2fbbf000000480000000100000003b97cd2e80a232dcf417da8ac1b835bf9dab15816bc1e2e0c07214e531ac922ca2f5ddbb26f8d599805feb5f6ae1c6e3fe08ef5cf7dbd60eb407892d6e72a67a30000001c0000000100000003e7d781f18b675dad11f1f49600057e8094628ad00000002800000001000000024ac9c87b674dcd932d2e9d3a4b7c16a3989e750fa3a8895e8dd0971c56fb96780000002c000000010000000200000010cf6ca67cfe59cd5f110c1586de9c2186cfb7213784043ffb017fdf5cfa74ac320000003c000000010000000200000020a03a82bae4627fc74de8c75437e5b077aa3d63e5745f61f47362954b80f53ede6867267605b7383f55e6a80aefcae153000000080000000200000003</p>
 <hr>
 <p>我们对规律的0进行分开一下</p>
 <p>我们可以得到如下图的流量</p>
-<p><img lazyload src="/images/loading.svg" data-src="/Ferris%20proxy%20663889200af44a809eb773849bd3f1f0/Untitled%203.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/Ferris%20proxy%20663889200af44a809eb773849bd3f1f0/Untitled%203.png" alt="Untitled"></p>
 <p>对于第一个字节表示得是数据长度</p>
 <pre class="line-numbers language-rust" data-language="rust"><code class="language-rust"><span class="token number">00000008</span> <span class="token operator">|</span> <span class="token number">00000000</span> <span class="token number">00000000</span> 表示这里有<span class="token number">0x08</span> <span class="token operator">=</span> <span class="token number">8</span> bytes 的数据
 0000000a <span class="token operator">|</span> <span class="token number">00000001</span> <span class="token number">00000000</span> b30c 表示这里有<span class="token number">0x0a</span> <span class="token operator">=</span> <span class="token number">10</span> bytes 的数据，以此类推<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
@@ -279,17 +281,17 @@ let mut rng = thread_rng();
 let x: u128 = rng.gen();
 println!("{}", x);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p><img lazyload src="/images/loading.svg" data-src="/Ferris%20proxy%20663889200af44a809eb773849bd3f1f0/Untitled%206.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/Ferris%20proxy%20663889200af44a809eb773849bd3f1f0/Untitled%206.png" alt="Untitled"></p>
 <p>这里将我们的rand出来的16比特的数，进行了rsa加密，从而使得我们的key变成了256位的密钥</p>
-<p><img lazyload src="/images/loading.svg" data-src="/Ferris%20proxy%20663889200af44a809eb773849bd3f1f0/Untitled%207.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/Ferris%20proxy%20663889200af44a809eb773849bd3f1f0/Untitled%207.png" alt="Untitled"></p>
 <p>这里可以推测出是PublicKey（公钥加密）的RSA算法加密</p>
 <p><a class="link" target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51607907/article/details/123884953">(87条消息) 公开密钥加密之RSA算法【概念+计算+代码实现】_rsa算法代码_MIKE笔记的博客-CSDN博客<i class="fas fa-external-link-alt"></i></a></p>
 <p>之后将server发送过来的密钥进行解密之后，异或上原本产生的16字节的随机数据，产生了新的密钥（也就是我们后面流量加密的密钥）</p>
-<p><img lazyload src="/images/loading.svg" data-src="/Ferris%20proxy%20663889200af44a809eb773849bd3f1f0/Untitled%208.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/Ferris%20proxy%20663889200af44a809eb773849bd3f1f0/Untitled%208.png" alt="Untitled"></p>
 <p>接着上一步，将异或后的数据进行sha-256加密，然后发送给server，双方进行对比验证，确定是同一个密钥，从而完成了密钥交换</p>
-<p><img lazyload src="/images/loading.svg" data-src="/Ferris%20proxy%20663889200af44a809eb773849bd3f1f0/Untitled%209.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/Ferris%20proxy%20663889200af44a809eb773849bd3f1f0/Untitled%209.png" alt="Untitled"></p>
 <h1 id="对包加密的传输"><a href="#对包加密的传输" class="headerlink" title="对包加密的传输"></a>对包加密的传输</h1><p>这里我们很容易的分辨出是进行了aes-cbc模式下的加密</p>
-<p><img lazyload src="/images/loading.svg" data-src="/Ferris%20proxy%20663889200af44a809eb773849bd3f1f0/Untitled%2010.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/Ferris%20proxy%20663889200af44a809eb773849bd3f1f0/Untitled%2010.png" alt="Untitled"></p>
 <p>对于前面得到rc4解密后的流量数据，进行分组之后，我们分析其后面的发送数据与协议。</p>
 <p>我们可以在协议中观察到以下几点:</p>
 <p>1、第7行的数据与我们在前面的例子中交换密钥时得到的SHA256哈希值相                                                    配:118d31c061936b811327f1645c9f8deef4c6628e3ee21b39950213ddd0cf2141</p>
@@ -307,7 +309,7 @@ println!("{}", x);<span aria-hidden="true" class="line-numbers-rows"><span></spa
                 <div class="post-copyright-info">
                     <div class="article-copyright-info-container">
     <ul>
-        <li>本文标题：</li>
+        <li>本文标题：Ferris proxy</li>
         <li>本文作者：二木</li>
         <li>创建时间：2023-07-26 14:03:33</li>
         <li>
@@ -336,7 +338,7 @@ println!("{}", x);<span aria-hidden="true" class="line-numbers-rows"><span></spa
                                 <i class="fas fa-chevron-left"></i>
                                 </span>
                                 <span class="title flex-center">
-                                    <span class="post-nav-title-item"></span>
+                                    <span class="post-nav-title-item">X87浮点指令</span>
                                     <span class="post-nav-item">上一篇</span>
                                 </span>
                             </a>
@@ -349,7 +351,7 @@ println!("{}", x);<span aria-hidden="true" class="line-numbers-rows"><span></spa
                             href="/2023/06/18/qiang-wang-bei-2022-gamemaster-110de77af2d24015be62f1704ce21b76/"
                             >
                                 <span class="title flex-center">
-                                    <span class="post-nav-title-item"></span>
+                                    <span class="post-nav-title-item">强网杯-2022-GameMaster</span>
                                     <span class="post-nav-item">下一篇</span>
                                 </span>
                                 <span class="right arrow-icon flex-center">

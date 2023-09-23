@@ -9,6 +9,8 @@
     
     <title>
         
+            EZ_CODE |
+        
         二木的博客小屋
     </title>
     
@@ -38,7 +40,7 @@
     <script id="hexo-configurations">
     let REDEFINE = window.REDEFINE || {};
     REDEFINE.hexo_config = {"hostname":"captainruler.github.io","root":"/","language":"zh-CN","path":"search.xml"};
-    REDEFINE.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#005080","avatar":"/images/7.webp","favicon":"/images/9.webp","article_img_align":"center","right_side_width":"210px","content_max_width":"1000px","nav_color":{"left":"#f78746","right":"#367d37","transparency":30},"hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_image":{"light":"/images/2.jpg","dark":"/images/1.jpg"},"title_color":{"light":"#fff","dark":"#d1d1b6"},"description":"好戏都在烟火中"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"0.3.5\nSearch"};
+    REDEFINE.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#005080","avatar":"/images/7.webp","favicon":"/images/9.webp","article_img_align":"center","right_side_width":"210px","content_max_width":"1000px","nav_color":{"left":"#f78746","right":"#367d37","transparency":30},"hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_image":{"light":"/images/2.jpg","dark":"/images/1.jpg"},"title_color":{"light":"#fff","dark":"#d1d1b6"},"description":"好戏都在烟火中"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"0.3.5\nSearch"};
     REDEFINE.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
   </script>
 <meta name="generator" content="Hexo 6.3.0">
@@ -174,7 +176,7 @@
     <div class="post-page-container">
         <div class="article-content-container">
             <div class="article-title">
-                <span class="title-hover-animation"><h1 style="font-size:2rem; font-weight: bold; margin: 10px 0;"></h1></span>
+                <span class="title-hover-animation"><h1 style="font-size:2rem; font-weight: bold; margin: 10px 0;">EZ_CODE</h1></span>
             </div>
 
             
@@ -224,17 +226,17 @@
 
             <div class="article-content markdown-body">
                 <h1 id="EZ-CODE"><a href="#EZ-CODE" class="headerlink" title="EZ_CODE"></a>EZ_CODE</h1><p>我们打开会发现是一些莫名的代码，如果能被称为代码的话，这个代码是混淆过后的powershell代码，拿到手其实是没什么思路的。</p>
-<p><img lazyload src="/images/loading.svg" data-src="/./EZ_CODE%20f470f8b01209484b8ebc3ceb62f6bb3d/Untitled.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./EZ_CODE%20f470f8b01209484b8ebc3ceb62f6bb3d/Untitled.png" alt="Untitled"></p>
 <p>我们使用，powershell ISE（windous自带的的一个书写powershell脚本与4）打开这个代码，运行它，出现了Do you konw PWSH.(PWSH就是表示powershell的意思）</p>
-<p><img lazyload src="/images/loading.svg" data-src="/EZ_CODE%20f470f8b01209484b8ebc3ceb62f6bb3d/Untitled%201.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/EZ_CODE%20f470f8b01209484b8ebc3ceb62f6bb3d/Untitled%201.png" alt="Untitled"></p>
 <p>这里出现了字符，但是在那一坨代码中是没有任何字符的，只有${},等等，是shell命令似的东西 ，这里我们就猜测是否有操作将字符作参数传入进去的。</p>
 <p>这里我们选中运行一下，按下f9下断点运行，进行调试。</p>
-<p><img lazyload src="/images/loading.svg" data-src="/EZ_CODE%20f470f8b01209484b8ebc3ceb62f6bb3d/Untitled%202.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/EZ_CODE%20f470f8b01209484b8ebc3ceb62f6bb3d/Untitled%202.png" alt="Untitled"></p>
 <p>出现这个即为调试成功</p>
 <p><a class="link" target="_blank" rel="noopener" href="https://blog.csdn.net/slovyz/article/details/47400107">Shell脚本中$0、$?、$!、$$、$*、$#、$@等的意义_slovyz的博客-CSDN博客<i class="fas fa-external-link-alt"></i></a></p>
 <p><a class="link" target="_blank" rel="noopener" href="https://blog.csdn.net/x1269778817/article/details/46535729">https://blog.csdn.net/x1269778817/article/details/46535729<i class="fas fa-external-link-alt"></i></a></p>
 <p>我们可以通过${@*}这条特殊用法，将参数列表作为一个数组展开，然后使用通配符<code>*</code>将数组中的每个元素进行展开，让其解混淆</p>
-<p><img lazyload src="/images/loading.svg" data-src="/EZ_CODE%20f470f8b01209484b8ebc3ceb62f6bb3d/Untitled%203.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/EZ_CODE%20f470f8b01209484b8ebc3ceb62f6bb3d/Untitled%203.png" alt="Untitled"></p>
 <p>我们将输出的数据提取出来,用py脚本将这些ascii码字符转换为char形势解出</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> re
 
@@ -473,7 +475,7 @@ nerateRes<span class="token punctuation">(</span><span class="token punctuation"
                 <div class="post-copyright-info">
                     <div class="article-copyright-info-container">
     <ul>
-        <li>本文标题：</li>
+        <li>本文标题：EZ_CODE</li>
         <li>本文作者：二木</li>
         <li>创建时间：2023-08-02 10:31:33</li>
         <li>
@@ -502,7 +504,7 @@ nerateRes<span class="token punctuation">(</span><span class="token punctuation"
                                 <i class="fas fa-chevron-left"></i>
                                 </span>
                                 <span class="title flex-center">
-                                    <span class="post-nav-title-item"></span>
+                                    <span class="post-nav-title-item">花指令总结</span>
                                     <span class="post-nav-item">上一篇</span>
                                 </span>
                             </a>
@@ -515,7 +517,7 @@ nerateRes<span class="token punctuation">(</span><span class="token punctuation"
                             href="/2023/07/30/2023-googlectf-re-oldshool-5f1694092f51492d9cc6cc1042d4039e/"
                             >
                                 <span class="title flex-center">
-                                    <span class="post-nav-title-item"></span>
+                                    <span class="post-nav-title-item">2023-googleCTF-re-oldshool</span>
                                     <span class="post-nav-item">下一篇</span>
                                 </span>
                                 <span class="right arrow-icon flex-center">

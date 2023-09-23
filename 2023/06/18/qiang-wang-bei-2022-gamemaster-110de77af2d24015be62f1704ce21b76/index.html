@@ -9,6 +9,8 @@
     
     <title>
         
+            强网杯-2022-GameMaster |
+        
         二木的博客小屋
     </title>
     
@@ -38,7 +40,7 @@
     <script id="hexo-configurations">
     let REDEFINE = window.REDEFINE || {};
     REDEFINE.hexo_config = {"hostname":"captainruler.github.io","root":"/","language":"zh-CN","path":"search.xml"};
-    REDEFINE.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#005080","avatar":"/images/7.webp","favicon":"/images/9.webp","article_img_align":"center","right_side_width":"210px","content_max_width":"1000px","nav_color":{"left":"#f78746","right":"#367d37","transparency":30},"hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_image":{"light":"/images/2.jpg","dark":"/images/1.jpg"},"title_color":{"light":"#fff","dark":"#d1d1b6"},"description":"好戏都在烟火中"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"0.3.5\nSearch"};
+    REDEFINE.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#005080","avatar":"/images/7.webp","favicon":"/images/9.webp","article_img_align":"center","right_side_width":"210px","content_max_width":"1000px","nav_color":{"left":"#f78746","right":"#367d37","transparency":30},"hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_image":{"light":"/images/2.jpg","dark":"/images/1.jpg"},"title_color":{"light":"#fff","dark":"#d1d1b6"},"description":"好戏都在烟火中"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"0.3.5\nSearch"};
     REDEFINE.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
   </script>
 <meta name="generator" content="Hexo 6.3.0">
@@ -174,7 +176,7 @@
     <div class="post-page-container">
         <div class="article-content-container">
             <div class="article-title">
-                <span class="title-hover-animation"><h1 style="font-size:2rem; font-weight: bold; margin: 10px 0;"></h1></span>
+                <span class="title-hover-animation"><h1 style="font-size:2rem; font-weight: bold; margin: 10px 0;">强网杯-2022-GameMaster</h1></span>
             </div>
 
             
@@ -225,27 +227,27 @@
             <div class="article-content markdown-body">
                 <h1 id="强网杯-2022-GameMaster"><a href="#强网杯-2022-GameMaster" class="headerlink" title="强网杯-2022-GameMaster"></a>强网杯-2022-GameMaster</h1><p>刚开始看这道题的时候，其实是有点懵的，还是自己做的题太少了T _ T.就此为了加深印象，复现这道题。</p>
 <p>丢进Exeinfo PE中，可以发现是c#写的.net程序，我们用Dnspy打开（一个专门反编译c#，.net等的一个软件）。</p>
-<p><img lazyload src="/images/loading.svg" data-src="/Untitled.png"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled.png"></p>
 <p>我们直接找到此软件的主函数，分析其逻辑</p>
 <p>![Untitled](/Untitled 1-16954559556731.png)</p>
 <p>这里我们可以发现，是读取了我们的附件所给的gamemesage里面的数据，读取到filestream,</p>
-<p><img lazyload src="/images/loading.svg" data-src="/Untitled%202.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled%202.png" alt="Untitled"></p>
 <p>分析下面的代码，可以知道，这部分实现的代码，就是根据我们的按键，施行对应的操作，其中Enter键和space键，对应的函数下都有deal和stand,hit键，如果简单的玩过一下这个游戏，我们很容易知道，这几个函数实现的功能就是进行输赢的判断和检测自己的金钱还有多少，游戏是否继续。</p>
-<p><img lazyload src="/images/loading.svg" data-src="/Untitled%203.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled%203.png" alt="Untitled"></p>
 <p>我们分析之后，发现这个esc这个键下的函数十分的可疑，我们跟进去看看。</p>
-<p><img lazyload src="/images/loading.svg" data-src="/Untitled%204.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled%204.png" alt="Untitled"></p>
 <p>整体来说，这个函数并没有做什么，但是这个函数中调用的另一个函数，goldFUNC，我们继续跟进。</p>
-<p><img lazyload src="/images/loading.svg" data-src="/Untitled%205.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled%205.png" alt="Untitled"></p>
 <p>发现这个函数里面全是flag判断啥的异常处理函数，这里应该就是我们关键的加密函数了，但是这些判断看起来一头雾水，我们继续分析。</p>
-<p><img lazyload src="/images/loading.svg" data-src="/Untitled%206.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled%206.png" alt="Untitled"></p>
 <p>我们翻到后面我们发现了一个非常不一样的异常处理函数，而且这里出现了Program.memory，这个就是程序的开头，将我们文件读取的数据存储的地方。我们继续向下分析，看还有没有同样的操作。</p>
-<p><img lazyload src="/images/loading.svg" data-src="/Untitled%207.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled%207.png" alt="Untitled"></p>
 <p>这里有一个AES-ECB的加密</p>
-<p><img lazyload src="/images/loading.svg" data-src="/Untitled%208.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled%208.png" alt="Untitled"></p>
 <p>我们发现了一个函数调用，我们进去看看。</p>
-<p><img lazyload src="/images/loading.svg" data-src="/Untitled%209.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled%209.png" alt="Untitled"></p>
 <p>这里也是AES-ECB加密，但是我们分析之后，我们可以发现它并没有对我们的文件的数据进行改变，因此我们不管它。</p>
-<p><img lazyload src="/images/loading.svg" data-src="/Untitled%2010.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled%2010.png" alt="Untitled"></p>
 <p>到这里我们就可以知道了，我们的gamemesage是被加密过的文件，首先异或了34，之后又进行了AES-ECB加密，我们写一个脚本进行解密即可</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> Crypto<span class="token punctuation">.</span>Cipher <span class="token keyword">import</span> AES
 
@@ -272,15 +274,15 @@ plaintext <span class="token operator">=</span> cipher<span class="token punctua
 
 <p>将解密后的文件输出到data</p>
 <p>我们放入winhex中分析，可以发现是.net的一个输出文件，但是并未有文件头，我们在这里面进行搜索，看看是否能找到一些看信息</p>
-<p><img lazyload src="/images/loading.svg" data-src="/Untitled%2011.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled%2011.png" alt="Untitled"></p>
 <p>我们可以找到一个MZ的头，我们将其前面的数据删除，然后将其加入dll的后缀，因为此文件是以dll文件的形式载入我们的程序的</p>
-<p><img lazyload src="/images/loading.svg" data-src="/Untitled%2012.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled%2012.png" alt="Untitled"></p>
 <p>我们将其放入dnspy中分析。</p>
-<p><img lazyload src="/images/loading.svg" data-src="/Untitled%2013.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled%2013.png" alt="Untitled"></p>
 <p>有两个关键函数,分析这两个函数是将先前的三段数据进行求解,下一个函数就是将解变成密钥后对我们的数据进行异或,我们先写个脚本爆破出x,y,z.</p>
-<p><img lazyload src="/images/loading.svg" data-src="/Untitled%2014.png" alt="Untitled"></p>
-<p><img lazyload src="/images/loading.svg" data-src="/Untitled%2015.png" alt="Untitled"></p>
-<p><img lazyload src="/images/loading.svg" data-src="/Untitled%2016.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled%2014.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled%2015.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled%2016.png" alt="Untitled"></p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> z3 <span class="token keyword">import</span> <span class="token operator">*</span>
 
 x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> z <span class="token operator">=</span> BitVecs<span class="token punctuation">(</span><span class="token string">'x y z'</span><span class="token punctuation">,</span> <span class="token number">64</span><span class="token punctuation">)</span>
@@ -325,7 +327,7 @@ enc<span class="token operator">=</span><span class="token punctuation">[</span>
                 <div class="post-copyright-info">
                     <div class="article-copyright-info-container">
     <ul>
-        <li>本文标题：</li>
+        <li>本文标题：强网杯-2022-GameMaster</li>
         <li>本文作者：二木</li>
         <li>创建时间：2023-06-18 10:29:56</li>
         <li>
@@ -354,7 +356,7 @@ enc<span class="token operator">=</span><span class="token punctuation">[</span>
                                 <i class="fas fa-chevron-left"></i>
                                 </span>
                                 <span class="title flex-center">
-                                    <span class="post-nav-title-item"></span>
+                                    <span class="post-nav-title-item">Ferris proxy</span>
                                     <span class="post-nav-item">上一篇</span>
                                 </span>
                             </a>
@@ -367,7 +369,7 @@ enc<span class="token operator">=</span><span class="token punctuation">[</span>
                             href="/2023/06/14/2019-hong-mao-bei-childre-c-ni-xiang-han-shu-diao-yong-yue-ding-c-xiu-shi-fu-zhuan-huan-yi-huo-hei-he-fen-xi-bao-po-119141f5973c4a7780d21de7909182c0/"
                             >
                                 <span class="title flex-center">
-                                    <span class="post-nav-title-item"></span>
+                                    <span class="post-nav-title-item">2019红帽杯-CHILDRE(c++逆向+函数调用约定+c++修饰符转换+异或+黑盒分析+爆破)</span>
                                     <span class="post-nav-item">下一篇</span>
                                 </span>
                                 <span class="right arrow-icon flex-center">

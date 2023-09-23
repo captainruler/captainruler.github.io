@@ -9,6 +9,8 @@
     
     <title>
         
+            花指令总结 |
+        
         二木的博客小屋
     </title>
     
@@ -38,7 +40,7 @@
     <script id="hexo-configurations">
     let REDEFINE = window.REDEFINE || {};
     REDEFINE.hexo_config = {"hostname":"captainruler.github.io","root":"/","language":"zh-CN","path":"search.xml"};
-    REDEFINE.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#005080","avatar":"/images/7.webp","favicon":"/images/9.webp","article_img_align":"center","right_side_width":"210px","content_max_width":"1000px","nav_color":{"left":"#f78746","right":"#367d37","transparency":30},"hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_image":{"light":"/images/2.jpg","dark":"/images/1.jpg"},"title_color":{"light":"#fff","dark":"#d1d1b6"},"description":"好戏都在烟火中"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"0.3.5\nSearch"};
+    REDEFINE.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#005080","avatar":"/images/7.webp","favicon":"/images/9.webp","article_img_align":"center","right_side_width":"210px","content_max_width":"1000px","nav_color":{"left":"#f78746","right":"#367d37","transparency":30},"hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_image":{"light":"/images/2.jpg","dark":"/images/1.jpg"},"title_color":{"light":"#fff","dark":"#d1d1b6"},"description":"好戏都在烟火中"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"0.3.5\nSearch"};
     REDEFINE.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
   </script>
 <meta name="generator" content="Hexo 6.3.0">
@@ -174,7 +176,7 @@
     <div class="post-page-container">
         <div class="article-content-container">
             <div class="article-title">
-                <span class="title-hover-animation"><h1 style="font-size:2rem; font-weight: bold; margin: 10px 0;"></h1></span>
+                <span class="title-hover-animation"><h1 style="font-size:2rem; font-weight: bold; margin: 10px 0;">花指令总结</h1></span>
             </div>
 
             
@@ -261,7 +263,7 @@ s<span class="token operator">:</span>
     _emit <span class="token number">0</span>EDh
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p><img lazyload src="/images/loading.svg" data-src="/2023/08/09/hua-zhi-ling-zong-jie-7789b9f63bcd41f2828df0aa7fa2fa23/Untitled.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2023/08/09/hua-zhi-ling-zong-jie-7789b9f63bcd41f2828df0aa7fa2fa23/Untitled.png" alt="Untitled"></p>
 <p><strong>3、call,与ret的使用(指令替换)</strong></p>
 <p>一、</p>
 <p>例如，对于我们的call addr指令，是可以替换为下面的片段</p>
@@ -293,8 +295,8 @@ jmp ecx<span aria-hidden="true" class="line-numbers-rows"><span></span><span></s
 <p>然而，在某些特殊情况下，我们可能需要在&nbsp;<code>ret</code>&nbsp;后面添加机器码。这是因为在编写内联汇编时，编译器会对代码进行优化，并且可能会对指令进行重新排序或优化。如果我们在&nbsp;<code>ret</code>&nbsp;指令后面没有添加机器码，编译器可能会将其与后面的指令进行合并或优化，导致程序行为不符合预期。</p>
 <p>通过在&nbsp;<code>ret</code>&nbsp;指令后面添加机器码，我们可以确保编译器不会对&nbsp;<code>ret</code>&nbsp;指令进行优化或重新排序。这样可以保证&nbsp;<code>ret</code>&nbsp;指令的行为与我们的预期一致，从而实现特定的功能或行为。</p>
 <p><code>ret</code>&nbsp;指令后面的机器码不会被执行，而是用于控制程序的流程。</p>
-<p><img lazyload src="/images/loading.svg" data-src="/Untitled%201.png" alt="Untitled"></p>
-<p><img lazyload src="/images/loading.svg" data-src="/Untitled%202.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled%201.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled%202.png" alt="Untitled"></p>
 <p>出现堆栈不平衡,从而造成后面的代码不能成功反编译出</p>
 <h3 id="二、"><a href="#二、" class="headerlink" title="二、"></a>二、</h3><pre class="line-numbers language-c" data-language="c"><code class="language-c">__asm <span class="token punctuation">{</span>
 	__asm jmp junk1
@@ -308,7 +310,7 @@ jmp ecx<span aria-hidden="true" class="line-numbers-rows"><span></span><span></s
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>效果如图：</p>
-<p><img lazyload src="/images/loading.svg" data-src="/Untitled%203.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled%203.png" alt="Untitled"></p>
 <p>对于call与ret的花指令构造可以在函数中修改返回地址，达到跳过thunkcode到正常流程的目的。</p>
 <p><strong>4、相互抵消的操作（IDA能修复）</strong></p>
 <p>如下</p>
@@ -329,7 +331,7 @@ sub esp,0x100<span aria-hidden="true" class="line-numbers-rows"><span></span><sp
                 <div class="post-copyright-info">
                     <div class="article-copyright-info-container">
     <ul>
-        <li>本文标题：</li>
+        <li>本文标题：花指令总结</li>
         <li>本文作者：二木</li>
         <li>创建时间：2023-08-09 15:28:31</li>
         <li>
@@ -371,7 +373,7 @@ sub esp,0x100<span aria-hidden="true" class="line-numbers-rows"><span></span><sp
                             href="/2023/08/02/ez-code-f470f8b01209484b8ebc3ceb62f6bb3d/"
                             >
                                 <span class="title flex-center">
-                                    <span class="post-nav-title-item"></span>
+                                    <span class="post-nav-title-item">EZ_CODE</span>
                                     <span class="post-nav-item">下一篇</span>
                                 </span>
                                 <span class="right arrow-icon flex-center">

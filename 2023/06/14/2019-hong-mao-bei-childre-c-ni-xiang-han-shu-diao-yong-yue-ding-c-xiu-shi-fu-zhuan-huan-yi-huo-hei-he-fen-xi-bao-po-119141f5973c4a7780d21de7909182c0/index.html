@@ -9,6 +9,8 @@
     
     <title>
         
+            2019红帽杯-CHILDRE(c++逆向+函数调用约定+c++修饰符转换+异或+黑盒分析+爆破) |
+        
         二木的博客小屋
     </title>
     
@@ -38,7 +40,7 @@
     <script id="hexo-configurations">
     let REDEFINE = window.REDEFINE || {};
     REDEFINE.hexo_config = {"hostname":"captainruler.github.io","root":"/","language":"zh-CN","path":"search.xml"};
-    REDEFINE.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#005080","avatar":"/images/7.webp","favicon":"/images/9.webp","article_img_align":"center","right_side_width":"210px","content_max_width":"1000px","nav_color":{"left":"#f78746","right":"#367d37","transparency":30},"hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_image":{"light":"/images/2.jpg","dark":"/images/1.jpg"},"title_color":{"light":"#fff","dark":"#d1d1b6"},"description":"好戏都在烟火中"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"0.3.5\nSearch"};
+    REDEFINE.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#005080","avatar":"/images/7.webp","favicon":"/images/9.webp","article_img_align":"center","right_side_width":"210px","content_max_width":"1000px","nav_color":{"left":"#f78746","right":"#367d37","transparency":30},"hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_image":{"light":"/images/2.jpg","dark":"/images/1.jpg"},"title_color":{"light":"#fff","dark":"#d1d1b6"},"description":"好戏都在烟火中"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"0.3.5\nSearch"};
     REDEFINE.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
   </script>
 <meta name="generator" content="Hexo 6.3.0">
@@ -174,7 +176,7 @@
     <div class="post-page-container">
         <div class="article-content-container">
             <div class="article-title">
-                <span class="title-hover-animation"><h1 style="font-size:2rem; font-weight: bold; margin: 10px 0;"></h1></span>
+                <span class="title-hover-animation"><h1 style="font-size:2rem; font-weight: bold; margin: 10px 0;">2019红帽杯-CHILDRE(c++逆向+函数调用约定+c++修饰符转换+异或+黑盒分析+爆破)</h1></span>
             </div>
 
             
@@ -223,26 +225,26 @@
             
 
             <div class="article-content markdown-body">
-                <h1 id="2019红帽杯-CHILDRE-c-逆向-函数调用约定-c-修饰符转换-异或-黑盒分析-爆破"><a href="#2019红帽杯-CHILDRE-c-逆向-函数调用约定-c-修饰符转换-异或-黑盒分析-爆破" class="headerlink" title="[2019红帽杯]CHILDRE(c++逆向+函数调用约定+c++修饰符转换+异或+黑盒分析+爆破)"></a>[2019红帽杯]CHILDRE(c++逆向+函数调用约定+c++修饰符转换+异或+黑盒分析+爆破)</h1><p><img lazyload src="/images/loading.svg" data-src="/%5B2019%E7%BA%A2%E5%B8%BD%E6%9D%AF%5DCHILDRE(c++%E9%80%86%E5%90%91+%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E7%BA%A6%E5%AE%9A+c++%E4%BF%AE%E9%A5%B0%E7%AC%A6%E8%BD%AC%E6%8D%A2+%E5%BC%82%E6%88%96+%E9%BB%91%E7%9B%92%E5%88%86%E6%9E%90+%E7%88%86%E7%A0%B4)%20119141f5973c4a7780d21de7909182c0/Untitled.png" alt="Untitled"></p>
-<p><img lazyload src="/images/loading.svg" data-src="/%5B2019%E7%BA%A2%E5%B8%BD%E6%9D%AF%5DCHILDRE(c++%E9%80%86%E5%90%91+%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E7%BA%A6%E5%AE%9A+c++%E4%BF%AE%E9%A5%B0%E7%AC%A6%E8%BD%AC%E6%8D%A2+%E5%BC%82%E6%88%96+%E9%BB%91%E7%9B%92%E5%88%86%E6%9E%90+%E7%88%86%E7%A0%B4)%20119141f5973c4a7780d21de7909182c0/Untitled%201.png" alt="Untitled"></p>
-<p><img lazyload src="/images/loading.svg" data-src="/%5B2019%E7%BA%A2%E5%B8%BD%E6%9D%AF%5DCHILDRE(c++%E9%80%86%E5%90%91+%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E7%BA%A6%E5%AE%9A+c++%E4%BF%AE%E9%A5%B0%E7%AC%A6%E8%BD%AC%E6%8D%A2+%E5%BC%82%E6%88%96+%E9%BB%91%E7%9B%92%E5%88%86%E6%9E%90+%E7%88%86%E7%A0%B4)%20119141f5973c4a7780d21de7909182c0/Untitled%202.png" alt="Untitled"></p>
+                <h1 id="2019红帽杯-CHILDRE-c-逆向-函数调用约定-c-修饰符转换-异或-黑盒分析-爆破"><a href="#2019红帽杯-CHILDRE-c-逆向-函数调用约定-c-修饰符转换-异或-黑盒分析-爆破" class="headerlink" title="[2019红帽杯]CHILDRE(c++逆向+函数调用约定+c++修饰符转换+异或+黑盒分析+爆破)"></a>[2019红帽杯]CHILDRE(c++逆向+函数调用约定+c++修饰符转换+异或+黑盒分析+爆破)</h1><p><img lazyload="" src="/images/loading.svg" data-src="/%5B2019%E7%BA%A2%E5%B8%BD%E6%9D%AF%5DCHILDRE(c++%E9%80%86%E5%90%91+%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E7%BA%A6%E5%AE%9A+c++%E4%BF%AE%E9%A5%B0%E7%AC%A6%E8%BD%AC%E6%8D%A2+%E5%BC%82%E6%88%96+%E9%BB%91%E7%9B%92%E5%88%86%E6%9E%90+%E7%88%86%E7%A0%B4)%20119141f5973c4a7780d21de7909182c0/Untitled.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/%5B2019%E7%BA%A2%E5%B8%BD%E6%9D%AF%5DCHILDRE(c++%E9%80%86%E5%90%91+%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E7%BA%A6%E5%AE%9A+c++%E4%BF%AE%E9%A5%B0%E7%AC%A6%E8%BD%AC%E6%8D%A2+%E5%BC%82%E6%88%96+%E9%BB%91%E7%9B%92%E5%88%86%E6%9E%90+%E7%88%86%E7%A0%B4)%20119141f5973c4a7780d21de7909182c0/Untitled%201.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/%5B2019%E7%BA%A2%E5%B8%BD%E6%9D%AF%5DCHILDRE(c++%E9%80%86%E5%90%91+%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E7%BA%A6%E5%AE%9A+c++%E4%BF%AE%E9%A5%B0%E7%AC%A6%E8%BD%AC%E6%8D%A2+%E5%BC%82%E6%88%96+%E9%BB%91%E7%9B%92%E5%88%86%E6%9E%90+%E7%88%86%E7%A0%B4)%20119141f5973c4a7780d21de7909182c0/Untitled%202.png" alt="Untitled"></p>
 <p>这里就直接用z3写脚本将我们的outoutstring爆出来。</p>
 <p>outputString =&nbsp;<code>private: char * __thiscall R0Pxx::My_Aut0_PWN(unsigned char *)</code></p>
-<p><img lazyload src="/images/loading.svg" data-src="/%5B2019%E7%BA%A2%E5%B8%BD%E6%9D%AF%5DCHILDRE(c++%E9%80%86%E5%90%91+%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E7%BA%A6%E5%AE%9A+c++%E4%BF%AE%E9%A5%B0%E7%AC%A6%E8%BD%AC%E6%8D%A2+%E5%BC%82%E6%88%96+%E9%BB%91%E7%9B%92%E5%88%86%E6%9E%90+%E7%88%86%E7%A0%B4)%20119141f5973c4a7780d21de7909182c0/Untitled%203.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/%5B2019%E7%BA%A2%E5%B8%BD%E6%9D%AF%5DCHILDRE(c++%E9%80%86%E5%90%91+%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E7%BA%A6%E5%AE%9A+c++%E4%BF%AE%E9%A5%B0%E7%AC%A6%E8%BD%AC%E6%8D%A2+%E5%BC%82%E6%88%96+%E9%BB%91%E7%9B%92%E5%88%86%E6%9E%90+%E7%88%86%E7%A0%B4)%20119141f5973c4a7780d21de7909182c0/Untitled%203.png" alt="Untitled"></p>
 <p>这个函数比关键。</p>
 <p>官方文档，大致可以知道这个函数的作用就是将我们的flag进行转换，转换成了c++函数模式。也就是说我们的flag就是outoutstring，这个函数的<strong>C++函数名修饰</strong></p>
-<p><img lazyload src="/images/loading.svg" data-src="/%5B2019%E7%BA%A2%E5%B8%BD%E6%9D%AF%5DCHILDRE(c++%E9%80%86%E5%90%91+%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E7%BA%A6%E5%AE%9A+c++%E4%BF%AE%E9%A5%B0%E7%AC%A6%E8%BD%AC%E6%8D%A2+%E5%BC%82%E6%88%96+%E9%BB%91%E7%9B%92%E5%88%86%E6%9E%90+%E7%88%86%E7%A0%B4)%20119141f5973c4a7780d21de7909182c0/Untitled%204.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/%5B2019%E7%BA%A2%E5%B8%BD%E6%9D%AF%5DCHILDRE(c++%E9%80%86%E5%90%91+%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E7%BA%A6%E5%AE%9A+c++%E4%BF%AE%E9%A5%B0%E7%AC%A6%E8%BD%AC%E6%8D%A2+%E5%BC%82%E6%88%96+%E9%BB%91%E7%9B%92%E5%88%86%E6%9E%90+%E7%88%86%E7%A0%B4)%20119141f5973c4a7780d21de7909182c0/Untitled%204.png" alt="Untitled"></p>
 <p>对于<strong>C++函数名修饰,这个需要了解函数调用约定</strong></p>
 <p><a class="link" target="_blank" rel="noopener" href="https://www.notion.so/1-066caf5ec03a43d397cc85d20b07c157?pvs=21">函数调用约定 (1)<i class="fas fa-external-link-alt"></i></a></p>
 <p>了解之后，我们可以将未转换的outoutstring得出：?My_Aut0_PWN@R0Pxx@@AAEPADPAE@Z</p>
-<p><img lazyload src="/images/loading.svg" data-src="/%5B2019%E7%BA%A2%E5%B8%BD%E6%9D%AF%5DCHILDRE(c++%E9%80%86%E5%90%91+%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E7%BA%A6%E5%AE%9A+c++%E4%BF%AE%E9%A5%B0%E7%AC%A6%E8%BD%AC%E6%8D%A2+%E5%BC%82%E6%88%96+%E9%BB%91%E7%9B%92%E5%88%86%E6%9E%90+%E7%88%86%E7%A0%B4)%20119141f5973c4a7780d21de7909182c0/Untitled%205.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/%5B2019%E7%BA%A2%E5%B8%BD%E6%9D%AF%5DCHILDRE(c++%E9%80%86%E5%90%91+%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E7%BA%A6%E5%AE%9A+c++%E4%BF%AE%E9%A5%B0%E7%AC%A6%E8%BD%AC%E6%8D%A2+%E5%BC%82%E6%88%96+%E9%BB%91%E7%9B%92%E5%88%86%E6%9E%90+%E7%88%86%E7%A0%B4)%20119141f5973c4a7780d21de7909182c0/Untitled%205.png" alt="Untitled"></p>
 <p>通过这里，我们可以判断出我们的flag有着31位</p>
-<p><img lazyload src="/images/loading.svg" data-src="/%5B2019%E7%BA%A2%E5%B8%BD%E6%9D%AF%5DCHILDRE(c++%E9%80%86%E5%90%91+%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E7%BA%A6%E5%AE%9A+c++%E4%BF%AE%E9%A5%B0%E7%AC%A6%E8%BD%AC%E6%8D%A2+%E5%BC%82%E6%88%96+%E9%BB%91%E7%9B%92%E5%88%86%E6%9E%90+%E7%88%86%E7%A0%B4)%20119141f5973c4a7780d21de7909182c0/Untitled%206.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/%5B2019%E7%BA%A2%E5%B8%BD%E6%9D%AF%5DCHILDRE(c++%E9%80%86%E5%90%91+%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E7%BA%A6%E5%AE%9A+c++%E4%BF%AE%E9%A5%B0%E7%AC%A6%E8%BD%AC%E6%8D%A2+%E5%BC%82%E6%88%96+%E9%BB%91%E7%9B%92%E5%88%86%E6%9E%90+%E7%88%86%E7%A0%B4)%20119141f5973c4a7780d21de7909182c0/Untitled%206.png" alt="Untitled"></p>
 <p>对于这一堆函数，我们进行动态调试,我们输入有序字母。</p>
-<p><img lazyload src="/images/loading.svg" data-src="/%5B2019%E7%BA%A2%E5%B8%BD%E6%9D%AF%5DCHILDRE(c++%E9%80%86%E5%90%91+%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E7%BA%A6%E5%AE%9A+c++%E4%BF%AE%E9%A5%B0%E7%AC%A6%E8%BD%AC%E6%8D%A2+%E5%BC%82%E6%88%96+%E9%BB%91%E7%9B%92%E5%88%86%E6%9E%90+%E7%88%86%E7%A0%B4)%20119141f5973c4a7780d21de7909182c0/Untitled%207.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/%5B2019%E7%BA%A2%E5%B8%BD%E6%9D%AF%5DCHILDRE(c++%E9%80%86%E5%90%91+%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E7%BA%A6%E5%AE%9A+c++%E4%BF%AE%E9%A5%B0%E7%AC%A6%E8%BD%AC%E6%8D%A2+%E5%BC%82%E6%88%96+%E9%BB%91%E7%9B%92%E5%88%86%E6%9E%90+%E7%88%86%E7%A0%B4)%20119141f5973c4a7780d21de7909182c0/Untitled%207.png" alt="Untitled"></p>
 <p>进入这个函数，我们可以发现</p>
-<p><img lazyload src="/images/loading.svg" data-src="/%5B2019%E7%BA%A2%E5%B8%BD%E6%9D%AF%5DCHILDRE(c++%E9%80%86%E5%90%91+%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E7%BA%A6%E5%AE%9A+c++%E4%BF%AE%E9%A5%B0%E7%AC%A6%E8%BD%AC%E6%8D%A2+%E5%BC%82%E6%88%96+%E9%BB%91%E7%9B%92%E5%88%86%E6%9E%90+%E7%88%86%E7%A0%B4)%20119141f5973c4a7780d21de7909182c0/Untitled%208.png" alt="Untitled"></p>
-<p><img lazyload src="/images/loading.svg" data-src="/%5B2019%E7%BA%A2%E5%B8%BD%E6%9D%AF%5DCHILDRE(c++%E9%80%86%E5%90%91+%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E7%BA%A6%E5%AE%9A+c++%E4%BF%AE%E9%A5%B0%E7%AC%A6%E8%BD%AC%E6%8D%A2+%E5%BC%82%E6%88%96+%E9%BB%91%E7%9B%92%E5%88%86%E6%9E%90+%E7%88%86%E7%A0%B4)%20119141f5973c4a7780d21de7909182c0/Untitled%209.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/%5B2019%E7%BA%A2%E5%B8%BD%E6%9D%AF%5DCHILDRE(c++%E9%80%86%E5%90%91+%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E7%BA%A6%E5%AE%9A+c++%E4%BF%AE%E9%A5%B0%E7%AC%A6%E8%BD%AC%E6%8D%A2+%E5%BC%82%E6%88%96+%E9%BB%91%E7%9B%92%E5%88%86%E6%9E%90+%E7%88%86%E7%A0%B4)%20119141f5973c4a7780d21de7909182c0/Untitled%208.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/%5B2019%E7%BA%A2%E5%B8%BD%E6%9D%AF%5DCHILDRE(c++%E9%80%86%E5%90%91+%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E7%BA%A6%E5%AE%9A+c++%E4%BF%AE%E9%A5%B0%E7%AC%A6%E8%BD%AC%E6%8D%A2+%E5%BC%82%E6%88%96+%E9%BB%91%E7%9B%92%E5%88%86%E6%9E%90+%E7%88%86%E7%A0%B4)%20119141f5973c4a7780d21de7909182c0/Untitled%209.png" alt="Untitled"></p>
 <p>可以发现我们输入的数据被打乱了</p>
 <p>我们输入31个有序数据，12345ABCDEFGHIJKLMNOPQRSTUWXYZ，</p>
 <p>得出乱序后的表，然后写脚本进行还原。</p>
@@ -269,7 +271,7 @@
                 <div class="post-copyright-info">
                     <div class="article-copyright-info-container">
     <ul>
-        <li>本文标题：</li>
+        <li>本文标题：2019红帽杯-CHILDRE(c++逆向+函数调用约定+c++修饰符转换+异或+黑盒分析+爆破)</li>
         <li>本文作者：二木</li>
         <li>创建时间：2023-06-14 09:45:43</li>
         <li>
@@ -298,7 +300,7 @@
                                 <i class="fas fa-chevron-left"></i>
                                 </span>
                                 <span class="title flex-center">
-                                    <span class="post-nav-title-item"></span>
+                                    <span class="post-nav-title-item">强网杯-2022-GameMaster</span>
                                     <span class="post-nav-item">上一篇</span>
                                 </span>
                             </a>
@@ -311,7 +313,7 @@
                             href="/2023/06/05/ru-he-cong-0-dao-1-bian-xie-yi-ge-dll-wen-jian-c6594ccdd993460ab9a316426ab8ed5a/"
                             >
                                 <span class="title flex-center">
-                                    <span class="post-nav-title-item"></span>
+                                    <span class="post-nav-title-item">如何从0到1编写一个dll文件</span>
                                     <span class="post-nav-item">下一篇</span>
                                 </span>
                                 <span class="right arrow-icon flex-center">
