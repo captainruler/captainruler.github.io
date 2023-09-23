@@ -224,14 +224,14 @@
 
             <div class="article-content markdown-body">
                 <h1 id="虎符CTF2022-—shellcode"><a href="#虎符CTF2022-—shellcode" class="headerlink" title="虎符CTF2022 —shellcode"></a>虎符CTF2022 —shellcode</h1><p>打开这道题，我们可以发现这个是进行加壳了的软件</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2023/09/21/hu-fu-ctf2022-shellcode-df67931495854300957b88abb372a0af/Untitled-16954558518861.png"></p>
+<p>![](虎符CTF2022 —shellcode df67931495854300957b88abb372a0af/Untitled.png)</p>
 <p>我们进行动态调试，先准备手动脱壳的，脱的时候发现居然有反调试，准备动态调试将反调试的patch但是发现很难脱，脱了半天还在循环，可能太菜的原因（T _ T）。但是我们脱的时候可以发现，这个就是themida的壳。去网上一搜，果然是强壳，难脱。。。</p>
-<p>![](./Untitled 1-16954591126691.png)</p>
+<p>![](虎符CTF2022 —shellcode df67931495854300957b88abb372a0af/Untitled 1.png)</p>
 <p>去网上找了一个可以绕过这个壳反调试</p>
-<p>![](/Untitled 2-16954591289412.png)</p>
+<p>![](虎符CTF2022 —shellcode df67931495854300957b88abb372a0af/Untitled 2.png)</p>
 <p>下载下来后拷贝对应版本的插件到你的x64dbg插件目录,如64位,拷贝SharpOD x64.dp64文件,然后重启调试器在插件菜单中配置</p>
 <p>再将这个选中。</p>
-<p>![](./Untitled 3-16954591347043.png)</p>
+<p>![](虎符CTF2022 —shellcode df67931495854300957b88abb372a0af/Untitled 3.png)</p>
 <p>这样我们就可以愉快的脱壳了。</p>
 <p>将程序放入X32DBGz中进行分析，我们按F9运行几次，我们就可以运行到我们的OPE之中了。</p>
 <p>![](./Untitled 4-16954591428614.png)</p>
