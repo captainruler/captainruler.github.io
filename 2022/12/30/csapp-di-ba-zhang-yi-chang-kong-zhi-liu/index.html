@@ -268,15 +268,15 @@
 <li><p>相同但是独立的地址空间。它们进程的地址空间是相同的，但是因为父进程和子进程是独立的进程，它们有着自己的私有空间。</p>
 </li>
 <li><p>共享文件。因为子进程会继承父进程大部分东西。相似但是有区别。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/image-20230226154844867.png"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/image-20230226154844867.png"></p>
 </li>
 </ul>
 <h4 id="3、进程休眠"><a href="#3、进程休眠" class="headerlink" title="3、进程休眠"></a>3、进程休眠</h4><p>一般的，我们运用sleep函数将一个进程挂起指定的一段时间</p>
 <h4 id="4、回收子进程"><a href="#4、回收子进程" class="headerlink" title="4、回收子进程"></a>4、回收子进程</h4><p>当一个进程由于某种原因终止的时候，内核并不会立即将它从系统中清除，而是保持在一种已终止的状态中，直到被父进程回收。一个终止了但是还未被回收的进程被称为僵死进程，虽然他们没有运行，但是它们仍然会消耗系统的内存资源。一般我们用waitpid函数来等待它的子进程终止或者停止。</p>
 <h3 id="信号"><a href="#信号" class="headerlink" title="信号"></a>信号</h3><p>信号的作用就是通知进程系统中发生的某种类型的事件。每种信号类型都对应着某种系统事件，当发生了一个异常，就会通知用户进程。</p>
 <p><strong>信号表</strong> </p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/image-20230226162021483.png" alt="image-20230226162021483"></p>
-<h3 id=""><a href="#" class="headerlink" title=""></a></h3>
+<p><img lazyload src="/images/loading.svg" data-src="/image-20230226162021483.png" alt="image-20230226162021483"></p>
+<h3 id><a href="#" class="headerlink" title></a></h3>
             </div>
 
             

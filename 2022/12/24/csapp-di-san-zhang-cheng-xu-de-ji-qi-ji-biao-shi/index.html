@@ -230,7 +230,7 @@
 </ul>
 <h3 id="数据格式"><a href="#数据格式" class="headerlink" title="数据格式"></a>数据格式</h3><ul>
 <li>字—word，双字—double words ，四字—quad words</li>
-<li><img lazyload="" src="/images/loading.svg" data-src="/2022/12/24/csapp-di-san-zhang-cheng-xu-de-ji-qi-ji-biao-shi/image-20221227230758891.png" alt="image-20221227230758891"></li>
+<li><img lazyload src="/images/loading.svg" data-src="/2022/12/24/csapp-di-san-zhang-cheng-xu-de-ji-qi-ji-biao-shi/image-20221227230758891.png" alt="image-20221227230758891"></li>
 </ul>
 <h3 id="访问信息"><a href="#访问信息" class="headerlink" title="访问信息"></a>访问信息</h3><ul>
 <li>一般局部变量是放在寄存器中的，而不是内存中，因为访问寄存器比访问内存要快得多</li>
@@ -247,7 +247,7 @@
 </li>
 <li><p>二维数组在内存中排列的顺序是按照<strong>行</strong>优先的原则。列如数组A [5] [3]</p>
 </li>
-<li><p><img lazyload="" src="/images/loading.svg" data-src="/2022/12/24/csapp-di-san-zhang-cheng-xu-de-ji-qi-ji-biao-shi/image-20221227210346634.png" alt="image-20221227210346634"></p>
+<li><p><img lazyload src="/images/loading.svg" data-src="/2022/12/24/csapp-di-san-zhang-cheng-xu-de-ji-qi-ji-biao-shi/image-20221227210346634.png" alt="image-20221227210346634"></p>
 <p>这里可以联想到，一个一维数组可以省略其大小，而二维数组可以省略其行，但是不能省略其列。此时二维数组就可以看做一维数组的嵌套，一维数组必须声明其为什么数组,以表明其装载的数据是int还是char,表明其存储数据的大小，同理二维数组，一维数组的数组，使用里面的数组我们必须表明其大小，而一维数组的大小就是其有多少个数据，因此代表里层数组大小，也就是二维数组的列不能省略。</p>
 <h3 id="异质的数据结构（c语言中的结构体和联合体）"><a href="#异质的数据结构（c语言中的结构体和联合体）" class="headerlink" title="异质的数据结构（c语言中的结构体和联合体）"></a>异质的数据结构（c语言中的结构体和联合体）</h3><ul>
 <li><p><strong>结构体</strong> 将可能不同类型的对象聚合到一个对象中。结构体的所有组成部分都存放在内存的连续的区域内，指向结构体的指针是结构体第一个 字节的地址</p>
@@ -256,7 +256,7 @@
 </li>
 <li><p><strong>数据对齐</strong> 计算机系统要求某种类型对象的地址必须为2、4、8的倍数。（对于x86指令来说，保持数据对齐能提高效率）</p>
 </li>
-<li><p>大多数函数的栈帧的边界都必须是16字节的倍数<img lazyload="" src="/images/loading.svg" data-src="/2022/12/24/csapp-di-san-zhang-cheng-xu-de-ji-qi-ji-biao-shi/image-20221227220154580.png" alt="image-20221227220154580"></p>
+<li><p>大多数函数的栈帧的边界都必须是16字节的倍数<img lazyload src="/images/loading.svg" data-src="/2022/12/24/csapp-di-san-zhang-cheng-xu-de-ji-qi-ji-biao-shi/image-20221227220154580.png" alt="image-20221227220154580"></p>
 </li>
 <li><p>在Linux系统中，栈随机化已经变成了标准行为，通过栈随机化使得栈的位置在程序每次运行时都有变化，以避免安全单一化。</p>
 </li>

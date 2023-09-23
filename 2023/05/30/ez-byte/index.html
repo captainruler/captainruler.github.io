@@ -227,13 +227,13 @@
             <div class="article-content markdown-body">
                 <h1 id="ez-byte"><a href="#ez-byte" class="headerlink" title="ez_byte"></a>ez_byte</h1><p>首先我们先打开文件运行一下，看一下输入和输出。进去就是输入，输入之后会对我们的输入进行回显，没有什么非常关键的信息。</p>
 <p>打开ida进行分析，main函数没有什么发现</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/ez_byte%20d8787172d35949589bf166b460d2c1f5/Untitled.png" alt="Untitled"></p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/ez_byte%20d8787172d35949589bf166b460d2c1f5/SAVE_20230530_155603.jpg" alt="SAVE_20230530_155603.jpg"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/ez_byte%20d8787172d35949589bf166b460d2c1f5/Untitled.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/ez_byte%20d8787172d35949589bf166b460d2c1f5/SAVE_20230530_155603.jpg" alt="SAVE_20230530_155603.jpg"></p>
 <p>我们跳到数据区，发现这个100%下面的，yes并没有在string窗口出现，我们按下x查询交叉引用，在执行yes之前，有个jmp指令，也就是说，按照程序执行是永远不好去到yes的地方的，也就是说，一定有什么操作，然后再跳到yes中去。</p>
 <p>我们patch一下jmp，将其修改为条件跳转，看看具体是操作。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/ez_byte%20d8787172d35949589bf166b460d2c1f5/65725c2557233d12.jpg" alt="65725c2557233d12.jpg"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/ez_byte%20d8787172d35949589bf166b460d2c1f5/65725c2557233d12.jpg" alt="65725c2557233d12.jpg"></p>
 <p>我们查看判断跳入，yes的汇编，我们可以发现，</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/ez_byte%20d8787172d35949589bf166b460d2c1f5/Untitled%201.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/ez_byte%20d8787172d35949589bf166b460d2c1f5/Untitled%201.png" alt="Untitled"></p>
 <p>有个判断r12是否为零，但是并没有出现对r12的任何操作，说明我们想要的操作被隐藏起来了。</p>
 <p>分析函数，我们可以查看到这样一个函数，一个异常处理函数</p>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">void</span> __noreturn <span class="token function">sub_404BF5</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>_DWORD <span class="token operator">*</span>exception<span class="token punctuation">;</span> <span class="token comment">// rax</span>
@@ -241,7 +241,7 @@ exception <span class="token operator">=</span> <span class="token punctuation">
 <span class="token operator">*</span>exception <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
 <span class="token function">_cxa_throw</span><span class="token punctuation">(</span>exception<span class="token punctuation">,</span> <span class="token operator">&amp;</span>off_5CB8C8<span class="token punctuation">,</span> <span class="token number">0LL</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p><img lazyload="" src="/images/loading.svg" data-src="/ez_byte%20d8787172d35949589bf166b460d2c1f5/SAVE_20230530_155623.jpg" alt="SAVE_20230530_155623.jpg"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/ez_byte%20d8787172d35949589bf166b460d2c1f5/SAVE_20230530_155623.jpg" alt="SAVE_20230530_155623.jpg"></p>
 <p>fenter里会有一系列SSE指令集有关xmm寄存器操作</p>
 <p>对于异常处理</p>
 <p><a class="link" target="_blank" rel="noopener" href="https://www.cnblogs.com/-citywall123/p/12901301.html">C++异常处理机制（throw、try、catch、finally） - 知道了呀~ - 博客园 (cnblogs.com)<i class="fas fa-external-link-alt"></i></a></p>
@@ -256,7 +256,7 @@ exception <span class="token operator">=</span> <span class="token punctuation">
 <p>到此，我们大致就可以知道，我们的操作就是被隐藏在了这个栈展开中DWARF的“虚拟机”字节码中，</p>
 <p>在Linux中我们执行readelf -Wwr ezbyte  &gt; out.txt,将DWARF 调试信息打印出来</p>
 <p>在前面，我们分析了，对r12的操作，并没有直接出现在代码上，操作代码被隐藏了。这里我们在文件中，搜索r12,发现在这里对我们的r12进行了操作，并且这也“虚拟机”字节码的操作部分。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/ez_byte%20d8787172d35949589bf166b460d2c1f5/7b5bfd7f6451b363.jpg" alt="7b5bfd7f6451b363.jpg"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/ez_byte%20d8787172d35949589bf166b460d2c1f5/7b5bfd7f6451b363.jpg" alt="7b5bfd7f6451b363.jpg"></p>
 <p><a class="link" target="_blank" rel="noopener" href="https://dwarfstd.org/doc/DWARF5.pdf">DWARF Debugging Information Format Version 5 (dwarfstd.org)<i class="fas fa-external-link-alt"></i></a></p>
 <p>通过官方文档，查询执行操作的命令</p>
 <p>整个的操作思路</p>

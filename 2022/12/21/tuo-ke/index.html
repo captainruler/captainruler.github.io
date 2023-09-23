@@ -232,42 +232,42 @@
 <p><strong>对于脱壳运用最多的方法，一个是单步调试法，另一个就是ESP定律来脱壳</strong></p>
 <h3 id="单步调试法"><a href="#单步调试法" class="headerlink" title="单步调试法"></a>单步调试法</h3><p>正如其名，单步调试法就是进行动态调试文件，分析汇编指令，找到关键点,寻找oep</p>
 <h3 id="esp定律（堆栈平衡）"><a href="#esp定律（堆栈平衡）" class="headerlink" title="esp定律（堆栈平衡）"></a>esp定律（堆栈平衡）</h3><p>由于我们壳会在内存中还原程序，跳到oep，执行我们的程序。大致过程就是运行壳程序解壳，然后退出解壳程序，加载原本程序。有着壳程序的运行与退出，根据堆栈平衡原理，壳退出后，必然会操作堆栈指针为进入之前的堆栈指针。因此根据这个原理，我们可以在堆栈处，设置访问断点，让程序运行，当程序暂停的时候，就是壳程序即将执行完的时候，然后在其附近单步跟踪就可以找到原始OEP了。</p>
-<h3 id="UPX"><a href="#UPX" class="headerlink" title="UPX"></a>UPX</h3><h3 id="题目一："><a href="#题目一：" class="headerlink" title="题目一："></a>题目一：</h3><h3 id="链接：https-pan-baidu-com-s-1teQgV5kgKpuNJ60o0byYVg-pwd-j8mj"><a href="#链接：https-pan-baidu-com-s-1teQgV5kgKpuNJ60o0byYVg-pwd-j8mj" class="headerlink" title="链接：https://pan.baidu.com/s/1teQgV5kgKpuNJ60o0byYVg?pwd=j8mj"></a>链接：<a class="link" target="_blank" rel="noopener" href="https://pan.baidu.com/s/1teQgV5kgKpuNJ60o0byYVg?pwd=j8mj">https://pan.baidu.com/s/1teQgV5kgKpuNJ60o0byYVg?pwd=j8mj<i class="fas fa-external-link-alt"></i></a></h3><h3 id="提取码：j8mj"><a href="#提取码：j8mj" class="headerlink" title="提取码：j8mj"></a>提取码：j8mj</h3><h6 id="单步调试法-1"><a href="#单步调试法-1" class="headerlink" title="单步调试法"></a>单步调试法</h6><p><img lazyload="" src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221221172644959.png" alt="image-20221221172644959"></p>
+<h3 id="UPX"><a href="#UPX" class="headerlink" title="UPX"></a>UPX</h3><h3 id="题目一："><a href="#题目一：" class="headerlink" title="题目一："></a>题目一：</h3><h3 id="链接：https-pan-baidu-com-s-1teQgV5kgKpuNJ60o0byYVg-pwd-j8mj"><a href="#链接：https-pan-baidu-com-s-1teQgV5kgKpuNJ60o0byYVg-pwd-j8mj" class="headerlink" title="链接：https://pan.baidu.com/s/1teQgV5kgKpuNJ60o0byYVg?pwd=j8mj"></a>链接：<a class="link" target="_blank" rel="noopener" href="https://pan.baidu.com/s/1teQgV5kgKpuNJ60o0byYVg?pwd=j8mj">https://pan.baidu.com/s/1teQgV5kgKpuNJ60o0byYVg?pwd=j8mj<i class="fas fa-external-link-alt"></i></a></h3><h3 id="提取码：j8mj"><a href="#提取码：j8mj" class="headerlink" title="提取码：j8mj"></a>提取码：j8mj</h3><h6 id="单步调试法-1"><a href="#单步调试法-1" class="headerlink" title="单步调试法"></a>单步调试法</h6><p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221221172644959.png" alt="image-20221221172644959"></p>
 <p>这个jmp非常可疑（一般那种jmp有大跳转就要注意），我们在这里按下f2 下断点，运行之后，按f7跟入。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221221174102488.png" alt="image-20221221174102488"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221221174102488.png" alt="image-20221221174102488"></p>
 <p>到这里大致就可以猜出我们找对了。</p>
 <p>按f8，运行到  jmp,f7跟入</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221221175001632.png" alt="image-20221221175001632"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221221175001632.png" alt="image-20221221175001632"></p>
 <p>到这里就差不多知道找到oep了，由于这样ida没有将它分析出来，我们按p，将其分析出来</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221221175423558.png" alt="image-20221221175423558"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221221175423558.png" alt="image-20221221175423558"></p>
 <p>进行反汇编之后发现看不懂，也没有找到我们的函数。这里有两个方法，一个就是单步，直到程序等待输入，另一个方法就是直接去string中搜索，字符串。我运用的是第二种。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221221203234327.png"></p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221221203609175.png" alt="image-20221221203609175"></p>
-<p>按键盘上的X快捷键。<img lazyload="" src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221221203438864-1671634100072-1.png" alt="image-20221221203438864-1671634100072-1"></p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221221203345394.png" alt="image-20221221203345394"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221221203234327.png"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221221203609175.png" alt="image-20221221203609175"></p>
+<p>按键盘上的X快捷键。<img lazyload src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221221203438864-1671634100072-1.png" alt="image-20221221203438864-1671634100072-1"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221221203345394.png" alt="image-20221221203345394"></p>
 <p>查询交叉引用就可以找到我们的加密函数，按f5反汇编即可。然后进行分析即可。</p>
-<h3 id="题目二"><a href="#题目二" class="headerlink" title="题目二"></a>题目二</h3><h3 id="链接：https-pan-baidu-com-s-1-e-A7gJow71q4s8KYs0JfQ-pwd-fycv"><a href="#链接：https-pan-baidu-com-s-1-e-A7gJow71q4s8KYs0JfQ-pwd-fycv" class="headerlink" title="链接：https://pan.baidu.com/s/1_e_A7gJow71q4s8KYs0JfQ?pwd=fycv"></a>链接：<a class="link" target="_blank" rel="noopener" href="https://pan.baidu.com/s/1_e_A7gJow71q4s8KYs0JfQ?pwd=fycv">https://pan.baidu.com/s/1_e_A7gJow71q4s8KYs0JfQ?pwd=fycv<i class="fas fa-external-link-alt"></i></a></h3><h3 id="提取码：fycv"><a href="#提取码：fycv" class="headerlink" title="提取码：fycv"></a>提取码：fycv</h3><p><img lazyload="" src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227095122670.png" alt="image-20221227095122670"></p>
+<h3 id="题目二"><a href="#题目二" class="headerlink" title="题目二"></a>题目二</h3><h3 id="链接：https-pan-baidu-com-s-1-e-A7gJow71q4s8KYs0JfQ-pwd-fycv"><a href="#链接：https-pan-baidu-com-s-1-e-A7gJow71q4s8KYs0JfQ-pwd-fycv" class="headerlink" title="链接：https://pan.baidu.com/s/1_e_A7gJow71q4s8KYs0JfQ?pwd=fycv"></a>链接：<a class="link" target="_blank" rel="noopener" href="https://pan.baidu.com/s/1_e_A7gJow71q4s8KYs0JfQ?pwd=fycv">https://pan.baidu.com/s/1_e_A7gJow71q4s8KYs0JfQ?pwd=fycv<i class="fas fa-external-link-alt"></i></a></h3><h3 id="提取码：fycv"><a href="#提取码：fycv" class="headerlink" title="提取码：fycv"></a>提取码：fycv</h3><p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227095122670.png" alt="image-20221227095122670"></p>
 <p>直接在程序的第一条指令上下一个断点。然后运行，寻找可疑点。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227095328753.png" alt="image-20221227095328753"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227095328753.png" alt="image-20221227095328753"></p>
 <p>指令的最后有个retn,这里我们按f4运行到此处，再按f7跟入。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227095542230.png" alt="image-20221227095542230"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227095542230.png" alt="image-20221227095542230"></p>
 <p>进入之后发现最后的jmp,我们继续像先前一样，f4,f7跟入。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227095720390.png" alt="image-20221227095720390"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227095720390.png" alt="image-20221227095720390"></p>
 <p>继续重复上面步骤。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/image-20221227095757480.png" alt="image-20221227095757480"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/image-20221227095757480.png" alt="image-20221227095757480"></p>
 <p>继续</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227095822799.png" alt="image-20221227095822799"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227095822799.png" alt="image-20221227095822799"></p>
 <p>继续</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227095854783.png" alt="image-20221227095854783"></p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227095925714.png" alt="image-20221227095925714"></p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227095948589.png" alt="image-20221227095948589"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227095854783.png" alt="image-20221227095854783"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227095925714.png" alt="image-20221227095925714"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227095948589.png" alt="image-20221227095948589"></p>
 <p>跟到了这里我们就大致可以知道了，我们马上成功了，我们找到了oep。继续</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227103349134.png" alt="image-20221227103349134"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227103349134.png" alt="image-20221227103349134"></p>
 <p>到这里之后按p分析，就成了现在的样子，到这里就找到了我们的oep了。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227103532762.png" alt="image-20221227103532762"></p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227103552479.png" alt="image-20221227103552479"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227103532762.png" alt="image-20221227103532762"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227103552479.png" alt="image-20221227103552479"></p>
 <p>在这里按c,再按p，再反汇编就可以得到我们的加密函数了</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227103659899.png" alt="image-20221227103659899"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227103659899.png" alt="image-20221227103659899"></p>
 <hr>
 <p>通过这两到题，我们大致可以发现，upx脱壳，就是去寻找可疑点，jmp,或者ret，因为壳是一个程序，因此我们脱壳就是要其运行完成的结果，所以我们在脱壳过程中总是要跳到ret，也就是这个原因。最后到oep的时候也很有特点，多脱几次就有感觉了。</p>
 

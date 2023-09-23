@@ -227,32 +227,32 @@
             <div class="article-content markdown-body">
                 <h1 id="ida操作"><a href="#ida操作" class="headerlink" title="ida操作"></a>ida操作</h1><h4 id="静态分析"><a href="#静态分析" class="headerlink" title="静态分析"></a>静态分析</h4><p><strong>1、反汇编：</strong>Tab\F5</p>
 <p><strong>2、IDA字符串表：</strong>shift+F12;或者直接找窗口</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/image-20230226175251517.png" alt="image-20230226175251517"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/image-20230226175251517.png" alt="image-20230226175251517"></p>
 <p>打开string窗口后，我们可以按Ctrl+F来调出搜索</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/image-20230226175638025.png" alt="image-20230226175638025"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/image-20230226175638025.png" alt="image-20230226175638025"></p>
 <p>在里面输入你想要查找的字符串，如果有原数据，就能成功找到。</p>
 <p>双击数据，就能进入对应的内存</p>
 <p><strong>3、G键</strong>。打开地址窗口</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/image-20230228202202438.png" alt="image-20230228202202438"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/image-20230228202202438.png" alt="image-20230228202202438"></p>
 <p><strong>4、X键。</strong>查看交叉引用，也就是查看有那些地方调用了这个函数</p>
 <p>点击即可进入对于调用的地方</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/image-20230228202326381.png" alt="image-20230228202326381"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/image-20230228202326381.png" alt="image-20230228202326381"></p>
 <p><strong>5、重命名符号。</strong>将选中的名称进行修改，以便于阅读分析</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/image-20230228202607658.png" alt="image-20230228202607658"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/image-20230228202607658.png" alt="image-20230228202607658"></p>
 <p>**6、对于数据处理上.**IDA的储存方式为小端序，例如，0XB1A33454在内存中的存储就是54, 34, A3, B1.</p>
 <p><strong>7、U键。</strong>在某地址上按下U，就会使得IDA取消对在部分地址的解释。</p>
 <p>按U前</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/image-20230228203508608.png" alt="image-20230228203508608"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/image-20230228203508608.png" alt="image-20230228203508608"></p>
 <p>按U后</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/image-20230228203538866.png" alt="image-20230228203538866"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/image-20230228203538866.png" alt="image-20230228203538866"></p>
 <p><strong>8、C键。</strong>将地址标记为代码，并且进行反汇编。也算是和U键互逆。</p>
 <p>前</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/image-20230228203538866.png" alt="image-20230228203538866"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/image-20230228203538866.png" alt="image-20230228203538866"></p>
 <p>后</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/image-20230228203746253.png" alt="image-20230228203746253"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/image-20230228203746253.png" alt="image-20230228203746253"></p>
 <p><strong>9、P键。</strong>比如刚才，我们将地址按下C分析后，前面为红色部分，这时我们不能进行反汇编，而p键的作用就是创建函数，让其成为一个可反编译的函数（结构需完整）。</p>
 <p>按下p后</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/image-20230228204129463.png" alt="image-20230228204129463"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/image-20230228204129463.png" alt="image-20230228204129463"></p>
 <h4 id="动态分析"><a href="#动态分析" class="headerlink" title="动态分析"></a>动态分析</h4><p>1、F7.单步步过。执行一条语句但不进入函数</p>
 <p>2、F8.单步步入。执行一条指令，会进入函数内部。</p>
 <p>3、Ctrl+F7.执行到返回。执行到函数的返回指令。一般用于快速跳出当前函数。</p>
@@ -261,10 +261,10 @@
 <p>6、模块窗口（一般安卓用得比较多）。打开方式——菜单–【debugger】–[debuger windows]–[module list]</p>
 <p>7、硬件断点。硬件断点不会修改内存数据。一般情况下，像脱壳，自解密，我们设置一般断点在其之上，会破坏数据。</p>
 <p>下硬件断点的方法：首先先下一个普通断点，然后在普通断点处按下鼠标右键，然后点击edit breakpoint ，然后勾选hardware，就将我们的断点转换为了硬件断点。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/IDA%E6%80%BB%E7%BB%93/image-20230304161001692.png" alt="image-20230304161001692"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/IDA%E6%80%BB%E7%BB%93/image-20230304161001692.png" alt="image-20230304161001692"></p>
 <p>其中下面的，read：表示断点地址被命中时被读取。writer:断点地址被写入时命中。execute:断点地址被执行时命中。</p>
 <p>8、trace分析.打开方法：打开菜单项【debugger】–【tracing】–【tracing options】配置我们的trace。配置好之后，在程序的头部设置一个断点，然后命中断点。再打开进行选择。然后继续运行程序，便成功trace.</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/IDA%E6%80%BB%E7%BB%93/image-20230304170248917.png" alt="image-20230304170248917"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/IDA%E6%80%BB%E7%BB%93/image-20230304170248917.png" alt="image-20230304170248917"></p>
 <p>一般用于追踪，混淆，花指令之类。</p>
 
             </div>

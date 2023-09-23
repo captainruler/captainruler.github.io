@@ -224,23 +224,23 @@
 
             <div class="article-content markdown-body">
                 <h1 id="L-S"><a href="#L-S" class="headerlink" title="L!S!"></a>L!S!</h1><p>说实话，起初看到这道题是很懵逼的，莫名其妙的两个文件，刚开始还没有理解到ls指得是linux的命令，以为是两个ELF可执行文件罢了。于是乎，我将其放入linux运行之后发现到一些端倪。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/L!S!%202e371aba70d2456a965c6ef22fd7be8b/Untitled.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/L!S!%202e371aba70d2456a965c6ef22fd7be8b/Untitled.png" alt="Untitled"></p>
 <p>运行两个文件，发现居然都是执行的ls命名。后来尝试运行将文件运行加上ls的命令，比如ls -help是查看ls命令帮助，我./ls-original -help，也是同样的情况。</p>
 <p>两个同样的文件，都是ls，似乎还是源码的感觉。想了很久，有仔细看了看名字，才恍然大悟。原来的将ls修改了，一个是修改后的，一个是源码。正好前些阵子听师傅讲过一个插件。bindiff,IDA插件，用于恢复符号表和对比函数。正好可以做这道题。</p>
 <p>这个大佬对于安装写得很详细</p>
 <p><a class="link" target="_blank" rel="noopener" href="https://www.cnblogs.com/lsdb/p/10543411.html">BinDiff安装使用教程 - 诸子流 - 博客园 (cnblogs.com)<i class="fas fa-external-link-alt"></i></a></p>
 <p>安装bindiff之后，我们打开IDA分析patch后的文件，然后分析源码文件，然后关闭文件，我们需要的是源码文件的IDB文件。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/L!S!%202e371aba70d2456a965c6ef22fd7be8b/Untitled%201.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/L!S!%202e371aba70d2456a965c6ef22fd7be8b/Untitled%201.png" alt="Untitled"></p>
 <p>打开我们的源码IDB，这个文件进入分析</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/L!S!%202e371aba70d2456a965c6ef22fd7be8b/Untitled%202.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/L!S!%202e371aba70d2456a965c6ef22fd7be8b/Untitled%202.png" alt="Untitled"></p>
 <p>我们直接点到这个Matched Function这个窗口，这个窗口就是我们已经匹配的函数</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/L!S!%202e371aba70d2456a965c6ef22fd7be8b/Untitled%203.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/L!S!%202e371aba70d2456a965c6ef22fd7be8b/Untitled%203.png" alt="Untitled"></p>
 <p>对于最前面的这个列表，表示的就是函数匹配程度，1代表完全匹配，越接近1匹配程度越高。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/L!S!%202e371aba70d2456a965c6ef22fd7be8b/Untitled%204.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/L!S!%202e371aba70d2456a965c6ef22fd7be8b/Untitled%204.png" alt="Untitled"></p>
 <p>我们翻到后面，发现有一个函数只有0.84，这个就是更改过后的函数了。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/L!S!%202e371aba70d2456a965c6ef22fd7be8b/Untitled%205.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/L!S!%202e371aba70d2456a965c6ef22fd7be8b/Untitled%205.png" alt="Untitled"></p>
 <p>进入函数分析</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/L!S!%202e371aba70d2456a965c6ef22fd7be8b/Untitled%206.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/L!S!%202e371aba70d2456a965c6ef22fd7be8b/Untitled%206.png" alt="Untitled"></p>
 <p>通过分析，我们可以知道，是将v19,v20这些数据进行了加密，而加密方式是简单的异或，但是IDA分析得很乱，具体是怎么异或的，或者异或的啥我们都不知道。而且发现有反调试（确切不知道，主要是一调试就会强制退出）。我们先将数据提取出来。</p>
 <p>到了这里，我们来想一想我们手上有那些有用的信息，我们知道数据，而且知道了加密方式，知道前六个字符铁定是HZCTF｛。根据这些信息我们可以对其异或的值进行爆破，然后再通过观察得到的值来查找规律。不料，直接一发入魂，爆破出来，异或的全是76。然后我们直接写脚本解出flag</p>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>

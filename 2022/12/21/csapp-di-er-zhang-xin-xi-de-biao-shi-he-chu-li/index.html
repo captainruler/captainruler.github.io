@@ -228,7 +228,7 @@
                 <h1 id="信息的表示和处理"><a href="#信息的表示和处理" class="headerlink" title="信息的表示和处理"></a>信息的表示和处理</h1><p><strong>本章的话，深入的讲解了我们的数据（信息）是如何在内存中表示，以及存储，后面的部分主要是讲解了我们的整数与浮点数的存储与运算，并且在数学上进行了证明与推导。总的来说，在数学证明与推导上，有点晦涩难懂（数学太菜了）。而且在一定程度上，我们平常也用不到这个，我们只需要了解一下就行了，重点关注比较常用的知识点</strong></p>
 <h3 id="信息存储"><a href="#信息存储" class="headerlink" title="信息存储"></a>信息存储</h3><p><strong>信息是怎么表示？</strong> 我们知道，我们的信息是由位组成的，我们的位就是0,1的集合，这样的表示被成为二进制，由于0101010这样相对于我们人类的十进制，太难理解和阅读了，为了更加简便，人们就思考怎样可以更加简便？因此找到了十六进制来表示。二进制和十六进制的转换很简单而且直观。</p>
 <p><strong>我们存储数据的大小是多少呢？</strong> 我们应该知道的是，在不同的计算机上，我们的一些数据的大小存储是不同的，比如，我们熟悉的int ，在不同的计算机上有的是占4个字节（大多数），有的计算机上占的是2个字节。因此在讨论所占大小时我们应该考虑计算机本身的存储。下面就是32位，与64位的一些区别。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2022/12/21/csapp-di-er-zhang-xin-xi-de-biao-shi-he-chu-li/image-20221222221354739.png" alt="image-20221222221354739"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/csapp-di-er-zhang-xin-xi-de-biao-shi-he-chu-li/image-20221222221354739.png" alt="image-20221222221354739"></p>
 <p><strong>有一个需要注意的点就是，64位的计算机能够兼容32位的程序，也就是说32位的程序能在64位上跑，64位不的能在32位上跑</strong></p>
 <p><strong>内存中如何排列这些字节序？</strong> 在不同的计算机中对于字节的排序是不同的，因而对于同一个文本，它的解释方式是不一样的。计算机有两种方式，一个是大端法，一个是小端法。对于大小端可以这样记，所谓大端就是大的位存储在前面（也就是低位），小端就是小的位存储在前面。比如1234，有空间0xa,0xb,0xc,0xd。按照大端存储就是1放在0xa,2放在0xb,3放在0xc,4放在0xd.按照小端排序的话，4放在0xa,3放在0xb,2放在0xc,1放在0xd.</p>
 <p><strong>布尔代数</strong> </p>
@@ -236,15 +236,15 @@
 <p><strong>位运算和逻辑运算</strong> </p>
 <p>主要区别就是位运算处理的是数据运算，而逻辑运算处理的是一种判断，真假。</p>
 <p><em><strong>位运算</strong></em> </p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2022/12/21/csapp-di-er-zhang-xin-xi-de-biao-shi-he-chu-li/image-20221223002053291.png" alt="image-20221223002053291"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/csapp-di-er-zhang-xin-xi-de-biao-shi-he-chu-li/image-20221223002053291.png" alt="image-20221223002053291"></p>
 <p><em><strong>逻辑运算</strong></em></p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2022/12/21/csapp-di-er-zhang-xin-xi-de-biao-shi-he-chu-li/image-20221223002128217.png" alt="image-20221223002128217"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/csapp-di-er-zhang-xin-xi-de-biao-shi-he-chu-li/image-20221223002128217.png" alt="image-20221223002128217"></p>
 <h3 id="整数"><a href="#整数" class="headerlink" title="整数"></a>整数</h3><p><strong>整数的数据类型</strong> </p>
 <p>对于整数来说，整数可以分为有符号数和无符号数。在不同的机器上，我们的整数的表示范围有着不同的差别。</p>
 <p><em><strong>32位机器上</strong></em> </p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2022/12/21/csapp-di-er-zhang-xin-xi-de-biao-shi-he-chu-li/image-20221223120246269.png" alt="image-20221223120246269"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/csapp-di-er-zhang-xin-xi-de-biao-shi-he-chu-li/image-20221223120246269.png" alt="image-20221223120246269"></p>
 <p><em><strong>64位机器上</strong></em> </p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2022/12/21/csapp-di-er-zhang-xin-xi-de-biao-shi-he-chu-li/image-20221223120356826.png" alt="image-20221223120356826"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/csapp-di-er-zhang-xin-xi-de-biao-shi-he-chu-li/image-20221223120356826.png" alt="image-20221223120356826"></p>
 <p>这个我们可以发现一个问题，有符号数的负数比整数多表示了一个数，这里是因为有一个整数用来表示0去了。</p>
 <ul>
 <li>我们大多数机器都是用补码的形式来表示有符号整数</li>

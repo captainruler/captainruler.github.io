@@ -224,15 +224,15 @@
 
             <div class="article-content markdown-body">
                 <h1 id="not-a-like"><a href="#not-a-like" class="headerlink" title="not_a_like"></a>not_a_like</h1><p>拖入PE查询中看看，发现有upx壳</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/not_a_like%202f29751282c1432cb3ff0308d17e8954/Untitled.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/not_a_like%202f29751282c1432cb3ff0308d17e8954/Untitled.png" alt="Untitled"></p>
 <p>用upx的程序进行脱壳，发现并不能脱去。</p>
 <p>丢入winhex中进行查看，发现upx壳的头缺失了。</p>
 <p>正常的</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/not_a_like%202f29751282c1432cb3ff0308d17e8954/Untitled%201.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/not_a_like%202f29751282c1432cb3ff0308d17e8954/Untitled%201.png" alt="Untitled"></p>
 <p>本题的</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/not_a_like%202f29751282c1432cb3ff0308d17e8954/Untitled%202.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/not_a_like%202f29751282c1432cb3ff0308d17e8954/Untitled%202.png" alt="Untitled"></p>
 <p>我们需要将其Upx头进行补全。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/not_a_like%202f29751282c1432cb3ff0308d17e8954/Untitled%203.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/not_a_like%202f29751282c1432cb3ff0308d17e8954/Untitled%203.png" alt="Untitled"></p>
 <p>然后再进行upx脱壳</p>
 <p>脱壳后，进入ida我们可以发现许多py后缀的文件，可以判断这里为py打包为exe</p>
 <p>我们用<a class="link" target="_blank" rel="noopener" href="http://pyinstxtractor.py/">pyinstxtractor.py<i class="fas fa-external-link-alt"></i></a>进行解包。</p>
@@ -286,12 +286,12 @@
         <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Do you think the encryption and decryption are the same?'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>到这里了，我们直接进行逆向分析即可。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/not_a_like%202f29751282c1432cb3ff0308d17e8954/Untitled%204.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/not_a_like%202f29751282c1432cb3ff0308d17e8954/Untitled%204.png" alt="Untitled"></p>
 <p>先是将我们的flag进行rsa加密，通过搜索，我们可以知道这里属于RSA的维纳攻击</p>
 <p>这里上传一个关于解维纳攻击比较好的工具脚本。</p>
 <p><a class="link" target="_blank" rel="noopener" href="https://www.notion.so/">https://www.notion.so<i class="fas fa-external-link-alt"></i></a></p>
 <p>进行RSA解密之后，就对我们的数据进行base64加密，对于加密后的数据传入encrypt中进行加密。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/not_a_like%202f29751282c1432cb3ff0308d17e8954/Untitled%205.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/not_a_like%202f29751282c1432cb3ff0308d17e8954/Untitled%205.png" alt="Untitled"></p>
 <p>分析encrypt我们很容易可以看出是进行RC4加密。</p>
 <p>对rc4加密之后，然后再进行了一次base64加密。</p>
 <p>最后再对密文进行对比。</p>

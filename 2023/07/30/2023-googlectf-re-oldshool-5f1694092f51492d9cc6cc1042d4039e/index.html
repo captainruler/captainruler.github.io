@@ -226,23 +226,23 @@
                 <h1 id="2023-googleCTF-re-oldshool"><a href="#2023-googleCTF-re-oldshool" class="headerlink" title="2023-googleCTF-re-oldshool"></a>2023-googleCTF-re-oldshool</h1><p>本题叫用给出的用户名，逆向，写出注册机，来批量生成密码，50个用户名，50个密码。</p>
 <p>刚刚拿到手，还打开不了，一直报错说窗口有问题，后来摸索了好久才知道，需要调整终端大小才能适应。而且这道题也是用Ncurses从零实现了GUI的图形解密，就造成了代码巨多，主函数的代码就接近5000行，还不算其他函数，要准确的找到我们想要的函数是十分的不容易的。这到题如果代码量少一些的话，难度就相对没那么大了。</p>
 <p>对于终端大小，在ubuntu的命令行中输入resize命令和就可以查询目前的长宽大小，我们用Ctrl+鼠标滑轮就可以调节大小，大致这么多</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2023-googleCTF-re-oldshool%205f1694092f51492d9cc6cc1042d4039e/Untitled.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/2023-googleCTF-re-oldshool%205f1694092f51492d9cc6cc1042d4039e/Untitled.png" alt="Untitled"></p>
 <p>我们打开oldshool,可以看到如下界面，输入用户名与密码。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2023-googleCTF-re-oldshool%205f1694092f51492d9cc6cc1042d4039e/Untitled%201.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/2023-googleCTF-re-oldshool%205f1694092f51492d9cc6cc1042d4039e/Untitled%201.png" alt="Untitled"></p>
 <p>对于本道题，我们使用动态调试来确定，我们的输入与验证函数。由于代码实在是太多。二分法最快，嘿嘿。</p>
 <p>经过调试，我们可以在3856行的伪代码处，找到我们的加密函数。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2023-googleCTF-re-oldshool%205f1694092f51492d9cc6cc1042d4039e/Untitled%202.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/2023-googleCTF-re-oldshool%205f1694092f51492d9cc6cc1042d4039e/Untitled%202.png" alt="Untitled"></p>
 <p>这里我们可以知道每五位就会检测-号，也就是说我们的密码大致格式为22222-aaaaa-33333-bbbbb-44444</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2023-googleCTF-re-oldshool%205f1694092f51492d9cc6cc1042d4039e/Untitled%203.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/2023-googleCTF-re-oldshool%205f1694092f51492d9cc6cc1042d4039e/Untitled%203.png" alt="Untitled"></p>
 <p>通过动态调试，追踪我们输入的密码，我们可以得知，这里的操作是移位查表，1→2,2→3,生成了一张表，我们可以归纳出其规律。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2023-googleCTF-re-oldshool%205f1694092f51492d9cc6cc1042d4039e/Untitled%204.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/2023-googleCTF-re-oldshool%205f1694092f51492d9cc6cc1042d4039e/Untitled%204.png" alt="Untitled"></p>
 <p>通过分析下面的的操作，我们可以知道，这些都是通过我们输入name生成一些固定的加密数据</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2023-googleCTF-re-oldshool%205f1694092f51492d9cc6cc1042d4039e/Untitled%205.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/2023-googleCTF-re-oldshool%205f1694092f51492d9cc6cc1042d4039e/Untitled%205.png" alt="Untitled"></p>
 <p>这一部分就是将我们的password进行转置生成矩阵,第n列循环右移n字节,并且进行异或加密</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2023-googleCTF-re-oldshool%205f1694092f51492d9cc6cc1042d4039e/Untitled%206.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/2023-googleCTF-re-oldshool%205f1694092f51492d9cc6cc1042d4039e/Untitled%206.png" alt="Untitled"></p>
 <p>最后这是运用了两矩阵相乘生成单位矩阵的性质来判断是否相等</p>
 <p>其中后面的&amp;0x1f是取其低 5 位，并将其他位设置为零。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2023-googleCTF-re-oldshool%205f1694092f51492d9cc6cc1042d4039e/Untitled%207.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/2023-googleCTF-re-oldshool%205f1694092f51492d9cc6cc1042d4039e/Untitled%207.png" alt="Untitled"></p>
 <p>到此我们算是分析完了，看到的加密。加密的逻辑就是：</p>
 <p>对于密码，将我们输入的密码进行转位换表，然后转置生成矩阵，进行异或</p>
 <p>对于用户名，将用户名进行一系列复杂的加密，生成一些固定的密文</p>
@@ -251,12 +251,12 @@
 <p>按理说，我们写出脚本，就能将其解出的，我们使用z3进行爆破求其逆矩阵，但是我们会发现，求出的有些密码在动态调试时输入是正确的，能过验证，但是直接运行程序却不能过验证。甚至有些还不能爆破。但是我们无论如何看，我们的脚本都是没有问题的，这就很怪。</p>
 <p>看了官方wp之后才知道，脚本确实没有写错，但是有反调试，检测到我们的调试器之后，就会将我们加密的一下数据进行改变，由于我们的密文是经过动态调试出来的，所以直接中招。</p>
 <p>通过几处的查看交叉引用</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2023-googleCTF-re-oldshool%205f1694092f51492d9cc6cc1042d4039e/Untitled%208.png" alt="Untitled"></p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2023-googleCTF-re-oldshool%205f1694092f51492d9cc6cc1042d4039e/Untitled%209.png" alt="Untitled"></p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2023-googleCTF-re-oldshool%205f1694092f51492d9cc6cc1042d4039e/Untitled%2010.png" alt="Untitled"></p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2023-googleCTF-re-oldshool%205f1694092f51492d9cc6cc1042d4039e/Untitled%2011.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/2023-googleCTF-re-oldshool%205f1694092f51492d9cc6cc1042d4039e/Untitled%208.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/2023-googleCTF-re-oldshool%205f1694092f51492d9cc6cc1042d4039e/Untitled%209.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/2023-googleCTF-re-oldshool%205f1694092f51492d9cc6cc1042d4039e/Untitled%2010.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/2023-googleCTF-re-oldshool%205f1694092f51492d9cc6cc1042d4039e/Untitled%2011.png" alt="Untitled"></p>
 <p>我们可以发现都是这个if的这个函数下进行改变的，我们对这个函数查看交叉引用，我们可以找到所有的反调试，按照官方的这个就是ptrace函数。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2023-googleCTF-re-oldshool%205f1694092f51492d9cc6cc1042d4039e/Untitled%2012.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/2023-googleCTF-re-oldshool%205f1694092f51492d9cc6cc1042d4039e/Untitled%2012.png" alt="Untitled"></p>
 <p>四处地方，都是改变我们加密过程中的数据，藏得十分隐秘，因为不会有任何的报错与提示，而且代码量巨多，让其难以发现，写脚本没解出来，第一时间都怀疑脚本的正误与分析的正误。</p>
 <p>绕过这个反调试也很简单，在动态调试的时候，将ptrace返回的标志，从1改成0即可</p>
 <p><strong>一般的来说：</strong></p>

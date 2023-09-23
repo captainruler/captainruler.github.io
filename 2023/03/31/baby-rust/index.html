@@ -225,21 +225,21 @@
             <div class="article-content markdown-body">
                 <h1 id="Baby-rust"><a href="#Baby-rust" class="headerlink" title="Baby_rust"></a>Baby_rust</h1><p>打开ida进行分析，打开sting窗口进行分析。</p>
 <p>查找字符串</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/Baby_rust%20e260f95a1b13424885ade8b00efe4b2f/Untitled.png" alt="Untitled"></p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/Baby_rust%20e260f95a1b13424885ade8b00efe4b2f/Untitled%201.png" alt="Untitled"></p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/Baby_rust%20e260f95a1b13424885ade8b00efe4b2f/Untitled%202.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/Baby_rust%20e260f95a1b13424885ade8b00efe4b2f/Untitled.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/Baby_rust%20e260f95a1b13424885ade8b00efe4b2f/Untitled%201.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/Baby_rust%20e260f95a1b13424885ade8b00efe4b2f/Untitled%202.png" alt="Untitled"></p>
 <p>这里应该就是我们的main函数了，进入函数进行分析。</p>
 <p>rust语言，说是专注于安全的语言，确实，用ida进行反汇编，根本看不了，所以我们只能对汇编进行分析。</p>
 <p>我们可以从这里发现，一串字符串之后，紧跟着的就是调用memcmp函数，我们就可以大致猜出，这里的字符串就是我们的密文。，前面有一条sub-1C(28)指令,为数据开辟28个空间，我们就可以推测出我们flag的长度为28</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/Baby_rust%20e260f95a1b13424885ade8b00efe4b2f/Untitled%203.png" alt="Untitled"></p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/Baby_rust%20e260f95a1b13424885ade8b00efe4b2f/Untitled%204.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/Baby_rust%20e260f95a1b13424885ade8b00efe4b2f/Untitled%203.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/Baby_rust%20e260f95a1b13424885ade8b00efe4b2f/Untitled%204.png" alt="Untitled"></p>
 <p>我们可以发现这里有一大长串的程序块</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/Baby_rust%20e260f95a1b13424885ade8b00efe4b2f/Untitled%205.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/Baby_rust%20e260f95a1b13424885ade8b00efe4b2f/Untitled%205.png" alt="Untitled"></p>
 <p>我们能发现，这些块的结构很相似都是先进行异或0x30然后再加上0xD3，然后后面再cmp1,2,3,4……，这里我们数一下，刚好28块，cmp也比较到了28.</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/Baby_rust%20e260f95a1b13424885ade8b00efe4b2f/Untitled%206.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/Baby_rust%20e260f95a1b13424885ade8b00efe4b2f/Untitled%206.png" alt="Untitled"></p>
 <p>这里我们可以知道，这里是对我们的flag进行了单字节加密。</p>
 <p>我们进行动态调试可以发现，在对flag单字节加密之前，会先运行到这个块。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/Baby_rust%20e260f95a1b13424885ade8b00efe4b2f/Untitled%207.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/Baby_rust%20e260f95a1b13424885ade8b00efe4b2f/Untitled%207.png" alt="Untitled"></p>
 <p>到这里，有两种方法，一种是进行动态调试，将其当做黑盒分析，输入多组数据，然后总结规律。</p>
 <p>另一种就是手撕SSE2汇编代码。</p>
 <p>这里我找到了一个大佬写对SSE2汇编得很好的总结，在此放个链接。</p>
@@ -273,7 +273,7 @@
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>到此次，我们还是不能得出flag</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/Baby_rust%20e260f95a1b13424885ade8b00efe4b2f/Untitled%208.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/Baby_rust%20e260f95a1b13424885ade8b00efe4b2f/Untitled%208.png" alt="Untitled"></p>
 <p>可以知道，我们对于Rust逆向出来的加密还是缺失了一些步骤，还有两个字节的数据没有出来。</p>
 <p>正所谓，做逆向，十题九猜，这里我们就可以使用我们的猜猜大法，NOWa?BaCK,这里应该是他们的战队名nowayback，为Y或者y。R?ST，这里不出意料就是U，或者u，这样总共四种情况，分别试一下即可。</p>
 <p>可得N K C T F { W L c o m E _ N O W a y B a C k _ R u S T }</p>
