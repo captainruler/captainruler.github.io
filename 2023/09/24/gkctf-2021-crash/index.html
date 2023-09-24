@@ -227,27 +227,27 @@
             <div class="article-content markdown-body">
                 <p>打开IDA进行分析</p>
 <p>通过这里的分析，我们可以发现，我们的flag的总长度为43位，且格式为GKCTF{}</p>
-<p><img lazyload src="/images/loading.svg" data-src="/2023/09/24/gkctf-2021-crash/image-20230924143653062.png" alt="image-20230924143653062"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2023/09/24/gkctf-2021-crash/image-20230924143653062.png" alt="image-20230924143653062"></p>
 <p>我们进入这个函数，进行分析</p>
-<p><img lazyload src="/images/loading.svg" data-src="/2023/09/24/gkctf-2021-crash/image-20230924143710859.png" alt="image-20230924143710859"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2023/09/24/gkctf-2021-crash/image-20230924143710859.png" alt="image-20230924143710859"></p>
 <p>我们分析这三个函数</p>
-<p><img lazyload src="/images/loading.svg" data-src="/2023/09/24/gkctf-2021-crash/image-20230924143727983.png" alt="image-20230924143727983"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2023/09/24/gkctf-2021-crash/image-20230924143727983.png" alt="image-20230924143727983"></p>
 <p>我们进入第一个加密函数，我们可以发现，这里运用得是DES加密</p>
 <p>通过这个函数我们可以发现，DES为CBC模式 DES的key 与vi, PKCS5Padding</p>
-<p><img lazyload src="/images/loading.svg" data-src="/2023/09/24/gkctf-2021-crash/image-20230924143806836.png" alt="image-20230924143806836"></p>
-<p><img lazyload src="/images/loading.svg" data-src="/image-20230924143818974.png" alt="image-20230924143818974"></p>
-<p><img lazyload src="/images/loading.svg" data-src="/2023/09/24/gkctf-2021-crash/image-20230924143833642.png" alt="image-20230924143833642"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2023/09/24/gkctf-2021-crash/image-20230924143806836.png" alt="image-20230924143806836"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2023/09/24/gkctf-2021-crash/image-20230924143818974.png" alt="image-20230924143818974"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2023/09/24/gkctf-2021-crash/image-20230924143833642.png" alt="image-20230924143833642"></p>
 <p>但是我们深入的发现，这个并不是简单的DES加密</p>
-<p><img lazyload src="/images/loading.svg" data-src="/image-20230924143851083.png" alt="image-20230924143851083"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2023/09/24/gkctf-2021-crash/image-20230924143851083.png" alt="image-20230924143851083"></p>
 <p>这里我们可以发现，这不是简单的DES，而是其的进阶版，3DES,也就是将DES运行三遍，但是微微不同。我们可以用网站来解</p>
-<p><img lazyload src="/images/loading.svg" data-src="/2023/09/24/gkctf-2021-crash/image-20230924143905197.png" alt="image-20230924143905197"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2023/09/24/gkctf-2021-crash/image-20230924143905197.png" alt="image-20230924143905197"></p>
 <p>我们可以解出第一段flag</p>
-<p><img lazyload src="/images/loading.svg" data-src="https://prod-files-secure.s3.us-west-2.amazonaws.com/7f00df58-ebbe-4a2b-b4ad-ce459ba900ab/75feeac5-9640-4dcc-a545-5b4ae2b2da84/Untitled.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2023/09/24/gkctf-2021-crash/image-20230924144309801.png" alt="image-20230924144309801"></p>
 <p>同样的，我们分析下面的三个函数</p>
 <p>我们可以分别知道是，sha256, sha512, md5我们使用网站，将他们后面的对比数据解出即可</p>
 <p>有一个比较好的网站</p>
 <p><a class="link" target="_blank" rel="noopener" href="https://www.somd5.com/">MD5免费在线解密破解_MD5在线加密-SOMD5<i class="fas fa-external-link-alt"></i></a></p>
-<p><img lazyload src="/images/loading.svg" data-src="/image-20230924143921026.png" alt="image-20230924143921026"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2023/09/24/gkctf-2021-crash/image-20230924144356908.png" alt="image-20230924144356908"></p>
 <p>我们可以分别解出</p>
 <p>e402 f20a f940</p>
 <p>我们将flag拼接起来就可以得出我们完整flag</p>
