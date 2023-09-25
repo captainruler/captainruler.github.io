@@ -172,151 +172,299 @@
             <div class="main-content">
 
                 
-                    <div class="fade-in-down-animation">
-    <div class="post-page-container">
-        <div class="article-content-container">
-            <div class="article-title">
-                <span class="title-hover-animation"><h1 style="font-size:2rem; font-weight: bold; margin: 10px 0;">长城杯-2021-院校组-Just_cmp-re</h1></span>
-            </div>
+                    $avatarWidth = 46px
+$arrow-icon-width = 16px
+$post-nav-max-width = 220px
+$article-title-font-size = 1.6rem
+$temp-toc-width = hexo-config('style.right_side_width')
+$toc-container-width = $temp-toc-width ? convert($temp-toc-width) : 210px
+$without-toc-container-width = calc(100% - 210px)
+.post-page-container{
+  display flex
+  position relative
+  justify-content space-between
+  box-sizing border-box
+  width 100%
+  height 100%
 
-            
-                <div class="article-header">
-                    <div class="avatar">
-                        <img src="/images/7.webp">
-                    </div>
-                    <div class="info">
-                        <div class="author">
-                            <span class="name">二木</span>
-                            
-                                <span class="author-label">王者</span>
-                            
-                        </div>
-                        <div class="meta-info">
-                            <div class="article-meta-info">
-    <span class="article-date article-meta-item">
-        <i class="fa-duotone fa-pen-line"></i>&nbsp;
-        <span class="pc">2023-09-23 23:33:23</span>
-        <span class="mobile">2023-09-23 23:33</span>
-    </span>
+  &.show-toc {
+    .toc-content-container {
+      display block
+    }
+
+    .article-content-container {
+      width $without-toc-container-width !important
+    }
+  }
+
+  +redefine-tablet() {
+    .toc-content-container {
+      display none !important
+    }
+
+    .article-content-container {
+      width 100% !important
+    }
+
+    &.show-toc {
+      .toc-content-container {
+        display none
+      }
+
+      .article-content-container {
+        width 100% !important
+      }
+    }
+  }
+
+
+  .article-content-container {
+    width 100%
+    margin-right: 30px
+
+    redefine-container(false, 0, 0, 30px, 30px)
+
+    +redefine-mobile() {
+      padding 1.2rem 0.2rem
+      box-shadow none
+    }
+
+    .article-title {
+      font-family "Noto Sans SC", sans-serif
+      color var(--second-text-color)
+      font-weight 600
+      font-size $article-title-font-size
+
+      +redefine-tablet() {
+        font-size $article-title-font-size * 0.9
+      }
+
+      +redefine-mobile() {
+        font-size $article-title-font-size * 0.8
+      }
+    }
+
+
+    .article-header {
+      font-family "Noto Sans", "Noto Sans SC", sans-serif
+      position relative
+      padding-left $avatarWidth
+      width 100%
+      height $avatarWidth
+      box-sizing border-box
+
+      .avatar {
+        position absolute
+        top 0
+        left 0
+        width $avatarWidth
+        height $avatarWidth
+        padding 1px
+        box-sizing border-box
+        border 1px solid var(--border-color)
+        border-radius 50%
+
+        img {
+          border-radius 50%
+          width 100%
+          height 100%
+          background var(--avatar-background-color)
+        }
+
+      }
+
+
+      .info {
+        padding 2px 0
+        margin-left 10px
+        box-sizing border-box
+        display flex
+        flex-direction column
+        justify-content space-between
+        width 100%
+        height 100%
+
+        .author {
+          font-weight regular
+          font-size 1.18rem
+          display flex
+          align-items center
+
+          .name {
+            color var(--default-text-color)
+          }
+
+          .author-label {
+            margin-left 10px
+            font-size 0.8rem
+            font-weight 500
+            padding 0 5px
+            border-radius 6px
+            color #fff
+            background var(--selection-color)
+          }
+
+        }
+      }
+
+    }
+
+
+    .article-header, .article-header-meta-info {
+      margin-top 16px
+      +redefine-tablet() {
+        transform scale(0.9)
+        transform-origin left top
+      }
+    }
+
+
+    .article-content {
+      margin-top $component-spacing-value
+      padding-bottom 10px
+      word-wrap break-word
+      border-bottom 1px solid var(--border-color)
+      color var(--default-text-color)
+    }
+
+
+    .post-tags-box {
+      display none
+      margin-top 1.6rem
+      justify-content center
+      font-size 1.1rem
+
+      +redefine-tablet() {
+        display flex
+      }
+
+      +redefine-mobile() {
+        margin-top 1.2rem
+        font-size 1rem
+      }
+
+
+      .tag-item {
+        margin 0 0.25rem
+      }
+    }
+
+    .post-copyright-info {
+      margin-top $component-spacing-value
+      width 100%
+
+      +redefine-tablet() {
+        margin-top $component-spacing-value * 0.8
+      }
+    }
+
+
+    .article-nav {
+      height 40px
+      margin-top $component-spacing-value
+
+      .article-prev, .article-next {
+        max-width $post-nav-max-width
+        height 100%
+        box-sizing border-box
+
+        redefine-container(true, 1.03, 1.03, 10px, 0)
+
+        a {
+          position relative
+          display block
+          width 100%
+          height 100%
+          box-sizing border-box
+
+          &.prev {
+            padding-left $arrow-icon-width
+          }
+
+          &.next {
+            padding-right $arrow-icon-width
+          }
+
+          .arrow-icon {
+            position absolute
+            top 0
+            height 100%
+            width $arrow-icon-width
+
+            &.left {
+              left 0
+            }
+
+            &.right {
+              right 0
+            }
+          }
+
+          .title {
+            width 100%
+            height 100%
+          }
+        }
+
+      }
+
+      .article-prev {
+        float left
+      }
+
+      .article-next {
+        float right
+      }
+
+      .post-nav-item {
+        display none
+
+        +redefine-tablet() {
+          display inline-block
+        }
+
+      }
+
+
+      .post-nav-title-item {
+        overflow hidden
+        text-overflow ellipsis
+        white-space nowrap
+
+        +redefine-tablet() {
+          display none
+        }
+      }
+    }
+  }
+
+  .toc-content-container {
+    position sticky
+    top $header-height + $component-spacing-value
+    //border-radius 18px
+    border-radius 0
+    display none
+    width $toc-container-width
+    height auto
+    max-height calc(100vh - 210px)
+    //z-index $z-index-6
+    overflow-y auto
+    float right
+    padding 10px
+    box-sizing border-box
+    box-shadow none !important
     
-    
 
-    
-    
-        <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>309 字</span>
-        </span>
-    
-    
-        <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>1 分钟</span>
-        </span>
-    
-    
-        <span class="article-pv article-meta-item">
-            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
-        </span>
-    
-</div>
+    hover-style(false, 0, 0)
 
-                        </div>
-                    </div>
-                </div>
-            
+    transition-t("display", "0", "0.3", "ease-out")
 
-            <div class="article-content markdown-body">
-                <h1 id="长城杯-2021-院校组-Just-cmp-re"><a href="#长城杯-2021-院校组-Just-cmp-re" class="headerlink" title="长城杯-2021-院校组-Just_cmp-re"></a>长城杯-2021-院校组-Just_cmp-re</h1><p>拿到这道题，其实是很迷糊的，因为按理说，直接进行比较这种，见过的都是将strcmp在init那里进行重写，但是很奇怪的是这道题没有，我去init去寻找之后，并没有找到进行处理的函数。很奇怪的。</p>
-<p>函数不多，找到了一个疑似是加密的函数</p>
-<p><img lazyload src="/images/loading.svg" data-src="/2023/09/23/chang-cheng-bei-2021-yuan-xiao-zu-just-cmp-re/image-20230923233927442.png" alt="image-20230923233927442"></p>
-<p>但是，也很奇怪,按了交叉应用之后，发现没有函数调用它？？？？（因为其他函数都不像加密，所以很大概率就认定这个是加密函数）</p>
-<p><img lazyload src="/images/loading.svg" data-src="/image-20230923234221950.png" alt="image-20230923234221950"></p>
-<p>不排除我IDA出差。。。。</p>
-<p>后来去看了wp才发现，果然，就是这里是加密</p>
-<p>解密很简单，这道题就直接猜是将flag{*…},里面的 *进行操作,将这里面的数据提取出来加即可</p>
-<p><img lazyload src="/images/loading.svg" data-src="/2023/09/23/chang-cheng-bei-2021-yuan-xiao-zu-just-cmp-re/image-20230923235213549.png" alt="image-20230923235213549"></p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">{</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> arr[<span class="number">38</span>] = {</span><br><span class="line">        <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x37</span>, <span class="number">0x07</span>, <span class="number">0x0A</span>, <span class="number">0x37</span>, <span class="number">0x0A</span>, <span class="number">0x08</span>, <span class="number">0x0A</span>, <span class="number">0x06</span>, <span class="number">0x06</span>, <span class="number">0x0B</span>, <span class="number">0x38</span>,</span><br><span class="line">        <span class="number">0x07</span>, <span class="number">0x0A</span>, <span class="number">0x3B</span>, <span class="number">0x08</span>, <span class="number">0x38</span>, <span class="number">0x0E</span>, <span class="number">0x0F</span>, <span class="number">0x3B</span>, <span class="number">0x3A</span>, <span class="number">0x0A</span>, <span class="number">0x0B</span>, <span class="number">0x06</span>, <span class="number">0x09</span>, <span class="number">0x07</span>, <span class="number">0x3B</span>, <span class="number">0x37</span>,</span><br><span class="line">        <span class="number">0x0D</span>, <span class="number">0x0F</span>, <span class="number">0x07</span>, <span class="number">0x38</span>, <span class="number">0x0F</span>, <span class="number">0x00</span>};</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span>  i = <span class="number">0</span>; i &lt; <span class="number">38</span>; i++)</span><br><span class="line">        {</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%c"</span>, arr[i] + <span class="number">0x2a</span>);</span><br><span class="line">        }</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div>
-
-<p>最后解出 flag{a14a424005b14e2b89ed45031ea791b9}</p>
-<p>至于为什么没有用到</p>
-<p><img lazyload src="/images/loading.svg" data-src="/image-20230923235559230.png" alt="image-20230923235559230"></p>
-<p>看到这里，想必，懂的都懂。显然没有hook成功.</p>
-
-            </div>
-
-            
-
-            
-
-            
-                <div class="article-nav">
-                    
-                        <div class="article-prev">
-                            <a class="prev"
-                            rel="prev"
-                            href="/2023/09/24/gkctf-2021-crash/"
-                            >
-                                <span class="left arrow-icon flex-center">
-                                <i class="fas fa-chevron-left"></i>
-                                </span>
-                                <span class="title flex-center">
-                                    <span class="post-nav-title-item">GKCTF-2021-Crash</span>
-                                    <span class="post-nav-item">上一篇</span>
-                                </span>
-                            </a>
-                        </div>
-                    
-                    
-                        <div class="article-next">
-                            <a class="next"
-                            rel="next"
-                            href="/2023/09/23/hfctf2022-shellcod/"
-                            >
-                                <span class="title flex-center">
-                                    <span class="post-nav-title-item">虎符CTF2022 —shellcode</span>
-                                    <span class="post-nav-item">下一篇</span>
-                                </span>
-                                <span class="right arrow-icon flex-center">
-                                <i class="fas fa-chevron-right"></i>
-                                </span>
-                            </a>
-                        </div>
-                    
-                </div>
-            
-
-            
-                <div class="comment-container">
-                    <div class="comments-container">
-    <div id="comment-anchor"></div>
-    <div class="comment-area-title">
-        <i class="fas fa-comments">&nbsp;评论</i>
-    </div>
-    
-
-        
-            
-
-        
-    
-</div>
-
-                </div>
-            
-        </div>
-
-        
-            <div class="toc-content-container">
-                <div class="post-toc-wrap">
-    <div class="post-toc">
-        <div style="font-size: 1.3rem;margin-top: 0; margin-bottom: 0.8rem; transition-duration: 0.1s;"><i class="fa-solid fa-list"></i> <strong>目录</strong></div>
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%95%BF%E5%9F%8E%E6%9D%AF-2021-%E9%99%A2%E6%A0%A1%E7%BB%84-Just-cmp-re"><span class="nav-number">1.</span> <span class="nav-text">长城杯-2021-院校组-Just_cmp-re</span></a></li></ol>
-    </div>
-</div>
-            </div>
-        
-    </div>
-</div>
-
+    +redefine-tablet() {
+      left 0 !important
+      display none !important
+    }
+  }
+}
 
                 
 

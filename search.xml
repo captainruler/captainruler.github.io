@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>GWCTF-2019-re3</title>
+      <link href="/2023/09/25/gwctf-2019-re3/"/>
+      <url>/2023/09/25/gwctf-2019-re3/</url>
+      
+        <content type="html"><![CDATA[<p>题不是很难，但是自己做的时候过于Sb了，也不能这样说，害，就是自己想多了，不久前自己魔改了一下AES，所以一直想得是魔改的AES，在哪儿整了半天，越想越不对，其实就是没有魔改AES，调试一下把KEY调试出来即可。我去看了一些WP,有点离谱，有些把密钥的MD5分析出来了，然后解密。。。。确实也加深学到了如何去识别MD5算法，还是很有收获。</p><p>这道打开，是很经典的SMC解密。</p><p><img lazyload="" src="/images/loading.svg" data-src="/2023/09/25/gwctf-2019-re3/image-20230925204147871.png" alt="image-20230925204147871"></p><p>对于SMC我们有两种解法，一种是写IDC脚本，一种是直接动态调试，让它自己把密文解密出来。</p><p>对于IDC脚本:</p><div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> idc_bc695 <span class="keyword">import</span> * s=<span class="number">0x402219</span>                   <span class="comment">#加密地址 </span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">224</span>):            <span class="comment">#循环    </span></span><br><span class="line">PatchByte(s+i,Byte(s+i)^<span class="number">0x99</span>) </span><br></pre></td></tr></tbody></table></figure></div><p>进行动态分析</p><p><img lazyload="" src="/images/loading.svg" data-src="/2023/09/25/gwctf-2019-re3/image-20230925204510681.png" alt="image-20230925204510681"></p><p>分析这这个函数，我们可以知道，第一个sub_400A71就是我们AES的密钥扩展。</p><p>下面的函数就是AES加密函数，我们点开即可分析出。</p><p><img lazyload="" src="/images/loading.svg" data-src="/2023/09/25/gwctf-2019-re3/image-20230925204719724.png" alt="image-20230925204719724"></p><p>对于密钥，我们可以知道，密钥扩展，会在原来的密钥基础上进行扩展，也就是说，当密钥扩展后，我们扩展后的前16位，就是我们的原始密钥，我们动态调试提取出来即可。</p><p>先前我准备用赛博厨房来解的，但是不知道为啥解不出来（可能我不熟悉它的原因。。。）</p><p>所以就写一个py脚本来解</p><div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</span><br><span class="line">decodedata = <span class="string">'BC0AADC0147C5ECCE0B140BC9C51D52B46B2B9434DE5324BAD7FB4B39CDB4B5B'</span>    <span class="comment">#数据</span></span><br><span class="line">key = <span class="string">'CB8D493521B47A4CC1AE7E62229266CE'</span>           <span class="comment">#密钥</span></span><br><span class="line">aeskey = AES.new(<span class="built_in">bytes</span>.fromhex(key), AES.MODE_ECB)    <span class="comment">#初始化加密器</span></span><br><span class="line">decode = aeskey.decrypt(<span class="built_in">bytes</span>.fromhex(decodedata))      <span class="comment">#加密器解密</span></span><br><span class="line"><span class="built_in">print</span>(decode)</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure></div><p>解出我们的FlAG:</p><p>flag{924a9ab2163d390410d0a1f670}</p><p>对于密钥，我看了他们的WP可以发现，居然是用MD5加密了BASE64表，然后在进行操作来生成的。</p><p>对于MD5特征码</p><p><img lazyload="" src="/images/loading.svg" data-src="/2023/09/25/gwctf-2019-re3/image-20230925205323221.png" alt="image-20230925205323221"></p><p><img lazyload="" src="/images/loading.svg" data-src="/2023/09/25/gwctf-2019-re3/image-20230925210004320.png" alt="image-20230925210004320"></p><p>一般的MD5的两个特征。</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>第五空间-2021-StrangeLanguage</title>
       <link href="/2023/09/25/di-wu-kong-jian-2021-strangelanguage/"/>
       <url>/2023/09/25/di-wu-kong-jian-2021-strangelanguage/</url>

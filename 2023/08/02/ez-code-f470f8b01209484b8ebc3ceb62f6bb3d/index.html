@@ -172,152 +172,299 @@
             <div class="main-content">
 
                 
-                    <div class="fade-in-down-animation">
-    <div class="post-page-container">
-        <div class="article-content-container">
-            <div class="article-title">
-                <span class="title-hover-animation"><h1 style="font-size:2rem; font-weight: bold; margin: 10px 0;">EZ_CODE</h1></span>
-            </div>
+                    $avatarWidth = 46px
+$arrow-icon-width = 16px
+$post-nav-max-width = 220px
+$article-title-font-size = 1.6rem
+$temp-toc-width = hexo-config('style.right_side_width')
+$toc-container-width = $temp-toc-width ? convert($temp-toc-width) : 210px
+$without-toc-container-width = calc(100% - 210px)
+.post-page-container{
+  display flex
+  position relative
+  justify-content space-between
+  box-sizing border-box
+  width 100%
+  height 100%
 
-            
-                <div class="article-header">
-                    <div class="avatar">
-                        <img src="/images/7.webp">
-                    </div>
-                    <div class="info">
-                        <div class="author">
-                            <span class="name">二木</span>
-                            
-                                <span class="author-label">王者</span>
-                            
-                        </div>
-                        <div class="meta-info">
-                            <div class="article-meta-info">
-    <span class="article-date article-meta-item">
-        <i class="fa-duotone fa-pen-line"></i>&nbsp;
-        <span class="pc">2023-08-02 10:31:33</span>
-        <span class="mobile">2023-08-02 10:31</span>
-    </span>
+  &.show-toc {
+    .toc-content-container {
+      display block
+    }
+
+    .article-content-container {
+      width $without-toc-container-width !important
+    }
+  }
+
+  +redefine-tablet() {
+    .toc-content-container {
+      display none !important
+    }
+
+    .article-content-container {
+      width 100% !important
+    }
+
+    &.show-toc {
+      .toc-content-container {
+        display none
+      }
+
+      .article-content-container {
+        width 100% !important
+      }
+    }
+  }
+
+
+  .article-content-container {
+    width 100%
+    margin-right: 30px
+
+    redefine-container(false, 0, 0, 30px, 30px)
+
+    +redefine-mobile() {
+      padding 1.2rem 0.2rem
+      box-shadow none
+    }
+
+    .article-title {
+      font-family "Noto Sans SC", sans-serif
+      color var(--second-text-color)
+      font-weight 600
+      font-size $article-title-font-size
+
+      +redefine-tablet() {
+        font-size $article-title-font-size * 0.9
+      }
+
+      +redefine-mobile() {
+        font-size $article-title-font-size * 0.8
+      }
+    }
+
+
+    .article-header {
+      font-family "Noto Sans", "Noto Sans SC", sans-serif
+      position relative
+      padding-left $avatarWidth
+      width 100%
+      height $avatarWidth
+      box-sizing border-box
+
+      .avatar {
+        position absolute
+        top 0
+        left 0
+        width $avatarWidth
+        height $avatarWidth
+        padding 1px
+        box-sizing border-box
+        border 1px solid var(--border-color)
+        border-radius 50%
+
+        img {
+          border-radius 50%
+          width 100%
+          height 100%
+          background var(--avatar-background-color)
+        }
+
+      }
+
+
+      .info {
+        padding 2px 0
+        margin-left 10px
+        box-sizing border-box
+        display flex
+        flex-direction column
+        justify-content space-between
+        width 100%
+        height 100%
+
+        .author {
+          font-weight regular
+          font-size 1.18rem
+          display flex
+          align-items center
+
+          .name {
+            color var(--default-text-color)
+          }
+
+          .author-label {
+            margin-left 10px
+            font-size 0.8rem
+            font-weight 500
+            padding 0 5px
+            border-radius 6px
+            color #fff
+            background var(--selection-color)
+          }
+
+        }
+      }
+
+    }
+
+
+    .article-header, .article-header-meta-info {
+      margin-top 16px
+      +redefine-tablet() {
+        transform scale(0.9)
+        transform-origin left top
+      }
+    }
+
+
+    .article-content {
+      margin-top $component-spacing-value
+      padding-bottom 10px
+      word-wrap break-word
+      border-bottom 1px solid var(--border-color)
+      color var(--default-text-color)
+    }
+
+
+    .post-tags-box {
+      display none
+      margin-top 1.6rem
+      justify-content center
+      font-size 1.1rem
+
+      +redefine-tablet() {
+        display flex
+      }
+
+      +redefine-mobile() {
+        margin-top 1.2rem
+        font-size 1rem
+      }
+
+
+      .tag-item {
+        margin 0 0.25rem
+      }
+    }
+
+    .post-copyright-info {
+      margin-top $component-spacing-value
+      width 100%
+
+      +redefine-tablet() {
+        margin-top $component-spacing-value * 0.8
+      }
+    }
+
+
+    .article-nav {
+      height 40px
+      margin-top $component-spacing-value
+
+      .article-prev, .article-next {
+        max-width $post-nav-max-width
+        height 100%
+        box-sizing border-box
+
+        redefine-container(true, 1.03, 1.03, 10px, 0)
+
+        a {
+          position relative
+          display block
+          width 100%
+          height 100%
+          box-sizing border-box
+
+          &.prev {
+            padding-left $arrow-icon-width
+          }
+
+          &.next {
+            padding-right $arrow-icon-width
+          }
+
+          .arrow-icon {
+            position absolute
+            top 0
+            height 100%
+            width $arrow-icon-width
+
+            &.left {
+              left 0
+            }
+
+            &.right {
+              right 0
+            }
+          }
+
+          .title {
+            width 100%
+            height 100%
+          }
+        }
+
+      }
+
+      .article-prev {
+        float left
+      }
+
+      .article-next {
+        float right
+      }
+
+      .post-nav-item {
+        display none
+
+        +redefine-tablet() {
+          display inline-block
+        }
+
+      }
+
+
+      .post-nav-title-item {
+        overflow hidden
+        text-overflow ellipsis
+        white-space nowrap
+
+        +redefine-tablet() {
+          display none
+        }
+      }
+    }
+  }
+
+  .toc-content-container {
+    position sticky
+    top $header-height + $component-spacing-value
+    //border-radius 18px
+    border-radius 0
+    display none
+    width $toc-container-width
+    height auto
+    max-height calc(100vh - 210px)
+    //z-index $z-index-6
+    overflow-y auto
+    float right
+    padding 10px
+    box-sizing border-box
+    box-shadow none !important
     
-    
 
-    
-    
-        <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>5.3k 字</span>
-        </span>
-    
-    
-        <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>32 分钟</span>
-        </span>
-    
-    
-        <span class="article-pv article-meta-item">
-            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
-        </span>
-    
-</div>
+    hover-style(false, 0, 0)
 
-                        </div>
-                    </div>
-                </div>
-            
+    transition-t("display", "0", "0.3", "ease-out")
 
-            <div class="article-content markdown-body">
-                <h1 id="EZ-CODE"><a href="#EZ-CODE" class="headerlink" title="EZ_CODE"></a>EZ_CODE</h1><p>我们打开会发现是一些莫名的代码，如果能被称为代码的话，这个代码是混淆过后的powershell代码，拿到手其实是没什么思路的。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/./EZ_CODE%20f470f8b01209484b8ebc3ceb62f6bb3d/Untitled.png" alt="Untitled"></p>
-<p>我们使用，powershell ISE（windous自带的的一个书写powershell脚本与4）打开这个代码，运行它，出现了Do you konw PWSH.(PWSH就是表示powershell的意思）</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/EZ_CODE%20f470f8b01209484b8ebc3ceb62f6bb3d/Untitled%201.png" alt="Untitled"></p>
-<p>这里出现了字符，但是在那一坨代码中是没有任何字符的，只有${},等等，是shell命令似的东西 ，这里我们就猜测是否有操作将字符作参数传入进去的。</p>
-<p>这里我们选中运行一下，按下f9下断点运行，进行调试。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/EZ_CODE%20f470f8b01209484b8ebc3ceb62f6bb3d/Untitled%202.png" alt="Untitled"></p>
-<p>出现这个即为调试成功</p>
-<p><a class="link" target="_blank" rel="noopener" href="https://blog.csdn.net/slovyz/article/details/47400107">Shell脚本中$0、$?、$!、$$、$*、$#、$@等的意义_slovyz的博客-CSDN博客<i class="fas fa-external-link-alt"></i></a></p>
-<p><a class="link" target="_blank" rel="noopener" href="https://blog.csdn.net/x1269778817/article/details/46535729">https://blog.csdn.net/x1269778817/article/details/46535729<i class="fas fa-external-link-alt"></i></a></p>
-<p>我们可以通过${@*}这条特殊用法，将参数列表作为一个数组展开，然后使用通配符<code>*</code>将数组中的每个元素进行展开，让其解混淆</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/EZ_CODE%20f470f8b01209484b8ebc3ceb62f6bb3d/Untitled%203.png" alt="Untitled"></p>
-<p>我们将输出的数据提取出来,用py脚本将这些ascii码字符转换为char形势解出</p>
-<div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line">input_string =<span class="string">'''[CHar]99+[CHar]108+[CHar]97+[CHar]115+[CHar]115+[CHar]32+[CHar]99+[CHar]104+[CHar]105+[CHar]112+[CHar]101+[CHar]114+[CHar]40+[CHar]41+[CHar]58+[CHar]10+[CHar]32+[</span></span><br><span class="line"><span class="string">CHar]32+[CHar]32+[CHar]32+[CHar]100+[CHar]101+[CHar]102+[CHar]32+[CHar]95+[CHar]95+[CHar]105+[CHar]110+[CHar]105+[CHar]116+[CHar]95+[CHar]95+[CHar]40+[CHar]115+[C</span></span><br><span class="line"><span class="string">Har]101+[CHar]108+[CHar]102+[CHar]41+[CHar]58+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]115+[CHar]101+[CHar]108+[CHar</span></span><br><span class="line"><span class="string">]102+[CHar]46+[CHar]100+[CHar]32+[CHar]61+[CHar]32+[CHar]48+[CHar]120+[CHar]56+[CHar]55+[CHar]54+[CHar]53+[CHar]52+[CHar]51+[CHar]50+[CHar]49+[CHar]10+[CHar]32+[C</span></span><br><span class="line"><span class="string">Har]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]107+[CHar]48+[CHar]32+[CHar]61+[CHar]32+[CHar]48+[CHar]120+[CHar]54+[CHar]55+[CHar]52+[CHar]53+</span></span><br><span class="line"><span class="string">[CHar]50+[CHar]51+[CHar]48+[CHar]49+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]107+[CHar]49+[CHar]32+[CHar]61+[CHar]32</span></span><br><span class="line"><span class="string">+[CHar]48+[CHar]120+[CHar]101+[CHar]102+[CHar]99+[CHar]100+[CHar]97+[CHar]98+[CHar]56+[CHar]57+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHa</span></span><br><span class="line"><span class="string">r]32+[CHar]32+[CHar]107+[CHar]50+[CHar]32+[CHar]61+[CHar]32+[CHar]48+[CHar]120+[CHar]57+[CHar]56+[CHar]98+[CHar]97+[CHar]100+[CHar]99+[CHar]102+[CHar]101+[CHar]10</span></span><br><span class="line"><span class="string">+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]107+[CHar]51+[CHar]32+[CHar]61+[CHar]32+[CHar]48+[CHar]120+[CHar]49+[CHar]48+[CHar]</span></span><br><span class="line"><span class="string">51+[CHar]50+[CHar]53+[CHar]52+[CHar]55+[CHar]54+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]115+[CHar]101+[CHar]108+[CH</span></span><br><span class="line"><span class="string">ar]102+[CHar]46+[CHar]107+[CHar]32+[CHar]61+[CHar]32+[CHar]91+[CHar]107+[CHar]48+[CHar]44+[CHar]32+[CHar]107+[CHar]49+[CHar]44+[CHar]32+[CHar]107+[CHar]50+[CHar]4</span></span><br><span class="line"><span class="string">4+[CHar]32+[CHar]107+[CHar]51+[CHar]93+[CHar]10+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]100+[CHar]101+[CHar]102+[CHar]32+[CHar]101+[CHar]40+[CHar]115+[</span></span><br><span class="line"><span class="string">CHar]101+[CHar]108+[CHar]102+[CHar]44+[CHar]32+[CHar]110+[CHar]44+[CHar]32+[CHar]118+[CHar]41+[CHar]58+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar</span></span><br><span class="line"><span class="string">]32+[CHar]32+[CHar]32+[CHar]102+[CHar]114+[CHar]111+[CHar]109+[CHar]32+[CHar]99+[CHar]116+[CHar]121+[CHar]112+[CHar]101+[CHar]115+[CHar]32+[CHar]105+[CHar]109+[CH</span></span><br><span class="line"><span class="string">ar]112+[CHar]111+[CHar]114+[CHar]116+[CHar]32+[CHar]99+[CHar]95+[CHar]117+[CHar]105+[CHar]110+[CHar]116+[CHar]51+[CHar]50+[CHar]10+[CHar]10+[CHar]32+[CHar]32+[CHa</span></span><br><span class="line"><span class="string">r]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]100+[CHar]101+[CHar]102+[CHar]32+[CHar]77+[CHar]88+[CHar]40+[CHar]122+[CHar]44+[CHar]32+[CHar]121+[CHar]44</span></span><br><span class="line"><span class="string">+[CHar]32+[CHar]116+[CHar]111+[CHar]116+[CHar]97+[CHar]108+[CHar]44+[CHar]32+[CHar]107+[CHar]101+[CHar]121+[CHar]44+[CHar]32+[CHar]112+[CHar]44+[CHar]32+[CHar]101</span></span><br><span class="line"><span class="string">+[CHar]41+[CHar]58+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]116+[CHar]101+[CHar]</span></span><br><span class="line"><span class="string">109+[CHar]112+[CHar]49+[CHar]32+[CHar]61+[CHar]32+[CHar]40+[CHar]122+[CHar]46+[CHar]118+[CHar]97+[CHar]108+[CHar]117+[CHar]101+[CHar]32+[CHar]62+[CHar]62+[CHar]32</span></span><br><span class="line"><span class="string">+[CHar]54+[CHar]32+[CHar]94+[CHar]32+[CHar]121+[CHar]46+[CHar]118+[CHar]97+[CHar]108+[CHar]117+[CHar]101+[CHar]32+[CHar]60+[CHar]60+[CHar]32+[CHar]52+[CHar]41+[CH</span></span><br><span class="line"><span class="string">ar]32+[CHar]43+[CHar]32+[CHar]92+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CH</span></span><br><span class="line"><span class="string">ar]32+[CHar]32+[CHar]32+[CHar]40+[CHar]121+[CHar]46+[CHar]118+[CHar]97+[CHar]108+[CHar]117+[CHar]101+[CHar]32+[CHar]62+[CHar]62+[CHar]32+[CHar]50+[CHar]32+[CHar]9</span></span><br><span class="line"><span class="string">4+[CHar]32+[CHar]122+[CHar]46+[CHar]118+[CHar]97+[CHar]108+[CHar]117+[CHar]101+[CHar]32+[CHar]60+[CHar]60+[CHar]32+[CHar]53+[CHar]41+[CHar]10+[CHar]32+[CHar]32+[C</span></span><br><span class="line"><span class="string">Har]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]116+[CHar]101+[CHar]109+[CHar]112+[CHar]50+[CHar]32+[CHar]61+[CHar]3</span></span><br><span class="line"><span class="string">2+[CHar]40+[CHar]116+[CHar]111+[CHar]116+[CHar]97+[CHar]108+[CHar]46+[CHar]118+[CHar]97+[CHar]108+[CHar]117+[CHar]101+[CHar]32+[CHar]94+[CHar]32+[CHar]121+[CHar]4</span></span><br><span class="line"><span class="string">6+[CHar]118+[CHar]97+[CHar]108+[CHar]117+[CHar]101+[CHar]41+[CHar]32+[CHar]43+[CHar]32+[CHar]92+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CH</span></span><br><span class="line"><span class="string">ar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]40+[CHar]107+[CHar]101+[CHar]121+[CHar]91+[CHar]40+[CHar]112+[CHar]32</span></span><br><span class="line"><span class="string">+[CHar]38+[CHar]32+[CHar]51+[CHar]41+[CHar]32+[CHar]94+[CHar]32+[CHar]101+[CHar]46+[CHar]118+[CHar]97+[CHar]108+[CHar]117+[CHar]101+[CHar]93+[CHar]32+[CHar]94+[CH</span></span><br><span class="line"><span class="string">ar]32+[CHar]122+[CHar]46+[CHar]118+[CHar]97+[CHar]108+[CHar]117+[CHar]101+[CHar]41+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]3</span></span><br><span class="line"><span class="string">2+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]114+[CHar]101+[CHar]116+[CHar]117+[CHar]114+[CHar]110+[CHar]32+[CHar]99+[CHar]95+[CHar]117+[CHar]105+[CHar]110+[CHar]1</span></span><br><span class="line"><span class="string">16+[CHar]51+[CHar]50+[CHar]40+[CHar]116+[CHar]101+[CHar]109+[CHar]112+[CHar]49+[CHar]32+[CHar]94+[CHar]32+[CHar]116+[CHar]101+[CHar]109+[CHar]112+[CHar]50+[CHar]4</span></span><br><span class="line"><span class="string">1+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]107+[CHar]101+[CHar]121+[CHar]32+[CHar]61+[CHar]32+[CHar]115+[CHar]101+[C</span></span><br><span class="line"><span class="string">Har]108+[CHar]102+[CHar]46+[CHar]107+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]100+[CHar]101+[CHar]108+[CHar]116+[CHa</span></span><br><span class="line"><span class="string">r]97+[CHar]32+[CHar]61+[CHar]32+[CHar]115+[CHar]101+[CHar]108+[CHar]102+[CHar]46+[CHar]100+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32</span></span><br><span class="line"><span class="string">+[CHar]32+[CHar]114+[CHar]111+[CHar]117+[CHar]110+[CHar]100+[CHar]115+[CHar]32+[CHar]61+[CHar]32+[CHar]54+[CHar]32+[CHar]43+[CHar]32+[CHar]53+[CHar]50+[CHar]47+[C</span></span><br><span class="line"><span class="string">Har]47+[CHar]110+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]116+[CHar]111+[CHar]116+[CHar]97+[CHar]108+[CHar]32+[CHar]</span></span><br><span class="line"><span class="string">61+[CHar]32+[CHar]99+[CHar]95+[CHar]117+[CHar]105+[CHar]110+[CHar]116+[CHar]51+[CHar]50+[CHar]40+[CHar]48+[CHar]41+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[C</span></span><br><span class="line"><span class="string">Har]32+[CHar]32+[CHar]32+[CHar]32+[CHar]122+[CHar]32+[CHar]61+[CHar]32+[CHar]99+[CHar]95+[CHar]117+[CHar]105+[CHar]110+[CHar]116+[CHar]51+[CHar]50+[CHar]40+[CHar]</span></span><br><span class="line"><span class="string">118+[CHar]91+[CHar]110+[CHar]45+[CHar]49+[CHar]93+[CHar]41+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]101+[CHar]32+[CH</span></span><br><span class="line"><span class="string">ar]61+[CHar]32+[CHar]99+[CHar]95+[CHar]117+[CHar]105+[CHar]110+[CHar]116+[CHar]51+[CHar]50+[CHar]40+[CHar]48+[CHar]41+[CHar]10+[CHar]10+[CHar]32+[CHar]32+[CHar]32</span></span><br><span class="line"><span class="string">+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]119+[CHar]104+[CHar]105+[CHar]108+[CHar]101+[CHar]32+[CHar]114+[CHar]111+[CHar]117+[CHar]110+[CHar]100+[CHar]1</span></span><br><span class="line"><span class="string">15+[CHar]32+[CHar]62+[CHar]32+[CHar]48+[CHar]58+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]</span></span><br><span class="line"><span class="string">32+[CHar]116+[CHar]111+[CHar]116+[CHar]97+[CHar]108+[CHar]46+[CHar]118+[CHar]97+[CHar]108+[CHar]117+[CHar]101+[CHar]32+[CHar]43+[CHar]61+[CHar]32+[CHar]100+[CHar]</span></span><br><span class="line"><span class="string">101+[CHar]108+[CHar]116+[CHar]97+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]101+[C</span></span><br><span class="line"><span class="string">Har]46+[CHar]118+[CHar]97+[CHar]108+[CHar]117+[CHar]101+[CHar]32+[CHar]61+[CHar]32+[CHar]40+[CHar]116+[CHar]111+[CHar]116+[CHar]97+[CHar]108+[CHar]46+[CHar]118+[C</span></span><br><span class="line"><span class="string">Har]97+[CHar]108+[CHar]117+[CHar]101+[CHar]32+[CHar]62+[CHar]62+[CHar]32+[CHar]50+[CHar]41+[CHar]32+[CHar]38+[CHar]32+[CHar]51+[CHar]10+[CHar]32+[CHar]32+[CHar]32</span></span><br><span class="line"><span class="string">+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]102+[CHar]111+[CHar]114+[CHar]32+[CHar]112+[CHar]32+[CHar]105+[CHar]110+[C</span></span><br><span class="line"><span class="string">Har]32+[CHar]114+[CHar]97+[CHar]110+[CHar]103+[CHar]101+[CHar]40+[CHar]110+[CHar]45+[CHar]49+[CHar]41+[CHar]58+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]</span></span><br><span class="line"><span class="string">32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]121+[CHar]32+[CHar]61+[CHar]32+[CHar]99+[CHar]95+[CHar</span></span><br><span class="line"><span class="string">]117+[CHar]105+[CHar]110+[CHar]116+[CHar]51+[CHar]50+[CHar]40+[CHar]118+[CHar]91+[CHar]112+[CHar]43+[CHar]49+[CHar]93+[CHar]41+[CHar]10+[CHar]32+[CHar]32+[CHar]32</span></span><br><span class="line"><span class="string">+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]118+[CHar]91+[CHar]112+[CHar]93+[CHar]</span></span><br><span class="line"><span class="string">32+[CHar]61+[CHar]32+[CHar]99+[CHar]95+[CHar]117+[CHar]105+[CHar]110+[CHar]116+[CHar]51+[CHar]50+[CHar]40+[CHar]118+[CHar]91+[CHar]112+[CHar]93+[CHar]32+[CHar]43+</span></span><br><span class="line"><span class="string">[CHar]32+[CHar]77+[CHar]88+[CHar]40+[CHar]122+[CHar]44+[CHar]32+[CHar]121+[CHar]44+[CHar]32+[CHar]116+[CHar]111+[CHar]116+[CHar]97+[CHar]108+[CHar]44+[CHar]32+[CH</span></span><br><span class="line"><span class="string">ar]107+[CHar]101+[CHar]121+[CHar]44+[CHar]32+[CHar]112+[CHar]44+[CHar]32+[CHar]101+[CHar]41+[CHar]46+[CHar]118+[CHar]97+[CHar]108+[CHar]117+[CHar]101+[CHar]41+[CH</span></span><br><span class="line"><span class="string">ar]46+[CHar]118+[CHar]97+[CHar]108+[CHar]117+[CHar]101+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32</span></span><br><span class="line"><span class="string">+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]122+[CHar]46+[CHar]118+[CHar]97+[CHar]108+[CHar]117+[CHar]101+[CHar]32+[CHar]61+[CHar]32+[CHar]118+[CHar]91+[C</span></span><br><span class="line"><span class="string">Har]112+[CHar]93+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]121+[CHar]32+[CHar]61+</span></span><br><span class="line"><span class="string">[CHar]32+[CHar]99+[CHar]95+[CHar]117+[CHar]105+[CHar]110+[CHar]116+[CHar]51+[CHar]50+[CHar]40+[CHar]118+[CHar]91+[CHar]48+[CHar]93+[CHar]41+[CHar]10+[CHar]32+[CHa</span></span><br><span class="line"><span class="string">r]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]118+[CHar]91+[CHar]110+[CHar]45+[CHar]49+[CHar]93+[CHar]32+[C</span></span><br><span class="line"><span class="string">Har]61+[CHar]32+[CHar]99+[CHar]95+[CHar]117+[CHar]105+[CHar]110+[CHar]116+[CHar]51+[CHar]50+[CHar]40+[CHar]118+[CHar]91+[CHar]110+[CHar]45+[CHar]49+[CHar]93+[CHar</span></span><br><span class="line"><span class="string">]32+[CHar]43+[CHar]32+[CHar]77+[CHar]88+[CHar]40+[CHar]122+[CHar]44+[CHar]32+[CHar]121+[CHar]44+[CHar]32+[CHar]116+[CHar]111+[CHar]116+[CHar]97+[CHar]108+[CHar]44</span></span><br><span class="line"><span class="string">+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32</span></span><br><span class="line"><span class="string">+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]107+[CHar]101+[CHar]121+[CHar]44+[CHar</span></span><br><span class="line"><span class="string">]32+[CHar]110+[CHar]45+[CHar]49+[CHar]44+[CHar]32+[CHar]101+[CHar]41+[CHar]46+[CHar]118+[CHar]97+[CHar]108+[CHar]117+[CHar]101+[CHar]41+[CHar]46+[CHar]118+[CHar]9</span></span><br><span class="line"><span class="string">7+[CHar]108+[CHar]117+[CHar]101+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]122+[CH</span></span><br><span class="line"><span class="string">ar]46+[CHar]118+[CHar]97+[CHar]108+[CHar]117+[CHar]101+[CHar]32+[CHar]61+[CHar]32+[CHar]118+[CHar]91+[CHar]110+[CHar]45+[CHar]49+[CHar]93+[CHar]10+[CHar]32+[CHar]</span></span><br><span class="line"><span class="string">32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]114+[CHar]111+[CHar]117+[CHar]110+[CHar]100+[CHar]115+[CHar]32+</span></span><br><span class="line"><span class="string">[CHar]45+[CHar]61+[CHar]32+[CHar]49+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]114+[CHar]101+[CHar]116+[CHar]117+[CHar</span></span><br><span class="line"><span class="string">]114+[CHar]110+[CHar]32+[CHar]118+[CHar]10+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]100+[CHar]101+[CHar]102+[CHar]32+[CHar]98+[CHar]121+[CHar]116+[CHar]</span></span><br><span class="line"><span class="string">101+[CHar]115+[CHar]50+[CHar]105+[CHar]110+[CHar]116+[CHar]115+[CHar]40+[CHar]115+[CHar]101+[CHar]108+[CHar]102+[CHar]44+[CHar]99+[CHar]115+[CHar]58+[CHar]98+[CHa</span></span><br><span class="line"><span class="string">r]121+[CHar]116+[CHar]101+[CHar]115+[CHar]41+[CHar]45+[CHar]62+[CHar]108+[CHar]105+[CHar]115+[CHar]116+[CHar]58+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar</span></span><br><span class="line"><span class="string">]32+[CHar]32+[CHar]32+[CHar]32+[CHar]110+[CHar]101+[CHar]119+[CHar]95+[CHar]108+[CHar]101+[CHar]110+[CHar]103+[CHar]116+[CHar]104+[CHar]61+[CHar]108+[CHar]101+[CH</span></span><br><span class="line"><span class="string">ar]110+[CHar]40+[CHar]99+[CHar]115+[CHar]41+[CHar]43+[CHar]40+[CHar]56+[CHar]45+[CHar]108+[CHar]101+[CHar]110+[CHar]40+[CHar]99+[CHar]115+[CHar]41+[CHar]37+[CHar]</span></span><br><span class="line"><span class="string">56+[CHar]41+[CHar]37+[CHar]56+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]98+[CHar]97+[CHar]114+[CHar]114+[CHar]97+[CHa</span></span><br><span class="line"><span class="string">r]121+[CHar]61+[CHar]99+[CHar]115+[CHar]46+[CHar]108+[CHar]106+[CHar]117+[CHar]115+[CHar]116+[CHar]40+[CHar]110+[CHar]101+[CHar]119+[CHar]95+[CHar]108+[CHar]101+[</span></span><br><span class="line"><span class="string">CHar]110+[CHar]103+[CHar]116+[CHar]104+[CHar]44+[CHar]98+[CHar]39+[CHar]92+[CHar]120+[CHar]48+[CHar]48+[CHar]39+[CHar]41+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar</span></span><br><span class="line"><span class="string">]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]105+[CHar]61+[CHar]48+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]118+[CH</span></span><br><span class="line"><span class="string">ar]61+[CHar]91+[CHar]93+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]119+[CHar]104+[CHar]105+[CHar]108+[CHar]101+[CHar]3</span></span><br><span class="line"><span class="string">2+[CHar]105+[CHar]32+[CHar]60+[CHar]32+[CHar]110+[CHar]101+[CHar]119+[CHar]95+[CHar]108+[CHar]101+[CHar]110+[CHar]103+[CHar]116+[CHar]104+[CHar]58+[CHar]10+[CHar]</span></span><br><span class="line"><span class="string">32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]118+[CHar]48+[CHar]32+[CHar]61+[CHar]32+[CHar]105+[CHa</span></span><br><span class="line"><span class="string">r]110+[CHar]116+[CHar]46+[CHar]102+[CHar]114+[CHar]111+[CHar]109+[CHar]95+[CHar]98+[CHar]121+[CHar]116+[CHar]101+[CHar]115+[CHar]40+[CHar]98+[CHar]97+[CHar]114+[C</span></span><br><span class="line"><span class="string">Har]114+[CHar]97+[CHar]121+[CHar]91+[CHar]105+[CHar]58+[CHar]105+[CHar]43+[CHar]52+[CHar]93+[CHar]44+[CHar]32+[CHar]39+[CHar]108+[CHar]105+[CHar]116+[CHar]116+[CH</span></span><br><span class="line"><span class="string">ar]108+[CHar]101+[CHar]39+[CHar]41+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]118+</span></span><br><span class="line"><span class="string">[CHar]49+[CHar]32+[CHar]61+[CHar]32+[CHar]105+[CHar]110+[CHar]116+[CHar]46+[CHar]102+[CHar]114+[CHar]111+[CHar]109+[CHar]95+[CHar]98+[CHar]121+[CHar]116+[CHar]101</span></span><br><span class="line"><span class="string">+[CHar]115+[CHar]40+[CHar]98+[CHar]97+[CHar]114+[CHar]114+[CHar]97+[CHar]121+[CHar]91+[CHar]105+[CHar]43+[CHar]52+[CHar]58+[CHar]105+[CHar]43+[CHar]56+[CHar]93+[C</span></span><br><span class="line"><span class="string">Har]44+[CHar]32+[CHar]39+[CHar]108+[CHar]105+[CHar]116+[CHar]116+[CHar]108+[CHar]101+[CHar]39+[CHar]41+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar</span></span><br><span class="line"><span class="string">]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]118+[CHar]46+[CHar]97+[CHar]112+[CHar]112+[CHar]101+[CHar]110+[CHar]100+[CHar]40+[CHar]118+[CHar]4</span></span><br><span class="line"><span class="string">8+[CHar]41+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]118+[CHar]46+[CHar]97+[CHar]</span></span><br><span class="line"><span class="string">112+[CHar]112+[CHar]101+[CHar]110+[CHar]100+[CHar]40+[CHar]118+[CHar]49+[CHar]41+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+</span></span><br><span class="line"><span class="string">[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]105+[CHar]32+[CHar]43+[CHar]61+[CHar]32+[CHar]56+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32</span></span><br><span class="line"><span class="string">+[CHar]32+[CHar]114+[CHar]101+[CHar]116+[CHar]117+[CHar]114+[CHar]110+[CHar]32+[CHar]118+[CHar]10+[CHar]10+[CHar]100+[CHar]101+[CHar]102+[CHar]32+[CHar]99+[CHar]1</span></span><br><span class="line"><span class="string">04+[CHar]101+[CHar]99+[CHar]107+[CHar]40+[CHar]105+[CHar]110+[CHar]115+[CHar]116+[CHar]114+[CHar]58+[CHar]115+[CHar]116+[CHar]114+[CHar]44+[CHar]99+[CHar]104+[CHa</span></span><br><span class="line"><span class="string">r]101+[CHar]99+[CHar]107+[CHar]108+[CHar]105+[CHar]115+[CHar]116+[CHar]58+[CHar]108+[CHar]105+[CHar]115+[CHar]116+[CHar]41+[CHar]45+[CHar]62+[CHar]105+[CHar]110+[</span></span><br><span class="line"><span class="string">CHar]116+[CHar]58+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]108+[CHar]101+[CHar]110+[CHar]103+[CHar]116+[CHar]104+[CHar]61+[CHar]108+[CHar]101+[CHar]110+</span></span><br><span class="line"><span class="string">[CHar]40+[CHar]105+[CHar]110+[CHar]115+[CHar]116+[CHar]114+[CHar]41+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]105+[CHar]102+[CHar]32+[CHar]108+[CHar]101+</span></span><br><span class="line"><span class="string">[CHar]110+[CHar]103+[CHar]116+[CHar]104+[CHar]37+[CHar]56+[CHar]58+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]112+[CHa</span></span><br><span class="line"><span class="string">r]114+[CHar]105+[CHar]110+[CHar]116+[CHar]40+[CHar]34+[CHar]73+[CHar]110+[CHar]99+[CHar]111+[CHar]114+[CHar]114+[CHar]101+[CHar]99+[CHar]116+[CHar]32+[CHar]102+[C</span></span><br><span class="line"><span class="string">Har]111+[CHar]114+[CHar]109+[CHar]97+[CHar]116+[CHar]46+[CHar]34+[CHar]41+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]1</span></span><br><span class="line"><span class="string">01+[CHar]120+[CHar]105+[CHar]116+[CHar]40+[CHar]49+[CHar]41+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]99+[CHar]61+[CHar]99+[CHar]104+[CHar]105+[CHar]112+</span></span><br><span class="line"><span class="string">[CHar]101+[CHar]114+[CHar]40+[CHar]41+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]118+[CHar]32+[CHar]61+[CHar]32+[CHar]99+[CHar]46+[CHar]98+[CHar]121+[CHar</span></span><br><span class="line"><span class="string">]116+[CHar]101+[CHar]115+[CHar]50+[CHar]105+[CHar]110+[CHar]116+[CHar]115+[CHar]40+[CHar]105+[CHar]110+[CHar]115+[CHar]116+[CHar]114+[CHar]46+[CHar]101+[CHar]110+</span></span><br><span class="line"><span class="string">[CHar]99+[CHar]111+[CHar]100+[CHar]101+[CHar]40+[CHar]41+[CHar]41+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]111+[CHar]117+[CHar]116+[CHar]112+[CHar]117+[</span></span><br><span class="line"><span class="string">CHar]116+[CHar]61+[CHar]108+[CHar]105+[CHar]115+[CHar]116+[CHar]40+[CHar]99+[CHar]46+[CHar]101+[CHar]40+[CHar]108+[CHar]101+[CHar]110+[CHar]40+[CHar]118+[CHar]41+</span></span><br><span class="line"><span class="string">[CHar]44+[CHar]118+[CHar]41+[CHar]41+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]105+[CHar]61+[CHar]48+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]1</span></span><br><span class="line"><span class="string">19+[CHar]104+[CHar]105+[CHar]108+[CHar]101+[CHar]40+[CHar]105+[CHar]60+[CHar]108+[CHar]101+[CHar]110+[CHar]40+[CHar]99+[CHar]104+[CHar]101+[CHar]99+[CHar]107+[CHa</span></span><br><span class="line"><span class="string">r]108+[CHar]105+[CHar]115+[CHar]116+[CHar]41+[CHar]41+[CHar]58+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]105+[CHar]10</span></span><br><span class="line"><span class="string">2+[CHar]32+[CHar]105+[CHar]60+[CHar]108+[CHar]101+[CHar]110+[CHar]40+[CHar]111+[CHar]117+[CHar]116+[CHar]112+[CHar]117+[CHar]116+[CHar]41+[CHar]32+[CHar]97+[CHar]</span></span><br><span class="line"><span class="string">110+[CHar]100+[CHar]32+[CHar]111+[CHar]117+[CHar]116+[CHar]112+[CHar]117+[CHar]116+[CHar]91+[CHar]105+[CHar]93+[CHar]61+[CHar]61+[CHar]99+[CHar]104+[CHar]101+[CHa</span></span><br><span class="line"><span class="string">r]99+[CHar]107+[CHar]108+[CHar]105+[CHar]115+[CHar]116+[CHar]91+[CHar]105+[CHar]93+[CHar]58+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]3</span></span><br><span class="line"><span class="string">2+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]105+[CHar]43+[CHar]61+[CHar]49+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]</span></span><br><span class="line"><span class="string">32+[CHar]101+[CHar]108+[CHar]115+[CHar]101+[CHar]58+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[C</span></span><br><span class="line"><span class="string">Har]32+[CHar]98+[CHar]114+[CHar]101+[CHar]97+[CHar]107+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]105+[CHar]102+[CHar]32+[CHar]105+[CHar]61+[CHar]61+[CHar</span></span><br><span class="line"><span class="string">]108+[CHar]101+[CHar]110+[CHar]40+[CHar]99+[CHar]104+[CHar]101+[CHar]99+[CHar]107+[CHar]108+[CHar]105+[CHar]115+[CHar]116+[CHar]41+[CHar]58+[CHar]10+[CHar]32+[CHa</span></span><br><span class="line"><span class="string">r]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]114+[CHar]101+[CHar]116+[CHar]117+[CHar]114+[CHar]110+[CHar]32+[CHar]49+[CHar]10+[CHar]32+[CHar]3</span></span><br><span class="line"><span class="string">2+[CHar]32+[CHar]32+[CHar]114+[CHar]101+[CHar]116+[CHar]117+[CHar]114+[CHar]110+[CHar]32+[CHar]48+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]10+[CHar]10+[CHar]105+</span></span><br><span class="line"><span class="string">[CHar]102+[CHar]32+[CHar]95+[CHar]95+[CHar]110+[CHar]97+[CHar]109+[CHar]101+[CHar]95+[CHar]95+[CHar]61+[CHar]61+[CHar]34+[CHar]95+[CHar]95+[CHar]109+[CHar]97+[CHa</span></span><br><span class="line"><span class="string">r]105+[CHar]110+[CHar]95+[CHar]95+[CHar]34+[CHar]58+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]97+[CHar]110+[CHar]115+[CHar]61+[CHar]91+[CHar]49+[CHar]51+</span></span><br><span class="line"><span class="string">[CHar]55+[CHar]52+[CHar]50+[CHar]55+[CHar]56+[CHar]56+[CHar]52+[CHar]50+[CHar]44+[CHar]32+[CHar]50+[CHar]49+[CHar]51+[CHar]54+[CHar]48+[CHar]48+[CHar]54+[CHar]53+</span></span><br><span class="line"><span class="string">[CHar]52+[CHar]48+[CHar]44+[CHar]32+[CHar]52+[CHar]49+[CHar]57+[CHar]49+[CHar]48+[CHar]53+[CHar]54+[CHar]56+[CHar]49+[CHar]53+[CHar]44+[CHar]32+[CHar]51+[CHar]50+</span></span><br><span class="line"><span class="string">[CHar]52+[CHar]56+[CHar]56+[CHar]56+[CHar]49+[CHar]51+[CHar]55+[CHar]54+[CHar]93+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]35+[CHar]32+[CHar]103+[CHar]10</span></span><br><span class="line"><span class="string">1+[CHar]110+[CHar]101+[CHar]114+[CHar]97+[CHar]116+[CHar]101+[CHar]82+[CHar]101+[CHar]115+[CHar]40+[CHar]41+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]102</span></span><br><span class="line"><span class="string">+[CHar]108+[CHar]97+[CHar]103+[CHar]61+[CHar]105+[CHar]110+[CHar]112+[CHar]117+[CHar]116+[CHar]40+[CHar]39+[CHar]80+[CHar]108+[CHar]101+[CHar]97+[CHar]115+[CHar]1</span></span><br><span class="line"><span class="string">01+[CHar]32+[CHar]105+[CHar]110+[CHar]112+[CHar]117+[CHar]116+[CHar]32+[CHar]102+[CHar]108+[CHar]97+[CHar]103+[CHar]58+[CHar]39+[CHar]41+[CHar]10+[CHar]32+[CHar]3</span></span><br><span class="line"><span class="string">2+[CHar]32+[CHar]32+[CHar]114+[CHar]101+[CHar]115+[CHar]61+[CHar]99+[CHar]104+[CHar]101+[CHar]99+[CHar]107+[CHar]40+[CHar]102+[CHar]108+[CHar]97+[CHar]103+[CHar]4</span></span><br><span class="line"><span class="string">4+[CHar]97+[CHar]110+[CHar]115+[CHar]41+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]105+[CHar]102+[CHar]32+[CHar]114+[CHar]101+[CHar]115+[CHar]58+[CHar]10+</span></span><br><span class="line"><span class="string">[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]112+[CHar]114+[CHar]105+[CHar]110+[CHar]116+[CHar]40+[CHar]34+[CHar]67+[CHar]111+[CH</span></span><br><span class="line"><span class="string">ar]110+[CHar]103+[CHar]114+[CHar]97+[CHar]116+[CHar]117+[CHar]108+[CHar]97+[CHar]116+[CHar]105+[CHar]111+[CHar]110+[CHar]115+[CHar]44+[CHar]32+[CHar]121+[CHar]111</span></span><br><span class="line"><span class="string">+[CHar]117+[CHar]39+[CHar]118+[CHar]101+[CHar]32+[CHar]103+[CHar]111+[CHar]116+[CHar]32+[CHar]116+[CHar]104+[CHar]101+[CHar]32+[CHar]102+[CHar]108+[CHar]97+[CHar]</span></span><br><span class="line"><span class="string">103+[CHar]33+[CHar]34+[CHar]41+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]112+[CHar]114+[CHar]105+[CHar]110+[CHar]116+</span></span><br><span class="line"><span class="string">[CHar]40+[CHar]34+[CHar]70+[CHar]108+[CHar]97+[CHar]103+[CHar]32+[CHar]105+[CHar]115+[CHar]32+[CHar]42+[CHar]99+[CHar]116+[CHar]102+[CHar]123+[CHar]121+[CHar]111+</span></span><br><span class="line"><span class="string">[CHar]117+[CHar]114+[CHar]95+[CHar]105+[CHar]110+[CHar]112+[CHar]117+[CHar]116+[CHar]125+[CHar]33+[CHar]34+[CHar]41+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[</span></span><br><span class="line"><span class="string">CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]101+[CHar]120+[CHar]105+[CHar]116+[CHar]40+[CHar]48+[CHar]41+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]101+[CHar</span></span><br><span class="line"><span class="string">]108+[CHar]115+[CHar]101+[CHar]58+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]112+[CHar]114+[CHar]105+[CHar]110+[CHar]1</span></span><br><span class="line"><span class="string">16+[CHar]40+[CHar]39+[CHar]78+[CHar]111+[CHar]112+[CHar]101+[CHar]44+[CHar]116+[CHar]114+[CHar]121+[CHar]32+[CHar]97+[CHar]103+[CHar]97+[CHar]105+[CHar]110+[CHar]</span></span><br><span class="line"><span class="string">33+[CHar]39+[CHar]41</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用正则表达式匹配数字部分</span></span><br><span class="line">numbers = re.findall(<span class="string">r'\d+'</span>, input_string)</span><br><span class="line">code = <span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> num <span class="keyword">in</span> numbers:</span><br><span class="line">    code += <span class="built_in">chr</span>(<span class="built_in">int</span>(num))</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(code)</span><br></pre></td></tr></tbody></table></figure></div>
-
-<p>可以解出一下的代码，我们分析可以知道，这个就是个XXtea加密，去网上找个脚本解出即可</p>
-<div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">chiper</span>():</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        self.d = <span class="number">0x87654321</span></span><br><span class="line">        k0 = <span class="number">0x67452301</span></span><br><span class="line">        k1 = <span class="number">0xefcdab89</span></span><br><span class="line">        k2 = <span class="number">0x98badcfe</span></span><br><span class="line">        k3 = <span class="number">0x10325476</span></span><br><span class="line">        self.k = [k0, k1, k2 k3]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">e</span>(<span class="params">self, n, v</span>):</span><br><span class="line">        <span class="keyword">from</span> ctypes <span class="keyword">import</span> c_uint32</span><br><span class="line"></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">MX</span>(<span class="params">z, y, total, key, p, e</span>):</span><br><span class="line">            temp1 = (z.value &gt;&gt; <span class="number">6</span> ^ y.value &lt;&lt; <span class="number">4</span>) + \</span><br><span class="line">                (y.value &gt;&gt; <span class="number">2</span> 	 z.value &lt;&lt; <span class="number">5</span>)</span><br><span class="line">            temp2 =(total.value ^ yvalue) + \</span><br><span class="line">                (key[(p &amp; <span class="number">3</span>) ^ e.value] ^ z.value)</span><br><span class="line">           <span class="keyword">return</span> c_uin32(temp1 ^ temp2</span><br><span class="line">        key = self.k</span><br><span class="line">        delta = self.d</span><br><span class="line">        rounds = <span class="number">6</span> + <span class="number">52</span>//n</span><br><span class="line">        total = c_uint32(<span class="number">0</span>)</span><br><span class="line">        z = c_uint32(v[n-<span class="number">1</span>])</span><br><span class="line">        e = c_uint32(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> <span class="built_in">round</span> &gt; <span class="number">0</span>:</span><br><span class="line">            total.value += delta</span><br><span class="line">            e.value = (total.value &gt;&gt; <span class="number">2</span>) &amp; <span class="number">3</span></span><br><span class="line">            <span class="keyword">for</span> p <span class="keyword">in</span> <span class="built_in">range</span>(n-<span class="number">1</span>):</span><br><span class="line">                y = c_uint32(v[p+<span class="number">1</span>])</span><br><span class="line">                v[p] = c_uint32(v[p] + MX(z, y, total, key, p, e).value).value</span><br><span class="line">                z.value = v[p]</span><br><span class="line">            y = c_uint32(v[<span class="number">0</span>])</span><br><span class="line">            v[n-<span class="number">1</span>] = c_uint32(v[n-<span class="number">1</span>] + MX(z, y, total,</span><br><span class="line">                              key, n-<span class="number">1</span>, e).value).v	lue</span><br><span class="line">            z.value = v[n-<span class="number">1</span>]</span><br><span class="line">            rounds -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> v</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">bytes2ints</span>(<span class="params">self,cs:<span class="built_in">bytes</span></span>)-&gt;<span class="built_in">list</span>:</span><br><span class="line">        new_length=<span class="built_in">len</span>(cs)+(<span class="number">8</span>-<span class="built_in">len</span>(cs)%<span class="number">8</span>)%<span class="number">8</span></span><br><span class="line">        barray=cs.ljust(new_length,<span class="string">b'\x00'</span>)</span><br><span class="line">        i=<span class="number">0</span></span><br><span class="line">        v=[]</span><br><span class="line">        whilei &lt; new_length:</span><br><span class="line">            v0 = <span class="built_in">int</span>.from_bytes(barray[i:i+<span class="number">4</span>], <span class="string">'little'</span>)</span><br><span class="line">            v1 = <span class="built_in">int</span>.from_bytes(barray[i+<span class="number">4</span>:i+<span class="number">8</span>], <span class="string">'little'</span>)</span><br><span class="line">            v.append(v)</span><br><span class="line">            v.append(v1)</span><br><span class="line">            i += <span class="number">8</span></span><br><span class="line">        <span class="keyword">return</span> v</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">ceck</span>(<span class="params">instr:<span class="built_in">str</span>,checklist:<span class="built_in">list</span></span>)-&gt;<span class="built_in">int</span>:</span><br><span class="line">    length=<span class="built_in">len</span>(instr)</span><br><span class="line">    <span class="keyword">if</span> length%<span class="number">8</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"Incorrect format."</span>)</span><br><span class="line">        xit(<span class="number">1</span>)</span><br><span class="line">    c=chiper()</span><br><span class="line">    v = c.bytes2ints(instr.encode())</span><br><span class="line">    output=<span class="built_in">list</span>(c.e(<span class="built_in">len</span>(v),v))</span><br><span class="line">    i=<span class="number">0</span></span><br><span class="line">    hile(i&lt;<span class="built_in">len</span>(checklist)):</span><br><span class="line">        i</span><br><span class="line"> i&lt;<span class="built_in">len</span>(output) <span class="keyword">and</span> output[i]==checklist[i]:</span><br><span class="line">           i+=<span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">if</span> i==<span class="built_in">len</span>(checklist):</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>    </span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">"__main__"</span>:</span><br><span class="line">    ans=[<span class="number">1374278842</span>, <span class="number">2136006540</span>, <span class="number">4191056815</span>, <span class="number">3248881376</span>]</span><br><span class="line">    <span class="comment"># g</span></span><br><span class="line">nerateRes()</span><br><span class="line">    flag=<span class="built_in">input</span>(<span class="string">'Pleas input flag:'</span>)</span><br><span class="line">   res=check(flagans)</span><br><span class="line">    <span class="keyword">if</span> res:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"Congratulations, you've got the flag!"</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"Flag is *ctf{your_input}!"</span>)</span><br><span class="line">        exit(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        prin(<span class="string">'Nope,try again!'</span>)</span><br></pre></td></tr></tbody></table></figure></div>
-            </div>
-
-            
-
-            
-
-            
-                <div class="article-nav">
-                    
-                        <div class="article-prev">
-                            <a class="prev"
-                            rel="prev"
-                            href="/2023/08/09/hua-zhi-ling-zong-jie-7789b9f63bcd41f2828df0aa7fa2fa23/"
-                            >
-                                <span class="left arrow-icon flex-center">
-                                <i class="fas fa-chevron-left"></i>
-                                </span>
-                                <span class="title flex-center">
-                                    <span class="post-nav-title-item">花指令总结</span>
-                                    <span class="post-nav-item">上一篇</span>
-                                </span>
-                            </a>
-                        </div>
-                    
-                    
-                        <div class="article-next">
-                            <a class="next"
-                            rel="next"
-                            href="/2023/07/30/2023-googlectf-re-oldshool-5f1694092f51492d9cc6cc1042d4039e/"
-                            >
-                                <span class="title flex-center">
-                                    <span class="post-nav-title-item">2023-googleCTF-re-oldshool</span>
-                                    <span class="post-nav-item">下一篇</span>
-                                </span>
-                                <span class="right arrow-icon flex-center">
-                                <i class="fas fa-chevron-right"></i>
-                                </span>
-                            </a>
-                        </div>
-                    
-                </div>
-            
-
-            
-                <div class="comment-container">
-                    <div class="comments-container">
-    <div id="comment-anchor"></div>
-    <div class="comment-area-title">
-        <i class="fas fa-comments">&nbsp;评论</i>
-    </div>
-    
-
-        
-            
-
-        
-    
-</div>
-
-                </div>
-            
-        </div>
-
-        
-            <div class="toc-content-container">
-                <div class="post-toc-wrap">
-    <div class="post-toc">
-        <div style="font-size: 1.3rem;margin-top: 0; margin-bottom: 0.8rem; transition-duration: 0.1s;"><i class="fa-solid fa-list"></i> <strong>目录</strong></div>
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#EZ-CODE"><span class="nav-number">1.</span> <span class="nav-text">EZ_CODE</span></a></li></ol>
-    </div>
-</div>
-            </div>
-        
-    </div>
-</div>
-
+    +redefine-tablet() {
+      left 0 !important
+      display none !important
+    }
+  }
+}
 
                 
 

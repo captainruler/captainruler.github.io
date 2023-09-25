@@ -172,195 +172,299 @@
             <div class="main-content">
 
                 
-                    <div class="fade-in-down-animation">
-    <div class="post-page-container">
-        <div class="article-content-container">
-            <div class="article-title">
-                <span class="title-hover-animation"><h1 style="font-size:2rem; font-weight: bold; margin: 10px 0;">花指令总结</h1></span>
-            </div>
+                    $avatarWidth = 46px
+$arrow-icon-width = 16px
+$post-nav-max-width = 220px
+$article-title-font-size = 1.6rem
+$temp-toc-width = hexo-config('style.right_side_width')
+$toc-container-width = $temp-toc-width ? convert($temp-toc-width) : 210px
+$without-toc-container-width = calc(100% - 210px)
+.post-page-container{
+  display flex
+  position relative
+  justify-content space-between
+  box-sizing border-box
+  width 100%
+  height 100%
 
-            
-                <div class="article-header">
-                    <div class="avatar">
-                        <img src="/images/7.webp">
-                    </div>
-                    <div class="info">
-                        <div class="author">
-                            <span class="name">二木</span>
-                            
-                                <span class="author-label">王者</span>
-                            
-                        </div>
-                        <div class="meta-info">
-                            <div class="article-meta-info">
-    <span class="article-date article-meta-item">
-        <i class="fa-duotone fa-pen-line"></i>&nbsp;
-        <span class="pc">2023-08-09 15:28:31</span>
-        <span class="mobile">2023-08-09 15:28</span>
-    </span>
+  &.show-toc {
+    .toc-content-container {
+      display block
+    }
+
+    .article-content-container {
+      width $without-toc-container-width !important
+    }
+  }
+
+  +redefine-tablet() {
+    .toc-content-container {
+      display none !important
+    }
+
+    .article-content-container {
+      width 100% !important
+    }
+
+    &.show-toc {
+      .toc-content-container {
+        display none
+      }
+
+      .article-content-container {
+        width 100% !important
+      }
+    }
+  }
+
+
+  .article-content-container {
+    width 100%
+    margin-right: 30px
+
+    redefine-container(false, 0, 0, 30px, 30px)
+
+    +redefine-mobile() {
+      padding 1.2rem 0.2rem
+      box-shadow none
+    }
+
+    .article-title {
+      font-family "Noto Sans SC", sans-serif
+      color var(--second-text-color)
+      font-weight 600
+      font-size $article-title-font-size
+
+      +redefine-tablet() {
+        font-size $article-title-font-size * 0.9
+      }
+
+      +redefine-mobile() {
+        font-size $article-title-font-size * 0.8
+      }
+    }
+
+
+    .article-header {
+      font-family "Noto Sans", "Noto Sans SC", sans-serif
+      position relative
+      padding-left $avatarWidth
+      width 100%
+      height $avatarWidth
+      box-sizing border-box
+
+      .avatar {
+        position absolute
+        top 0
+        left 0
+        width $avatarWidth
+        height $avatarWidth
+        padding 1px
+        box-sizing border-box
+        border 1px solid var(--border-color)
+        border-radius 50%
+
+        img {
+          border-radius 50%
+          width 100%
+          height 100%
+          background var(--avatar-background-color)
+        }
+
+      }
+
+
+      .info {
+        padding 2px 0
+        margin-left 10px
+        box-sizing border-box
+        display flex
+        flex-direction column
+        justify-content space-between
+        width 100%
+        height 100%
+
+        .author {
+          font-weight regular
+          font-size 1.18rem
+          display flex
+          align-items center
+
+          .name {
+            color var(--default-text-color)
+          }
+
+          .author-label {
+            margin-left 10px
+            font-size 0.8rem
+            font-weight 500
+            padding 0 5px
+            border-radius 6px
+            color #fff
+            background var(--selection-color)
+          }
+
+        }
+      }
+
+    }
+
+
+    .article-header, .article-header-meta-info {
+      margin-top 16px
+      +redefine-tablet() {
+        transform scale(0.9)
+        transform-origin left top
+      }
+    }
+
+
+    .article-content {
+      margin-top $component-spacing-value
+      padding-bottom 10px
+      word-wrap break-word
+      border-bottom 1px solid var(--border-color)
+      color var(--default-text-color)
+    }
+
+
+    .post-tags-box {
+      display none
+      margin-top 1.6rem
+      justify-content center
+      font-size 1.1rem
+
+      +redefine-tablet() {
+        display flex
+      }
+
+      +redefine-mobile() {
+        margin-top 1.2rem
+        font-size 1rem
+      }
+
+
+      .tag-item {
+        margin 0 0.25rem
+      }
+    }
+
+    .post-copyright-info {
+      margin-top $component-spacing-value
+      width 100%
+
+      +redefine-tablet() {
+        margin-top $component-spacing-value * 0.8
+      }
+    }
+
+
+    .article-nav {
+      height 40px
+      margin-top $component-spacing-value
+
+      .article-prev, .article-next {
+        max-width $post-nav-max-width
+        height 100%
+        box-sizing border-box
+
+        redefine-container(true, 1.03, 1.03, 10px, 0)
+
+        a {
+          position relative
+          display block
+          width 100%
+          height 100%
+          box-sizing border-box
+
+          &.prev {
+            padding-left $arrow-icon-width
+          }
+
+          &.next {
+            padding-right $arrow-icon-width
+          }
+
+          .arrow-icon {
+            position absolute
+            top 0
+            height 100%
+            width $arrow-icon-width
+
+            &.left {
+              left 0
+            }
+
+            &.right {
+              right 0
+            }
+          }
+
+          .title {
+            width 100%
+            height 100%
+          }
+        }
+
+      }
+
+      .article-prev {
+        float left
+      }
+
+      .article-next {
+        float right
+      }
+
+      .post-nav-item {
+        display none
+
+        +redefine-tablet() {
+          display inline-block
+        }
+
+      }
+
+
+      .post-nav-title-item {
+        overflow hidden
+        text-overflow ellipsis
+        white-space nowrap
+
+        +redefine-tablet() {
+          display none
+        }
+      }
+    }
+  }
+
+  .toc-content-container {
+    position sticky
+    top $header-height + $component-spacing-value
+    //border-radius 18px
+    border-radius 0
+    display none
+    width $toc-container-width
+    height auto
+    max-height calc(100vh - 210px)
+    //z-index $z-index-6
+    overflow-y auto
+    float right
+    padding 10px
+    box-sizing border-box
+    box-shadow none !important
     
-    
 
-    
-    
-        <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>1.5k 字</span>
-        </span>
-    
-    
-        <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>5 分钟</span>
-        </span>
-    
-    
-        <span class="article-pv article-meta-item">
-            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
-        </span>
-    
-</div>
+    hover-style(false, 0, 0)
 
-                        </div>
-                    </div>
-                </div>
-            
+    transition-t("display", "0", "0.3", "ease-out")
 
-            <div class="article-content markdown-body">
-                <h1 id="花指令总结"><a href="#花指令总结" class="headerlink" title="花指令总结"></a>花指令总结</h1><p><a href="%E8%8A%B1%E6%8C%87%E4%BB%A4%E6%80%BB%E7%BB%93%207789b9f63bcd41f2828df0aa7fa2fa23/1.pdf">1.PDF</a></p>
-<p>做花指令的题，主要是看汇编代码，将那些可疑的代码patch掉，多patch，说不一定就patch出来了，有些题就比较恶心，出现一大堆花，人肉去花非常麻烦，只能使用脚本。</p>
-<h2 id="什么是花指令？"><a href="#什么是花指令？" class="headerlink" title="什么是花指令？"></a>什么是花指令？</h2><p>所谓花指令就是指程序中完全冗余，不影响程序功能却会对逆向工程产生干扰的指令。</p>
-<h2 id="花指令的作用"><a href="#花指令的作用" class="headerlink" title="花指令的作用:"></a>花指令的作用:</h2><p>主打一个静态混淆,让我们的反汇编工具不能正常识别出,像我们的IDA一些加花了的程序,我们就不能看到它的伪代码了.大多数起到一个提高逆向成本的作用,花时间去花.</p>
-<p>在了解花指令之前,我们首先要了解我们的反编译是怎么运作,通过这样我们才能从源头明白,为啥会有花指令的出现.</p>
-<h2 id="反汇编器的运作方式"><a href="#反汇编器的运作方式" class="headerlink" title="反汇编器的运作方式:"></a>反汇编器的运作方式:</h2><p>我们常见的工具有,ida,od,WinDbg,objdump,这些工具运用的原理有不同两种</p>
-<p><strong><strong>线性扫描反汇编</strong></strong></p>
-<p>正如其名,像一条直线式的进行扫描然后反汇编.就是按照着机器码的顺序,一条条的翻译我们的机器码,逐条的反汇编我们的每一条指令，直到将代码段整个扫描完毕.</p>
-<p>这个方法有一个明显的缺点,就是它太直了,它不会考虑到代码中可能混有数据，因此无法正确地将嵌入的数据与代码区分开。从而造成反汇编失败.</p>
-<p><strong><strong>递归下降反汇编</strong></strong></p>
-<p>这个算法主要是基于控制流来判断是否被另一条指令引用来决定是否进行反汇编.</p>
-<p>主要为下面几个指令进行判断:</p>
-<p><strong><strong>顺序流指令(一条一条进行执行的指令),条件分支指令(ja,je,jne…..),无条件分支指令(jmp),函数调用指令(call),返回指令(ret)</strong></strong></p>
-<p>优点:具有区分代码与数据的能力.</p>
-<p>缺点:就是我们可以构造反汇编器无法判断真假的恒真/恒假分支，再插入不可执行的花指令来达到欺骗效果。</p>
-<p>对于花指令的去除,我们现在用于分析的主要是IDA,而我们的IDA运用的算法正是递归下降算法的反汇编.</p>
-<p>因此我们的花指令主要的是针对于让我们的IDA混淆起来,让它不能正常的反编译我们的文件,从而增大逆向分析难度.</p>
-<p>opcode。opcode&nbsp;<em>operation code</em>也叫指令机器码&nbsp;<em>Instruction Machine Code</em>，就是汇编指令翻译后的二进制形式，我们也称之为硬编码，比如0XE8一般为call，0XE9为JMP,0X90为NOP.</p>
-<h2 id="一些常见的花指令套路"><a href="#一些常见的花指令套路" class="headerlink" title="一些常见的花指令套路"></a>一些常见的花指令套路</h2><p><strong>1、插入无效步骤</strong></p>
-<p>无效跳转</p>
-<p>比如通过一些抵消的操作来达到混淆效果，比如在push后，然后就紧接着Jmp，跳到一个地方后，pop，然后在jmp回来，形成一个无效的代码，从而造成混淆。</p>
-<p><strong>2、绝对跳转（永真跳转）</strong></p>
-<p>一个是直接使用jmp进行跳转，还有的就是进行je,jne这种互补的指令，由于递归下降算法不能获取到程序运行中的上下文信息，遇到条件跳转语句时，它会递归地将跳转的分支与不跳转的分支都就行反汇编。</p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">_asm {</span><br><span class="line">xor eax, eax;</span><br><span class="line">jz s;</span><br><span class="line">add esp, <span class="number">0x11</span>;</span><br><span class="line">s:</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div>
-
-<p>对于这种我们直接nop就行。</p>
-<h3 id="二，"><a href="#二，" class="headerlink" title="二，"></a>二，</h3><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">__asm { </span><br><span class="line">    _emit <span class="number">075</span>h    <span class="meta">#jmp $+4</span></span><br><span class="line">    _emit <span class="number">2</span>h     <span class="comment">//表示向后跳转的机械码数</span></span><br><span class="line">    _emit <span class="number">0E9</span>h</span><br><span class="line">    _emit <span class="number">0</span>EDh</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div>
-
-<p><img lazyload="" src="/images/loading.svg" data-src="/2023/08/09/hua-zhi-ling-zong-jie-7789b9f63bcd41f2828df0aa7fa2fa23/Untitled.png" alt="Untitled"></p>
-<p><strong>3、call,与ret的使用(指令替换)</strong></p>
-<p>一、</p>
-<p>例如，对于我们的call addr指令，是可以替换为下面的片段</p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">push addr</span><br><span class="line">ret</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure></div>
-
-<p>因为call本质上将其拆解为两条指令进行理解：<code>push 函数并返回地址</code>然后<code>jmp 函数地址</code></p>
-<p>对于我们的ret, 可以替换为</p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">push ecx</span><br><span class="line">mov ecx,[esp+<span class="number">4</span>]</span><br><span class="line">add esp,<span class="number">8</span></span><br><span class="line">jmp ecx</span><br></pre></td></tr></tbody></table></figure></div>
-
-<p>对于ret本质上等于<code>pop eip</code> 加 jmp</p>
-<p>通过此中代换，就会破坏我们的ecx寄存器，从而操作我们工具解析出的函数地址范围与调用关系出现错误。</p>
-<h3 id="一、"><a href="#一、" class="headerlink" title="一、"></a>一、</h3><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">__asm {</span><br><span class="line">		call LABEL9;</span><br><span class="line">		_emit <span class="number">0x83</span>;</span><br><span class="line">	LABEL9:</span><br><span class="line">		add dword ptr ss : [esp] , <span class="number">8</span>;</span><br><span class="line">		ret;</span><br><span class="line">		__emit <span class="number">0xF3</span>;  </span><br><span class="line">	}</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure></div>
-
-<p>在使用内联汇编时，<code>ret</code>&nbsp;指令用于从子函数返回到调用函数。正常情况下，<code>ret</code>&nbsp;指令会弹出栈顶的返回地址，并将程序控制流转移到该地址。</p>
-<p>然而，在某些特殊情况下，我们可能需要在&nbsp;<code>ret</code>&nbsp;后面添加机器码。这是因为在编写内联汇编时，编译器会对代码进行优化，并且可能会对指令进行重新排序或优化。如果我们在&nbsp;<code>ret</code>&nbsp;指令后面没有添加机器码，编译器可能会将其与后面的指令进行合并或优化，导致程序行为不符合预期。</p>
-<p>通过在&nbsp;<code>ret</code>&nbsp;指令后面添加机器码，我们可以确保编译器不会对&nbsp;<code>ret</code>&nbsp;指令进行优化或重新排序。这样可以保证&nbsp;<code>ret</code>&nbsp;指令的行为与我们的预期一致，从而实现特定的功能或行为。</p>
-<p><code>ret</code>&nbsp;指令后面的机器码不会被执行，而是用于控制程序的流程。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled%201.png" alt="Untitled"></p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled%202.png" alt="Untitled"></p>
-<p>出现堆栈不平衡,从而造成后面的代码不能成功反编译出</p>
-<h3 id="二、"><a href="#二、" class="headerlink" title="二、"></a>二、</h3><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">__asm {</span><br><span class="line">	__asm jmp junk1</span><br><span class="line">	__asm __emit <span class="number">0xe8</span></span><br><span class="line">	__asm junk2:</span><br><span class="line">	__asm ret</span><br><span class="line">	__asm __emit <span class="number">0xe8</span></span><br><span class="line">	__asm junk1 :</span><br><span class="line">	__asm call junk2</span><br><span class="line">	</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div>
-
-<p>效果如图：</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/Untitled%203.png" alt="Untitled"></p>
-<p>对于call与ret的花指令构造可以在函数中修改返回地址，达到跳过thunkcode到正常流程的目的。</p>
-<p><strong>4、相互抵消的操作（IDA能修复）</strong></p>
-<p>如下</p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">push ebp</span><br><span class="line">pushfd</span><br><span class="line">add esp,<span class="number">0xd</span></span><br><span class="line">nop</span><br><span class="line">sub esp,<span class="number">0xd</span></span><br><span class="line">popfd</span><br><span class="line">mov ebp,esp</span><br><span class="line">sub esp,<span class="number">0x100</span></span><br></pre></td></tr></tbody></table></figure></div>
-
-<p>在汇编代码中添加一下互相抵消的指令，从而让分析器，发生干扰，不能正常反编译。</p>
-
-            </div>
-
-            
-
-            
-
-            
-                <div class="article-nav">
-                    
-                        <div class="article-prev">
-                            <a class="prev"
-                            rel="prev"
-                            href="/2023/09/02/2021-chang-an-bei-xue-sheng-zu-snake-dedaca130c6e4381aa5ea85dcaa8674f/"
-                            >
-                                <span class="left arrow-icon flex-center">
-                                <i class="fas fa-chevron-left"></i>
-                                </span>
-                                <span class="title flex-center">
-                                    <span class="post-nav-title-item">2021长安杯学生组-snake</span>
-                                    <span class="post-nav-item">上一篇</span>
-                                </span>
-                            </a>
-                        </div>
-                    
-                    
-                        <div class="article-next">
-                            <a class="next"
-                            rel="next"
-                            href="/2023/08/02/ez-code-f470f8b01209484b8ebc3ceb62f6bb3d/"
-                            >
-                                <span class="title flex-center">
-                                    <span class="post-nav-title-item">EZ_CODE</span>
-                                    <span class="post-nav-item">下一篇</span>
-                                </span>
-                                <span class="right arrow-icon flex-center">
-                                <i class="fas fa-chevron-right"></i>
-                                </span>
-                            </a>
-                        </div>
-                    
-                </div>
-            
-
-            
-                <div class="comment-container">
-                    <div class="comments-container">
-    <div id="comment-anchor"></div>
-    <div class="comment-area-title">
-        <i class="fas fa-comments">&nbsp;评论</i>
-    </div>
-    
-
-        
-            
-
-        
-    
-</div>
-
-                </div>
-            
-        </div>
-
-        
-            <div class="toc-content-container">
-                <div class="post-toc-wrap">
-    <div class="post-toc">
-        <div style="font-size: 1.3rem;margin-top: 0; margin-bottom: 0.8rem; transition-duration: 0.1s;"><i class="fa-solid fa-list"></i> <strong>目录</strong></div>
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%8A%B1%E6%8C%87%E4%BB%A4%E6%80%BB%E7%BB%93"><span class="nav-number">1.</span> <span class="nav-text">花指令总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E8%8A%B1%E6%8C%87%E4%BB%A4%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">什么是花指令？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8A%B1%E6%8C%87%E4%BB%A4%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">1.2.</span> <span class="nav-text">花指令的作用:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E6%B1%87%E7%BC%96%E5%99%A8%E7%9A%84%E8%BF%90%E4%BD%9C%E6%96%B9%E5%BC%8F"><span class="nav-number">1.3.</span> <span class="nav-text">反汇编器的运作方式:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E5%B8%B8%E8%A7%81%E7%9A%84%E8%8A%B1%E6%8C%87%E4%BB%A4%E5%A5%97%E8%B7%AF"><span class="nav-number">1.4.</span> <span class="nav-text">一些常见的花指令套路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%EF%BC%8C"><span class="nav-number">1.4.1.</span> <span class="nav-text">二，</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81"><span class="nav-number">1.4.2.</span> <span class="nav-text">一、</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81"><span class="nav-number">1.4.3.</span> <span class="nav-text">二、</span></a></li></ol></li></ol></li></ol>
-    </div>
-</div>
-            </div>
-        
-    </div>
-</div>
-
+    +redefine-tablet() {
+      left 0 !important
+      display none !important
+    }
+  }
+}
 
                 
 

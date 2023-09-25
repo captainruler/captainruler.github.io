@@ -170,191 +170,299 @@
             <div class="main-content">
 
                 
-                    <div class="fade-in-down-animation">
-    <div class="post-page-container">
-        <div class="article-content-container">
-            <div class="article-title">
-                <span class="title-hover-animation"><h1 style="font-size:2rem; font-weight: bold; margin: 10px 0;"></h1></span>
-            </div>
+                    $avatarWidth = 46px
+$arrow-icon-width = 16px
+$post-nav-max-width = 220px
+$article-title-font-size = 1.6rem
+$temp-toc-width = hexo-config('style.right_side_width')
+$toc-container-width = $temp-toc-width ? convert($temp-toc-width) : 210px
+$without-toc-container-width = calc(100% - 210px)
+.post-page-container{
+  display flex
+  position relative
+  justify-content space-between
+  box-sizing border-box
+  width 100%
+  height 100%
 
-            
-                <div class="article-header">
-                    <div class="avatar">
-                        <img src="/images/7.webp">
-                    </div>
-                    <div class="info">
-                        <div class="author">
-                            <span class="name">二木</span>
-                            
-                                <span class="author-label">王者</span>
-                            
-                        </div>
-                        <div class="meta-info">
-                            <div class="article-meta-info">
-    <span class="article-date article-meta-item">
-        <i class="fa-duotone fa-pen-line"></i>&nbsp;
-        <span class="pc">2023-03-30 22:14:46</span>
-        <span class="mobile">2023-03-30 22:14</span>
-    </span>
+  &.show-toc {
+    .toc-content-container {
+      display block
+    }
+
+    .article-content-container {
+      width $without-toc-container-width !important
+    }
+  }
+
+  +redefine-tablet() {
+    .toc-content-container {
+      display none !important
+    }
+
+    .article-content-container {
+      width 100% !important
+    }
+
+    &.show-toc {
+      .toc-content-container {
+        display none
+      }
+
+      .article-content-container {
+        width 100% !important
+      }
+    }
+  }
+
+
+  .article-content-container {
+    width 100%
+    margin-right: 30px
+
+    redefine-container(false, 0, 0, 30px, 30px)
+
+    +redefine-mobile() {
+      padding 1.2rem 0.2rem
+      box-shadow none
+    }
+
+    .article-title {
+      font-family "Noto Sans SC", sans-serif
+      color var(--second-text-color)
+      font-weight 600
+      font-size $article-title-font-size
+
+      +redefine-tablet() {
+        font-size $article-title-font-size * 0.9
+      }
+
+      +redefine-mobile() {
+        font-size $article-title-font-size * 0.8
+      }
+    }
+
+
+    .article-header {
+      font-family "Noto Sans", "Noto Sans SC", sans-serif
+      position relative
+      padding-left $avatarWidth
+      width 100%
+      height $avatarWidth
+      box-sizing border-box
+
+      .avatar {
+        position absolute
+        top 0
+        left 0
+        width $avatarWidth
+        height $avatarWidth
+        padding 1px
+        box-sizing border-box
+        border 1px solid var(--border-color)
+        border-radius 50%
+
+        img {
+          border-radius 50%
+          width 100%
+          height 100%
+          background var(--avatar-background-color)
+        }
+
+      }
+
+
+      .info {
+        padding 2px 0
+        margin-left 10px
+        box-sizing border-box
+        display flex
+        flex-direction column
+        justify-content space-between
+        width 100%
+        height 100%
+
+        .author {
+          font-weight regular
+          font-size 1.18rem
+          display flex
+          align-items center
+
+          .name {
+            color var(--default-text-color)
+          }
+
+          .author-label {
+            margin-left 10px
+            font-size 0.8rem
+            font-weight 500
+            padding 0 5px
+            border-radius 6px
+            color #fff
+            background var(--selection-color)
+          }
+
+        }
+      }
+
+    }
+
+
+    .article-header, .article-header-meta-info {
+      margin-top 16px
+      +redefine-tablet() {
+        transform scale(0.9)
+        transform-origin left top
+      }
+    }
+
+
+    .article-content {
+      margin-top $component-spacing-value
+      padding-bottom 10px
+      word-wrap break-word
+      border-bottom 1px solid var(--border-color)
+      color var(--default-text-color)
+    }
+
+
+    .post-tags-box {
+      display none
+      margin-top 1.6rem
+      justify-content center
+      font-size 1.1rem
+
+      +redefine-tablet() {
+        display flex
+      }
+
+      +redefine-mobile() {
+        margin-top 1.2rem
+        font-size 1rem
+      }
+
+
+      .tag-item {
+        margin 0 0.25rem
+      }
+    }
+
+    .post-copyright-info {
+      margin-top $component-spacing-value
+      width 100%
+
+      +redefine-tablet() {
+        margin-top $component-spacing-value * 0.8
+      }
+    }
+
+
+    .article-nav {
+      height 40px
+      margin-top $component-spacing-value
+
+      .article-prev, .article-next {
+        max-width $post-nav-max-width
+        height 100%
+        box-sizing border-box
+
+        redefine-container(true, 1.03, 1.03, 10px, 0)
+
+        a {
+          position relative
+          display block
+          width 100%
+          height 100%
+          box-sizing border-box
+
+          &.prev {
+            padding-left $arrow-icon-width
+          }
+
+          &.next {
+            padding-right $arrow-icon-width
+          }
+
+          .arrow-icon {
+            position absolute
+            top 0
+            height 100%
+            width $arrow-icon-width
+
+            &.left {
+              left 0
+            }
+
+            &.right {
+              right 0
+            }
+          }
+
+          .title {
+            width 100%
+            height 100%
+          }
+        }
+
+      }
+
+      .article-prev {
+        float left
+      }
+
+      .article-next {
+        float right
+      }
+
+      .post-nav-item {
+        display none
+
+        +redefine-tablet() {
+          display inline-block
+        }
+
+      }
+
+
+      .post-nav-title-item {
+        overflow hidden
+        text-overflow ellipsis
+        white-space nowrap
+
+        +redefine-tablet() {
+          display none
+        }
+      }
+    }
+  }
+
+  .toc-content-container {
+    position sticky
+    top $header-height + $component-spacing-value
+    //border-radius 18px
+    border-radius 0
+    display none
+    width $toc-container-width
+    height auto
+    max-height calc(100vh - 210px)
+    //z-index $z-index-6
+    overflow-y auto
+    float right
+    padding 10px
+    box-sizing border-box
+    box-shadow none !important
     
-    
 
-    
-    
-        <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>603 字</span>
-        </span>
-    
-    
-        <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>2 分钟</span>
-        </span>
-    
-    
-        <span class="article-pv article-meta-item">
-            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
-        </span>
-    
-</div>
+    hover-style(false, 0, 0)
 
-                        </div>
-                    </div>
-                </div>
-            
+    transition-t("display", "0", "0.3", "ease-out")
 
-            <div class="article-content markdown-body">
-                <h1 id="PMKF"><a href="#PMKF" class="headerlink" title="PMKF"></a>PMKF</h1><p>将题目拖入ida中进行分析,进入此函数中进行分析.</p>
-<p><img lazyload src="/images/loading.svg" data-src="/PMKF%205242e5ff91b84dbb912b491512e3a707/Untitled.png" alt="Untitled"></p>
-<p><img lazyload src="/images/loading.svg" data-src="/PMKF%205242e5ff91b84dbb912b491512e3a707/Untitled%201.png" alt="Untitled"></p>
-<p><img lazyload src="/images/loading.svg" data-src="/PMKF%205242e5ff91b84dbb912b491512e3a707/Untitled%202.png" alt="Untitled"></p>
-<p>其中我们需要知道这个函数</p>
-<h3 id="readfile-从指定的文件或输入-x2F-输出-I-x2F-O-设备读取数据。-如果设备支持，则读取发生在文件指针指定的位置。"><a href="#readfile-从指定的文件或输入-x2F-输出-I-x2F-O-设备读取数据。-如果设备支持，则读取发生在文件指针指定的位置。" class="headerlink" title="readfile:从指定的文件或输入/输出 (I/O) 设备读取数据。 如果设备支持，则读取发生在文件指针指定的位置。"></a>readfile:从指定的文件或输入/输出 (I/O) 设备读取数据。 如果设备支持，则读取发生在文件指针指定的位置。</h3><p>这里我们并没有发现到底是哪里读取了文件,我们动态调试,在push处下断点,发现断点不能断下,我们去找找,我们会发现这个.函数,在内存中读取一个名为,nk.ctf的文件,这样我们创建一个文件即可.</p>
-<p>发现能够动态调试了.</p>
-<p><img lazyload src="/images/loading.svg" data-src="/PMKF%205242e5ff91b84dbb912b491512e3a707/Untitled%203.png" alt="Untitled"></p>
-<p>其他的逻辑就比较简单了.</p>
-<p><img lazyload src="/images/loading.svg" data-src="/PMKF%205242e5ff91b84dbb912b491512e3a707/Untitled%204.png" alt="Untitled"></p>
-<p>1处读取一个数据放在buffer中,然后判断,buffer大小.\</p>
-<p>2处读入五个数据,放在v15中,可以直接提取出来nkman</p>
-<p>3处将flag读取出来.</p>
-<p>v11的值为,nkman的数据值之和.但是这里需要注意:v11的数据类型为char,而char的数据类型,存储的最大数据为512,超过512将会溢出,这里nkman的值为533因此会发生溢出,所以最终v11所存的值为21</p>
-<p><img lazyload src="/images/loading.svg" data-src="/PMKF%205242e5ff91b84dbb912b491512e3a707/Untitled%205.png" alt="Untitled"></p>
-<p><img lazyload src="/images/loading.svg" data-src="/PMKF%205242e5ff91b84dbb912b491512e3a707/Untitled%206.png" alt="Untitled"></p>
-<p>到此处为对我们的flag进行异或.v11.</p>
-<p><img lazyload src="/images/loading.svg" data-src="/PMKF%205242e5ff91b84dbb912b491512e3a707/Untitled%207.png" alt="Untitled"></p>
-<p><img lazyload src="/images/loading.svg" data-src="/PMKF%205242e5ff91b84dbb912b491512e3a707/Untitled%208.png" alt="Untitled"></p>
-<p>通过下面的数据,我们可以知道,这里是迷宫,我们写个脚本将迷宫打印出来.</p>
-<p><img lazyload src="/images/loading.svg" data-src="/PMKF%205242e5ff91b84dbb912b491512e3a707/Untitled%209.png" alt="Untitled"></p>
-<p>将路线走出来即可</p>
-<p>但是,这里是对我们的数据进行加密了的,但是位移运算是不可逆的,我们用z3将其爆破出来</p>
-<p><img lazyload src="/images/loading.svg" data-src="/PMKF%205242e5ff91b84dbb912b491512e3a707/Untitled%2010.png" alt="Untitled"></p>
-<p>然后按照这个逻辑进行逆向即可,可以写出脚本.</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">#coding:utf-8</span>
-<span class="token keyword">from</span> z3 <span class="token keyword">import</span> <span class="token operator">*</span>
-
-data <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span>
-        <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span>
-
-s <span class="token operator">=</span> Solver<span class="token punctuation">(</span><span class="token punctuation">)</span>
-flag <span class="token operator">=</span> <span class="token punctuation">[</span>BitVec<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token string">'x%d'</span> <span class="token operator">%</span> i<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
-<span class="token comment"># for i in range(0, 16):</span>
-<span class="token comment">#     s.add(flag[i] &lt; 127)</span>
-<span class="token comment">#     s.add(flag[i] &gt; 32)</span>
-
-v7 <span class="token operator">=</span> <span class="token number">0</span>
-n <span class="token operator">=</span> <span class="token number">0</span>
-x <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span>
-<span class="token keyword">for</span> v7 <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">for</span> k <span class="token keyword">in</span> x<span class="token punctuation">:</span>
-        s<span class="token punctuation">.</span>add<span class="token punctuation">(</span><span class="token punctuation">(</span>data<span class="token punctuation">[</span>n<span class="token punctuation">]</span><span class="token operator">==</span><span class="token punctuation">(</span>flag<span class="token punctuation">[</span>v7<span class="token punctuation">]</span> <span class="token operator">&gt;&gt;</span> k<span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-        n<span class="token operator">+=</span><span class="token number">1</span>
-
-<span class="token keyword">if</span> s<span class="token punctuation">.</span>check<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> sat<span class="token punctuation">:</span>
-    model <span class="token operator">=</span> s<span class="token punctuation">.</span>model<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    string <span class="token operator">=</span> <span class="token punctuation">[</span>model<span class="token punctuation">[</span>flag<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">.</span>as_long<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>real <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span>string<span class="token punctuation">)</span>
-    exit<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token keyword">else</span><span class="token punctuation">:</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"无解"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>将得出的数据,异或一下,然后保存在nk.ctf中,将其用winhex将其二进制数据提取出来,这就是我们的flag</p>
-<p>nkctf{056e6b6d616e4fef7eb0004415047000bea9eeb043aa}</p>
-
-            </div>
-
-            
-
-            
-
-            
-                <div class="article-nav">
-                    
-                        <div class="article-prev">
-                            <a class="prev"
-                            rel="prev"
-                            href="/2023/03/31/baby-rust/"
-                            >
-                                <span class="left arrow-icon flex-center">
-                                <i class="fas fa-chevron-left"></i>
-                                </span>
-                                <span class="title flex-center">
-                                    <span class="post-nav-title-item"></span>
-                                    <span class="post-nav-item">上一篇</span>
-                                </span>
-                            </a>
-                        </div>
-                    
-                    
-                        <div class="article-next">
-                            <a class="next"
-                            rel="next"
-                            href="/2023/03/30/try-decrypt-me/"
-                            >
-                                <span class="title flex-center">
-                                    <span class="post-nav-title-item"></span>
-                                    <span class="post-nav-item">下一篇</span>
-                                </span>
-                                <span class="right arrow-icon flex-center">
-                                <i class="fas fa-chevron-right"></i>
-                                </span>
-                            </a>
-                        </div>
-                    
-                </div>
-            
-
-            
-                <div class="comment-container">
-                    <div class="comments-container">
-    <div id="comment-anchor"></div>
-    <div class="comment-area-title">
-        <i class="fas fa-comments">&nbsp;评论</i>
-    </div>
-    
-
-        
-            
-
-        
-    
-</div>
-
-                </div>
-            
-        </div>
-
-        
-            <div class="toc-content-container">
-                <div class="post-toc-wrap">
-    <div class="post-toc">
-        <div style="font-size: 1.3rem;margin-top: 0; margin-bottom: 0.8rem; transition-duration: 0.1s;"><i class="fa-solid fa-list"></i> <strong>目录</strong></div>
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#PMKF"><span class="nav-number">1.</span> <span class="nav-text">PMKF</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#readfile-%E4%BB%8E%E6%8C%87%E5%AE%9A%E7%9A%84%E6%96%87%E4%BB%B6%E6%88%96%E8%BE%93%E5%85%A5-x2F-%E8%BE%93%E5%87%BA-I-x2F-O-%E8%AE%BE%E5%A4%87%E8%AF%BB%E5%8F%96%E6%95%B0%E6%8D%AE%E3%80%82-%E5%A6%82%E6%9E%9C%E8%AE%BE%E5%A4%87%E6%94%AF%E6%8C%81%EF%BC%8C%E5%88%99%E8%AF%BB%E5%8F%96%E5%8F%91%E7%94%9F%E5%9C%A8%E6%96%87%E4%BB%B6%E6%8C%87%E9%92%88%E6%8C%87%E5%AE%9A%E7%9A%84%E4%BD%8D%E7%BD%AE%E3%80%82"><span class="nav-number">1.0.1.</span> <span class="nav-text">readfile:从指定的文件或输入&#x2F;输出 (I&#x2F;O) 设备读取数据。 如果设备支持，则读取发生在文件指针指定的位置。</span></a></li></ol></li></ol></li></ol>
-    </div>
-</div>
-            </div>
-        
-    </div>
-</div>
-
+    +redefine-tablet() {
+      left 0 !important
+      display none !important
+    }
+  }
+}
 
                 
 

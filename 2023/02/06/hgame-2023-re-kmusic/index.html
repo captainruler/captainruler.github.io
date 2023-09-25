@@ -172,236 +172,299 @@
             <div class="main-content">
 
                 
-                    <div class="fade-in-down-animation">
-    <div class="post-page-container">
-        <div class="article-content-container">
-            <div class="article-title">
-                <span class="title-hover-animation"><h1 style="font-size:2rem; font-weight: bold; margin: 10px 0;">hgame-2023-re-kmusic</h1></span>
-            </div>
+                    $avatarWidth = 46px
+$arrow-icon-width = 16px
+$post-nav-max-width = 220px
+$article-title-font-size = 1.6rem
+$temp-toc-width = hexo-config('style.right_side_width')
+$toc-container-width = $temp-toc-width ? convert($temp-toc-width) : 210px
+$without-toc-container-width = calc(100% - 210px)
+.post-page-container{
+  display flex
+  position relative
+  justify-content space-between
+  box-sizing border-box
+  width 100%
+  height 100%
 
-            
-                <div class="article-header">
-                    <div class="avatar">
-                        <img src="/images/7.webp">
-                    </div>
-                    <div class="info">
-                        <div class="author">
-                            <span class="name">二木</span>
-                            
-                                <span class="author-label">王者</span>
-                            
-                        </div>
-                        <div class="meta-info">
-                            <div class="article-meta-info">
-    <span class="article-date article-meta-item">
-        <i class="fa-duotone fa-pen-line"></i>&nbsp;
-        <span class="pc">2023-02-06 01:28:12</span>
-        <span class="mobile">2023-02-06 01:28</span>
-    </span>
+  &.show-toc {
+    .toc-content-container {
+      display block
+    }
+
+    .article-content-container {
+      width $without-toc-container-width !important
+    }
+  }
+
+  +redefine-tablet() {
+    .toc-content-container {
+      display none !important
+    }
+
+    .article-content-container {
+      width 100% !important
+    }
+
+    &.show-toc {
+      .toc-content-container {
+        display none
+      }
+
+      .article-content-container {
+        width 100% !important
+      }
+    }
+  }
+
+
+  .article-content-container {
+    width 100%
+    margin-right: 30px
+
+    redefine-container(false, 0, 0, 30px, 30px)
+
+    +redefine-mobile() {
+      padding 1.2rem 0.2rem
+      box-shadow none
+    }
+
+    .article-title {
+      font-family "Noto Sans SC", sans-serif
+      color var(--second-text-color)
+      font-weight 600
+      font-size $article-title-font-size
+
+      +redefine-tablet() {
+        font-size $article-title-font-size * 0.9
+      }
+
+      +redefine-mobile() {
+        font-size $article-title-font-size * 0.8
+      }
+    }
+
+
+    .article-header {
+      font-family "Noto Sans", "Noto Sans SC", sans-serif
+      position relative
+      padding-left $avatarWidth
+      width 100%
+      height $avatarWidth
+      box-sizing border-box
+
+      .avatar {
+        position absolute
+        top 0
+        left 0
+        width $avatarWidth
+        height $avatarWidth
+        padding 1px
+        box-sizing border-box
+        border 1px solid var(--border-color)
+        border-radius 50%
+
+        img {
+          border-radius 50%
+          width 100%
+          height 100%
+          background var(--avatar-background-color)
+        }
+
+      }
+
+
+      .info {
+        padding 2px 0
+        margin-left 10px
+        box-sizing border-box
+        display flex
+        flex-direction column
+        justify-content space-between
+        width 100%
+        height 100%
+
+        .author {
+          font-weight regular
+          font-size 1.18rem
+          display flex
+          align-items center
+
+          .name {
+            color var(--default-text-color)
+          }
+
+          .author-label {
+            margin-left 10px
+            font-size 0.8rem
+            font-weight 500
+            padding 0 5px
+            border-radius 6px
+            color #fff
+            background var(--selection-color)
+          }
+
+        }
+      }
+
+    }
+
+
+    .article-header, .article-header-meta-info {
+      margin-top 16px
+      +redefine-tablet() {
+        transform scale(0.9)
+        transform-origin left top
+      }
+    }
+
+
+    .article-content {
+      margin-top $component-spacing-value
+      padding-bottom 10px
+      word-wrap break-word
+      border-bottom 1px solid var(--border-color)
+      color var(--default-text-color)
+    }
+
+
+    .post-tags-box {
+      display none
+      margin-top 1.6rem
+      justify-content center
+      font-size 1.1rem
+
+      +redefine-tablet() {
+        display flex
+      }
+
+      +redefine-mobile() {
+        margin-top 1.2rem
+        font-size 1rem
+      }
+
+
+      .tag-item {
+        margin 0 0.25rem
+      }
+    }
+
+    .post-copyright-info {
+      margin-top $component-spacing-value
+      width 100%
+
+      +redefine-tablet() {
+        margin-top $component-spacing-value * 0.8
+      }
+    }
+
+
+    .article-nav {
+      height 40px
+      margin-top $component-spacing-value
+
+      .article-prev, .article-next {
+        max-width $post-nav-max-width
+        height 100%
+        box-sizing border-box
+
+        redefine-container(true, 1.03, 1.03, 10px, 0)
+
+        a {
+          position relative
+          display block
+          width 100%
+          height 100%
+          box-sizing border-box
+
+          &.prev {
+            padding-left $arrow-icon-width
+          }
+
+          &.next {
+            padding-right $arrow-icon-width
+          }
+
+          .arrow-icon {
+            position absolute
+            top 0
+            height 100%
+            width $arrow-icon-width
+
+            &.left {
+              left 0
+            }
+
+            &.right {
+              right 0
+            }
+          }
+
+          .title {
+            width 100%
+            height 100%
+          }
+        }
+
+      }
+
+      .article-prev {
+        float left
+      }
+
+      .article-next {
+        float right
+      }
+
+      .post-nav-item {
+        display none
+
+        +redefine-tablet() {
+          display inline-block
+        }
+
+      }
+
+
+      .post-nav-title-item {
+        overflow hidden
+        text-overflow ellipsis
+        white-space nowrap
+
+        +redefine-tablet() {
+          display none
+        }
+      }
+    }
+  }
+
+  .toc-content-container {
+    position sticky
+    top $header-height + $component-spacing-value
+    //border-radius 18px
+    border-radius 0
+    display none
+    width $toc-container-width
+    height auto
+    max-height calc(100vh - 210px)
+    //z-index $z-index-6
+    overflow-y auto
+    float right
+    padding 10px
+    box-sizing border-box
+    box-shadow none !important
     
-    
 
-    
-    
-        <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>1.2k 字</span>
-        </span>
-    
-    
-        <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>6 分钟</span>
-        </span>
-    
-    
-        <span class="article-pv article-meta-item">
-            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
-        </span>
-    
-</div>
+    hover-style(false, 0, 0)
 
-                        </div>
-                    </div>
-                </div>
-            
+    transition-t("display", "0", "0.3", "ease-out")
 
-            <div class="article-content markdown-body">
-                <h1 id="kmusic"><a href="#kmusic" class="headerlink" title="kmusic"></a>kmusic</h1><h2 id="链接：https-pan-baidu-com-s-14vG-N5FLMpHKbEf9cfEzvA-pwd-etvs"><a href="#链接：https-pan-baidu-com-s-14vG-N5FLMpHKbEf9cfEzvA-pwd-etvs" class="headerlink" title="链接：https://pan.baidu.com/s/14vG_N5FLMpHKbEf9cfEzvA?pwd=etvs"></a>链接：<a class="link" target="_blank" rel="noopener" href="https://pan.baidu.com/s/14vG_N5FLMpHKbEf9cfEzvA?pwd=etvs">https://pan.baidu.com/s/14vG_N5FLMpHKbEf9cfEzvA?pwd=etvs<i class="fas fa-external-link-alt"></i></a></h2><h2 id="提取码：etvs"><a href="#提取码：etvs" class="headerlink" title="提取码：etvs"></a>提取码：etvs</h2><p>打开找道题，我们可以知道这个是.net编写的程序，我们用dnSpy打开（64位）进行分析。</p>
-<p><img lazyload src="/images/loading.svg" data-src="/kmusic%20a07251f804844b97b7d16b340f9bf9d2/Untitled.png" alt="Untitled"></p>
-<p>我们可以看到这里对data进行了加密，我们运行到data结束，进入二进制界面。</p>
-<p><img lazyload src="/images/loading.svg" data-src="/kmusic%20a07251f804844b97b7d16b340f9bf9d2/Untitled%201.png" alt="Untitled"></p>
-<p><img lazyload src="/images/loading.svg" data-src="/kmusic%20a07251f804844b97b7d16b340f9bf9d2/Untitled%202.png" alt="Untitled"></p>
-<p>这里发现MZ头，可知是一个二进制文件。我们用winhex，dump出来。</p>
-<p>将dump出来的文件放入dnSpy进行分析。</p>
-<p><img lazyload src="/images/loading.svg" data-src="/kmusic%20a07251f804844b97b7d16b340f9bf9d2/Untitled%203.png" alt="Untitled"></p>
-<p>可以发现出现了一个大if,然后里面进行了限制计算。到这里我们可知道用z3进行求解。</p>
-<p>用z3进行创建求解即可。</p>
-<h1 id="关于z3"><a href="#关于z3" class="headerlink" title="关于z3"></a>关于z3</h1><p><img lazyload src="/images/loading.svg" data-src="/kmusic%20a07251f804844b97b7d16b340f9bf9d2/Untitled%204.png" alt="Untitled"></p>
-<p><img lazyload src="/images/loading.svg" data-src="/kmusic%20a07251f804844b97b7d16b340f9bf9d2/Untitled%205.png" alt="Untitled"></p>
-<h3 id="一般的模板："><a href="#一般的模板：" class="headerlink" title="一般的模板："></a>一般的模板：</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> z3 <span class="token keyword">import</span> <span class="token operator">*</span>
-s <span class="token operator">=</span> Solver<span class="token punctuation">(</span><span class="token punctuation">)</span>
-flag <span class="token operator">=</span> <span class="token punctuation">[</span>BitVec<span class="token punctuation">(</span><span class="token string">'x%d'</span> <span class="token operator">%</span> i<span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">13</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
-
-<span class="token comment"># 将flag限制为可见字符</span>
-<span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">47</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    s<span class="token punctuation">.</span>add<span class="token punctuation">(</span>flag<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&lt;=</span> <span class="token number">127</span><span class="token punctuation">)</span>
-    s<span class="token punctuation">.</span>add<span class="token punctuation">(</span>flag<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&gt;=</span> <span class="token number">32</span><span class="token punctuation">)</span>
-<span class="token comment"># 中间添加程序的加密算法</span>
-
-<span class="token keyword">if</span> s<span class="token punctuation">.</span>check<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> sat<span class="token punctuation">:</span>
-    model <span class="token operator">=</span> s<span class="token punctuation">.</span>model<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    string <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token builtin">chr</span><span class="token punctuation">(</span>model<span class="token punctuation">[</span>num<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">.</span>as_long<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>real<span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">13</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span>model<span class="token punctuation">)</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span>string<span class="token punctuation">)</span><span class="token punctuation">)</span>
-
-<span class="token keyword">else</span><span class="token punctuation">:</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'无'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>对于本道题，我们进行解题：</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> z3 <span class="token keyword">import</span> <span class="token operator">*</span>
-array <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">132</span><span class="token punctuation">,</span><span class="token number">47</span><span class="token punctuation">,</span><span class="token number">80</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">216</span><span class="token punctuation">,</span><span class="token number">45</span><span class="token punctuation">,</span><span class="token number">68</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">39</span><span class="token punctuation">,</span><span class="token number">246</span><span class="token punctuation">,</span><span class="token number">124</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">243</span><span class="token punctuation">,</span><span class="token number">137</span><span class="token punctuation">,</span><span class="token number">58</span><span class="token punctuation">,</span><span class="token number">172</span><span class="token punctuation">,</span><span class="token number">53</span><span class="token punctuation">,</span><span class="token number">200</span><span class="token punctuation">,</span><span class="token number">99</span><span class="token punctuation">,</span><span class="token number">91</span><span class="token punctuation">,</span><span class="token number">83</span><span class="token punctuation">,</span><span class="token number">13</span><span class="token punctuation">,</span><span class="token number">171</span><span class="token punctuation">,</span><span class="token number">80</span><span class="token punctuation">,</span><span class="token number">108</span><span class="token punctuation">,</span><span class="token number">235</span><span class="token punctuation">,</span><span class="token number">179</span><span class="token punctuation">,</span><span class="token number">58</span><span class="token punctuation">,</span><span class="token number">176</span><span class="token punctuation">,</span><span class="token number">28</span><span class="token punctuation">,</span><span class="token number">216</span><span class="token punctuation">,</span><span class="token number">36</span><span class="token punctuation">,</span><span class="token number">11</span><span class="token punctuation">,</span><span class="token number">80</span><span class="token punctuation">,</span><span class="token number">39</span><span class="token punctuation">,</span><span class="token number">162</span><span class="token punctuation">,</span><span class="token number">97</span><span class="token punctuation">,</span><span class="token number">58</span><span class="token punctuation">,</span><span class="token number">236</span><span class="token punctuation">,</span><span class="token number">130</span><span class="token punctuation">,</span><span class="token number">123</span><span class="token punctuation">,</span><span class="token number">176</span><span class="token punctuation">,</span><span class="token number">24</span><span class="token punctuation">,</span><span class="token number">212</span><span class="token punctuation">,</span><span class="token number">56</span><span class="token punctuation">,</span><span class="token number">89</span><span class="token punctuation">,</span><span class="token number">72</span><span class="token punctuation">]</span>
-s <span class="token operator">=</span> Solver<span class="token punctuation">(</span><span class="token punctuation">)</span>
-num <span class="token operator">=</span> <span class="token punctuation">[</span>BitVec<span class="token punctuation">(</span><span class="token string">'x%d'</span> <span class="token operator">%</span> i<span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">13</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
-
-<span class="token comment">#</span>
-<span class="token comment"># for i in range(47):</span>
-<span class="token comment">#     s.add(num[i] &lt;= 127)</span>
-<span class="token comment">#     s.add(num[i] &gt;= 32)</span>
-<span class="token comment"># 中间添加程序的加密算法</span>
-
-s<span class="token punctuation">.</span>add<span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">52296</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">26211</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">11754</span> <span class="token operator">+</span> <span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">41236</span><span class="token punctuation">)</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">63747</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">52714</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">10512</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">12972</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">45505</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">9</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">21713</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">59122</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">11</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">12840</span> <span class="token operator">+</span> <span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">12</span><span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">21087</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">12702282</span><span class="token punctuation">)</span>
-
-s<span class="token punctuation">.</span>add<span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">25228</span> <span class="token operator">+</span> <span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">20699</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">8158</span><span class="token punctuation">)</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">65307</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">30701</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">47555</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">2557</span> <span class="token operator">+</span> <span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">49055</span><span class="token punctuation">)</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">7992</span> <span class="token operator">+</span> <span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">9</span><span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">57465</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">57426</span><span class="token punctuation">)</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">11</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">13299</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">12</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">50966</span> <span class="token operator">==</span> <span class="token number">9946829</span><span class="token punctuation">)</span>
-
-s<span class="token punctuation">.</span>add<span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">64801</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">60698</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">40853</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">54907</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">29882</span> <span class="token operator">+</span> <span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">13574</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">21310</span><span class="token punctuation">)</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">47366</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">41784</span> <span class="token operator">+</span> <span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">9</span><span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">53690</span><span class="token punctuation">)</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">58436</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">11</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">15590</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">12</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">58225</span> <span class="token operator">==</span> <span class="token number">2372055</span><span class="token punctuation">)</span>
-
-s<span class="token punctuation">.</span>add<span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">61538</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">17121</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">58124</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">8186</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">21253</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">38524</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">48323</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">20556</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">56056</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">9</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">18568</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">12995</span> <span class="token operator">+</span> <span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">11</span><span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">39260</span><span class="token punctuation">)</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">12</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">25329</span> <span class="token operator">==</span> <span class="token number">6732474</span><span class="token punctuation">)</span>
-
-s<span class="token punctuation">.</span>add<span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">42567</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">17743</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">47827</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">10246</span> <span class="token operator">+</span> <span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">16284</span><span class="token punctuation">)</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">39390</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">11803</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">60332</span> <span class="token operator">+</span> <span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">18491</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">9</span><span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">4795</span><span class="token punctuation">)</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">25636</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">11</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">16780</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">12</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">62345</span> <span class="token operator">==</span> <span class="token number">14020739</span><span class="token punctuation">)</span>
-
-s<span class="token punctuation">.</span>add<span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">10968</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">31780</span> <span class="token operator">+</span> <span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">31857</span><span class="token punctuation">)</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">61983</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">31048</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">20189</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">12337</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">25945</span> <span class="token operator">+</span> <span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">7064</span><span class="token punctuation">)</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">9</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">25369</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">54893</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">11</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">59949</span> <span class="token operator">+</span> <span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">12</span><span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">12441</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">14434062</span><span class="token punctuation">)</span>
-
-s<span class="token punctuation">.</span>add<span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">16689</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">10279</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">32918</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">57155</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">26571</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">15086</span> <span class="token operator">+</span> <span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">22986</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">23349</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">16381</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">9</span><span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">23173</span><span class="token punctuation">)</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">40224</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">11</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">31751</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">12</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">8421</span> <span class="token operator">==</span> <span class="token number">7433598</span><span class="token punctuation">)</span>
-
-s<span class="token punctuation">.</span>add<span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">28740</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">64696</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">60470</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">14752</span> <span class="token operator">+</span> <span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">1287</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">35272</span><span class="token punctuation">)</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">49467</span> <span class="token operator">+</span>num<span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">33788</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">20606</span> <span class="token operator">+</span> <span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">9</span><span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">44874</span><span class="token punctuation">)</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">19764</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">11</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">48342</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">12</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">56511</span> <span class="token operator">==</span> <span class="token number">7989404</span><span class="token punctuation">)</span>
-
-s<span class="token punctuation">.</span>add<span class="token punctuation">(</span><span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">28978</span><span class="token punctuation">)</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">23120</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">22802</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">31533</span> <span class="token operator">+</span> <span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">39287</span><span class="token punctuation">)</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">48576</span> <span class="token operator">+</span> <span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">28542</span><span class="token punctuation">)</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">43265</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">22365</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">9</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">61108</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">2823</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">11</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">30343</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">12</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">14780</span> <span class="token operator">==</span> <span class="token number">3504803</span><span class="token punctuation">)</span>
-
-s<span class="token punctuation">.</span>add<span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">22466</span> <span class="token operator">+</span> <span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">55999</span><span class="token punctuation">)</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">53658</span> <span class="token operator">+</span> <span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">47160</span><span class="token punctuation">)</span> <span class="token operator">+</span><span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">12511</span><span class="token punctuation">)</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">59807</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">46242</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">3052</span> <span class="token operator">+</span> <span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">25279</span><span class="token punctuation">)</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">9</span><span class="token punctuation">]</span> <span class="token operator">+</span><span class="token number">30202</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">22698</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">11</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">33480</span> <span class="token operator">+</span> <span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">12</span><span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">16757</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">11003580</span><span class="token punctuation">)</span>
-
-s<span class="token punctuation">.</span>add<span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">57492</span> <span class="token operator">+</span><span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">13421</span><span class="token punctuation">)</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">13941</span> <span class="token operator">+</span> <span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">48092</span><span class="token punctuation">)</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">38310</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">9884</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">]</span> <span class="token operator">-</span><span class="token number">45500</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">19233</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">58274</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">9</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">36175</span> <span class="token operator">+</span> <span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">18568</span><span class="token punctuation">)</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">11</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">49694</span> <span class="token operator">+</span> <span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">12</span><span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">9473</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">25546210</span><span class="token punctuation">)</span>
-
-s<span class="token punctuation">.</span>add<span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">23355</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">50164</span> <span class="token operator">+</span> <span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">34618</span><span class="token punctuation">)</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">52703</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">36245</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">46648</span> <span class="token operator">+</span> <span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">4858</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">41846</span><span class="token punctuation">)</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">27122</span> <span class="token operator">+</span><span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">9</span><span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">42058</span><span class="token punctuation">)</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">15676</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">11</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">31863</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">12</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">62510</span> <span class="token operator">==</span> <span class="token number">11333836</span><span class="token punctuation">)</span>
-
-s<span class="token punctuation">.</span>add<span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">30523</span> <span class="token operator">+</span> <span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">7990</span><span class="token punctuation">)</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">39058</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">57549</span> <span class="token operator">+</span> <span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">53440</span><span class="token punctuation">)</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">4275</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">48863</span> <span class="token operator">+</span><span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">55436</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">2624</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token punctuation">(</span>num<span class="token punctuation">[</span><span class="token number">9</span><span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">13652</span><span class="token punctuation">)</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">62231</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">11</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">19456</span> <span class="token operator">+</span> num<span class="token punctuation">[</span><span class="token number">12</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">13195</span> <span class="token operator">==</span> <span class="token number">13863722</span><span class="token punctuation">)</span>
-
-flag <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
-text <span class="token operator">=</span> <span class="token number">47</span><span class="token operator">*</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
-<span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>array<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    text<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">(</span>array<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">^</span> num<span class="token punctuation">[</span>i <span class="token operator">%</span> <span class="token builtin">len</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">47</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    s<span class="token punctuation">.</span>add<span class="token punctuation">(</span>text<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&lt;</span> <span class="token number">127</span><span class="token punctuation">)</span>  <span class="token comment"># 添加约束条件,解出来的满足的num有很多，但是我们要的是能够解出可见字符的num，</span>
-                          <span class="token comment">#因此需要添加约束条件来解出可见的flag</span>
-    s<span class="token punctuation">.</span>add<span class="token punctuation">(</span>text<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&gt;</span> <span class="token number">32</span><span class="token punctuation">)</span>
-
-<span class="token keyword">if</span> s<span class="token punctuation">.</span>check<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> sat<span class="token punctuation">:</span>  <span class="token comment"># 检测是否有解</span>
-    result <span class="token operator">=</span> s<span class="token punctuation">.</span>model<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token keyword">for</span> i <span class="token keyword">in</span> num<span class="token punctuation">:</span>  <span class="token comment"># 因为最后得出的是等式，先遍历 temp，把 temp 的每个依次赋给 i</span>
-        flag<span class="token punctuation">.</span>append<span class="token punctuation">(</span>result<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>  <span class="token comment"># 然后找到每个 temp 对应的解，附加到空列表的后面</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span>flag<span class="token punctuation">)</span>
-<span class="token keyword">else</span><span class="token punctuation">:</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'无解'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><img lazyload src="/images/loading.svg" data-src="/kmusic%20a07251f804844b97b7d16b340f9bf9d2/Untitled%206.png" alt="Untitled"></p>
-<p>这道题比较特殊的地方就是这里。由于我们z3是限制求解，解有很多，z3只会给我们一个，我们的限制越多，越接近准确答案。因而这步的原因就是对我们解出的num再解出的flag进行限制，来确保我们num解出来的flag都是可见字符。</p>
-<p>可得num=[236, 72, 213, 106, 189, 86, 62, 53, 120, 199, 15, 93, 133]</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python">array <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">132</span><span class="token punctuation">,</span><span class="token number">47</span><span class="token punctuation">,</span><span class="token number">80</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">216</span><span class="token punctuation">,</span><span class="token number">45</span><span class="token punctuation">,</span><span class="token number">68</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">39</span><span class="token punctuation">,</span><span class="token number">246</span><span class="token punctuation">,</span><span class="token number">124</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">243</span><span class="token punctuation">,</span><span class="token number">137</span><span class="token punctuation">,</span><span class="token number">58</span><span class="token punctuation">,</span><span class="token number">172</span><span class="token punctuation">,</span><span class="token number">53</span><span class="token punctuation">,</span><span class="token number">200</span><span class="token punctuation">,</span><span class="token number">99</span><span class="token punctuation">,</span><span class="token number">91</span><span class="token punctuation">,</span><span class="token number">83</span><span class="token punctuation">,</span><span class="token number">13</span><span class="token punctuation">,</span><span class="token number">171</span><span class="token punctuation">,</span><span class="token number">80</span><span class="token punctuation">,</span><span class="token number">108</span><span class="token punctuation">,</span><span class="token number">235</span><span class="token punctuation">,</span><span class="token number">179</span><span class="token punctuation">,</span><span class="token number">58</span><span class="token punctuation">,</span><span class="token number">176</span><span class="token punctuation">,</span><span class="token number">28</span><span class="token punctuation">,</span><span class="token number">216</span><span class="token punctuation">,</span><span class="token number">36</span><span class="token punctuation">,</span><span class="token number">11</span><span class="token punctuation">,</span><span class="token number">80</span><span class="token punctuation">,</span><span class="token number">39</span><span class="token punctuation">,</span><span class="token number">162</span><span class="token punctuation">,</span><span class="token number">97</span><span class="token punctuation">,</span><span class="token number">58</span><span class="token punctuation">,</span><span class="token number">236</span><span class="token punctuation">,</span><span class="token number">130</span><span class="token punctuation">,</span><span class="token number">123</span><span class="token punctuation">,</span><span class="token number">176</span><span class="token punctuation">,</span><span class="token number">24</span><span class="token punctuation">,</span><span class="token number">212</span><span class="token punctuation">,</span><span class="token number">56</span><span class="token punctuation">,</span><span class="token number">89</span><span class="token punctuation">,</span><span class="token number">72</span><span class="token punctuation">]</span>
-
-text <span class="token operator">=</span><span class="token string">""</span>
-arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">236</span><span class="token punctuation">,</span> <span class="token number">72</span><span class="token punctuation">,</span> <span class="token number">85</span><span class="token punctuation">,</span> <span class="token number">106</span><span class="token punctuation">,</span> <span class="token number">189</span><span class="token punctuation">,</span> <span class="token number">86</span><span class="token punctuation">,</span> <span class="token number">62</span><span class="token punctuation">,</span> <span class="token number">53</span><span class="token punctuation">,</span> <span class="token number">120</span><span class="token punctuation">,</span> <span class="token number">71</span><span class="token punctuation">,</span> <span class="token number">15</span><span class="token punctuation">,</span> <span class="token number">93</span><span class="token punctuation">,</span> <span class="token number">133</span><span class="token punctuation">]</span>
-<span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">47</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    x <span class="token operator">=</span> <span class="token builtin">chr</span><span class="token punctuation">(</span>array<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">^</span> arr<span class="token punctuation">[</span>i <span class="token operator">%</span> <span class="token number">13</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-    text <span class="token operator">+=</span> x
-
-<span class="token keyword">print</span><span class="token punctuation">(</span>text<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>解出flag: hgame{z3_1s_very_u5eful_1n_rever5e_engin3ering}</p>
-
-            </div>
-
-            
-
-            
-
-            
-                <div class="article-nav">
-                    
-                        <div class="article-prev">
-                            <a class="prev"
-                            rel="prev"
-                            href="/2023/02/09/csapp-di-shi-er-zhang-bing-fa-bian-cheng/"
-                            >
-                                <span class="left arrow-icon flex-center">
-                                <i class="fas fa-chevron-left"></i>
-                                </span>
-                                <span class="title flex-center">
-                                    <span class="post-nav-title-item">csapp 第十二章 并发编程</span>
-                                    <span class="post-nav-item">上一篇</span>
-                                </span>
-                            </a>
-                        </div>
-                    
-                    
-                        <div class="article-next">
-                            <a class="next"
-                            rel="next"
-                            href="/2022/12/31/csapp-di-shi-yi-zhang-wang-luo-bian-cheng/"
-                            >
-                                <span class="title flex-center">
-                                    <span class="post-nav-title-item">csapp 第十一章 网络编程</span>
-                                    <span class="post-nav-item">下一篇</span>
-                                </span>
-                                <span class="right arrow-icon flex-center">
-                                <i class="fas fa-chevron-right"></i>
-                                </span>
-                            </a>
-                        </div>
-                    
-                </div>
-            
-
-            
-                <div class="comment-container">
-                    <div class="comments-container">
-    <div id="comment-anchor"></div>
-    <div class="comment-area-title">
-        <i class="fas fa-comments">&nbsp;评论</i>
-    </div>
-    
-
-        
-            
-
-        
-    
-</div>
-
-                </div>
-            
-        </div>
-
-        
-            <div class="toc-content-container">
-                <div class="post-toc-wrap">
-    <div class="post-toc">
-        <div style="font-size: 1.3rem;margin-top: 0; margin-bottom: 0.8rem; transition-duration: 0.1s;"><i class="fa-solid fa-list"></i> <strong>目录</strong></div>
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#kmusic"><span class="nav-number">1.</span> <span class="nav-text">kmusic</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%93%BE%E6%8E%A5%EF%BC%9Ahttps-pan-baidu-com-s-14vG-N5FLMpHKbEf9cfEzvA-pwd-etvs"><span class="nav-number">1.1.</span> <span class="nav-text">链接：https:&#x2F;&#x2F;pan.baidu.com&#x2F;s&#x2F;14vG_N5FLMpHKbEf9cfEzvA?pwd&#x3D;etvs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E5%8F%96%E7%A0%81%EF%BC%9Aetvs"><span class="nav-number">1.2.</span> <span class="nav-text">提取码：etvs</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E4%BA%8Ez3"><span class="nav-number">2.</span> <span class="nav-text">关于z3</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E8%88%AC%E7%9A%84%E6%A8%A1%E6%9D%BF%EF%BC%9A"><span class="nav-number">2.0.1.</span> <span class="nav-text">一般的模板：</span></a></li></ol></li></ol></li></ol>
-    </div>
-</div>
-            </div>
-        
-    </div>
-</div>
-
+    +redefine-tablet() {
+      left 0 !important
+      display none !important
+    }
+  }
+}
 
                 
 

@@ -170,211 +170,299 @@
             <div class="main-content">
 
                 
-                    <div class="fade-in-down-animation">
-    <div class="post-page-container">
-        <div class="article-content-container">
-            <div class="article-title">
-                <span class="title-hover-animation"><h1 style="font-size:2rem; font-weight: bold; margin: 10px 0;"></h1></span>
-            </div>
+                    $avatarWidth = 46px
+$arrow-icon-width = 16px
+$post-nav-max-width = 220px
+$article-title-font-size = 1.6rem
+$temp-toc-width = hexo-config('style.right_side_width')
+$toc-container-width = $temp-toc-width ? convert($temp-toc-width) : 210px
+$without-toc-container-width = calc(100% - 210px)
+.post-page-container{
+  display flex
+  position relative
+  justify-content space-between
+  box-sizing border-box
+  width 100%
+  height 100%
 
-            
-                <div class="article-header">
-                    <div class="avatar">
-                        <img src="/images/7.webp">
-                    </div>
-                    <div class="info">
-                        <div class="author">
-                            <span class="name">二木</span>
-                            
-                                <span class="author-label">王者</span>
-                            
-                        </div>
-                        <div class="meta-info">
-                            <div class="article-meta-info">
-    <span class="article-date article-meta-item">
-        <i class="fa-duotone fa-pen-line"></i>&nbsp;
-        <span class="pc">2023-03-30 20:53:51</span>
-        <span class="mobile">2023-03-30 20:53</span>
-    </span>
+  &.show-toc {
+    .toc-content-container {
+      display block
+    }
+
+    .article-content-container {
+      width $without-toc-container-width !important
+    }
+  }
+
+  +redefine-tablet() {
+    .toc-content-container {
+      display none !important
+    }
+
+    .article-content-container {
+      width 100% !important
+    }
+
+    &.show-toc {
+      .toc-content-container {
+        display none
+      }
+
+      .article-content-container {
+        width 100% !important
+      }
+    }
+  }
+
+
+  .article-content-container {
+    width 100%
+    margin-right: 30px
+
+    redefine-container(false, 0, 0, 30px, 30px)
+
+    +redefine-mobile() {
+      padding 1.2rem 0.2rem
+      box-shadow none
+    }
+
+    .article-title {
+      font-family "Noto Sans SC", sans-serif
+      color var(--second-text-color)
+      font-weight 600
+      font-size $article-title-font-size
+
+      +redefine-tablet() {
+        font-size $article-title-font-size * 0.9
+      }
+
+      +redefine-mobile() {
+        font-size $article-title-font-size * 0.8
+      }
+    }
+
+
+    .article-header {
+      font-family "Noto Sans", "Noto Sans SC", sans-serif
+      position relative
+      padding-left $avatarWidth
+      width 100%
+      height $avatarWidth
+      box-sizing border-box
+
+      .avatar {
+        position absolute
+        top 0
+        left 0
+        width $avatarWidth
+        height $avatarWidth
+        padding 1px
+        box-sizing border-box
+        border 1px solid var(--border-color)
+        border-radius 50%
+
+        img {
+          border-radius 50%
+          width 100%
+          height 100%
+          background var(--avatar-background-color)
+        }
+
+      }
+
+
+      .info {
+        padding 2px 0
+        margin-left 10px
+        box-sizing border-box
+        display flex
+        flex-direction column
+        justify-content space-between
+        width 100%
+        height 100%
+
+        .author {
+          font-weight regular
+          font-size 1.18rem
+          display flex
+          align-items center
+
+          .name {
+            color var(--default-text-color)
+          }
+
+          .author-label {
+            margin-left 10px
+            font-size 0.8rem
+            font-weight 500
+            padding 0 5px
+            border-radius 6px
+            color #fff
+            background var(--selection-color)
+          }
+
+        }
+      }
+
+    }
+
+
+    .article-header, .article-header-meta-info {
+      margin-top 16px
+      +redefine-tablet() {
+        transform scale(0.9)
+        transform-origin left top
+      }
+    }
+
+
+    .article-content {
+      margin-top $component-spacing-value
+      padding-bottom 10px
+      word-wrap break-word
+      border-bottom 1px solid var(--border-color)
+      color var(--default-text-color)
+    }
+
+
+    .post-tags-box {
+      display none
+      margin-top 1.6rem
+      justify-content center
+      font-size 1.1rem
+
+      +redefine-tablet() {
+        display flex
+      }
+
+      +redefine-mobile() {
+        margin-top 1.2rem
+        font-size 1rem
+      }
+
+
+      .tag-item {
+        margin 0 0.25rem
+      }
+    }
+
+    .post-copyright-info {
+      margin-top $component-spacing-value
+      width 100%
+
+      +redefine-tablet() {
+        margin-top $component-spacing-value * 0.8
+      }
+    }
+
+
+    .article-nav {
+      height 40px
+      margin-top $component-spacing-value
+
+      .article-prev, .article-next {
+        max-width $post-nav-max-width
+        height 100%
+        box-sizing border-box
+
+        redefine-container(true, 1.03, 1.03, 10px, 0)
+
+        a {
+          position relative
+          display block
+          width 100%
+          height 100%
+          box-sizing border-box
+
+          &.prev {
+            padding-left $arrow-icon-width
+          }
+
+          &.next {
+            padding-right $arrow-icon-width
+          }
+
+          .arrow-icon {
+            position absolute
+            top 0
+            height 100%
+            width $arrow-icon-width
+
+            &.left {
+              left 0
+            }
+
+            &.right {
+              right 0
+            }
+          }
+
+          .title {
+            width 100%
+            height 100%
+          }
+        }
+
+      }
+
+      .article-prev {
+        float left
+      }
+
+      .article-next {
+        float right
+      }
+
+      .post-nav-item {
+        display none
+
+        +redefine-tablet() {
+          display inline-block
+        }
+
+      }
+
+
+      .post-nav-title-item {
+        overflow hidden
+        text-overflow ellipsis
+        white-space nowrap
+
+        +redefine-tablet() {
+          display none
+        }
+      }
+    }
+  }
+
+  .toc-content-container {
+    position sticky
+    top $header-height + $component-spacing-value
+    //border-radius 18px
+    border-radius 0
+    display none
+    width $toc-container-width
+    height auto
+    max-height calc(100vh - 210px)
+    //z-index $z-index-6
+    overflow-y auto
+    float right
+    padding 10px
+    box-sizing border-box
+    box-shadow none !important
     
-    
 
-    
-    
-        <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>604 字</span>
-        </span>
-    
-    
-        <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>2 分钟</span>
-        </span>
-    
-    
-        <span class="article-pv article-meta-item">
-            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
-        </span>
-    
-</div>
+    hover-style(false, 0, 0)
 
-                        </div>
-                    </div>
-                </div>
-            
+    transition-t("display", "0", "0.3", "ease-out")
 
-            <div class="article-content markdown-body">
-                <h1 id="try-decrypt-me"><a href="#try-decrypt-me" class="headerlink" title="try_decrypt_me"></a>try_decrypt_me</h1><p>这里我们直接将文件放入jeb中进行分析，直接找到我们的mainactivity</p>
-<p><img lazyload src="/images/loading.svg" data-src="/try_decrypt_me%20edb208d3b4a54080b0f29adb8ba7c0ee/Untitled.png" alt="Untitled"></p>
-<p>按下tab键，进行反汇编</p>
-<p><img lazyload src="/images/loading.svg" data-src="/try_decrypt_me%20edb208d3b4a54080b0f29adb8ba7c0ee/Untitled%201.png" alt="Untitled"></p>
-<p>进入这个DES加密函数。</p>
-<p><img lazyload src="/images/loading.svg" data-src="/try_decrypt_me%20edb208d3b4a54080b0f29adb8ba7c0ee/Untitled%202.png" alt="Untitled"></p>
-<p>肉眼可见，这里是进行了aes加密，CBC模式，用PKCS5进行填充</p>
-<p>对于这个填充方式，我找了一个大佬写了一篇很好的文章。</p>
-<p>关于PKCS7,PKCS5,zore的填充方式</p>
-<p><a class="link" target="_blank" rel="noopener" href="https://www.jianshu.com/p/7b6f5aaa7680">iOS 实现对称加密多种填充方式(ANSIX923、ISO10126、Zero) - 简书 (jianshu.com)<i class="fas fa-external-link-alt"></i></a></p>
-<p>这下，我们返回主函数分析逻辑，重点地方我将其标注出来了。</p>
-<p><img lazyload src="/images/loading.svg" data-src="/try_decrypt_me%20edb208d3b4a54080b0f29adb8ba7c0ee/Untitled%203.png" alt="Untitled"></p>
-<p>这里有个equal，在java中，这个就是一个比较函数，就是将我们加密后的密文与BxLHc1KruiH31I94W171oal+9olDzgBIjnK/J1Db0IUyi+MbI38+nw62ejCPShRB，进行比较，我们可以知道这个就是我们的密文了。</p>
-<p>intput 就是我们输入的flag了。</p>
-<p>这个vector2就是我们CBC的偏移量了。但是这个我们发现，偏移量调用了一个函数。</p>
-<p><img lazyload src="/images/loading.svg" data-src="/try_decrypt_me%20edb208d3b4a54080b0f29adb8ba7c0ee/Untitled%204.png" alt="Untitled"></p>
-<p>可以发现，我们的偏移量是将reversehavemagic  用md5进行加密后的数据。</p>
-<p>对此，我们进行md5加密即可得出我们的偏移量，但是这里有个问题。</p>
-<p>去网上搜解密时，我们可以发现，md5有16位大，小写，和32位大，小写，我们应该怎么选勒？两种，一个是挨个挨个的试，另外一个，通过它的加密进行判断。</p>
-<p>对于MD5加密，下面用JAVA写md5的加密函数，我们只需要对其进行对照即可，判断出来为32位小写。</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token operator">/</span><span class="token operator">**</span>
- <span class="token operator">*</span> 将字符串转换为MD5
- <span class="token operator">*</span><span class="token operator">/</span>
- public <span class="token keyword">class</span> <span class="token class-name">ParseMD5</span> <span class="token punctuation">{</span>
- 	public static String parseStrToMd5L32<span class="token punctuation">(</span>String <span class="token builtin">str</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
- 		<span class="token operator">//</span> 将字符串转换为<span class="token number">32</span>位小写MD5 
- 		String reStr <span class="token operator">=</span> null<span class="token punctuation">;</span>
- 		<span class="token keyword">try</span> <span class="token punctuation">{</span>
- 			MessageDigest md5 <span class="token operator">=</span> MessageDigest<span class="token punctuation">.</span>getInstance<span class="token punctuation">(</span><span class="token string">"MD5"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
- 			byte<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token builtin">bytes</span> <span class="token operator">=</span> md5<span class="token punctuation">.</span>digest<span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">.</span>getBytes<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
- 			StringBuffer stringBuffer <span class="token operator">=</span> new StringBuffer<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
- 			<span class="token keyword">for</span> <span class="token punctuation">(</span>byte b <span class="token punctuation">:</span> <span class="token builtin">bytes</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
- 				<span class="token builtin">int</span> bt <span class="token operator">=</span> b<span class="token operator">&amp;</span><span class="token number">0xff</span><span class="token punctuation">;</span>
- 				<span class="token keyword">if</span> <span class="token punctuation">(</span>bt <span class="token operator">&lt;</span> <span class="token number">16</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
- 					stringBuffer<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
- 				<span class="token punctuation">}</span>
- 				stringBuffer<span class="token punctuation">.</span>append<span class="token punctuation">(</span>Integer<span class="token punctuation">.</span>toHexString<span class="token punctuation">(</span>bt<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
- 			<span class="token punctuation">}</span>
- 			reStr <span class="token operator">=</span> stringBuffer<span class="token punctuation">.</span>toString<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
- 		<span class="token punctuation">}</span> catch <span class="token punctuation">(</span>NoSuchAlgorithmException e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
- 			e<span class="token punctuation">.</span>printStackTrace<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
- 		<span class="token punctuation">}</span>
- 		<span class="token keyword">return</span> reStr<span class="token punctuation">;</span>
- 	<span class="token punctuation">}</span>
-
-	<span class="token operator">//</span> 将字符串转换为<span class="token number">32</span>位大写的MD5
-	public static String parseStrToMd5U32<span class="token punctuation">(</span>String <span class="token builtin">str</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-		String reStr <span class="token operator">=</span> parseStrToMd5L32<span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-		<span class="token keyword">if</span> <span class="token punctuation">(</span>reStr <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-			reStr <span class="token operator">=</span> reStr<span class="token punctuation">.</span>toUpperCase<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-		<span class="token punctuation">}</span>
-		<span class="token keyword">return</span> resStr<span class="token punctuation">;</span>
-	<span class="token punctuation">}</span>
-
-	<span class="token operator">//</span> 将字符串转换为<span class="token number">16</span>位小写的MD5
-	public static String parseStrToMd5L16<span class="token punctuation">(</span>String <span class="token builtin">str</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-		String reStr <span class="token operator">=</span> paseStrToMd5L32<span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-		<span class="token keyword">if</span> <span class="token punctuation">(</span>reStr <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-			reStr <span class="token operator">=</span> reStr<span class="token punctuation">.</span>subString<span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">24</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-		<span class="token punctuation">}</span>
-		<span class="token keyword">return</span> reStr<span class="token punctuation">;</span>
-	<span class="token punctuation">}</span>
-
-	<span class="token operator">//</span> 将字符串转换为<span class="token number">16</span>位大写的MD5
-	public static String parseStrToMd5U16<span class="token punctuation">(</span>String <span class="token builtin">str</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-		String reStr <span class="token operator">=</span> parseStrToMd5L32<span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-		<span class="token keyword">if</span> <span class="token punctuation">(</span>reStr <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-			reStr <span class="token operator">=</span> reStr<span class="token punctuation">.</span>toUpperCase<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>subString<span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">24</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-		<span class="token punctuation">}</span>
-		<span class="token keyword">return</span> reStr<span class="token punctuation">;</span>
-	<span class="token punctuation">}</span>
- <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>这里，万事俱备只欠东风，将我们得出的数据进行解密即可，由于本题未对AES进行魔改，我们可以用在线网站进行解</p>
-<p><img lazyload src="/images/loading.svg" data-src="/try_decrypt_me%20edb208d3b4a54080b0f29adb8ba7c0ee/Untitled%205.png" alt="Untitled"></p>
-
-            </div>
-
-            
-
-            
-
-            
-                <div class="article-nav">
-                    
-                        <div class="article-prev">
-                            <a class="prev"
-                            rel="prev"
-                            href="/2023/03/30/pmkf/"
-                            >
-                                <span class="left arrow-icon flex-center">
-                                <i class="fas fa-chevron-left"></i>
-                                </span>
-                                <span class="title flex-center">
-                                    <span class="post-nav-title-item"></span>
-                                    <span class="post-nav-item">上一篇</span>
-                                </span>
-                            </a>
-                        </div>
-                    
-                    
-                        <div class="article-next">
-                            <a class="next"
-                            rel="next"
-                            href="/2023/02/26/ida-zong-jie/"
-                            >
-                                <span class="title flex-center">
-                                    <span class="post-nav-title-item">IDA操作总结</span>
-                                    <span class="post-nav-item">下一篇</span>
-                                </span>
-                                <span class="right arrow-icon flex-center">
-                                <i class="fas fa-chevron-right"></i>
-                                </span>
-                            </a>
-                        </div>
-                    
-                </div>
-            
-
-            
-                <div class="comment-container">
-                    <div class="comments-container">
-    <div id="comment-anchor"></div>
-    <div class="comment-area-title">
-        <i class="fas fa-comments">&nbsp;评论</i>
-    </div>
-    
-
-        
-            
-
-        
-    
-</div>
-
-                </div>
-            
-        </div>
-
-        
-            <div class="toc-content-container">
-                <div class="post-toc-wrap">
-    <div class="post-toc">
-        <div style="font-size: 1.3rem;margin-top: 0; margin-bottom: 0.8rem; transition-duration: 0.1s;"><i class="fa-solid fa-list"></i> <strong>目录</strong></div>
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#try-decrypt-me"><span class="nav-number">1.</span> <span class="nav-text">try_decrypt_me</span></a></li></ol>
-    </div>
-</div>
-            </div>
-        
-    </div>
-</div>
-
+    +redefine-tablet() {
+      left 0 !important
+      display none !important
+    }
+  }
+}
 
                 
 
