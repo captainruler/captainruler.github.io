@@ -172,299 +172,282 @@
             <div class="main-content">
 
                 
-                    $avatarWidth = 46px
-$arrow-icon-width = 16px
-$post-nav-max-width = 220px
-$article-title-font-size = 1.6rem
-$temp-toc-width = hexo-config('style.right_side_width')
-$toc-container-width = $temp-toc-width ? convert($temp-toc-width) : 210px
-$without-toc-container-width = calc(100% - 210px)
-.post-page-container{
-  display flex
-  position relative
-  justify-content space-between
-  box-sizing border-box
-  width 100%
-  height 100%
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+            <div class="article-title">
+                <span class="title-hover-animation"><h1 style="font-size:2rem; font-weight: bold; margin: 10px 0;">2023—VNCTF-re-PZGalaxy</h1></span>
+            </div>
 
-  &.show-toc {
-    .toc-content-container {
-      display block
-    }
-
-    .article-content-container {
-      width $without-toc-container-width !important
-    }
-  }
-
-  +redefine-tablet() {
-    .toc-content-container {
-      display none !important
-    }
-
-    .article-content-container {
-      width 100% !important
-    }
-
-    &.show-toc {
-      .toc-content-container {
-        display none
-      }
-
-      .article-content-container {
-        width 100% !important
-      }
-    }
-  }
-
-
-  .article-content-container {
-    width 100%
-    margin-right: 30px
-
-    redefine-container(false, 0, 0, 30px, 30px)
-
-    +redefine-mobile() {
-      padding 1.2rem 0.2rem
-      box-shadow none
-    }
-
-    .article-title {
-      font-family "Noto Sans SC", sans-serif
-      color var(--second-text-color)
-      font-weight 600
-      font-size $article-title-font-size
-
-      +redefine-tablet() {
-        font-size $article-title-font-size * 0.9
-      }
-
-      +redefine-mobile() {
-        font-size $article-title-font-size * 0.8
-      }
-    }
-
-
-    .article-header {
-      font-family "Noto Sans", "Noto Sans SC", sans-serif
-      position relative
-      padding-left $avatarWidth
-      width 100%
-      height $avatarWidth
-      box-sizing border-box
-
-      .avatar {
-        position absolute
-        top 0
-        left 0
-        width $avatarWidth
-        height $avatarWidth
-        padding 1px
-        box-sizing border-box
-        border 1px solid var(--border-color)
-        border-radius 50%
-
-        img {
-          border-radius 50%
-          width 100%
-          height 100%
-          background var(--avatar-background-color)
-        }
-
-      }
-
-
-      .info {
-        padding 2px 0
-        margin-left 10px
-        box-sizing border-box
-        display flex
-        flex-direction column
-        justify-content space-between
-        width 100%
-        height 100%
-
-        .author {
-          font-weight regular
-          font-size 1.18rem
-          display flex
-          align-items center
-
-          .name {
-            color var(--default-text-color)
-          }
-
-          .author-label {
-            margin-left 10px
-            font-size 0.8rem
-            font-weight 500
-            padding 0 5px
-            border-radius 6px
-            color #fff
-            background var(--selection-color)
-          }
-
-        }
-      }
-
-    }
-
-
-    .article-header, .article-header-meta-info {
-      margin-top 16px
-      +redefine-tablet() {
-        transform scale(0.9)
-        transform-origin left top
-      }
-    }
-
-
-    .article-content {
-      margin-top $component-spacing-value
-      padding-bottom 10px
-      word-wrap break-word
-      border-bottom 1px solid var(--border-color)
-      color var(--default-text-color)
-    }
-
-
-    .post-tags-box {
-      display none
-      margin-top 1.6rem
-      justify-content center
-      font-size 1.1rem
-
-      +redefine-tablet() {
-        display flex
-      }
-
-      +redefine-mobile() {
-        margin-top 1.2rem
-        font-size 1rem
-      }
-
-
-      .tag-item {
-        margin 0 0.25rem
-      }
-    }
-
-    .post-copyright-info {
-      margin-top $component-spacing-value
-      width 100%
-
-      +redefine-tablet() {
-        margin-top $component-spacing-value * 0.8
-      }
-    }
-
-
-    .article-nav {
-      height 40px
-      margin-top $component-spacing-value
-
-      .article-prev, .article-next {
-        max-width $post-nav-max-width
-        height 100%
-        box-sizing border-box
-
-        redefine-container(true, 1.03, 1.03, 10px, 0)
-
-        a {
-          position relative
-          display block
-          width 100%
-          height 100%
-          box-sizing border-box
-
-          &.prev {
-            padding-left $arrow-icon-width
-          }
-
-          &.next {
-            padding-right $arrow-icon-width
-          }
-
-          .arrow-icon {
-            position absolute
-            top 0
-            height 100%
-            width $arrow-icon-width
-
-            &.left {
-              left 0
-            }
-
-            &.right {
-              right 0
-            }
-          }
-
-          .title {
-            width 100%
-            height 100%
-          }
-        }
-
-      }
-
-      .article-prev {
-        float left
-      }
-
-      .article-next {
-        float right
-      }
-
-      .post-nav-item {
-        display none
-
-        +redefine-tablet() {
-          display inline-block
-        }
-
-      }
-
-
-      .post-nav-title-item {
-        overflow hidden
-        text-overflow ellipsis
-        white-space nowrap
-
-        +redefine-tablet() {
-          display none
-        }
-      }
-    }
-  }
-
-  .toc-content-container {
-    position sticky
-    top $header-height + $component-spacing-value
-    //border-radius 18px
-    border-radius 0
-    display none
-    width $toc-container-width
-    height auto
-    max-height calc(100vh - 210px)
-    //z-index $z-index-6
-    overflow-y auto
-    float right
-    padding 10px
-    box-sizing border-box
-    box-shadow none !important
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/7.webp">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">二木</span>
+                            
+                                <span class="author-label">王者</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-duotone fa-pen-line"></i>&nbsp;
+        <span class="pc">2023-02-26 12:46:10</span>
+        <span class="mobile">2023-02-26 12:46</span>
+    </span>
+    
     
 
-    hover-style(false, 0, 0)
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>637 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>3 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
 
-    transition-t("display", "0", "0.3", "ease-out")
+                        </div>
+                    </div>
+                </div>
+            
 
-    +redefine-tablet() {
-      left 0 !important
-      display none !important
-    }
-  }
-}
+            <div class="article-content markdown-body">
+                <h1 id="PZGalaxy"><a href="#PZGalaxy" class="headerlink" title="PZGalaxy"></a>PZGalaxy</h1><p>这道题是用js写的代码</p>
+<p>用浏览器打开 开发者工具查看源码</p>
+<p><img lazyload src="/images/loading.svg" data-src="/Untitled.png" alt="Untitled"></p>
+<p>![Untitled 3](/Untitled 3.png)</p>
+<p>源码很有特点，就是进行rc4加密。</p>
+<p>![Untitled 2](/Untitled 2.png)</p>
+<p>这里分析一下我们就可以知道，data和enc都传入了Leaf中进行加密，我们就可以推测出data,就是进行加密的密钥。</p>
+<p>后面的一行代码，分别是判断flag前面四个字符，和data前面的四个字符，并且我们可以知道，data的长度为8.</p>
+<p>![Untitled 1](/Untitled 1.png)</p>
+<p>知道key的前四个字符，也知道key的前四个字符，自然想到对key进行爆破。</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;string.h&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;math.h&gt;</span></span>
+
+<span class="token comment">//将数字转换为字符串</span>
+<span class="token keyword">char</span> <span class="token operator">*</span><span class="token function">ccc</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">char</span> key<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+
+    <span class="token keyword">int</span> i<span class="token punctuation">,</span> b <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> j<span class="token punctuation">,</span> x <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> y <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">7</span><span class="token punctuation">;</span> i <span class="token operator">&gt;</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">--</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        x <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span>j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> i<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span>
+            x <span class="token operator">*=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+
+        b <span class="token operator">=</span> a <span class="token operator">/</span> x<span class="token punctuation">;</span>
+
+        key<span class="token punctuation">[</span>y<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> b <span class="token operator">+</span> <span class="token char">'0'</span><span class="token punctuation">;</span>
+        a <span class="token operator">%=</span> x<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> key<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">//s盒的初始化，生成密钥流</span>
+<span class="token keyword">void</span> <span class="token function">rc4_init</span><span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">char</span> <span class="token operator">*</span>s<span class="token punctuation">,</span> <span class="token keyword">unsigned</span> <span class="token keyword">char</span> <span class="token operator">*</span>key<span class="token punctuation">,</span> <span class="token keyword">unsigned</span> <span class="token keyword">long</span> Len<span class="token punctuation">)</span> <span class="token comment">// 对S盒进行初始化</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">char</span> k<span class="token punctuation">[</span><span class="token number">256</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">unsigned</span> <span class="token keyword">char</span> tmp <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">256</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        s<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> i<span class="token punctuation">;</span>
+        k<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> key<span class="token punctuation">[</span>i <span class="token operator">%</span> Len<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">256</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        j <span class="token operator">=</span> <span class="token punctuation">(</span>j <span class="token operator">+</span> s<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">+</span> k<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">256</span><span class="token punctuation">;</span>
+
+        tmp <span class="token operator">=</span> s<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        s<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> s<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// 交换s[i]和s[j]</span>
+        s<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> tmp<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token comment">//rc4加密</span>
+<span class="token keyword">void</span> <span class="token function">rc4_crypt</span><span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">char</span> <span class="token operator">*</span>s<span class="token punctuation">,</span> <span class="token keyword">unsigned</span> <span class="token keyword">char</span> <span class="token operator">*</span>Data<span class="token punctuation">,</span> <span class="token keyword">unsigned</span> <span class="token keyword">long</span> Len<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> t <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">unsigned</span> <span class="token keyword">long</span> k <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">unsigned</span> <span class="token keyword">char</span> tmp<span class="token punctuation">;</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>k <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> k <span class="token operator">&lt;</span> Len<span class="token punctuation">;</span> k<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        i <span class="token operator">=</span> <span class="token punctuation">(</span>i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">256</span><span class="token punctuation">;</span>
+        j <span class="token operator">=</span> <span class="token punctuation">(</span>j <span class="token operator">+</span> s<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">256</span><span class="token punctuation">;</span>
+
+        tmp <span class="token operator">=</span> s<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        s<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> s<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// 交换s[x]和s[y]</span>
+        s<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> tmp<span class="token punctuation">;</span>
+
+        t <span class="token operator">=</span> <span class="token punctuation">(</span>s<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">+</span> s<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">256</span><span class="token punctuation">;</span>
+        Data<span class="token punctuation">[</span>k<span class="token punctuation">]</span> <span class="token operator">^=</span> s<span class="token punctuation">[</span>t<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">//rc4执行函数</span>
+<span class="token keyword">char</span> <span class="token operator">*</span><span class="token function">rc4_run</span><span class="token punctuation">(</span><span class="token keyword">char</span> pData<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">char</span> key<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">unsigned</span> <span class="token keyword">long</span> len <span class="token operator">=</span> <span class="token function">strlen</span><span class="token punctuation">(</span>pData<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">unsigned</span> <span class="token keyword">char</span> s<span class="token punctuation">[</span><span class="token number">256</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">,</span> s2<span class="token punctuation">[</span><span class="token number">256</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> i<span class="token punctuation">;</span>
+
+    key<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token char">'\0'</span><span class="token punctuation">;</span>
+
+    <span class="token function">rc4_init</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">char</span> <span class="token operator">*</span><span class="token punctuation">)</span>key<span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">256</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token comment">// 用s2[i]暂时保留经过初始化的s[i]，很重要的！！！</span>
+    <span class="token punctuation">{</span>
+        s2<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> s<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token function">rc4_crypt</span><span class="token punctuation">(</span>s2<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">char</span> <span class="token operator">*</span><span class="token punctuation">)</span>pData<span class="token punctuation">,</span> len<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> pData<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">char</span> <span class="token operator">*</span>arr<span class="token punctuation">,</span> <span class="token operator">*</span>key<span class="token punctuation">;</span>
+<span class="token comment">//注意，最好将不变的数据放入静态数据区，以保障其值</span>
+    <span class="token keyword">static</span> <span class="token keyword">char</span> flag<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">"flag"</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">char</span> data<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">char</span> pData<span class="token punctuation">[</span><span class="token number">512</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">char</span> x<span class="token punctuation">[</span><span class="token number">512</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">0xa6</span><span class="token punctuation">,</span> <span class="token number">0x70</span><span class="token punctuation">,</span> <span class="token number">0x3a</span><span class="token punctuation">,</span> <span class="token number">0xdc</span><span class="token punctuation">,</span> <span class="token number">0x92</span><span class="token punctuation">,</span> <span class="token number">0xc3</span><span class="token punctuation">,</span> <span class="token number">0x97</span><span class="token punctuation">,</span> <span class="token number">0xf3</span><span class="token punctuation">,</span> <span class="token number">0x1a</span><span class="token punctuation">,</span> <span class="token number">0xdf</span><span class="token punctuation">,</span> <span class="token number">0x8</span><span class="token punctuation">,</span> <span class="token number">0xd6</span><span class="token punctuation">,</span> <span class="token number">0x41</span><span class="token punctuation">,</span> <span class="token number">0xa0</span><span class="token punctuation">,</span> <span class="token number">0x35</span><span class="token punctuation">,</span> <span class="token number">0x90</span><span class="token punctuation">,</span> <span class="token number">0x7b</span><span class="token punctuation">,</span> <span class="token number">0x6</span><span class="token punctuation">,</span> <span class="token number">0xd4</span><span class="token punctuation">,</span> <span class="token number">0xf7</span><span class="token punctuation">,</span> <span class="token number">0x73</span><span class="token punctuation">,</span> <span class="token number">0x5f</span><span class="token punctuation">,</span> <span class="token number">0x1d</span><span class="token punctuation">,</span> <span class="token number">0x3a</span><span class="token punctuation">,</span> <span class="token number">0x49</span><span class="token punctuation">,</span> <span class="token number">0x4c</span><span class="token punctuation">,</span> <span class="token number">0x43</span><span class="token punctuation">,</span> <span class="token number">0x58</span><span class="token punctuation">,</span> <span class="token number">0xd1</span><span class="token punctuation">,</span> <span class="token number">0xb9</span><span class="token punctuation">,</span> <span class="token number">0x4f</span><span class="token punctuation">,</span> <span class="token number">0x99</span><span class="token punctuation">,</span> <span class="token number">0x85</span><span class="token punctuation">,</span> <span class="token number">0x33</span><span class="token punctuation">,</span> <span class="token number">0xe0</span><span class="token punctuation">,</span> <span class="token number">0x69</span><span class="token punctuation">,</span> <span class="token number">0x7c</span><span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token comment">// 密文</span>
+    <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">20230000</span><span class="token punctuation">,</span> i<span class="token punctuation">,</span> j<span class="token punctuation">;</span>
+<span class="token comment">//遍历后四为可能出现的值，进行爆破</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>a <span class="token operator">&lt;</span> <span class="token number">20239999</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+
+        j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">512</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+            pData<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> x<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+        arr <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+        key <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+
+        key <span class="token operator">=</span> <span class="token function">ccc</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        arr <span class="token operator">=</span> <span class="token function">rc4_run</span><span class="token punctuation">(</span>pData<span class="token punctuation">,</span> key<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">//寻找满足条件的，数据</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">4</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> flag<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">==</span> <span class="token number">4</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token function">rc4_run</span><span class="token punctuation">(</span>pData<span class="token punctuation">,</span> key<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        a<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%s\n"</span><span class="token punctuation">,</span> arr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>解出flag：flag{HitYourSoulAndSeeYouInTheGalaxy}</p>
+
+            </div>
+
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                            rel="prev"
+                            href="/2023/02/26/ida-zong-jie/"
+                            >
+                                <span class="left arrow-icon flex-center">
+                                <i class="fas fa-chevron-left"></i>
+                                </span>
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">IDA操作总结</span>
+                                    <span class="post-nav-item">上一篇</span>
+                                </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                            rel="next"
+                            href="/2023/02/09/csapp-di-shi-er-zhang-bing-fa-bian-cheng/"
+                            >
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">csapp 第十二章 并发编程</span>
+                                    <span class="post-nav-item">下一篇</span>
+                                </span>
+                                <span class="right arrow-icon flex-center">
+                                <i class="fas fa-chevron-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+                <div class="comment-container">
+                    <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;评论</i>
+    </div>
+    
+
+        
+            
+
+        
+    
+</div>
+
+                </div>
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div style="font-size: 1.3rem;margin-top: 0; margin-bottom: 0.8rem; transition-duration: 0.1s;"><i class="fa-solid fa-list"></i> <strong>目录</strong></div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#PZGalaxy"><span class="nav-number">1.</span> <span class="nav-text">PZGalaxy</span></a></li></ol>
+    </div>
+</div>
+            </div>
+        
+    </div>
+</div>
+
 
                 
 

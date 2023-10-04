@@ -172,299 +172,168 @@
             <div class="main-content">
 
                 
-                    $avatarWidth = 46px
-$arrow-icon-width = 16px
-$post-nav-max-width = 220px
-$article-title-font-size = 1.6rem
-$temp-toc-width = hexo-config('style.right_side_width')
-$toc-container-width = $temp-toc-width ? convert($temp-toc-width) : 210px
-$without-toc-container-width = calc(100% - 210px)
-.post-page-container{
-  display flex
-  position relative
-  justify-content space-between
-  box-sizing border-box
-  width 100%
-  height 100%
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+            <div class="article-title">
+                <span class="title-hover-animation"><h1 style="font-size:2rem; font-weight: bold; margin: 10px 0;">csapp 第十二章 并发编程</h1></span>
+            </div>
 
-  &.show-toc {
-    .toc-content-container {
-      display block
-    }
-
-    .article-content-container {
-      width $without-toc-container-width !important
-    }
-  }
-
-  +redefine-tablet() {
-    .toc-content-container {
-      display none !important
-    }
-
-    .article-content-container {
-      width 100% !important
-    }
-
-    &.show-toc {
-      .toc-content-container {
-        display none
-      }
-
-      .article-content-container {
-        width 100% !important
-      }
-    }
-  }
-
-
-  .article-content-container {
-    width 100%
-    margin-right: 30px
-
-    redefine-container(false, 0, 0, 30px, 30px)
-
-    +redefine-mobile() {
-      padding 1.2rem 0.2rem
-      box-shadow none
-    }
-
-    .article-title {
-      font-family "Noto Sans SC", sans-serif
-      color var(--second-text-color)
-      font-weight 600
-      font-size $article-title-font-size
-
-      +redefine-tablet() {
-        font-size $article-title-font-size * 0.9
-      }
-
-      +redefine-mobile() {
-        font-size $article-title-font-size * 0.8
-      }
-    }
-
-
-    .article-header {
-      font-family "Noto Sans", "Noto Sans SC", sans-serif
-      position relative
-      padding-left $avatarWidth
-      width 100%
-      height $avatarWidth
-      box-sizing border-box
-
-      .avatar {
-        position absolute
-        top 0
-        left 0
-        width $avatarWidth
-        height $avatarWidth
-        padding 1px
-        box-sizing border-box
-        border 1px solid var(--border-color)
-        border-radius 50%
-
-        img {
-          border-radius 50%
-          width 100%
-          height 100%
-          background var(--avatar-background-color)
-        }
-
-      }
-
-
-      .info {
-        padding 2px 0
-        margin-left 10px
-        box-sizing border-box
-        display flex
-        flex-direction column
-        justify-content space-between
-        width 100%
-        height 100%
-
-        .author {
-          font-weight regular
-          font-size 1.18rem
-          display flex
-          align-items center
-
-          .name {
-            color var(--default-text-color)
-          }
-
-          .author-label {
-            margin-left 10px
-            font-size 0.8rem
-            font-weight 500
-            padding 0 5px
-            border-radius 6px
-            color #fff
-            background var(--selection-color)
-          }
-
-        }
-      }
-
-    }
-
-
-    .article-header, .article-header-meta-info {
-      margin-top 16px
-      +redefine-tablet() {
-        transform scale(0.9)
-        transform-origin left top
-      }
-    }
-
-
-    .article-content {
-      margin-top $component-spacing-value
-      padding-bottom 10px
-      word-wrap break-word
-      border-bottom 1px solid var(--border-color)
-      color var(--default-text-color)
-    }
-
-
-    .post-tags-box {
-      display none
-      margin-top 1.6rem
-      justify-content center
-      font-size 1.1rem
-
-      +redefine-tablet() {
-        display flex
-      }
-
-      +redefine-mobile() {
-        margin-top 1.2rem
-        font-size 1rem
-      }
-
-
-      .tag-item {
-        margin 0 0.25rem
-      }
-    }
-
-    .post-copyright-info {
-      margin-top $component-spacing-value
-      width 100%
-
-      +redefine-tablet() {
-        margin-top $component-spacing-value * 0.8
-      }
-    }
-
-
-    .article-nav {
-      height 40px
-      margin-top $component-spacing-value
-
-      .article-prev, .article-next {
-        max-width $post-nav-max-width
-        height 100%
-        box-sizing border-box
-
-        redefine-container(true, 1.03, 1.03, 10px, 0)
-
-        a {
-          position relative
-          display block
-          width 100%
-          height 100%
-          box-sizing border-box
-
-          &.prev {
-            padding-left $arrow-icon-width
-          }
-
-          &.next {
-            padding-right $arrow-icon-width
-          }
-
-          .arrow-icon {
-            position absolute
-            top 0
-            height 100%
-            width $arrow-icon-width
-
-            &.left {
-              left 0
-            }
-
-            &.right {
-              right 0
-            }
-          }
-
-          .title {
-            width 100%
-            height 100%
-          }
-        }
-
-      }
-
-      .article-prev {
-        float left
-      }
-
-      .article-next {
-        float right
-      }
-
-      .post-nav-item {
-        display none
-
-        +redefine-tablet() {
-          display inline-block
-        }
-
-      }
-
-
-      .post-nav-title-item {
-        overflow hidden
-        text-overflow ellipsis
-        white-space nowrap
-
-        +redefine-tablet() {
-          display none
-        }
-      }
-    }
-  }
-
-  .toc-content-container {
-    position sticky
-    top $header-height + $component-spacing-value
-    //border-radius 18px
-    border-radius 0
-    display none
-    width $toc-container-width
-    height auto
-    max-height calc(100vh - 210px)
-    //z-index $z-index-6
-    overflow-y auto
-    float right
-    padding 10px
-    box-sizing border-box
-    box-shadow none !important
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/7.webp">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">二木</span>
+                            
+                                <span class="author-label">王者</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-duotone fa-pen-line"></i>&nbsp;
+        <span class="pc">2023-02-09 14:22:01</span>
+        <span class="mobile">2023-02-09 14:22</span>
+    </span>
+    
     
 
-    hover-style(false, 0, 0)
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>3 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
 
-    transition-t("display", "0", "0.3", "ease-out")
+                        </div>
+                    </div>
+                </div>
+            
 
-    +redefine-tablet() {
-      left 0 !important
-      display none !important
-    }
-  }
-}
+            <div class="article-content markdown-body">
+                <h1 id="并发编程"><a href="#并发编程" class="headerlink" title="并发编程"></a>并发编程</h1><p>什么是并发？我们可以这样理解就是同时运行，做多件事情，比如，我们在看剧的同时，吃着薯片，像这种，在时间上重叠的现象，就是并发、</p>
+<p><strong>并发的作用</strong> </p>
+<ul>
+<li><p>访问慢速i\o设备。访问慢速的i\o设备的时候，内核可以同时运行一些其他的数据，来等待。</p>
+</li>
+<li><p>与人进行交互。我们一般打开电脑，都会同时运行好几个程序。</p>
+</li>
+<li><p>服务器服务多个网络客户端。</p>
+</li>
+<li><p>在多核机器上进行并行计算。</p>
+</li>
+<li><p>多线程运行。</p>
+<h3 id="基于进程的并发编程"><a href="#基于进程的并发编程" class="headerlink" title="基于进程的并发编程"></a>基于进程的并发编程</h3><h4 id="基于进程的并发服务器"><a href="#基于进程的并发服务器" class="headerlink" title="基于进程的并发服务器"></a>基于进程的并发服务器</h4><p>![image-20230226165229824](csapp 第十二章 并发编程/image-20230226165229824.png)</p>
+</li>
+</ul>
+<p>![image-20230227143648282](csapp 第十二章 并发编程/image-20230227143648282.png)</p>
+<p>优点:具有共享文件表，但并不共享用户地址空间，进程有 独立的地址空间。这样使得一个进程不可能不小小覆盖另一个进程调出虚拟内存。</p>
+<p>缺点：独立的地址空间使得进程之间的通信变得更加困难，从而造成它们往往比较慢，控制进程和IPC的开销比较大。</p>
+<h4 id="关于IPC的解释"><a href="#关于IPC的解释" class="headerlink" title="关于IPC的解释"></a>关于IPC的解释</h4><p>![image-20230227144750118](csapp 第十二章 并发编程/image-20230227144750118.png)</p>
+<h3 id="基于线程的并发编程"><a href="#基于线程的并发编程" class="headerlink" title="基于线程的并发编程"></a>基于线程的并发编程</h3><p>线程与进程的<strong>区别</strong>：1、线程运行的消耗比进程的消耗要小。2、对于进程来说，创建一个新的进程，新和旧的关系为父子关系。而在同一个进程中创建线程池，它们之间的关系都为对等，就算是主线程，也仅仅是代表它是进程中第一个运行的线程。</p>
+<p>线程池的一个<strong>特点</strong>就是，一个线程可以杀死它的任何对等的线程，或者等待对等线程终止。而且和进程一样，对等线程都能够读写相同的共享数据。</p>
+<h4 id="分离线程"><a href="#分离线程" class="headerlink" title="分离线程"></a>分离线程</h4><p>在任何一个时间点上，线程都是可结合或者是可分离的。其中可结合线程能够被其他线程回收和杀死，在被其他的线程回收之前，它的内存资源，是不会被释放的。而分离线程是不能够被其他线程回收或者杀死的。它的内存资源，在它终止时由系统自动释放。</p>
+<p>![image-20230228125255617](csapp 第十二章 并发编程/image-20230228125255617.png)</p>
+<h3 id="多线程程序中的共享变量"><a href="#多线程程序中的共享变量" class="headerlink" title="多线程程序中的共享变量"></a>多线程程序中的共享变量</h3><h4 id="线程内存模型"><a href="#线程内存模型" class="headerlink" title="线程内存模型"></a>线程内存模型</h4><p> 一组线程并发的运行在一个进程的运行上下文中。每个线程都有他自己独立的线程上下文，也就是运行环境。每个线程共享进程上下文的剩余部分。包括：用户的虚拟地址空间等。但是线程的寄存器是不会进行共享的。</p>
+<h4 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h4><p>四个线程不安全的函数类</p>
+<p><strong>加锁–复制技术</strong></p>
+<ul>
+<li>![image-20230301205637003](csapp 第十二章 并发编程/image-20230301205637003.png)</li>
+</ul>
+<p><strong>加锁–复制技术的缺点</strong></p>
+<p>![](csapp 第十二章 并发编程/image-20230301205824372.png)</p>
+<h4 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h4><p>信号量有一种潜在的运行时错误，叫死锁。指的是一组线程被阻塞了，等待一个永远不会为真的条件。打个比方，一套工具分给几个人使用，每个人将活干完之后，才会将工具归还，按照正常来管理，这些分工具给不同的的人使用，然后等他使用完后，再给另一个人，但是有些时候意外情况会发生，比如，工具有a,b,c，工人有甲乙两人。甲用了工具a,和工具c，乙正在运用工具b,这个时候，甲需要用工具b才能继续工作下去，甲于是就等着乙工作完，然后拿工具。而乙工作到一半，需要a，工具才能继续工作下去，所以乙就等着甲工作完拿a，于是乎，两个都在等待另一方工作完，两人都不进行工作，这样就形成了死锁。</p>
+
+            </div>
+
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                            rel="prev"
+                            href="/2023/02/26/2023-vnctf-re-pzgalaxy/"
+                            >
+                                <span class="left arrow-icon flex-center">
+                                <i class="fas fa-chevron-left"></i>
+                                </span>
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">2023—VNCTF-re-PZGalaxy</span>
+                                    <span class="post-nav-item">上一篇</span>
+                                </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                            rel="next"
+                            href="/2023/02/06/hgame-2023-re-kmusic/"
+                            >
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">hgame-2023-re-kmusic</span>
+                                    <span class="post-nav-item">下一篇</span>
+                                </span>
+                                <span class="right arrow-icon flex-center">
+                                <i class="fas fa-chevron-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+                <div class="comment-container">
+                    <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;评论</i>
+    </div>
+    
+
+        
+            
+
+        
+    
+</div>
+
+                </div>
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div style="font-size: 1.3rem;margin-top: 0; margin-bottom: 0.8rem; transition-duration: 0.1s;"><i class="fa-solid fa-list"></i> <strong>目录</strong></div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">并发编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B"><span class="nav-number">1.0.1.</span> <span class="nav-text">基于进程的并发编程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%B9%B6%E5%8F%91%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">基于进程的并发服务器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B3%E4%BA%8EIPC%E7%9A%84%E8%A7%A3%E9%87%8A"><span class="nav-number">1.0.1.2.</span> <span class="nav-text">关于IPC的解释</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B"><span class="nav-number">1.0.2.</span> <span class="nav-text">基于线程的并发编程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E7%A6%BB%E7%BA%BF%E7%A8%8B"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">分离线程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%A8%8B%E5%BA%8F%E4%B8%AD%E7%9A%84%E5%85%B1%E4%BA%AB%E5%8F%98%E9%87%8F"><span class="nav-number">1.0.3.</span> <span class="nav-text">多线程程序中的共享变量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.0.3.1.</span> <span class="nav-text">线程内存模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8"><span class="nav-number">1.0.3.2.</span> <span class="nav-text">线程安全</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%BB%E9%94%81"><span class="nav-number">1.0.3.3.</span> <span class="nav-text">死锁</span></a></li></ol></li></ol></li></ol></li></ol>
+    </div>
+</div>
+            </div>
+        
+    </div>
+</div>
+
 
                 
 

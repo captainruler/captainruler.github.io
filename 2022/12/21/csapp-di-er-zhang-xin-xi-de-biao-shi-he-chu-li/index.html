@@ -172,299 +172,178 @@
             <div class="main-content">
 
                 
-                    $avatarWidth = 46px
-$arrow-icon-width = 16px
-$post-nav-max-width = 220px
-$article-title-font-size = 1.6rem
-$temp-toc-width = hexo-config('style.right_side_width')
-$toc-container-width = $temp-toc-width ? convert($temp-toc-width) : 210px
-$without-toc-container-width = calc(100% - 210px)
-.post-page-container{
-  display flex
-  position relative
-  justify-content space-between
-  box-sizing border-box
-  width 100%
-  height 100%
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+            <div class="article-title">
+                <span class="title-hover-animation"><h1 style="font-size:2rem; font-weight: bold; margin: 10px 0;">csapp 第二章 信息的表示和处理</h1></span>
+            </div>
 
-  &.show-toc {
-    .toc-content-container {
-      display block
-    }
-
-    .article-content-container {
-      width $without-toc-container-width !important
-    }
-  }
-
-  +redefine-tablet() {
-    .toc-content-container {
-      display none !important
-    }
-
-    .article-content-container {
-      width 100% !important
-    }
-
-    &.show-toc {
-      .toc-content-container {
-        display none
-      }
-
-      .article-content-container {
-        width 100% !important
-      }
-    }
-  }
-
-
-  .article-content-container {
-    width 100%
-    margin-right: 30px
-
-    redefine-container(false, 0, 0, 30px, 30px)
-
-    +redefine-mobile() {
-      padding 1.2rem 0.2rem
-      box-shadow none
-    }
-
-    .article-title {
-      font-family "Noto Sans SC", sans-serif
-      color var(--second-text-color)
-      font-weight 600
-      font-size $article-title-font-size
-
-      +redefine-tablet() {
-        font-size $article-title-font-size * 0.9
-      }
-
-      +redefine-mobile() {
-        font-size $article-title-font-size * 0.8
-      }
-    }
-
-
-    .article-header {
-      font-family "Noto Sans", "Noto Sans SC", sans-serif
-      position relative
-      padding-left $avatarWidth
-      width 100%
-      height $avatarWidth
-      box-sizing border-box
-
-      .avatar {
-        position absolute
-        top 0
-        left 0
-        width $avatarWidth
-        height $avatarWidth
-        padding 1px
-        box-sizing border-box
-        border 1px solid var(--border-color)
-        border-radius 50%
-
-        img {
-          border-radius 50%
-          width 100%
-          height 100%
-          background var(--avatar-background-color)
-        }
-
-      }
-
-
-      .info {
-        padding 2px 0
-        margin-left 10px
-        box-sizing border-box
-        display flex
-        flex-direction column
-        justify-content space-between
-        width 100%
-        height 100%
-
-        .author {
-          font-weight regular
-          font-size 1.18rem
-          display flex
-          align-items center
-
-          .name {
-            color var(--default-text-color)
-          }
-
-          .author-label {
-            margin-left 10px
-            font-size 0.8rem
-            font-weight 500
-            padding 0 5px
-            border-radius 6px
-            color #fff
-            background var(--selection-color)
-          }
-
-        }
-      }
-
-    }
-
-
-    .article-header, .article-header-meta-info {
-      margin-top 16px
-      +redefine-tablet() {
-        transform scale(0.9)
-        transform-origin left top
-      }
-    }
-
-
-    .article-content {
-      margin-top $component-spacing-value
-      padding-bottom 10px
-      word-wrap break-word
-      border-bottom 1px solid var(--border-color)
-      color var(--default-text-color)
-    }
-
-
-    .post-tags-box {
-      display none
-      margin-top 1.6rem
-      justify-content center
-      font-size 1.1rem
-
-      +redefine-tablet() {
-        display flex
-      }
-
-      +redefine-mobile() {
-        margin-top 1.2rem
-        font-size 1rem
-      }
-
-
-      .tag-item {
-        margin 0 0.25rem
-      }
-    }
-
-    .post-copyright-info {
-      margin-top $component-spacing-value
-      width 100%
-
-      +redefine-tablet() {
-        margin-top $component-spacing-value * 0.8
-      }
-    }
-
-
-    .article-nav {
-      height 40px
-      margin-top $component-spacing-value
-
-      .article-prev, .article-next {
-        max-width $post-nav-max-width
-        height 100%
-        box-sizing border-box
-
-        redefine-container(true, 1.03, 1.03, 10px, 0)
-
-        a {
-          position relative
-          display block
-          width 100%
-          height 100%
-          box-sizing border-box
-
-          &.prev {
-            padding-left $arrow-icon-width
-          }
-
-          &.next {
-            padding-right $arrow-icon-width
-          }
-
-          .arrow-icon {
-            position absolute
-            top 0
-            height 100%
-            width $arrow-icon-width
-
-            &.left {
-              left 0
-            }
-
-            &.right {
-              right 0
-            }
-          }
-
-          .title {
-            width 100%
-            height 100%
-          }
-        }
-
-      }
-
-      .article-prev {
-        float left
-      }
-
-      .article-next {
-        float right
-      }
-
-      .post-nav-item {
-        display none
-
-        +redefine-tablet() {
-          display inline-block
-        }
-
-      }
-
-
-      .post-nav-title-item {
-        overflow hidden
-        text-overflow ellipsis
-        white-space nowrap
-
-        +redefine-tablet() {
-          display none
-        }
-      }
-    }
-  }
-
-  .toc-content-container {
-    position sticky
-    top $header-height + $component-spacing-value
-    //border-radius 18px
-    border-radius 0
-    display none
-    width $toc-container-width
-    height auto
-    max-height calc(100vh - 210px)
-    //z-index $z-index-6
-    overflow-y auto
-    float right
-    padding 10px
-    box-sizing border-box
-    box-shadow none !important
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/7.webp">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">二木</span>
+                            
+                                <span class="author-label">王者</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-duotone fa-pen-line"></i>&nbsp;
+        <span class="pc">2022-12-21 17:30:43</span>
+        <span class="mobile">2022-12-21 17:30</span>
+    </span>
+    
     
 
-    hover-style(false, 0, 0)
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.6k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>5 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
 
-    transition-t("display", "0", "0.3", "ease-out")
+                        </div>
+                    </div>
+                </div>
+            
 
-    +redefine-tablet() {
-      left 0 !important
-      display none !important
-    }
-  }
-}
+            <div class="article-content markdown-body">
+                <h1 id="信息的表示和处理"><a href="#信息的表示和处理" class="headerlink" title="信息的表示和处理"></a>信息的表示和处理</h1><p><strong>本章的话，深入的讲解了我们的数据（信息）是如何在内存中表示，以及存储，后面的部分主要是讲解了我们的整数与浮点数的存储与运算，并且在数学上进行了证明与推导。总的来说，在数学证明与推导上，有点晦涩难懂（数学太菜了）。而且在一定程度上，我们平常也用不到这个，我们只需要了解一下就行了，重点关注比较常用的知识点</strong></p>
+<h3 id="信息存储"><a href="#信息存储" class="headerlink" title="信息存储"></a>信息存储</h3><p><strong>信息是怎么表示？</strong> 我们知道，我们的信息是由位组成的，我们的位就是0,1的集合，这样的表示被成为二进制，由于0101010这样相对于我们人类的十进制，太难理解和阅读了，为了更加简便，人们就思考怎样可以更加简便？因此找到了十六进制来表示。二进制和十六进制的转换很简单而且直观。</p>
+<p><strong>我们存储数据的大小是多少呢？</strong> 我们应该知道的是，在不同的计算机上，我们的一些数据的大小存储是不同的，比如，我们熟悉的int ，在不同的计算机上有的是占4个字节（大多数），有的计算机上占的是2个字节。因此在讨论所占大小时我们应该考虑计算机本身的存储。下面就是32位，与64位的一些区别。</p>
+<p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/csapp-di-er-zhang-xin-xi-de-biao-shi-he-chu-li/image-20221222221354739.png" alt="image-20221222221354739"></p>
+<p><strong>有一个需要注意的点就是，64位的计算机能够兼容32位的程序，也就是说32位的程序能在64位上跑，64位不的能在32位上跑</strong></p>
+<p><strong>内存中如何排列这些字节序？</strong> 在不同的计算机中对于字节的排序是不同的，因而对于同一个文本，它的解释方式是不一样的。计算机有两种方式，一个是大端法，一个是小端法。对于大小端可以这样记，所谓大端就是大的位存储在前面（也就是低位），小端就是小的位存储在前面。比如1234，有空间0xa,0xb,0xc,0xd。按照大端存储就是1放在0xa,2放在0xb,3放在0xc,4放在0xd.按照小端排序的话，4放在0xa,3放在0xb,2放在0xc,1放在0xd.</p>
+<p><strong>布尔代数</strong> </p>
+<p>这个就只有两个，一个是ture，一个是false。就是真和假，和我们高中学的知识一样，或，且，非，异或，四中逻辑运算。因为ture和false,刚好和我们的存储的二进制0,1对应，因此计算机上运用广泛。</p>
+<p><strong>位运算和逻辑运算</strong> </p>
+<p>主要区别就是位运算处理的是数据运算，而逻辑运算处理的是一种判断，真假。</p>
+<p><em><strong>位运算</strong></em> </p>
+<p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/csapp-di-er-zhang-xin-xi-de-biao-shi-he-chu-li/image-20221223002053291.png" alt="image-20221223002053291"></p>
+<p><em><strong>逻辑运算</strong></em></p>
+<p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/csapp-di-er-zhang-xin-xi-de-biao-shi-he-chu-li/image-20221223002128217.png" alt="image-20221223002128217"></p>
+<h3 id="整数"><a href="#整数" class="headerlink" title="整数"></a>整数</h3><p><strong>整数的数据类型</strong> </p>
+<p>对于整数来说，整数可以分为有符号数和无符号数。在不同的机器上，我们的整数的表示范围有着不同的差别。</p>
+<p><em><strong>32位机器上</strong></em> </p>
+<p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/csapp-di-er-zhang-xin-xi-de-biao-shi-he-chu-li/image-20221223120246269.png" alt="image-20221223120246269"></p>
+<p><em><strong>64位机器上</strong></em> </p>
+<p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/csapp-di-er-zhang-xin-xi-de-biao-shi-he-chu-li/image-20221223120356826.png" alt="image-20221223120356826"></p>
+<p>这个我们可以发现一个问题，有符号数的负数比整数多表示了一个数，这里是因为有一个整数用来表示0去了。</p>
+<ul>
+<li>我们大多数机器都是用补码的形式来表示有符号整数</li>
+<li>对于强制转换类型，是保持位不变改变了解释这些位的解释方式。也就是说存储的数据（0，1）并没有改变，仅仅是解释的方式变了，上下文变了。</li>
+<li>大多数数字是默认有符号的，如果要创建无符号常量就需要在数字后面加上一个u。</li>
+<li>强制转换有显式和隐式的，显式强制转换在前面加括号，在写上要转换的类型。隐式强制转换，由编译器自动进行。比如printf中，一个int型，打印用%x，就是隐式转换。</li>
+<li>一个小的数据类型（float），可以转换为一个交大的数据类型(double)（对位进行扩展），而一个大的数据类型，可能转换不到较小的去（对数字进行截断），因为可能会发生溢出。</li>
+<li>乘法，与除法，在机器上运行是很慢的，我们可以通过位运算，加法和减法的组合运算来实现，从而提高速度。</li>
+</ul>
+<h3 id="浮点数"><a href="#浮点数" class="headerlink" title="浮点数"></a>浮点数</h3><p><strong>舍入</strong> </p>
+<p>对于一个浮点数，或者说对于一个小数，我们计算机是怎么取舍的呢？如果我们学习过c语音可以知道，浮点数是有精度的，也就是说我们的数都是由无限逼近的数进行取舍的，也就是说，举个例子：5/2=2.5，在我们的计算机中这个2.5并不是准确的2.5，可能是2.49876765.有些时候可能我们会纳闷，有些时候计算机是进行的四舍五入，有些时候我们的计算机又进行的是直接抹除小数后面位数。那么到底是怎么取舍的呢？通常情况下我们采取的舍入规则是在原来的值是舍入值的中间值时，采取向偶数舍入（四舍五入）<strong>而它的原理</strong> 二进制中，末尾为0的数为偶数。而若不是这样的话，我们的计算机一般会有选择性的使用向上和向下舍入，但最终还是会向最接近的值舍入。这是IEEE采取的默认的舍入方式，因为这种舍入方式总是向最近的值的舍入，从而让我们的舍入更加精确。也就是大部分都是四舍五入，只有下面的一种是向零舍入。</p>
+<p><strong>浮点运算</strong> </p>
+<p>这里我们需要知道：</p>
+<ul>
+<li>浮点运算没有结合律和分配律，打个比方（3-3）+0.0000000000002=0.00000000000002，（3+0.0000000000002）-3=0，按照我们的数学来说很奇怪是不是？出现这个的原因，就是因为浮点数有着舍入与精度规则，第二个式子的值被抹去了。</li>
+</ul>
+<p>对此推广开来，我们就可以知道一些问题：</p>
+<ul>
+<li>int转换成float，不会发生溢出，但是可能会发生舍入。</li>
+<li>double转换成int，与float，可能会发生溢出。</li>
+<li><strong>由浮点数转换为整数，float,double,转换成int会发生取舍，取舍规则为向零取舍，即小数点后面的数全部抹除</strong></li>
+</ul>
+
+            </div>
+
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                            rel="prev"
+                            href="/2022/12/21/tuo-ke/"
+                            >
+                                <span class="left arrow-icon flex-center">
+                                <i class="fas fa-chevron-left"></i>
+                                </span>
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">脱壳</span>
+                                    <span class="post-nav-item">上一篇</span>
+                                </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                            rel="next"
+                            href="/2022/12/15/csapp-di-yi-zhang-ji-suan-ji-xi-tong-man-you/"
+                            >
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">cs:app 第一章 计算机系统漫游</span>
+                                    <span class="post-nav-item">下一篇</span>
+                                </span>
+                                <span class="right arrow-icon flex-center">
+                                <i class="fas fa-chevron-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+                <div class="comment-container">
+                    <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;评论</i>
+    </div>
+    
+
+        
+            
+
+        
+    
+</div>
+
+                </div>
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div style="font-size: 1.3rem;margin-top: 0; margin-bottom: 0.8rem; transition-duration: 0.1s;"><i class="fa-solid fa-list"></i> <strong>目录</strong></div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%A4%84%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">信息的表示和处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E5%AD%98%E5%82%A8"><span class="nav-number">1.0.1.</span> <span class="nav-text">信息存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B4%E6%95%B0"><span class="nav-number">1.0.2.</span> <span class="nav-text">整数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%AE%E7%82%B9%E6%95%B0"><span class="nav-number">1.0.3.</span> <span class="nav-text">浮点数</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+            </div>
+        
+    </div>
+</div>
+
 
                 
 

@@ -172,299 +172,177 @@
             <div class="main-content">
 
                 
-                    $avatarWidth = 46px
-$arrow-icon-width = 16px
-$post-nav-max-width = 220px
-$article-title-font-size = 1.6rem
-$temp-toc-width = hexo-config('style.right_side_width')
-$toc-container-width = $temp-toc-width ? convert($temp-toc-width) : 210px
-$without-toc-container-width = calc(100% - 210px)
-.post-page-container{
-  display flex
-  position relative
-  justify-content space-between
-  box-sizing border-box
-  width 100%
-  height 100%
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+            <div class="article-title">
+                <span class="title-hover-animation"><h1 style="font-size:2rem; font-weight: bold; margin: 10px 0;">IDA操作总结</h1></span>
+            </div>
 
-  &.show-toc {
-    .toc-content-container {
-      display block
-    }
-
-    .article-content-container {
-      width $without-toc-container-width !important
-    }
-  }
-
-  +redefine-tablet() {
-    .toc-content-container {
-      display none !important
-    }
-
-    .article-content-container {
-      width 100% !important
-    }
-
-    &.show-toc {
-      .toc-content-container {
-        display none
-      }
-
-      .article-content-container {
-        width 100% !important
-      }
-    }
-  }
-
-
-  .article-content-container {
-    width 100%
-    margin-right: 30px
-
-    redefine-container(false, 0, 0, 30px, 30px)
-
-    +redefine-mobile() {
-      padding 1.2rem 0.2rem
-      box-shadow none
-    }
-
-    .article-title {
-      font-family "Noto Sans SC", sans-serif
-      color var(--second-text-color)
-      font-weight 600
-      font-size $article-title-font-size
-
-      +redefine-tablet() {
-        font-size $article-title-font-size * 0.9
-      }
-
-      +redefine-mobile() {
-        font-size $article-title-font-size * 0.8
-      }
-    }
-
-
-    .article-header {
-      font-family "Noto Sans", "Noto Sans SC", sans-serif
-      position relative
-      padding-left $avatarWidth
-      width 100%
-      height $avatarWidth
-      box-sizing border-box
-
-      .avatar {
-        position absolute
-        top 0
-        left 0
-        width $avatarWidth
-        height $avatarWidth
-        padding 1px
-        box-sizing border-box
-        border 1px solid var(--border-color)
-        border-radius 50%
-
-        img {
-          border-radius 50%
-          width 100%
-          height 100%
-          background var(--avatar-background-color)
-        }
-
-      }
-
-
-      .info {
-        padding 2px 0
-        margin-left 10px
-        box-sizing border-box
-        display flex
-        flex-direction column
-        justify-content space-between
-        width 100%
-        height 100%
-
-        .author {
-          font-weight regular
-          font-size 1.18rem
-          display flex
-          align-items center
-
-          .name {
-            color var(--default-text-color)
-          }
-
-          .author-label {
-            margin-left 10px
-            font-size 0.8rem
-            font-weight 500
-            padding 0 5px
-            border-radius 6px
-            color #fff
-            background var(--selection-color)
-          }
-
-        }
-      }
-
-    }
-
-
-    .article-header, .article-header-meta-info {
-      margin-top 16px
-      +redefine-tablet() {
-        transform scale(0.9)
-        transform-origin left top
-      }
-    }
-
-
-    .article-content {
-      margin-top $component-spacing-value
-      padding-bottom 10px
-      word-wrap break-word
-      border-bottom 1px solid var(--border-color)
-      color var(--default-text-color)
-    }
-
-
-    .post-tags-box {
-      display none
-      margin-top 1.6rem
-      justify-content center
-      font-size 1.1rem
-
-      +redefine-tablet() {
-        display flex
-      }
-
-      +redefine-mobile() {
-        margin-top 1.2rem
-        font-size 1rem
-      }
-
-
-      .tag-item {
-        margin 0 0.25rem
-      }
-    }
-
-    .post-copyright-info {
-      margin-top $component-spacing-value
-      width 100%
-
-      +redefine-tablet() {
-        margin-top $component-spacing-value * 0.8
-      }
-    }
-
-
-    .article-nav {
-      height 40px
-      margin-top $component-spacing-value
-
-      .article-prev, .article-next {
-        max-width $post-nav-max-width
-        height 100%
-        box-sizing border-box
-
-        redefine-container(true, 1.03, 1.03, 10px, 0)
-
-        a {
-          position relative
-          display block
-          width 100%
-          height 100%
-          box-sizing border-box
-
-          &.prev {
-            padding-left $arrow-icon-width
-          }
-
-          &.next {
-            padding-right $arrow-icon-width
-          }
-
-          .arrow-icon {
-            position absolute
-            top 0
-            height 100%
-            width $arrow-icon-width
-
-            &.left {
-              left 0
-            }
-
-            &.right {
-              right 0
-            }
-          }
-
-          .title {
-            width 100%
-            height 100%
-          }
-        }
-
-      }
-
-      .article-prev {
-        float left
-      }
-
-      .article-next {
-        float right
-      }
-
-      .post-nav-item {
-        display none
-
-        +redefine-tablet() {
-          display inline-block
-        }
-
-      }
-
-
-      .post-nav-title-item {
-        overflow hidden
-        text-overflow ellipsis
-        white-space nowrap
-
-        +redefine-tablet() {
-          display none
-        }
-      }
-    }
-  }
-
-  .toc-content-container {
-    position sticky
-    top $header-height + $component-spacing-value
-    //border-radius 18px
-    border-radius 0
-    display none
-    width $toc-container-width
-    height auto
-    max-height calc(100vh - 210px)
-    //z-index $z-index-6
-    overflow-y auto
-    float right
-    padding 10px
-    box-sizing border-box
-    box-shadow none !important
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/7.webp">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">二木</span>
+                            
+                                <span class="author-label">王者</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-duotone fa-pen-line"></i>&nbsp;
+        <span class="pc">2023-02-26 17:42:54</span>
+        <span class="mobile">2023-02-26 17:42</span>
+    </span>
+    
     
 
-    hover-style(false, 0, 0)
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>796 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>2 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
 
-    transition-t("display", "0", "0.3", "ease-out")
+                        </div>
+                    </div>
+                </div>
+            
 
-    +redefine-tablet() {
-      left 0 !important
-      display none !important
-    }
-  }
-}
+            <div class="article-content markdown-body">
+                <h1 id="ida操作"><a href="#ida操作" class="headerlink" title="ida操作"></a>ida操作</h1><h4 id="静态分析"><a href="#静态分析" class="headerlink" title="静态分析"></a>静态分析</h4><p><strong>1、反汇编：</strong>Tab\F5</p>
+<p><strong>2、IDA字符串表：</strong>shift+F12;或者直接找窗口</p>
+<p><img lazyload src="/images/loading.svg" data-src="/image-20230226175251517.png" alt="image-20230226175251517"></p>
+<p>打开string窗口后，我们可以按Ctrl+F来调出搜索</p>
+<p><img lazyload src="/images/loading.svg" data-src="/image-20230226175638025.png" alt="image-20230226175638025"></p>
+<p>在里面输入你想要查找的字符串，如果有原数据，就能成功找到。</p>
+<p>双击数据，就能进入对应的内存</p>
+<p><strong>3、G键</strong>。打开地址窗口</p>
+<p><img lazyload src="/images/loading.svg" data-src="/image-20230228202202438.png" alt="image-20230228202202438"></p>
+<p><strong>4、X键。</strong>查看交叉引用，也就是查看有那些地方调用了这个函数</p>
+<p>点击即可进入对于调用的地方</p>
+<p><img lazyload src="/images/loading.svg" data-src="/image-20230228202326381.png" alt="image-20230228202326381"></p>
+<p><strong>5、重命名符号。</strong>将选中的名称进行修改，以便于阅读分析</p>
+<p><img lazyload src="/images/loading.svg" data-src="/image-20230228202607658.png" alt="image-20230228202607658"></p>
+<p>**6、对于数据处理上.**IDA的储存方式为小端序，例如，0XB1A33454在内存中的存储就是54, 34, A3, B1.</p>
+<p><strong>7、U键。</strong>在某地址上按下U，就会使得IDA取消对在部分地址的解释。</p>
+<p>按U前</p>
+<p><img lazyload src="/images/loading.svg" data-src="/image-20230228203508608.png" alt="image-20230228203508608"></p>
+<p>按U后</p>
+<p><img lazyload src="/images/loading.svg" data-src="/image-20230228203538866.png" alt="image-20230228203538866"></p>
+<p><strong>8、C键。</strong>将地址标记为代码，并且进行反汇编。也算是和U键互逆。</p>
+<p>前</p>
+<p><img lazyload src="/images/loading.svg" data-src="/image-20230228203538866.png" alt="image-20230228203538866"></p>
+<p>后</p>
+<p><img lazyload src="/images/loading.svg" data-src="/image-20230228203746253.png" alt="image-20230228203746253"></p>
+<p><strong>9、P键。</strong>比如刚才，我们将地址按下C分析后，前面为红色部分，这时我们不能进行反汇编，而p键的作用就是创建函数，让其成为一个可反编译的函数（结构需完整）。</p>
+<p>按下p后</p>
+<p><img lazyload src="/images/loading.svg" data-src="/image-20230228204129463.png" alt="image-20230228204129463"></p>
+<h4 id="动态分析"><a href="#动态分析" class="headerlink" title="动态分析"></a>动态分析</h4><p>1、F7.单步步过。执行一条语句但不进入函数</p>
+<p>2、F8.单步步入。执行一条指令，会进入函数内部。</p>
+<p>3、Ctrl+F7.执行到返回。执行到函数的返回指令。一般用于快速跳出当前函数。</p>
+<p>4、F4。执行到光标下停下来。将光标悬停在想要执行到的代码，然后按下F4,随后程序就会跳到指向的代码处，一般用于快速跳转到想要执行的代码处。</p>
+<p>5、Ctrl+N(Set IP).强制代码从光标处开始执行。一般用于想重复调试某一块代码时使用。比如，分析一个加密前后的数据，寻找规律。这个时候，我们需要多次输入。按照平常，我们就需要多次重新调试，这样就比较麻烦，而使用set ip就能节省很多时间。</p>
+<p>6、模块窗口（一般安卓用得比较多）。打开方式——菜单–【debugger】–[debuger windows]–[module list]</p>
+<p>7、硬件断点。硬件断点不会修改内存数据。一般情况下，像脱壳，自解密，我们设置一般断点在其之上，会破坏数据。</p>
+<p>下硬件断点的方法：首先先下一个普通断点，然后在普通断点处按下鼠标右键，然后点击edit breakpoint ，然后勾选hardware，就将我们的断点转换为了硬件断点。</p>
+<p><img lazyload src="/images/loading.svg" data-src="/IDA%E6%80%BB%E7%BB%93/image-20230304161001692.png" alt="image-20230304161001692"></p>
+<p>其中下面的，read：表示断点地址被命中时被读取。writer:断点地址被写入时命中。execute:断点地址被执行时命中。</p>
+<p>8、trace分析.打开方法：打开菜单项【debugger】–【tracing】–【tracing options】配置我们的trace。配置好之后，在程序的头部设置一个断点，然后命中断点。再打开进行选择。然后继续运行程序，便成功trace.</p>
+<p><img lazyload src="/images/loading.svg" data-src="/IDA%E6%80%BB%E7%BB%93/image-20230304170248917.png" alt="image-20230304170248917"></p>
+<p>一般用于追踪，混淆，花指令之类。</p>
+
+            </div>
+
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                            rel="prev"
+                            href="/2023/03/30/try-decrypt-me/"
+                            >
+                                <span class="left arrow-icon flex-center">
+                                <i class="fas fa-chevron-left"></i>
+                                </span>
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item"></span>
+                                    <span class="post-nav-item">上一篇</span>
+                                </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                            rel="next"
+                            href="/2023/02/26/2023-vnctf-re-pzgalaxy/"
+                            >
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">2023—VNCTF-re-PZGalaxy</span>
+                                    <span class="post-nav-item">下一篇</span>
+                                </span>
+                                <span class="right arrow-icon flex-center">
+                                <i class="fas fa-chevron-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+                <div class="comment-container">
+                    <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;评论</i>
+    </div>
+    
+
+        
+            
+
+        
+    
+</div>
+
+                </div>
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div style="font-size: 1.3rem;margin-top: 0; margin-bottom: 0.8rem; transition-duration: 0.1s;"><i class="fa-solid fa-list"></i> <strong>目录</strong></div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ida%E6%93%8D%E4%BD%9C"><span class="nav-number">1.</span> <span class="nav-text">ida操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">静态分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E5%88%86%E6%9E%90"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">动态分析</span></a></li></ol></li></ol></li></ol></li></ol>
+    </div>
+</div>
+            </div>
+        
+    </div>
+</div>
+
 
                 
 

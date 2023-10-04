@@ -172,299 +172,161 @@
             <div class="main-content">
 
                 
-                    $avatarWidth = 46px
-$arrow-icon-width = 16px
-$post-nav-max-width = 220px
-$article-title-font-size = 1.6rem
-$temp-toc-width = hexo-config('style.right_side_width')
-$toc-container-width = $temp-toc-width ? convert($temp-toc-width) : 210px
-$without-toc-container-width = calc(100% - 210px)
-.post-page-container{
-  display flex
-  position relative
-  justify-content space-between
-  box-sizing border-box
-  width 100%
-  height 100%
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+            <div class="article-title">
+                <span class="title-hover-animation"><h1 style="font-size:2rem; font-weight: bold; margin: 10px 0;">2021长安杯学生组-snake</h1></span>
+            </div>
 
-  &.show-toc {
-    .toc-content-container {
-      display block
-    }
-
-    .article-content-container {
-      width $without-toc-container-width !important
-    }
-  }
-
-  +redefine-tablet() {
-    .toc-content-container {
-      display none !important
-    }
-
-    .article-content-container {
-      width 100% !important
-    }
-
-    &.show-toc {
-      .toc-content-container {
-        display none
-      }
-
-      .article-content-container {
-        width 100% !important
-      }
-    }
-  }
-
-
-  .article-content-container {
-    width 100%
-    margin-right: 30px
-
-    redefine-container(false, 0, 0, 30px, 30px)
-
-    +redefine-mobile() {
-      padding 1.2rem 0.2rem
-      box-shadow none
-    }
-
-    .article-title {
-      font-family "Noto Sans SC", sans-serif
-      color var(--second-text-color)
-      font-weight 600
-      font-size $article-title-font-size
-
-      +redefine-tablet() {
-        font-size $article-title-font-size * 0.9
-      }
-
-      +redefine-mobile() {
-        font-size $article-title-font-size * 0.8
-      }
-    }
-
-
-    .article-header {
-      font-family "Noto Sans", "Noto Sans SC", sans-serif
-      position relative
-      padding-left $avatarWidth
-      width 100%
-      height $avatarWidth
-      box-sizing border-box
-
-      .avatar {
-        position absolute
-        top 0
-        left 0
-        width $avatarWidth
-        height $avatarWidth
-        padding 1px
-        box-sizing border-box
-        border 1px solid var(--border-color)
-        border-radius 50%
-
-        img {
-          border-radius 50%
-          width 100%
-          height 100%
-          background var(--avatar-background-color)
-        }
-
-      }
-
-
-      .info {
-        padding 2px 0
-        margin-left 10px
-        box-sizing border-box
-        display flex
-        flex-direction column
-        justify-content space-between
-        width 100%
-        height 100%
-
-        .author {
-          font-weight regular
-          font-size 1.18rem
-          display flex
-          align-items center
-
-          .name {
-            color var(--default-text-color)
-          }
-
-          .author-label {
-            margin-left 10px
-            font-size 0.8rem
-            font-weight 500
-            padding 0 5px
-            border-radius 6px
-            color #fff
-            background var(--selection-color)
-          }
-
-        }
-      }
-
-    }
-
-
-    .article-header, .article-header-meta-info {
-      margin-top 16px
-      +redefine-tablet() {
-        transform scale(0.9)
-        transform-origin left top
-      }
-    }
-
-
-    .article-content {
-      margin-top $component-spacing-value
-      padding-bottom 10px
-      word-wrap break-word
-      border-bottom 1px solid var(--border-color)
-      color var(--default-text-color)
-    }
-
-
-    .post-tags-box {
-      display none
-      margin-top 1.6rem
-      justify-content center
-      font-size 1.1rem
-
-      +redefine-tablet() {
-        display flex
-      }
-
-      +redefine-mobile() {
-        margin-top 1.2rem
-        font-size 1rem
-      }
-
-
-      .tag-item {
-        margin 0 0.25rem
-      }
-    }
-
-    .post-copyright-info {
-      margin-top $component-spacing-value
-      width 100%
-
-      +redefine-tablet() {
-        margin-top $component-spacing-value * 0.8
-      }
-    }
-
-
-    .article-nav {
-      height 40px
-      margin-top $component-spacing-value
-
-      .article-prev, .article-next {
-        max-width $post-nav-max-width
-        height 100%
-        box-sizing border-box
-
-        redefine-container(true, 1.03, 1.03, 10px, 0)
-
-        a {
-          position relative
-          display block
-          width 100%
-          height 100%
-          box-sizing border-box
-
-          &.prev {
-            padding-left $arrow-icon-width
-          }
-
-          &.next {
-            padding-right $arrow-icon-width
-          }
-
-          .arrow-icon {
-            position absolute
-            top 0
-            height 100%
-            width $arrow-icon-width
-
-            &.left {
-              left 0
-            }
-
-            &.right {
-              right 0
-            }
-          }
-
-          .title {
-            width 100%
-            height 100%
-          }
-        }
-
-      }
-
-      .article-prev {
-        float left
-      }
-
-      .article-next {
-        float right
-      }
-
-      .post-nav-item {
-        display none
-
-        +redefine-tablet() {
-          display inline-block
-        }
-
-      }
-
-
-      .post-nav-title-item {
-        overflow hidden
-        text-overflow ellipsis
-        white-space nowrap
-
-        +redefine-tablet() {
-          display none
-        }
-      }
-    }
-  }
-
-  .toc-content-container {
-    position sticky
-    top $header-height + $component-spacing-value
-    //border-radius 18px
-    border-radius 0
-    display none
-    width $toc-container-width
-    height auto
-    max-height calc(100vh - 210px)
-    //z-index $z-index-6
-    overflow-y auto
-    float right
-    padding 10px
-    box-sizing border-box
-    box-shadow none !important
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/7.webp">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">二木</span>
+                            
+                                <span class="author-label">王者</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-duotone fa-pen-line"></i>&nbsp;
+        <span class="pc">2023-09-02 12:29:04</span>
+        <span class="mobile">2023-09-02 12:29</span>
+    </span>
+    
     
 
-    hover-style(false, 0, 0)
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>723 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>2 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
 
-    transition-t("display", "0", "0.3", "ease-out")
+                        </div>
+                    </div>
+                </div>
+            
 
-    +redefine-tablet() {
-      left 0 !important
-      display none !important
-    }
-  }
-}
+            <div class="article-content markdown-body">
+                <h1 id="2021长安杯学生组-snake"><a href="#2021长安杯学生组-snake" class="headerlink" title="2021长安杯学生组-snake"></a>2021长安杯学生组-snake</h1><p>这道题拿到手，我们可以发现，这道题开了很高的优化，使得我们一点点的分析代码比较困难，我们就直接看关键的步骤即可。</p>
+<p><img lazyload src="/images/loading.svg" data-src="/./Untitled-169545682564910.png" alt="Untitled"></p>
+<p>这里我们直接查一下flag</p>
+<p><img lazyload src="/images/loading.svg" data-src="/./Untitled%201.png" alt="Untitled"></p>
+<p>进入函数</p>
+<p>![Untitled](./Untitled 2-16954567668451.png)</p>
+<p>我们可以直接知道，游戏玩通关之后我们的flag会自动打印出来，但是这个函数中，其中关于值的，grid_mats这个数据是从外部传入的，我们可以猜测要么与wasd这中步骤数有关，要么与关卡数有关，要么与食物（身体长度有关）。我们查看交叉应用来看看到底是什么？</p>
+<p>![Untitled](./Untitled 3-16954567845912.png)</p>
+<p>通过这些函数名我们可以知道，这里的flag与卡关数是有关的</p>
+<p>![Untitled](./Untitled 4-16954567892043.png)</p>
+<p>主函数里面set_level是生成关卡的，因此操作还是在主函数中</p>
+<p>![Untitled](./Untitled 5-16954567926444.png)</p>
+<p>这里是一个关键地方，判断得分$与判断游戏结束的两个if，这两个if又在一个while循环里面，当我们吃到$的时候，我们就会跳出这个循环，由此我们可以知道，这个循环就是我们移动过程的判定循环，这里我们patch关于v11的判断，将其变成≠$就跳出，这样只要走一步就算是吃了$,但是我们patch之后运行，我们会发现动一下就说游戏结束了，也就是说，肯定还有什么比较关键的判断步骤，会直接让我们跳到重开。</p>
+<p>![Untitled](./Untitled 6-16954567967525.png)</p>
+<p>这个v79这个if判断，我们翻到后面可以知道</p>
+<p>![Untitled](./Untitled 7-16954568002266.png)</p>
+<p>必须当v79等于200的时候，才会打印我们的flag,我们可以知道，我们flag会进过200次的循环计算才能出现。</p>
+<p>![Untitled](./Untitled 8-16954568033587.png)</p>
+<p>通过这个函数我们可以知道，我们的v79代表的是我们的关卡</p>
+<p>在上面的那个图中，有着一个进入show_score是一个判断，之后，便会失败</p>
+<p>![Untitled](./Untitled 9-16954568072168.png)</p>
+<p>这个v82在下面的计算之中，我们可以大致分析（猜）出，这个v82就是关卡判断，判定我们是不是过关了，当v82等于零的时候才算过关，不然就会跳到重开去，由此印证了上的猜测。这里我们同样patch将这个判断变成!v82,这样只要不是0都能过关，这样就是能让我随意按wasd就能直接过下关。</p>
+<p>200关后得出我们的flag.</p>
+<p>![Untitled](./Untitled 10-16954568105959.png)</p>
+<p>做完之后，还是蛮有收获的，其实像这中游戏逆向等，大都那几个步骤，寻找关键函数，关键判断，然后通过patch，或者添加代码来让程序能快速的达到我们的目的。</p>
+
+            </div>
+
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                            rel="prev"
+                            href="/2023/09/22/bo-lu-bei-2021-baby-python-pyinstaller-da-bao-hou-jin-xing-liao-aes-jia-mi-9152683296194b56a51b277fbc669217/"
+                            >
+                                <span class="left arrow-icon flex-center">
+                                <i class="fas fa-chevron-left"></i>
+                                </span>
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">柏鹭杯-2021-baby_python（pyinstaller打包后进行了AES加密）</span>
+                                    <span class="post-nav-item">上一篇</span>
+                                </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                            rel="next"
+                            href="/2023/08/09/hua-zhi-ling-zong-jie-7789b9f63bcd41f2828df0aa7fa2fa23/"
+                            >
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">花指令总结</span>
+                                    <span class="post-nav-item">下一篇</span>
+                                </span>
+                                <span class="right arrow-icon flex-center">
+                                <i class="fas fa-chevron-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+                <div class="comment-container">
+                    <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;评论</i>
+    </div>
+    
+
+        
+            
+
+        
+    
+</div>
+
+                </div>
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div style="font-size: 1.3rem;margin-top: 0; margin-bottom: 0.8rem; transition-duration: 0.1s;"><i class="fa-solid fa-list"></i> <strong>目录</strong></div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2021%E9%95%BF%E5%AE%89%E6%9D%AF%E5%AD%A6%E7%94%9F%E7%BB%84-snake"><span class="nav-number">1.</span> <span class="nav-text">2021长安杯学生组-snake</span></a></li></ol>
+    </div>
+</div>
+            </div>
+        
+    </div>
+</div>
+
 
                 
 

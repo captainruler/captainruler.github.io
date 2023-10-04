@@ -170,299 +170,216 @@
             <div class="main-content">
 
                 
-                    $avatarWidth = 46px
-$arrow-icon-width = 16px
-$post-nav-max-width = 220px
-$article-title-font-size = 1.6rem
-$temp-toc-width = hexo-config('style.right_side_width')
-$toc-container-width = $temp-toc-width ? convert($temp-toc-width) : 210px
-$without-toc-container-width = calc(100% - 210px)
-.post-page-container{
-  display flex
-  position relative
-  justify-content space-between
-  box-sizing border-box
-  width 100%
-  height 100%
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+            <div class="article-title">
+                <span class="title-hover-animation"><h1 style="font-size:2rem; font-weight: bold; margin: 10px 0;"></h1></span>
+            </div>
 
-  &.show-toc {
-    .toc-content-container {
-      display block
-    }
-
-    .article-content-container {
-      width $without-toc-container-width !important
-    }
-  }
-
-  +redefine-tablet() {
-    .toc-content-container {
-      display none !important
-    }
-
-    .article-content-container {
-      width 100% !important
-    }
-
-    &.show-toc {
-      .toc-content-container {
-        display none
-      }
-
-      .article-content-container {
-        width 100% !important
-      }
-    }
-  }
-
-
-  .article-content-container {
-    width 100%
-    margin-right: 30px
-
-    redefine-container(false, 0, 0, 30px, 30px)
-
-    +redefine-mobile() {
-      padding 1.2rem 0.2rem
-      box-shadow none
-    }
-
-    .article-title {
-      font-family "Noto Sans SC", sans-serif
-      color var(--second-text-color)
-      font-weight 600
-      font-size $article-title-font-size
-
-      +redefine-tablet() {
-        font-size $article-title-font-size * 0.9
-      }
-
-      +redefine-mobile() {
-        font-size $article-title-font-size * 0.8
-      }
-    }
-
-
-    .article-header {
-      font-family "Noto Sans", "Noto Sans SC", sans-serif
-      position relative
-      padding-left $avatarWidth
-      width 100%
-      height $avatarWidth
-      box-sizing border-box
-
-      .avatar {
-        position absolute
-        top 0
-        left 0
-        width $avatarWidth
-        height $avatarWidth
-        padding 1px
-        box-sizing border-box
-        border 1px solid var(--border-color)
-        border-radius 50%
-
-        img {
-          border-radius 50%
-          width 100%
-          height 100%
-          background var(--avatar-background-color)
-        }
-
-      }
-
-
-      .info {
-        padding 2px 0
-        margin-left 10px
-        box-sizing border-box
-        display flex
-        flex-direction column
-        justify-content space-between
-        width 100%
-        height 100%
-
-        .author {
-          font-weight regular
-          font-size 1.18rem
-          display flex
-          align-items center
-
-          .name {
-            color var(--default-text-color)
-          }
-
-          .author-label {
-            margin-left 10px
-            font-size 0.8rem
-            font-weight 500
-            padding 0 5px
-            border-radius 6px
-            color #fff
-            background var(--selection-color)
-          }
-
-        }
-      }
-
-    }
-
-
-    .article-header, .article-header-meta-info {
-      margin-top 16px
-      +redefine-tablet() {
-        transform scale(0.9)
-        transform-origin left top
-      }
-    }
-
-
-    .article-content {
-      margin-top $component-spacing-value
-      padding-bottom 10px
-      word-wrap break-word
-      border-bottom 1px solid var(--border-color)
-      color var(--default-text-color)
-    }
-
-
-    .post-tags-box {
-      display none
-      margin-top 1.6rem
-      justify-content center
-      font-size 1.1rem
-
-      +redefine-tablet() {
-        display flex
-      }
-
-      +redefine-mobile() {
-        margin-top 1.2rem
-        font-size 1rem
-      }
-
-
-      .tag-item {
-        margin 0 0.25rem
-      }
-    }
-
-    .post-copyright-info {
-      margin-top $component-spacing-value
-      width 100%
-
-      +redefine-tablet() {
-        margin-top $component-spacing-value * 0.8
-      }
-    }
-
-
-    .article-nav {
-      height 40px
-      margin-top $component-spacing-value
-
-      .article-prev, .article-next {
-        max-width $post-nav-max-width
-        height 100%
-        box-sizing border-box
-
-        redefine-container(true, 1.03, 1.03, 10px, 0)
-
-        a {
-          position relative
-          display block
-          width 100%
-          height 100%
-          box-sizing border-box
-
-          &.prev {
-            padding-left $arrow-icon-width
-          }
-
-          &.next {
-            padding-right $arrow-icon-width
-          }
-
-          .arrow-icon {
-            position absolute
-            top 0
-            height 100%
-            width $arrow-icon-width
-
-            &.left {
-              left 0
-            }
-
-            &.right {
-              right 0
-            }
-          }
-
-          .title {
-            width 100%
-            height 100%
-          }
-        }
-
-      }
-
-      .article-prev {
-        float left
-      }
-
-      .article-next {
-        float right
-      }
-
-      .post-nav-item {
-        display none
-
-        +redefine-tablet() {
-          display inline-block
-        }
-
-      }
-
-
-      .post-nav-title-item {
-        overflow hidden
-        text-overflow ellipsis
-        white-space nowrap
-
-        +redefine-tablet() {
-          display none
-        }
-      }
-    }
-  }
-
-  .toc-content-container {
-    position sticky
-    top $header-height + $component-spacing-value
-    //border-radius 18px
-    border-radius 0
-    display none
-    width $toc-container-width
-    height auto
-    max-height calc(100vh - 210px)
-    //z-index $z-index-6
-    overflow-y auto
-    float right
-    padding 10px
-    box-sizing border-box
-    box-shadow none !important
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/7.webp">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">二木</span>
+                            
+                                <span class="author-label">王者</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-duotone fa-pen-line"></i>&nbsp;
+        <span class="pc">2023-04-06 21:09:41</span>
+        <span class="mobile">2023-04-06 21:09</span>
+    </span>
+    
     
 
-    hover-style(false, 0, 0)
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.7k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>6 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
 
-    transition-t("display", "0", "0.3", "ease-out")
+                        </div>
+                    </div>
+                </div>
+            
 
-    +redefine-tablet() {
-      left 0 !important
-      display none !important
-    }
-  }
-}
+            <div class="article-content markdown-body">
+                <h1 id="函数调用约定"><a href="#函数调用约定" class="headerlink" title="函数调用约定"></a>函数调用约定</h1><p>对于函数调用约定，我们首先应该知道的是为什么产生函数调用约定？为什么要用函数约定？</p>
+<p>首先，我们在写函数时，我们可以知道的是</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span><span class="token keyword">int</span> b<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>像这样，我们很容易知道，函数的返回值是什么类型，有几个参数，以及参数是什么类型。对于我们的CPU来说，我们的C语言是先编译成机械码之后，我们CPU才能执行，但是，变成一条一条的机械码之后，我们的CPU怎么才能知道这个函数有几个参数，以及什么类型等等的问题呢？这个时候就需要我们的函数调用约定。</p>
+<p>其次，深入函数的调用，对于内存上来说，函数的调用者首先依次把参数压栈，然后调用函数，函数被调用以后，在堆栈中申请空间并取得数据，然后在这个临时开辟的空间中进行计算。函数计算结束以后，调用者或者函数本身就会将这片临时的空间释放，然后将参数出栈，使堆栈恢复原状。</p>
+<p>因此自然而然的在进行函数调用时，有两个很重要的问题需要得到明确说明：</p>
+<p>1、当参数个数多于一个时，按照什么顺序将参数压入堆栈<br>2、函数调用后，由谁来将堆栈恢复原状<br>因此，我们的相对高级的语言在处理上述的这些问题的时候，就有着一些约定。</p>
+<p>所以<strong>函数调用约定到底是什么</strong>呢？函数调用约定就是：函数调用者和被调用的函数体之间关于参数传递、返回值传递、堆栈清除、寄存器使用的一种约定。</p>
+<h1 id="一些常见的函数调用约定以及使用"><a href="#一些常见的函数调用约定以及使用" class="headerlink" title="一些常见的函数调用约定以及使用"></a>一些常见的函数调用约定以及使用</h1><p>我们一般写函数的格式都是这样的</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span><span class="token keyword">int</span> b<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>其实这样写是省略了我们函数调用约定的，这样写是运用了c默认的函数调用约定__cdecl，如果不省略我们的函数调用约定就应该这样写</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> __cdecl <span class="token function">func</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span><span class="token keyword">int</span> b<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>在我们函数名前面加上我们的函数调用约定。</p>
+<h2 id="cdecl（C-x2F-C-默认的调用约定）"><a href="#cdecl（C-x2F-C-默认的调用约定）" class="headerlink" title="__cdecl（C/C++默认的调用约定）"></a><strong><strong>__cdecl（C/C++默认的调用约定）</strong></strong></h2><p><strong><strong>__cdecl是C Declaration的缩写，表示C\C++默认的函数调用约定。当我们没有写函数调用约定时，我们编译器会自己默认将其加上。</strong></strong></p>
+<p>_cdecl规定：</p>
+<ul>
+<li>参数从右向左压入堆栈</li>
+<li>由调用者负责清理堆栈（传送参数的内存栈是由调用者来维护的，返回值在EAX中）</li>
+<li>C调用约定允许函数的参数的个数是不固定的。（因此调用参数个数可变的函数只能采用这种方式（如printf））</li>
+<li>编译器在编译时会在函数名前加上一个下划线前缀生成修饰名，格式为_functionname。如函数int Add(int a, int b)的修饰名是_Add</li>
+</ul>
+<h2 id="stdcall（Windows的大多数的API函数采用了这种调用方式）"><a href="#stdcall（Windows的大多数的API函数采用了这种调用方式）" class="headerlink" title="__stdcall（Windows的大多数的API函数采用了这种调用方式）"></a><strong><strong>__stdcall（Windows的大多数的API函数采用了这种调用方式）</strong></strong></h2><ul>
+<li>参数从右向左压入堆栈</li>
+<li>由被调用者负责清理堆栈（函数自己在退出时清空堆栈，返回值在EAX中）</li>
+<li>__stdcall调用约定在输出函数名前加上一个下划线前缀，后面加上一个“@”符号和其参数的字节数，格式为_function@number。如函数int sub(int a, int b)的修饰名是_sub@8。</li>
+</ul>
+<p> 这里__stdcall和__cdecl中第二条主要的区别在于，当调用者负责清理堆栈的时候，调用一次就会需要在调用处编译出恢复栈顶的代码，而被调用者负责清理堆栈的时候，在函数内部编译出恢复栈顶的代码一份就行了。这样就会节省我们的空间。</p>
+<h2 id="fastcall（用于一些需要对参数快速处理的函数）"><a href="#fastcall（用于一些需要对参数快速处理的函数）" class="headerlink" title="__fastcall（用于一些需要对参数快速处理的函数）"></a><strong><strong>__fastcall（用于一些需要对参数快速处理的函数）</strong></strong></h2><p>正如其名，_fastcall调用的主要特点就是快，因为它是通过寄存器来传送参数。</p>
+<ul>
+<li>函数的第一个和第二个（从左向右）两个DWORD或更小的参数，通过ecx和edx传递（寄存器传递），其他参数通过桟传递。从第三个参数（如果有的话）开始<strong>从右向左</strong>的顺序压栈；</li>
+<li>函数自身清理堆栈</li>
+<li>在函数名之前加上”@”,在函数名后面也加上“@”和参数字节数，例如@function@8</li>
+</ul>
+<p>和__stdcall与__cdecl相比最主要的区别是，__fastcall把第1和第2个参数放到了寄存器中，而不是压栈，因为寄存器的读写速度比栈快很多，所以叫做fast call。</p>
+<h2 id="thiscall-C-类成员函数默认调用约定"><a href="#thiscall-C-类成员函数默认调用约定" class="headerlink" title="__thiscall(C++类成员函数默认调用约定)"></a><strong>__thiscall(C++类成员函数默认调用约定)</strong></h2><p>thiscall是一个不能明确指明的函数修饰，thiscall不是关键字，thiscall只能用于C++类成员函数的调用。而且thiscall也是C++成员函数缺省的调用约定，由于成员函数调用还有一个this指针，因此需要特殊处理。</p>
+<ul>
+<li>参数从右向左压入堆栈</li>
+<li>如果参数个数不确定，this指针在所有参数压栈后被压入堆栈。如果参数个数确定，this指针通过ecx传递给被调用者</li>
+<li>如果参数个数不确定，调用者清理堆栈，否则函数自己清理堆栈</li>
+</ul>
+<h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><h3 id="C-编译时函数名修饰约定规则："><a href="#C-编译时函数名修饰约定规则：" class="headerlink" title="C++编译时函数名修饰约定规则："></a>C++编译时函数名修饰约定规则：</h3><p>以“?”标识函数名的开始，后跟函数名；</p>
+<p>函数名后面以“@@YG”标识参数表的开始，后跟参数表；</p>
+<p>2.函数名后面标识调用约定，然后跟参数列表。</p>
+<p>__cdecl，@@YA</p>
+<p>__stdcall，@@YG</p>
+<p>__fastcall，@@YI</p>
+<p>参数表以代号表示：</p>
+<p>X–void ，</p>
+<p>D–char，</p>
+<p>E–unsigned char，</p>
+<p>F–short，</p>
+<p>H–int，</p>
+<p>I–unsigned int，</p>
+<p>J–long，</p>
+<p>K–unsigned long，</p>
+<p>M–float，</p>
+<p>N–double，</p>
+<p>_N–bool，</p>
+<p>PA–表示指针,后面的代号表明指针类型，如果相同类型的指针连续出现，以“0”代替，一个“0”代表一次重复<br>…</p>
+<p>参数表的第一项为该函数的返回值类型，其后依次为参数的数据类型,指针标识在其所指数据类型前；</p>
+<p>参数表后以“@Z”标识整个名字的结束，如果该函数无参数，则以“Z”标识结束。</p>
+<p>例如:</p>
+<p>int Test1（char *var1,unsigned long）—–“?Test1@@YGHPADK@Z”<br>void Test2（） —–“?Test2@@YGXXZ”</p>
+<p>“int __cdecl a(char)————?a@@YAHD@Z”</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a class="link" target="_blank" rel="noopener" href="https://blog.csdn.net/mlyjqx/article/details/73844565">(62条消息) C语言的函数调用约定（stdcall+cdecl+thiscall+fastcall）_int stdcall_莲娃的博客-CSDN博客<i class="fas fa-external-link-alt"></i></a></p>
+<p><a class="link" target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39640298/article/details/84455481">(60条消息) 函数调用约定的详解_YoungYangD的博客-CSDN博客<i class="fas fa-external-link-alt"></i></a></p>
+<p><a class="link" target="_blank" rel="noopener" href="https://blog.csdn.net/luoweifu/article/details/52425733">(62条消息) 带你玩转Visual Studio——调用约定__cdecl、__stdcall和__fastcall_vs调用规则cdecl_luoweifu的博客-CSDN博客<i class="fas fa-external-link-alt"></i></a></p>
+<p><a class="link" target="_blank" rel="noopener" href="http://www.3scard.com/index.php?m=blog&amp;f=view&amp;id=10">调用约定(Calling Conventions) 函数名修饰(Name Mangling) 二进制分析工具 - 通用C++ - 蜗牛大锅的博客 (3scard.com)<i class="fas fa-external-link-alt"></i></a></p>
+
+            </div>
+
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                            rel="prev"
+                            href="/2023/04/18/2023-gudoctf-l-s/"
+                            >
+                                <span class="left arrow-icon flex-center">
+                                <i class="fas fa-chevron-left"></i>
+                                </span>
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item"></span>
+                                    <span class="post-nav-item">上一篇</span>
+                                </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                            rel="next"
+                            href="/2023/04/05/nu1l-2023-zhao-xin-ti-mu/"
+                            >
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item"></span>
+                                    <span class="post-nav-item">下一篇</span>
+                                </span>
+                                <span class="right arrow-icon flex-center">
+                                <i class="fas fa-chevron-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+                <div class="comment-container">
+                    <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;评论</i>
+    </div>
+    
+
+        
+            
+
+        
+    
+</div>
+
+                </div>
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div style="font-size: 1.3rem;margin-top: 0; margin-bottom: 0.8rem; transition-duration: 0.1s;"><i class="fa-solid fa-list"></i> <strong>目录</strong></div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E7%BA%A6%E5%AE%9A"><span class="nav-number">1.</span> <span class="nav-text">函数调用约定</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E5%B8%B8%E8%A7%81%E7%9A%84%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E7%BA%A6%E5%AE%9A%E4%BB%A5%E5%8F%8A%E4%BD%BF%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">一些常见的函数调用约定以及使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#cdecl%EF%BC%88C-x2F-C-%E9%BB%98%E8%AE%A4%E7%9A%84%E8%B0%83%E7%94%A8%E7%BA%A6%E5%AE%9A%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">__cdecl（C&#x2F;C++默认的调用约定）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stdcall%EF%BC%88Windows%E7%9A%84%E5%A4%A7%E5%A4%9A%E6%95%B0%E7%9A%84API%E5%87%BD%E6%95%B0%E9%87%87%E7%94%A8%E4%BA%86%E8%BF%99%E7%A7%8D%E8%B0%83%E7%94%A8%E6%96%B9%E5%BC%8F%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">__stdcall（Windows的大多数的API函数采用了这种调用方式）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fastcall%EF%BC%88%E7%94%A8%E4%BA%8E%E4%B8%80%E4%BA%9B%E9%9C%80%E8%A6%81%E5%AF%B9%E5%8F%82%E6%95%B0%E5%BF%AB%E9%80%9F%E5%A4%84%E7%90%86%E7%9A%84%E5%87%BD%E6%95%B0%EF%BC%89"><span class="nav-number">2.3.</span> <span class="nav-text">__fastcall（用于一些需要对参数快速处理的函数）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#thiscall-C-%E7%B1%BB%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E9%BB%98%E8%AE%A4%E8%B0%83%E7%94%A8%E7%BA%A6%E5%AE%9A"><span class="nav-number">2.4.</span> <span class="nav-text">__thiscall(C++类成员函数默认调用约定)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%A5%E5%85%85"><span class="nav-number">3.</span> <span class="nav-text">补充</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#C-%E7%BC%96%E8%AF%91%E6%97%B6%E5%87%BD%E6%95%B0%E5%90%8D%E4%BF%AE%E9%A5%B0%E7%BA%A6%E5%AE%9A%E8%A7%84%E5%88%99%EF%BC%9A"><span class="nav-number">3.0.1.</span> <span class="nav-text">C++编译时函数名修饰约定规则：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol>
+    </div>
+</div>
+            </div>
+        
+    </div>
+</div>
+
 
                 
 

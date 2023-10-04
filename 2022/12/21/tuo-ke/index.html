@@ -172,299 +172,181 @@
             <div class="main-content">
 
                 
-                    $avatarWidth = 46px
-$arrow-icon-width = 16px
-$post-nav-max-width = 220px
-$article-title-font-size = 1.6rem
-$temp-toc-width = hexo-config('style.right_side_width')
-$toc-container-width = $temp-toc-width ? convert($temp-toc-width) : 210px
-$without-toc-container-width = calc(100% - 210px)
-.post-page-container{
-  display flex
-  position relative
-  justify-content space-between
-  box-sizing border-box
-  width 100%
-  height 100%
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+            <div class="article-title">
+                <span class="title-hover-animation"><h1 style="font-size:2rem; font-weight: bold; margin: 10px 0;">脱壳</h1></span>
+            </div>
 
-  &.show-toc {
-    .toc-content-container {
-      display block
-    }
-
-    .article-content-container {
-      width $without-toc-container-width !important
-    }
-  }
-
-  +redefine-tablet() {
-    .toc-content-container {
-      display none !important
-    }
-
-    .article-content-container {
-      width 100% !important
-    }
-
-    &.show-toc {
-      .toc-content-container {
-        display none
-      }
-
-      .article-content-container {
-        width 100% !important
-      }
-    }
-  }
-
-
-  .article-content-container {
-    width 100%
-    margin-right: 30px
-
-    redefine-container(false, 0, 0, 30px, 30px)
-
-    +redefine-mobile() {
-      padding 1.2rem 0.2rem
-      box-shadow none
-    }
-
-    .article-title {
-      font-family "Noto Sans SC", sans-serif
-      color var(--second-text-color)
-      font-weight 600
-      font-size $article-title-font-size
-
-      +redefine-tablet() {
-        font-size $article-title-font-size * 0.9
-      }
-
-      +redefine-mobile() {
-        font-size $article-title-font-size * 0.8
-      }
-    }
-
-
-    .article-header {
-      font-family "Noto Sans", "Noto Sans SC", sans-serif
-      position relative
-      padding-left $avatarWidth
-      width 100%
-      height $avatarWidth
-      box-sizing border-box
-
-      .avatar {
-        position absolute
-        top 0
-        left 0
-        width $avatarWidth
-        height $avatarWidth
-        padding 1px
-        box-sizing border-box
-        border 1px solid var(--border-color)
-        border-radius 50%
-
-        img {
-          border-radius 50%
-          width 100%
-          height 100%
-          background var(--avatar-background-color)
-        }
-
-      }
-
-
-      .info {
-        padding 2px 0
-        margin-left 10px
-        box-sizing border-box
-        display flex
-        flex-direction column
-        justify-content space-between
-        width 100%
-        height 100%
-
-        .author {
-          font-weight regular
-          font-size 1.18rem
-          display flex
-          align-items center
-
-          .name {
-            color var(--default-text-color)
-          }
-
-          .author-label {
-            margin-left 10px
-            font-size 0.8rem
-            font-weight 500
-            padding 0 5px
-            border-radius 6px
-            color #fff
-            background var(--selection-color)
-          }
-
-        }
-      }
-
-    }
-
-
-    .article-header, .article-header-meta-info {
-      margin-top 16px
-      +redefine-tablet() {
-        transform scale(0.9)
-        transform-origin left top
-      }
-    }
-
-
-    .article-content {
-      margin-top $component-spacing-value
-      padding-bottom 10px
-      word-wrap break-word
-      border-bottom 1px solid var(--border-color)
-      color var(--default-text-color)
-    }
-
-
-    .post-tags-box {
-      display none
-      margin-top 1.6rem
-      justify-content center
-      font-size 1.1rem
-
-      +redefine-tablet() {
-        display flex
-      }
-
-      +redefine-mobile() {
-        margin-top 1.2rem
-        font-size 1rem
-      }
-
-
-      .tag-item {
-        margin 0 0.25rem
-      }
-    }
-
-    .post-copyright-info {
-      margin-top $component-spacing-value
-      width 100%
-
-      +redefine-tablet() {
-        margin-top $component-spacing-value * 0.8
-      }
-    }
-
-
-    .article-nav {
-      height 40px
-      margin-top $component-spacing-value
-
-      .article-prev, .article-next {
-        max-width $post-nav-max-width
-        height 100%
-        box-sizing border-box
-
-        redefine-container(true, 1.03, 1.03, 10px, 0)
-
-        a {
-          position relative
-          display block
-          width 100%
-          height 100%
-          box-sizing border-box
-
-          &.prev {
-            padding-left $arrow-icon-width
-          }
-
-          &.next {
-            padding-right $arrow-icon-width
-          }
-
-          .arrow-icon {
-            position absolute
-            top 0
-            height 100%
-            width $arrow-icon-width
-
-            &.left {
-              left 0
-            }
-
-            &.right {
-              right 0
-            }
-          }
-
-          .title {
-            width 100%
-            height 100%
-          }
-        }
-
-      }
-
-      .article-prev {
-        float left
-      }
-
-      .article-next {
-        float right
-      }
-
-      .post-nav-item {
-        display none
-
-        +redefine-tablet() {
-          display inline-block
-        }
-
-      }
-
-
-      .post-nav-title-item {
-        overflow hidden
-        text-overflow ellipsis
-        white-space nowrap
-
-        +redefine-tablet() {
-          display none
-        }
-      }
-    }
-  }
-
-  .toc-content-container {
-    position sticky
-    top $header-height + $component-spacing-value
-    //border-radius 18px
-    border-radius 0
-    display none
-    width $toc-container-width
-    height auto
-    max-height calc(100vh - 210px)
-    //z-index $z-index-6
-    overflow-y auto
-    float right
-    padding 10px
-    box-sizing border-box
-    box-shadow none !important
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/7.webp">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">二木</span>
+                            
+                                <span class="author-label">王者</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-duotone fa-pen-line"></i>&nbsp;
+        <span class="pc">2022-12-21 22:46:18</span>
+        <span class="mobile">2022-12-21 22:46</span>
+    </span>
+    
     
 
-    hover-style(false, 0, 0)
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>3 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
 
-    transition-t("display", "0", "0.3", "ease-out")
+                        </div>
+                    </div>
+                </div>
+            
 
-    +redefine-tablet() {
-      left 0 !important
-      display none !important
-    }
-  }
-}
+            <div class="article-content markdown-body">
+                <h1 id="对于脱壳一些题型的记录"><a href="#对于脱壳一些题型的记录" class="headerlink" title="对于脱壳一些题型的记录"></a>对于脱壳一些题型的记录</h1><p>对于手动脱壳，我们有两种常用的安全工具，一个是od,另一个是ida。两个方法略有不同。对于脱一般的程序壳的时候，我主要用的是ida来脱壳，一般ida实在脱不了了再想到用od来脱，od,，所以我记录的大多都是用的ida来脱的。</p>
+<h3 id="大致步骤"><a href="#大致步骤" class="headerlink" title="大致步骤"></a>大致步骤</h3><h5 id="1、寻找oep"><a href="#1、寻找oep" class="headerlink" title="1、寻找oep"></a>1、寻找oep</h5><p>因为我们的壳经过运行之后，会慢慢的自动解开壳，我们就要去寻找解开后的那个时候的程序入口。而oep就是程序的入口。</p>
+<h5 id="2、寻找到加密函数"><a href="#2、寻找到加密函数" class="headerlink" title="2、寻找到加密函数"></a>2、寻找到加密函数</h5><p>找到oep之后，运行下来，我们的程序就出来了。我们就可以去寻找了。string里面去寻找字符串，然后再跳到函数里面，去就可以直接分析了。</p>
+<h5 id="3、dump与修复"><a href="#3、dump与修复" class="headerlink" title="3、dump与修复"></a>3、dump与修复</h5><p>有些时候，可能我们要将程序剥离出来，这个时候就在oep口的地方将全部程序dump出来即可，dump出来之后还要进行修复文件，因为它的程序地址那些会发生改变，因此我们需要修复IAT。</p>
+<p><strong>对于脱壳运用最多的方法，一个是单步调试法，另一个就是ESP定律来脱壳</strong></p>
+<h3 id="单步调试法"><a href="#单步调试法" class="headerlink" title="单步调试法"></a>单步调试法</h3><p>正如其名，单步调试法就是进行动态调试文件，分析汇编指令，找到关键点,寻找oep</p>
+<h3 id="esp定律（堆栈平衡）"><a href="#esp定律（堆栈平衡）" class="headerlink" title="esp定律（堆栈平衡）"></a>esp定律（堆栈平衡）</h3><p>由于我们壳会在内存中还原程序，跳到oep，执行我们的程序。大致过程就是运行壳程序解壳，然后退出解壳程序，加载原本程序。有着壳程序的运行与退出，根据堆栈平衡原理，壳退出后，必然会操作堆栈指针为进入之前的堆栈指针。因此根据这个原理，我们可以在堆栈处，设置访问断点，让程序运行，当程序暂停的时候，就是壳程序即将执行完的时候，然后在其附近单步跟踪就可以找到原始OEP了。</p>
+<h3 id="UPX"><a href="#UPX" class="headerlink" title="UPX"></a>UPX</h3><h3 id="题目一："><a href="#题目一：" class="headerlink" title="题目一："></a>题目一：</h3><h3 id="链接：https-pan-baidu-com-s-1teQgV5kgKpuNJ60o0byYVg-pwd-j8mj"><a href="#链接：https-pan-baidu-com-s-1teQgV5kgKpuNJ60o0byYVg-pwd-j8mj" class="headerlink" title="链接：https://pan.baidu.com/s/1teQgV5kgKpuNJ60o0byYVg?pwd=j8mj"></a>链接：<a class="link" target="_blank" rel="noopener" href="https://pan.baidu.com/s/1teQgV5kgKpuNJ60o0byYVg?pwd=j8mj">https://pan.baidu.com/s/1teQgV5kgKpuNJ60o0byYVg?pwd=j8mj<i class="fas fa-external-link-alt"></i></a></h3><h3 id="提取码：j8mj"><a href="#提取码：j8mj" class="headerlink" title="提取码：j8mj"></a>提取码：j8mj</h3><h6 id="单步调试法-1"><a href="#单步调试法-1" class="headerlink" title="单步调试法"></a>单步调试法</h6><p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221221172644959.png" alt="image-20221221172644959"></p>
+<p>这个jmp非常可疑（一般那种jmp有大跳转就要注意），我们在这里按下f2 下断点，运行之后，按f7跟入。</p>
+<p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221221174102488.png" alt="image-20221221174102488"></p>
+<p>到这里大致就可以猜出我们找对了。</p>
+<p>按f8，运行到  jmp,f7跟入</p>
+<p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221221175001632.png" alt="image-20221221175001632"></p>
+<p>到这里就差不多知道找到oep了，由于这样ida没有将它分析出来，我们按p，将其分析出来</p>
+<p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221221175423558.png" alt="image-20221221175423558"></p>
+<p>进行反汇编之后发现看不懂，也没有找到我们的函数。这里有两个方法，一个就是单步，直到程序等待输入，另一个方法就是直接去string中搜索，字符串。我运用的是第二种。</p>
+<p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221221203234327.png"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221221203609175.png" alt="image-20221221203609175"></p>
+<p>按键盘上的X快捷键。<img lazyload src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221221203438864-1671634100072-1.png" alt="image-20221221203438864-1671634100072-1"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221221203345394.png" alt="image-20221221203345394"></p>
+<p>查询交叉引用就可以找到我们的加密函数，按f5反汇编即可。然后进行分析即可。</p>
+<h3 id="题目二"><a href="#题目二" class="headerlink" title="题目二"></a>题目二</h3><h3 id="链接：https-pan-baidu-com-s-1-e-A7gJow71q4s8KYs0JfQ-pwd-fycv"><a href="#链接：https-pan-baidu-com-s-1-e-A7gJow71q4s8KYs0JfQ-pwd-fycv" class="headerlink" title="链接：https://pan.baidu.com/s/1_e_A7gJow71q4s8KYs0JfQ?pwd=fycv"></a>链接：<a class="link" target="_blank" rel="noopener" href="https://pan.baidu.com/s/1_e_A7gJow71q4s8KYs0JfQ?pwd=fycv">https://pan.baidu.com/s/1_e_A7gJow71q4s8KYs0JfQ?pwd=fycv<i class="fas fa-external-link-alt"></i></a></h3><h3 id="提取码：fycv"><a href="#提取码：fycv" class="headerlink" title="提取码：fycv"></a>提取码：fycv</h3><p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227095122670.png" alt="image-20221227095122670"></p>
+<p>直接在程序的第一条指令上下一个断点。然后运行，寻找可疑点。</p>
+<p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227095328753.png" alt="image-20221227095328753"></p>
+<p>指令的最后有个retn,这里我们按f4运行到此处，再按f7跟入。</p>
+<p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227095542230.png" alt="image-20221227095542230"></p>
+<p>进入之后发现最后的jmp,我们继续像先前一样，f4,f7跟入。</p>
+<p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227095720390.png" alt="image-20221227095720390"></p>
+<p>继续重复上面步骤。</p>
+<p><img lazyload src="/images/loading.svg" data-src="/image-20221227095757480.png" alt="image-20221227095757480"></p>
+<p>继续</p>
+<p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227095822799.png" alt="image-20221227095822799"></p>
+<p>继续</p>
+<p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227095854783.png" alt="image-20221227095854783"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227095925714.png" alt="image-20221227095925714"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227095948589.png" alt="image-20221227095948589"></p>
+<p>跟到了这里我们就大致可以知道了，我们马上成功了，我们找到了oep。继续</p>
+<p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227103349134.png" alt="image-20221227103349134"></p>
+<p>到这里之后按p分析，就成了现在的样子，到这里就找到了我们的oep了。</p>
+<p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227103532762.png" alt="image-20221227103532762"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227103552479.png" alt="image-20221227103552479"></p>
+<p>在这里按c,再按p，再反汇编就可以得到我们的加密函数了</p>
+<p><img lazyload src="/images/loading.svg" data-src="/2022/12/21/tuo-ke/image-20221227103659899.png" alt="image-20221227103659899"></p>
+<hr>
+<p>通过这两到题，我们大致可以发现，upx脱壳，就是去寻找可疑点，jmp,或者ret，因为壳是一个程序，因此我们脱壳就是要其运行完成的结果，所以我们在脱壳过程中总是要跳到ret，也就是这个原因。最后到oep的时候也很有特点，多脱几次就有感觉了。</p>
+
+            </div>
+
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                            rel="prev"
+                            href="/2022/12/24/csapp-di-san-zhang-cheng-xu-de-ji-qi-ji-biao-shi/"
+                            >
+                                <span class="left arrow-icon flex-center">
+                                <i class="fas fa-chevron-left"></i>
+                                </span>
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">csapp 第三章 程序的机器级表示</span>
+                                    <span class="post-nav-item">上一篇</span>
+                                </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                            rel="next"
+                            href="/2022/12/21/csapp-di-er-zhang-xin-xi-de-biao-shi-he-chu-li/"
+                            >
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">csapp 第二章 信息的表示和处理</span>
+                                    <span class="post-nav-item">下一篇</span>
+                                </span>
+                                <span class="right arrow-icon flex-center">
+                                <i class="fas fa-chevron-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+                <div class="comment-container">
+                    <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;评论</i>
+    </div>
+    
+
+        
+            
+
+        
+    
+</div>
+
+                </div>
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div style="font-size: 1.3rem;margin-top: 0; margin-bottom: 0.8rem; transition-duration: 0.1s;"><i class="fa-solid fa-list"></i> <strong>目录</strong></div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%B9%E4%BA%8E%E8%84%B1%E5%A3%B3%E4%B8%80%E4%BA%9B%E9%A2%98%E5%9E%8B%E7%9A%84%E8%AE%B0%E5%BD%95"><span class="nav-number">1.</span> <span class="nav-text">对于脱壳一些题型的记录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%A7%E8%87%B4%E6%AD%A5%E9%AA%A4"><span class="nav-number">1.0.1.</span> <span class="nav-text">大致步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1%E3%80%81%E5%AF%BB%E6%89%BEoep"><span class="nav-number">1.0.1.0.1.</span> <span class="nav-text">1、寻找oep</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2%E3%80%81%E5%AF%BB%E6%89%BE%E5%88%B0%E5%8A%A0%E5%AF%86%E5%87%BD%E6%95%B0"><span class="nav-number">1.0.1.0.2.</span> <span class="nav-text">2、寻找到加密函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3%E3%80%81dump%E4%B8%8E%E4%BF%AE%E5%A4%8D"><span class="nav-number">1.0.1.0.3.</span> <span class="nav-text">3、dump与修复</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E6%AD%A5%E8%B0%83%E8%AF%95%E6%B3%95"><span class="nav-number">1.0.2.</span> <span class="nav-text">单步调试法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#esp%E5%AE%9A%E5%BE%8B%EF%BC%88%E5%A0%86%E6%A0%88%E5%B9%B3%E8%A1%A1%EF%BC%89"><span class="nav-number">1.0.3.</span> <span class="nav-text">esp定律（堆栈平衡）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UPX"><span class="nav-number">1.0.4.</span> <span class="nav-text">UPX</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E4%B8%80%EF%BC%9A"><span class="nav-number">1.0.5.</span> <span class="nav-text">题目一：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%BE%E6%8E%A5%EF%BC%9Ahttps-pan-baidu-com-s-1teQgV5kgKpuNJ60o0byYVg-pwd-j8mj"><span class="nav-number">1.0.6.</span> <span class="nav-text">链接：https:&#x2F;&#x2F;pan.baidu.com&#x2F;s&#x2F;1teQgV5kgKpuNJ60o0byYVg?pwd&#x3D;j8mj</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E5%8F%96%E7%A0%81%EF%BC%9Aj8mj"><span class="nav-number">1.0.7.</span> <span class="nav-text">提取码：j8mj</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%8D%95%E6%AD%A5%E8%B0%83%E8%AF%95%E6%B3%95-1"><span class="nav-number">1.0.7.0.0.1.</span> <span class="nav-text">单步调试法</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E4%BA%8C"><span class="nav-number">1.0.8.</span> <span class="nav-text">题目二</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%BE%E6%8E%A5%EF%BC%9Ahttps-pan-baidu-com-s-1-e-A7gJow71q4s8KYs0JfQ-pwd-fycv"><span class="nav-number">1.0.9.</span> <span class="nav-text">链接：https:&#x2F;&#x2F;pan.baidu.com&#x2F;s&#x2F;1_e_A7gJow71q4s8KYs0JfQ?pwd&#x3D;fycv</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E5%8F%96%E7%A0%81%EF%BC%9Afycv"><span class="nav-number">1.0.10.</span> <span class="nav-text">提取码：fycv</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+            </div>
+        
+    </div>
+</div>
+
 
                 
 

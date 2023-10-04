@@ -9,6 +9,8 @@
     
     <title>
         
+            网鼎杯-2020-青龙组-jocker |
+        
         二木的博客小屋
     </title>
     
@@ -174,7 +176,7 @@
     <div class="post-page-container">
         <div class="article-content-container">
             <div class="article-title">
-                <span class="title-hover-animation"><h1 style="font-size:2rem; font-weight: bold; margin: 10px 0;"></h1></span>
+                <span class="title-hover-animation"><h1 style="font-size:2rem; font-weight: bold; margin: 10px 0;">网鼎杯-2020-青龙组-jocker</h1></span>
             </div>
 
             
@@ -193,8 +195,8 @@
                             <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fa-duotone fa-pen-line"></i>&nbsp;
-        <span class="pc">2023-04-18 00:04:34</span>
-        <span class="mobile">2023-04-18 00:04</span>
+        <span class="pc">2023-10-04 18:08:54</span>
+        <span class="mobile">2023-10-04 18:08</span>
     </span>
     
     
@@ -202,12 +204,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>710 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>373 字</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>2 分钟</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>1 分钟</span>
         </span>
     
     
@@ -223,46 +225,29 @@
             
 
             <div class="article-content markdown-body">
-                <h1 id="L-S"><a href="#L-S" class="headerlink" title="L!S!"></a>L!S!</h1><p>说实话，起初看到这道题是很懵逼的，莫名其妙的两个文件，刚开始还没有理解到ls指得是linux的命令，以为是两个ELF可执行文件罢了。于是乎，我将其放入linux运行之后发现到一些端倪。</p>
-<p><img lazyload src="/images/loading.svg" data-src="/L!S!%202e371aba70d2456a965c6ef22fd7be8b/Untitled.png" alt="Untitled"></p>
-<p>运行两个文件，发现居然都是执行的ls命名。后来尝试运行将文件运行加上ls的命令，比如ls -help是查看ls命令帮助，我./ls-original -help，也是同样的情况。</p>
-<p>两个同样的文件，都是ls，似乎还是源码的感觉。想了很久，有仔细看了看名字，才恍然大悟。原来的将ls修改了，一个是修改后的，一个是源码。正好前些阵子听师傅讲过一个插件。bindiff,IDA插件，用于恢复符号表和对比函数。正好可以做这道题。</p>
-<p>这个大佬对于安装写得很详细</p>
-<p><a class="link" target="_blank" rel="noopener" href="https://www.cnblogs.com/lsdb/p/10543411.html">BinDiff安装使用教程 - 诸子流 - 博客园 (cnblogs.com)<i class="fas fa-external-link-alt"></i></a></p>
-<p>安装bindiff之后，我们打开IDA分析patch后的文件，然后分析源码文件，然后关闭文件，我们需要的是源码文件的IDB文件。</p>
-<p><img lazyload src="/images/loading.svg" data-src="/L!S!%202e371aba70d2456a965c6ef22fd7be8b/Untitled%201.png" alt="Untitled"></p>
-<p>打开我们的源码IDB，这个文件进入分析</p>
-<p><img lazyload src="/images/loading.svg" data-src="/L!S!%202e371aba70d2456a965c6ef22fd7be8b/Untitled%202.png" alt="Untitled"></p>
-<p>我们直接点到这个Matched Function这个窗口，这个窗口就是我们已经匹配的函数</p>
-<p><img lazyload src="/images/loading.svg" data-src="/L!S!%202e371aba70d2456a965c6ef22fd7be8b/Untitled%203.png" alt="Untitled"></p>
-<p>对于最前面的这个列表，表示的就是函数匹配程度，1代表完全匹配，越接近1匹配程度越高。</p>
-<p><img lazyload src="/images/loading.svg" data-src="/L!S!%202e371aba70d2456a965c6ef22fd7be8b/Untitled%204.png" alt="Untitled"></p>
-<p>我们翻到后面，发现有一个函数只有0.84，这个就是更改过后的函数了。</p>
-<p><img lazyload src="/images/loading.svg" data-src="/L!S!%202e371aba70d2456a965c6ef22fd7be8b/Untitled%205.png" alt="Untitled"></p>
-<p>进入函数分析</p>
-<p><img lazyload src="/images/loading.svg" data-src="/L!S!%202e371aba70d2456a965c6ef22fd7be8b/Untitled%206.png" alt="Untitled"></p>
-<p>通过分析，我们可以知道，是将v19,v20这些数据进行了加密，而加密方式是简单的异或，但是IDA分析得很乱，具体是怎么异或的，或者异或的啥我们都不知道。而且发现有反调试（确切不知道，主要是一调试就会强制退出）。我们先将数据提取出来。</p>
-<p>到了这里，我们来想一想我们手上有那些有用的信息，我们知道数据，而且知道了加密方式，知道前六个字符铁定是HZCTF｛。根据这些信息我们可以对其异或的值进行爆破，然后再通过观察得到的值来查找规律。不料，直接一发入魂，爆破出来，异或的全是76。然后我们直接写脚本解出flag</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
+                <p>(SMC自解密+XOR+猜!)</p>
+<p>正如这道题的名字,我做的时候就挺jocker的,题不是很难,但是最后的猜猜大法才能出flag是我没想到的,而且就算是把flag解出来了,给程序也不会有正确的回显,这就挺…..jocker</p>
+<p>IDA打开,很容易知道flag为24位,进行了三个加密,我们分别分析</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2023/10/04/wang-ding-bei-2020-qing-long-zu-jocker/image-20231004181449084.png" alt="image-20231004181449084"></p>
+<p>wrong函数,就是一个简单的加密函数</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2023/10/04/wang-ding-bei-2020-qing-long-zu-jocker/image-20231004181735810.png" alt="image-20231004181735810"></p>
+<p>omg函数就是对上面那个函数的检验</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2023/10/04/wang-ding-bei-2020-qing-long-zu-jocker/image-20231004181820843.png" alt="image-20231004181820843"></p>
+<p>这里我们就可以解出第一层密码,我们可以知道这个密码是假的</p>
+<p>下面的两个函数需要进行SMC解密</p>
+<p>对于SMC两种方法,一种用脚本,一种直接动调</p>
+<p>脚本:</p>
+<div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> idc_bc695 <span class="keyword">import</span> *</span><br><span class="line">s=<span class="number">0x402219</span>                   <span class="comment">#加密地址</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">224</span>):            <span class="comment">#循环</span></span><br><span class="line">    PatchByte(s+i,Byte(s+i)^<span class="number">0x41</span>)          <span class="comment">#加密的间隔   Byte(s+i)^0x99表示需要进行的加密操作</span></span><br></pre></td></tr></tbody></table></figure></div>
 
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token keyword">int</span> i<span class="token punctuation">,</span> x <span class="token operator">=</span> <span class="token number">45</span><span class="token punctuation">;</span>
-    <span class="token keyword">char</span> m <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-    <span class="token keyword">unsigned</span> <span class="token keyword">char</span> data<span class="token punctuation">[</span><span class="token number">46</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
-        <span class="token number">0x04</span><span class="token punctuation">,</span> <span class="token number">0x16</span><span class="token punctuation">,</span> <span class="token number">0x0F</span><span class="token punctuation">,</span> <span class="token number">0x18</span><span class="token punctuation">,</span> <span class="token number">0x0A</span><span class="token punctuation">,</span> <span class="token number">0x37</span><span class="token punctuation">,</span> <span class="token number">0x2E</span><span class="token punctuation">,</span> <span class="token number">0x7D</span><span class="token punctuation">,</span> <span class="token number">0x22</span><span class="token punctuation">,</span> <span class="token number">0x28</span><span class="token punctuation">,</span> <span class="token number">0x25</span><span class="token punctuation">,</span> <span class="token number">0x2A</span><span class="token punctuation">,</span> <span class="token number">0x2A</span><span class="token punctuation">,</span> <span class="token number">0x13</span><span class="token punctuation">,</span> <span class="token number">0x7D</span><span class="token punctuation">,</span> <span class="token number">0x3F</span><span class="token punctuation">,</span>
-        <span class="token number">0x13</span><span class="token punctuation">,</span> <span class="token number">0x2D</span><span class="token punctuation">,</span> <span class="token number">0x13</span><span class="token punctuation">,</span> <span class="token number">0x39</span><span class="token punctuation">,</span> <span class="token number">0x3F</span><span class="token punctuation">,</span> <span class="token number">0x7F</span><span class="token punctuation">,</span> <span class="token number">0x2A</span><span class="token punctuation">,</span> <span class="token number">0x39</span><span class="token punctuation">,</span> <span class="token number">0x20</span><span class="token punctuation">,</span> <span class="token number">0x13</span><span class="token punctuation">,</span> <span class="token number">0x38</span><span class="token punctuation">,</span> <span class="token number">0x7C</span><span class="token punctuation">,</span> <span class="token number">0x7C</span><span class="token punctuation">,</span> <span class="token number">0x20</span><span class="token punctuation">,</span> <span class="token number">0x31</span><span class="token punctuation">,</span> <span class="token number">0x00</span><span class="token punctuation">,</span>
-        <span class="token number">0x40</span><span class="token punctuation">,</span> <span class="token number">0x20</span><span class="token punctuation">,</span> <span class="token number">0x77</span><span class="token punctuation">,</span> <span class="token number">0x10</span><span class="token punctuation">,</span> <span class="token number">0xB6</span><span class="token punctuation">,</span> <span class="token number">0x55</span><span class="token punctuation">,</span> <span class="token number">0x00</span><span class="token punctuation">,</span> <span class="token number">0x00</span><span class="token punctuation">,</span> <span class="token number">0x5C</span><span class="token punctuation">,</span> <span class="token number">0x18</span><span class="token punctuation">,</span> <span class="token number">0xAA</span><span class="token punctuation">,</span> <span class="token number">0x3A</span><span class="token punctuation">,</span> <span class="token number">0x94</span><span class="token punctuation">,</span> <span class="token number">0x7F</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">46</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        data<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">^=</span> <span class="token number">76</span><span class="token punctuation">;</span>
-        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%c"</span><span class="token punctuation">,</span> data<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>HZCTF{b1ndiff_1s_a_us3ful_t00l}</p>
+<p>使用动调其实更好追踪</p>
+<p><strong>动调</strong></p>
+<p>对于encrypt函数,就是一个简单的异或加密,这里我们提取数据,进行异或就可以解出前十八个字符</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2023/10/04/wang-ding-bei-2020-qing-long-zu-jocker/image-20231004182807653.png" alt="image-20231004182807653"></p>
+<p>接下来就到了最jocker的时刻,</p>
+<p>finally函数,这里通过合理猜测,我们可以知道%tp&amp;:这五个就是我们的对比字符,然后仔细分析下面的代码,我们可以惊奇的发现,这个代码是无意义的!!!!!</p>
+<p>后来乱猜,异或,把:异或了}试了试,最后解出flag…….</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2023/10/04/wang-ding-bei-2020-qing-long-zu-jocker/image-20231004182948862.png" alt="image-20231004182948862"></p>
+<p>flag{d07abccf8a410cb37a}</p>
 
             </div>
 
@@ -273,29 +258,14 @@
             
                 <div class="article-nav">
                     
-                        <div class="article-prev">
-                            <a class="prev"
-                            rel="prev"
-                            href="/2023/05/30/ez-byte/"
-                            >
-                                <span class="left arrow-icon flex-center">
-                                <i class="fas fa-chevron-left"></i>
-                                </span>
-                                <span class="title flex-center">
-                                    <span class="post-nav-title-item">csapp 第十二章 并发编程</span>
-                                    <span class="post-nav-item">上一篇</span>
-                                </span>
-                            </a>
-                        </div>
-                    
                     
                         <div class="article-next">
                             <a class="next"
                             rel="next"
-                            href="/2023/04/06/han-shu-diao-yong-yue-ding/"
+                            href="/2023/09/25/gwctf-2019-re3/"
                             >
                                 <span class="title flex-center">
-                                    <span class="post-nav-title-item"></span>
+                                    <span class="post-nav-title-item">GWCTF-2019-re3</span>
                                     <span class="post-nav-item">下一篇</span>
                                 </span>
                                 <span class="right arrow-icon flex-center">
@@ -332,7 +302,7 @@
                 <div class="post-toc-wrap">
     <div class="post-toc">
         <div style="font-size: 1.3rem;margin-top: 0; margin-bottom: 0.8rem; transition-duration: 0.1s;"><i class="fa-solid fa-list"></i> <strong>目录</strong></div>
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#L-S"><span class="nav-number">1.</span> <span class="nav-text">L!S!</span></a></li></ol>
+        
     </div>
 </div>
             </div>

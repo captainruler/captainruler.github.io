@@ -172,299 +172,208 @@
             <div class="main-content">
 
                 
-                    $avatarWidth = 46px
-$arrow-icon-width = 16px
-$post-nav-max-width = 220px
-$article-title-font-size = 1.6rem
-$temp-toc-width = hexo-config('style.right_side_width')
-$toc-container-width = $temp-toc-width ? convert($temp-toc-width) : 210px
-$without-toc-container-width = calc(100% - 210px)
-.post-page-container{
-  display flex
-  position relative
-  justify-content space-between
-  box-sizing border-box
-  width 100%
-  height 100%
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+            <div class="article-title">
+                <span class="title-hover-animation"><h1 style="font-size:2rem; font-weight: bold; margin: 10px 0;">csapp 第十二章 并发编程</h1></span>
+            </div>
 
-  &.show-toc {
-    .toc-content-container {
-      display block
-    }
-
-    .article-content-container {
-      width $without-toc-container-width !important
-    }
-  }
-
-  +redefine-tablet() {
-    .toc-content-container {
-      display none !important
-    }
-
-    .article-content-container {
-      width 100% !important
-    }
-
-    &.show-toc {
-      .toc-content-container {
-        display none
-      }
-
-      .article-content-container {
-        width 100% !important
-      }
-    }
-  }
-
-
-  .article-content-container {
-    width 100%
-    margin-right: 30px
-
-    redefine-container(false, 0, 0, 30px, 30px)
-
-    +redefine-mobile() {
-      padding 1.2rem 0.2rem
-      box-shadow none
-    }
-
-    .article-title {
-      font-family "Noto Sans SC", sans-serif
-      color var(--second-text-color)
-      font-weight 600
-      font-size $article-title-font-size
-
-      +redefine-tablet() {
-        font-size $article-title-font-size * 0.9
-      }
-
-      +redefine-mobile() {
-        font-size $article-title-font-size * 0.8
-      }
-    }
-
-
-    .article-header {
-      font-family "Noto Sans", "Noto Sans SC", sans-serif
-      position relative
-      padding-left $avatarWidth
-      width 100%
-      height $avatarWidth
-      box-sizing border-box
-
-      .avatar {
-        position absolute
-        top 0
-        left 0
-        width $avatarWidth
-        height $avatarWidth
-        padding 1px
-        box-sizing border-box
-        border 1px solid var(--border-color)
-        border-radius 50%
-
-        img {
-          border-radius 50%
-          width 100%
-          height 100%
-          background var(--avatar-background-color)
-        }
-
-      }
-
-
-      .info {
-        padding 2px 0
-        margin-left 10px
-        box-sizing border-box
-        display flex
-        flex-direction column
-        justify-content space-between
-        width 100%
-        height 100%
-
-        .author {
-          font-weight regular
-          font-size 1.18rem
-          display flex
-          align-items center
-
-          .name {
-            color var(--default-text-color)
-          }
-
-          .author-label {
-            margin-left 10px
-            font-size 0.8rem
-            font-weight 500
-            padding 0 5px
-            border-radius 6px
-            color #fff
-            background var(--selection-color)
-          }
-
-        }
-      }
-
-    }
-
-
-    .article-header, .article-header-meta-info {
-      margin-top 16px
-      +redefine-tablet() {
-        transform scale(0.9)
-        transform-origin left top
-      }
-    }
-
-
-    .article-content {
-      margin-top $component-spacing-value
-      padding-bottom 10px
-      word-wrap break-word
-      border-bottom 1px solid var(--border-color)
-      color var(--default-text-color)
-    }
-
-
-    .post-tags-box {
-      display none
-      margin-top 1.6rem
-      justify-content center
-      font-size 1.1rem
-
-      +redefine-tablet() {
-        display flex
-      }
-
-      +redefine-mobile() {
-        margin-top 1.2rem
-        font-size 1rem
-      }
-
-
-      .tag-item {
-        margin 0 0.25rem
-      }
-    }
-
-    .post-copyright-info {
-      margin-top $component-spacing-value
-      width 100%
-
-      +redefine-tablet() {
-        margin-top $component-spacing-value * 0.8
-      }
-    }
-
-
-    .article-nav {
-      height 40px
-      margin-top $component-spacing-value
-
-      .article-prev, .article-next {
-        max-width $post-nav-max-width
-        height 100%
-        box-sizing border-box
-
-        redefine-container(true, 1.03, 1.03, 10px, 0)
-
-        a {
-          position relative
-          display block
-          width 100%
-          height 100%
-          box-sizing border-box
-
-          &.prev {
-            padding-left $arrow-icon-width
-          }
-
-          &.next {
-            padding-right $arrow-icon-width
-          }
-
-          .arrow-icon {
-            position absolute
-            top 0
-            height 100%
-            width $arrow-icon-width
-
-            &.left {
-              left 0
-            }
-
-            &.right {
-              right 0
-            }
-          }
-
-          .title {
-            width 100%
-            height 100%
-          }
-        }
-
-      }
-
-      .article-prev {
-        float left
-      }
-
-      .article-next {
-        float right
-      }
-
-      .post-nav-item {
-        display none
-
-        +redefine-tablet() {
-          display inline-block
-        }
-
-      }
-
-
-      .post-nav-title-item {
-        overflow hidden
-        text-overflow ellipsis
-        white-space nowrap
-
-        +redefine-tablet() {
-          display none
-        }
-      }
-    }
-  }
-
-  .toc-content-container {
-    position sticky
-    top $header-height + $component-spacing-value
-    //border-radius 18px
-    border-radius 0
-    display none
-    width $toc-container-width
-    height auto
-    max-height calc(100vh - 210px)
-    //z-index $z-index-6
-    overflow-y auto
-    float right
-    padding 10px
-    box-sizing border-box
-    box-shadow none !important
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/7.webp">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">二木</span>
+                            
+                                <span class="author-label">王者</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-duotone fa-pen-line"></i>&nbsp;
+        <span class="pc">2023-05-30 19:44:01</span>
+        <span class="mobile">2023-05-30 19:44</span>
+    </span>
+    
     
 
-    hover-style(false, 0, 0)
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.1k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>4 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
 
-    transition-t("display", "0", "0.3", "ease-out")
+                        </div>
+                    </div>
+                </div>
+            
 
-    +redefine-tablet() {
-      left 0 !important
-      display none !important
-    }
-  }
-}
+            <div class="article-content markdown-body">
+                <h1 id="ez-byte"><a href="#ez-byte" class="headerlink" title="ez_byte"></a>ez_byte</h1><p>首先我们先打开文件运行一下，看一下输入和输出。进去就是输入，输入之后会对我们的输入进行回显，没有什么非常关键的信息。</p>
+<p>打开ida进行分析，main函数没有什么发现</p>
+<p><img lazyload src="/images/loading.svg" data-src="/ez_byte%20d8787172d35949589bf166b460d2c1f5/Untitled.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/ez_byte%20d8787172d35949589bf166b460d2c1f5/SAVE_20230530_155603.jpg" alt="SAVE_20230530_155603.jpg"></p>
+<p>我们跳到数据区，发现这个100%下面的，yes并没有在string窗口出现，我们按下x查询交叉引用，在执行yes之前，有个jmp指令，也就是说，按照程序执行是永远不好去到yes的地方的，也就是说，一定有什么操作，然后再跳到yes中去。</p>
+<p>我们patch一下jmp，将其修改为条件跳转，看看具体是操作。</p>
+<p><img lazyload src="/images/loading.svg" data-src="/ez_byte%20d8787172d35949589bf166b460d2c1f5/65725c2557233d12.jpg" alt="65725c2557233d12.jpg"></p>
+<p>我们查看判断跳入，yes的汇编，我们可以发现，</p>
+<p><img lazyload src="/images/loading.svg" data-src="/ez_byte%20d8787172d35949589bf166b460d2c1f5/Untitled%201.png" alt="Untitled"></p>
+<p>有个判断r12是否为零，但是并没有出现对r12的任何操作，说明我们想要的操作被隐藏起来了。</p>
+<p>分析函数，我们可以查看到这样一个函数，一个异常处理函数</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">void</span> __noreturn <span class="token function">sub_404BF5</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>_DWORD <span class="token operator">*</span>exception<span class="token punctuation">;</span> <span class="token comment">// rax</span>
+exception <span class="token operator">=</span> <span class="token punctuation">(</span>_DWORD <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">_cxa_allocate_exception</span><span class="token punctuation">(</span><span class="token number">4LL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">*</span>exception <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token function">_cxa_throw</span><span class="token punctuation">(</span>exception<span class="token punctuation">,</span> <span class="token operator">&amp;</span>off_5CB8C8<span class="token punctuation">,</span> <span class="token number">0LL</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img lazyload src="/images/loading.svg" data-src="/ez_byte%20d8787172d35949589bf166b460d2c1f5/SAVE_20230530_155623.jpg" alt="SAVE_20230530_155623.jpg"></p>
+<p>fenter里会有一系列SSE指令集有关xmm寄存器操作</p>
+<p>对于异常处理</p>
+<p><a class="link" target="_blank" rel="noopener" href="https://www.cnblogs.com/-citywall123/p/12901301.html">C++异常处理机制（throw、try、catch、finally） - 知道了呀~ - 博客园 (cnblogs.com)<i class="fas fa-external-link-alt"></i></a></p>
+<p><a class="link" target="_blank" rel="noopener" href="https://www.cnblogs.com/catch/p/3604516.html">c++ 异常处理（1） - twoon - 博客园 (cnblogs.com)<i class="fas fa-external-link-alt"></i></a></p>
+<p><a class="link" target="_blank" rel="noopener" href="https://www.cnblogs.com/catch/p/3619379.html">c++ 异常处理（2） - twoon - 博客园 (cnblogs.com)<i class="fas fa-external-link-alt"></i></a></p>
+<p>为此，我们可以大致猜测就是运行程序，触发一个异常，然后通过此条转到想要操作的地方，进行操作，通过题目描述，应该就是嵌入了一堆字节码。</p>
+<p>通过查阅资料，有个大佬写了关于此方面的知识。</p>
+<p><a class="link" target="_blank" rel="noopener" href="https://bbs.kanxue.com/thread-271891.htm">通过DWARF Expression将代码隐藏在栈展开过程中-软件逆向-看雪-安全社区|安全招聘|kanxue.com<i class="fas fa-external-link-alt"></i></a></p>
+<p>当触发异常的时候，程序会沿着调用链不断向上进行栈展开，直到寻找到能处理这个异常的catch块。</p>
+<p>然而在这个过程中DWARF调试信息完成这个恢复过程</p>
+<p>而在DWARF 3标准中引入了一个DWARF Expression，这个WARF Expression变相就是一个虚拟机。</p>
+<p>到此，我们大致就可以知道，我们的操作就是被隐藏在了这个栈展开中DWARF的“虚拟机”字节码中，</p>
+<p>在Linux中我们执行readelf -Wwr ezbyte  &gt; out.txt,将DWARF 调试信息打印出来</p>
+<p>在前面，我们分析了，对r12的操作，并没有直接出现在代码上，操作代码被隐藏了。这里我们在文件中，搜索r12,发现在这里对我们的r12进行了操作，并且这也“虚拟机”字节码的操作部分。</p>
+<p><img lazyload src="/images/loading.svg" data-src="/ez_byte%20d8787172d35949589bf166b460d2c1f5/7b5bfd7f6451b363.jpg" alt="7b5bfd7f6451b363.jpg"></p>
+<p><a class="link" target="_blank" rel="noopener" href="https://dwarfstd.org/doc/DWARF5.pdf">DWARF Debugging Information Format Version 5 (dwarfstd.org)<i class="fas fa-external-link-alt"></i></a></p>
+<p>通过官方文档，查询执行操作的命令</p>
+<p>整个的操作思路</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">DW_OP_constu<span class="token operator">:</span> <span class="token number">8722213363631027234</span>：将一个无符号整数压入堆栈。
+DW_OP_constu<span class="token operator">:</span> <span class="token number">1890878197237214971</span>：将另一个无符号整数压入堆栈。
+DW_OP_constu<span class="token operator">:</span> <span class="token number">9123704</span>：将第三个无符号整数压入堆栈。
+<span class="token function">DW_OP_breg15</span> <span class="token punctuation">(</span>r15<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token number">0</span>：从 r15 这个寄存器中读取一个值，并将其加上偏移量 <span class="token number">0</span>。
+DW_OP_plus：从堆栈中弹出两个值，相加后再将结果压入堆栈。
+DW_OP_xor：从堆栈中弹出两个值，进行异或运算后再将结果压入堆栈。
+DW_OP_xor：重复前面的操作，再进行一次异或运算。
+DW_OP_constu<span class="token operator">:</span> <span class="token number">2451795628338718684</span>：将另一个无符号整数压入堆栈。
+DW_OP_constu<span class="token operator">:</span> <span class="token number">1098791727398412397</span>：将另一个无符号整数压入堆栈。
+DW_OP_constu<span class="token operator">:</span> <span class="token number">1512312</span>：将第三个无符号整数压入堆栈。
+<span class="token function">DW_OP_breg14</span> <span class="token punctuation">(</span>r14<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token number">0</span>：从 r14 这个寄存器中读取一个值，并将其加上偏移量 <span class="token number">0</span>。
+DW_OP_plus：从堆栈中弹出两个值，相加后再将结果压入堆栈。
+DW_OP_xor：从堆栈中弹出两个值，进行异或运算后再将结果压入堆栈。
+DW_OP_xor：重复前面<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>分析完毕之后，写出我们的脚本</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">def <span class="token function">decrypt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span>
+    r15 <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">8722213363631027234</span> <span class="token operator">^</span> <span class="token number">1890878197237214971</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">9123704</span>
+    r14 <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">2451795628338718684</span> <span class="token operator">^</span> <span class="token number">1098791727398412397</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1512312</span>
+    r13 <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">8502251781212277489</span> <span class="token operator">^</span> <span class="token number">1209847170981118947</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">8971237</span>
+    r12 <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">2616514329260088143</span> <span class="token operator">^</span> <span class="token number">1237891274917891239</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1892739</span>
+    <span class="token function">print</span><span class="token punctuation">(</span><span class="token function">hex</span><span class="token punctuation">(</span>r12<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token function">print</span><span class="token punctuation">(</span><span class="token function">hex</span><span class="token punctuation">(</span>r13<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token function">print</span><span class="token punctuation">(</span><span class="token function">hex</span><span class="token punctuation">(</span>r14<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token function">print</span><span class="token punctuation">(</span><span class="token function">hex</span><span class="token punctuation">(</span>r15<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    import binascii
+    hexstring <span class="token operator">=</span> <span class="token string">"65363039656662352d653730652d346539342d616336392d6163333164393663"</span>
+    <span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"flag{"</span> <span class="token operator">+</span> binascii<span class="token punctuation">.</span><span class="token function">unhexlify</span><span class="token punctuation">(</span>hexstring<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">decode</span><span class="token punctuation">(</span>encoding<span class="token operator">=</span><span class="token string">"utf-8"</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"3861}"</span><span class="token punctuation">)</span>
+    <span class="token macro property"><span class="token directive-hash">#</span> <span class="token directive keyword">print</span><span class="token expression"><span class="token punctuation">(</span>binascii<span class="token punctuation">.</span><span class="token function">unhexlify</span><span class="token punctuation">(</span><span class="token function">hex</span><span class="token punctuation">(</span>r15<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token operator">:</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">decode</span><span class="token punctuation">(</span></span><span class="token char">'utf-8'</span><span class="token expression"><span class="token punctuation">)</span><span class="token punctuation">,</span> end<span class="token operator">=</span></span><span class="token char">''</span><span class="token expression"><span class="token punctuation">)</span></span></span>
+    <span class="token macro property"><span class="token directive-hash">#</span> <span class="token directive keyword">print</span><span class="token expression"><span class="token punctuation">(</span>binascii<span class="token punctuation">.</span><span class="token function">unhexlify</span><span class="token punctuation">(</span><span class="token function">hex</span><span class="token punctuation">(</span>r14<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token operator">:</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">decode</span><span class="token punctuation">(</span></span><span class="token char">'utf-8'</span><span class="token expression"><span class="token punctuation">)</span><span class="token punctuation">,</span> end<span class="token operator">=</span></span><span class="token char">''</span><span class="token expression"><span class="token punctuation">)</span></span></span>
+    <span class="token macro property"><span class="token directive-hash">#</span> <span class="token directive keyword">print</span><span class="token expression"><span class="token punctuation">(</span>binascii<span class="token punctuation">.</span><span class="token function">unhexlify</span><span class="token punctuation">(</span><span class="token function">hex</span><span class="token punctuation">(</span>r13<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token operator">:</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">decode</span><span class="token punctuation">(</span></span><span class="token char">'utf-8'</span><span class="token expression"><span class="token punctuation">)</span><span class="token punctuation">,</span> end<span class="token operator">=</span></span><span class="token char">' '</span><span class="token expression"><span class="token punctuation">)</span></span></span>
+    <span class="token macro property"><span class="token directive-hash">#</span> <span class="token directive keyword">print</span><span class="token expression"><span class="token punctuation">(</span>binascii<span class="token punctuation">.</span><span class="token function">unhexlify</span><span class="token punctuation">(</span><span class="token function">hex</span><span class="token punctuation">(</span>r12<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token operator">:</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">decode</span><span class="token punctuation">(</span></span><span class="token char">'utf-8'</span><span class="token expression"><span class="token punctuation">)</span><span class="token punctuation">,</span> end<span class="token operator">=</span></span><span class="token char">' '</span><span class="token expression"><span class="token punctuation">)</span></span></span>
+
+<span class="token function">decrypt</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>解出flag:     flag{e609efb5-e70e-4e94-ac69-ac31d96c3861}</p>
+
+            </div>
+
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                            rel="prev"
+                            href="/2023/06/05/ru-he-cong-0-dao-1-bian-xie-yi-ge-dll-wen-jian-c6594ccdd993460ab9a316426ab8ed5a/"
+                            >
+                                <span class="left arrow-icon flex-center">
+                                <i class="fas fa-chevron-left"></i>
+                                </span>
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">如何从0到1编写一个dll文件</span>
+                                    <span class="post-nav-item">上一篇</span>
+                                </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                            rel="next"
+                            href="/2023/04/18/2023-gudoctf-l-s/"
+                            >
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item"></span>
+                                    <span class="post-nav-item">下一篇</span>
+                                </span>
+                                <span class="right arrow-icon flex-center">
+                                <i class="fas fa-chevron-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+                <div class="comment-container">
+                    <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;评论</i>
+    </div>
+    
+
+        
+            
+
+        
+    
+</div>
+
+                </div>
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div style="font-size: 1.3rem;margin-top: 0; margin-bottom: 0.8rem; transition-duration: 0.1s;"><i class="fa-solid fa-list"></i> <strong>目录</strong></div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ez-byte"><span class="nav-number">1.</span> <span class="nav-text">ez_byte</span></a></li></ol>
+    </div>
+</div>
+            </div>
+        
+    </div>
+</div>
+
 
                 
 

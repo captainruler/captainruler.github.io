@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>网鼎杯-2020-青龙组-jocker</title>
+      <link href="/2023/10/04/wang-ding-bei-2020-qing-long-zu-jocker/"/>
+      <url>/2023/10/04/wang-ding-bei-2020-qing-long-zu-jocker/</url>
+      
+        <content type="html"><![CDATA[<p>(SMC自解密+XOR+猜!)</p><p>正如这道题的名字,我做的时候就挺jocker的,题不是很难,但是最后的猜猜大法才能出flag是我没想到的,而且就算是把flag解出来了,给程序也不会有正确的回显,这就挺…..jocker</p><p>IDA打开,很容易知道flag为24位,进行了三个加密,我们分别分析</p><p><img lazyload="" src="/images/loading.svg" data-src="/2023/10/04/wang-ding-bei-2020-qing-long-zu-jocker/image-20231004181449084.png" alt="image-20231004181449084"></p><p>wrong函数,就是一个简单的加密函数</p><p><img lazyload="" src="/images/loading.svg" data-src="/2023/10/04/wang-ding-bei-2020-qing-long-zu-jocker/image-20231004181735810.png" alt="image-20231004181735810"></p><p>omg函数就是对上面那个函数的检验</p><p><img lazyload="" src="/images/loading.svg" data-src="/2023/10/04/wang-ding-bei-2020-qing-long-zu-jocker/image-20231004181820843.png" alt="image-20231004181820843"></p><p>这里我们就可以解出第一层密码,我们可以知道这个密码是假的</p><p>下面的两个函数需要进行SMC解密</p><p>对于SMC两种方法,一种用脚本,一种直接动调</p><p>脚本:</p><div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> idc_bc695 <span class="keyword">import</span> *</span><br><span class="line">s=<span class="number">0x402219</span>                   <span class="comment">#加密地址</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">224</span>):            <span class="comment">#循环</span></span><br><span class="line">    PatchByte(s+i,Byte(s+i)^<span class="number">0x41</span>)          <span class="comment">#加密的间隔   Byte(s+i)^0x99表示需要进行的加密操作</span></span><br></pre></td></tr></tbody></table></figure></div><p>使用动调其实更好追踪</p><p><strong>动调</strong></p><p>对于encrypt函数,就是一个简单的异或加密,这里我们提取数据,进行异或就可以解出前十八个字符</p><p><img lazyload="" src="/images/loading.svg" data-src="/2023/10/04/wang-ding-bei-2020-qing-long-zu-jocker/image-20231004182807653.png" alt="image-20231004182807653"></p><p>接下来就到了最jocker的时刻,</p><p>finally函数,这里通过合理猜测,我们可以知道%tp&amp;:这五个就是我们的对比字符,然后仔细分析下面的代码,我们可以惊奇的发现,这个代码是无意义的!!!!!</p><p>后来乱猜,异或,把:异或了}试了试,最后解出flag…….</p><p><img lazyload="" src="/images/loading.svg" data-src="/2023/10/04/wang-ding-bei-2020-qing-long-zu-jocker/image-20231004182948862.png" alt="image-20231004182948862"></p><p>flag{d07abccf8a410cb37a}</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>GWCTF-2019-re3</title>
       <link href="/2023/09/25/gwctf-2019-re3/"/>
       <url>/2023/09/25/gwctf-2019-re3/</url>

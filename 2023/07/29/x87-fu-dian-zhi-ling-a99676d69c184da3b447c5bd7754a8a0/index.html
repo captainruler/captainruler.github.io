@@ -172,299 +172,204 @@
             <div class="main-content">
 
                 
-                    $avatarWidth = 46px
-$arrow-icon-width = 16px
-$post-nav-max-width = 220px
-$article-title-font-size = 1.6rem
-$temp-toc-width = hexo-config('style.right_side_width')
-$toc-container-width = $temp-toc-width ? convert($temp-toc-width) : 210px
-$without-toc-container-width = calc(100% - 210px)
-.post-page-container{
-  display flex
-  position relative
-  justify-content space-between
-  box-sizing border-box
-  width 100%
-  height 100%
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+            <div class="article-title">
+                <span class="title-hover-animation"><h1 style="font-size:2rem; font-weight: bold; margin: 10px 0;">X87浮点指令</h1></span>
+            </div>
 
-  &.show-toc {
-    .toc-content-container {
-      display block
-    }
-
-    .article-content-container {
-      width $without-toc-container-width !important
-    }
-  }
-
-  +redefine-tablet() {
-    .toc-content-container {
-      display none !important
-    }
-
-    .article-content-container {
-      width 100% !important
-    }
-
-    &.show-toc {
-      .toc-content-container {
-        display none
-      }
-
-      .article-content-container {
-        width 100% !important
-      }
-    }
-  }
-
-
-  .article-content-container {
-    width 100%
-    margin-right: 30px
-
-    redefine-container(false, 0, 0, 30px, 30px)
-
-    +redefine-mobile() {
-      padding 1.2rem 0.2rem
-      box-shadow none
-    }
-
-    .article-title {
-      font-family "Noto Sans SC", sans-serif
-      color var(--second-text-color)
-      font-weight 600
-      font-size $article-title-font-size
-
-      +redefine-tablet() {
-        font-size $article-title-font-size * 0.9
-      }
-
-      +redefine-mobile() {
-        font-size $article-title-font-size * 0.8
-      }
-    }
-
-
-    .article-header {
-      font-family "Noto Sans", "Noto Sans SC", sans-serif
-      position relative
-      padding-left $avatarWidth
-      width 100%
-      height $avatarWidth
-      box-sizing border-box
-
-      .avatar {
-        position absolute
-        top 0
-        left 0
-        width $avatarWidth
-        height $avatarWidth
-        padding 1px
-        box-sizing border-box
-        border 1px solid var(--border-color)
-        border-radius 50%
-
-        img {
-          border-radius 50%
-          width 100%
-          height 100%
-          background var(--avatar-background-color)
-        }
-
-      }
-
-
-      .info {
-        padding 2px 0
-        margin-left 10px
-        box-sizing border-box
-        display flex
-        flex-direction column
-        justify-content space-between
-        width 100%
-        height 100%
-
-        .author {
-          font-weight regular
-          font-size 1.18rem
-          display flex
-          align-items center
-
-          .name {
-            color var(--default-text-color)
-          }
-
-          .author-label {
-            margin-left 10px
-            font-size 0.8rem
-            font-weight 500
-            padding 0 5px
-            border-radius 6px
-            color #fff
-            background var(--selection-color)
-          }
-
-        }
-      }
-
-    }
-
-
-    .article-header, .article-header-meta-info {
-      margin-top 16px
-      +redefine-tablet() {
-        transform scale(0.9)
-        transform-origin left top
-      }
-    }
-
-
-    .article-content {
-      margin-top $component-spacing-value
-      padding-bottom 10px
-      word-wrap break-word
-      border-bottom 1px solid var(--border-color)
-      color var(--default-text-color)
-    }
-
-
-    .post-tags-box {
-      display none
-      margin-top 1.6rem
-      justify-content center
-      font-size 1.1rem
-
-      +redefine-tablet() {
-        display flex
-      }
-
-      +redefine-mobile() {
-        margin-top 1.2rem
-        font-size 1rem
-      }
-
-
-      .tag-item {
-        margin 0 0.25rem
-      }
-    }
-
-    .post-copyright-info {
-      margin-top $component-spacing-value
-      width 100%
-
-      +redefine-tablet() {
-        margin-top $component-spacing-value * 0.8
-      }
-    }
-
-
-    .article-nav {
-      height 40px
-      margin-top $component-spacing-value
-
-      .article-prev, .article-next {
-        max-width $post-nav-max-width
-        height 100%
-        box-sizing border-box
-
-        redefine-container(true, 1.03, 1.03, 10px, 0)
-
-        a {
-          position relative
-          display block
-          width 100%
-          height 100%
-          box-sizing border-box
-
-          &.prev {
-            padding-left $arrow-icon-width
-          }
-
-          &.next {
-            padding-right $arrow-icon-width
-          }
-
-          .arrow-icon {
-            position absolute
-            top 0
-            height 100%
-            width $arrow-icon-width
-
-            &.left {
-              left 0
-            }
-
-            &.right {
-              right 0
-            }
-          }
-
-          .title {
-            width 100%
-            height 100%
-          }
-        }
-
-      }
-
-      .article-prev {
-        float left
-      }
-
-      .article-next {
-        float right
-      }
-
-      .post-nav-item {
-        display none
-
-        +redefine-tablet() {
-          display inline-block
-        }
-
-      }
-
-
-      .post-nav-title-item {
-        overflow hidden
-        text-overflow ellipsis
-        white-space nowrap
-
-        +redefine-tablet() {
-          display none
-        }
-      }
-    }
-  }
-
-  .toc-content-container {
-    position sticky
-    top $header-height + $component-spacing-value
-    //border-radius 18px
-    border-radius 0
-    display none
-    width $toc-container-width
-    height auto
-    max-height calc(100vh - 210px)
-    //z-index $z-index-6
-    overflow-y auto
-    float right
-    padding 10px
-    box-sizing border-box
-    box-shadow none !important
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/7.webp">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">二木</span>
+                            
+                                <span class="author-label">王者</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-duotone fa-pen-line"></i>&nbsp;
+        <span class="pc">2023-07-29 19:42:09</span>
+        <span class="mobile">2023-07-29 19:42</span>
+    </span>
+    
     
 
-    hover-style(false, 0, 0)
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.1k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>4 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
 
-    transition-t("display", "0", "0.3", "ease-out")
+                        </div>
+                    </div>
+                </div>
+            
 
-    +redefine-tablet() {
-      left 0 !important
-      display none !important
-    }
-  }
-}
+            <div class="article-content markdown-body">
+                <h1 id="X87浮点指令"><a href="#X87浮点指令" class="headerlink" title="X87浮点指令"></a>X87浮点指令</h1><h3 id="87-FPU寄存器栈有一定数量的寄存器（通常是8个或更多，取决于处理器）"><a href="#87-FPU寄存器栈有一定数量的寄存器（通常是8个或更多，取决于处理器）" class="headerlink" title="87 FPU寄存器栈有一定数量的寄存器（通常是8个或更多，取决于处理器）"></a>87 FPU寄存器栈有一定数量的寄存器（通常是8个或更多，取决于处理器）</h3><h1 id="x87简介"><a href="#x87简介" class="headerlink" title="x87简介"></a>x87简介</h1><p>x87指令集是用于处理浮点数运算的指令集，它是Intel 8087数学协处理器的指令集的扩展，后来成为x86处理器家族的一部分。x87指令集为浮点运算提供了硬件支持，包括浮点加减、乘除、取整等操作。在较新的x86处理器中，x87指令集被SSE（Streaming SIMD Extensions）和AVX（Advanced Vector Extensions）等更先进的浮点指令集所取代，但x87仍然兼容并在一些特定情况下使用。</p>
+<p>x87指令集的指令主要针对浮点数运算，它提供了高精度的浮点计算能力。但由于SSE和AVX指令集的引入，现代的x86处理器更倾向于使用这些更高级的指令集，因为它们可以处理更多的数据和并行操作。</p>
+<h1 id="x87寄存器"><a href="#x87寄存器" class="headerlink" title="x87寄存器"></a>x87寄存器</h1><ol>
+<li>累加器（Accumulator）寄存器（ST0 - ST7）：它们是x87寄存器集合中的核心部分。每个寄存器都可以容纳80位（10字节）的扩展精度浮点数。</li>
+<li>控制寄存器（Control Register）（CW）：用于控制浮点运算的各种设置，例如舍入模式、精度控制等。</li>
+<li>状态寄存器（Status Register）（SW）：记录浮点操作的一些状态信息，例如运算结果的状态、出现的异常等。</li>
+<li>标记寄存器（Tag Register）（TW）：用于存储每个浮点寄存器的标记位，标记对应寄存器是否包含有效的浮点数。</li>
+</ol>
+<h1 id="x87常用指令"><a href="#x87常用指令" class="headerlink" title="x87常用指令"></a>x87常用指令</h1><p>x87指令集使用了一个称为FPU（Floating-Point Unit）的数学协处理器，它独立于CPU，并用于执行浮点运算。下面是一些常见的x87指令集的操作：</p>
+<ol>
+<li><strong>加载和存储指令：</strong><ul>
+<li><strong><code>FLD</code></strong>: 从内存加载一个浮点数到FPU寄存器栈顶。</li>
+<li><strong><code>FST</code></strong>: 将FPU栈顶的浮点数存储到内存中。</li>
+<li><strong><code>FLDENV</code></strong>&nbsp;和&nbsp;<strong><code>FSTENV</code></strong>: 加载和保存FPU环境，包括控制寄存器和状态寄存器等。</li>
+</ul>
+</li>
+<li><strong>算术指令：</strong><ul>
+<li><strong><code>FADD</code></strong>: 将栈顶的两个浮点数相加，并将结果存储在栈顶。</li>
+<li><strong><code>FSUB</code></strong>: 从栈顶的浮点数中减去下一个浮点数，并将结果存储在栈顶。</li>
+<li><strong><code>FMUL</code></strong>: 将栈顶的两个浮点数相乘，并将结果存储在栈顶。</li>
+<li><strong><code>FDIV</code></strong>: 用栈顶的浮点数除以下一个浮点数，并将结果存储在栈顶。</li>
+</ul>
+</li>
+<li><strong>转换指令：</strong><ul>
+<li><strong><code>FIST</code></strong>: 将FPU栈顶的浮点数转换为整数，并存储在内存中。</li>
+<li><strong><code>FISTP</code></strong>: 和**<code>FIST</code>**类似，但在转换后将结果弹出栈。</li>
+</ul>
+</li>
+<li><strong>控制指令：</strong><ul>
+<li><strong><code>FCOM</code></strong>: 比较栈顶的两个浮点数，并设置状态寄存器中的标志。</li>
+<li><strong><code>FUCOM</code></strong>: 类似于**<code>FCOM</code>**，但处理未规范的操作数（NaN）。</li>
+<li><strong><code>FCOMI</code></strong>: 执行浮点数比较，并将结果写入EFLAGS寄存器中。</li>
+<li><strong><code>FUCOMI</code></strong>: 类似于**<code>FCOMI</code>**，但处理未规范的操作数（NaN）。</li>
+</ul>
+</li>
+</ol>
+<h1 id="x87部分指令演示"><a href="#x87部分指令演示" class="headerlink" title="x87部分指令演示"></a>x87部分指令演示</h1><p>x87指令集是用于处理浮点数运算的指令集，它提供了一组用于执行浮点操作的指令。x87指令集在现代x86处理器中仍然存在，但由于SSE（Streaming SIMD Extensions）和AVX（Advanced Vector Extensions）等更现代的指令集的引入，使用x87指令集的情况相对较少。在这里，我将详细介绍x87指令集中常见的指令以及它们的用途，并为每个指令提供一个简单的示例。</p>
+<ol>
+<li><p><strong>FLD - Load Floating-Point Value:</strong> 从内存中加载一个浮点数值到x87 FPU栈顶。</p>
+ <div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">fld dword [float_value]</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure></div>
+</li>
+<li><p><strong>FST - Store Floating-Point Value:</strong> 将x87 FPU栈顶的浮点数值存储到内存中。</p>
+ <div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">fst dword [result]</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure></div>
+</li>
+<li><p><strong>FADD - Add:</strong> 将栈顶的两个浮点数值相加，并将结果存储在栈顶。</p>
+ <div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">fadd</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure></div>
+</li>
+<li><p><strong>FSUB - Subtract:</strong> 从栈顶的浮点数中减去下一个浮点数，并将结果存储在栈顶。</p>
+ <div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">fsub</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure></div>
+</li>
+<li><p><strong>FMUL - Multiply:</strong> 将栈顶的两个浮点数值相乘，并将结果存储在栈顶。</p>
+ <div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">fmul</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure></div>
+</li>
+<li><p><strong>FDIV - Divide:</strong> 用栈顶的浮点数除以下一个浮点数，并将结果存储在栈顶。</p>
+ <div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">fdiv</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure></div>
+</li>
+<li><p><strong>FIST - Store Integer after FPU Comparison:</strong> 将FPU栈顶的浮点数转换为整数，并存储在内存中。</p>
+ <div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">fist dword [integer_value]</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure></div>
+</li>
+<li><p><strong>FISTP - Store Integer and Pop:</strong> 和FIST类似，但在转换后将结果弹出栈。</p>
+ <div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">fistp dword [integer_value]</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure></div>
+</li>
+<li><p><strong>FCOM - Compare Floating-Point Values:</strong> 比较栈顶的两个浮点数，并设置状态寄存器中的标志。</p>
+ <div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">fcom</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure></div>
+</li>
+<li><p><strong>FUCOM - Unordered Compare Floating-Point Values:</strong> 类似于FCOM，但处理未规范的操作数（NaN）。</p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">fucom</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure></div></li>
+</ol>
+
+            </div>
+
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                            rel="prev"
+                            href="/2023/07/30/2023-googlectf-re-oldshool-5f1694092f51492d9cc6cc1042d4039e/"
+                            >
+                                <span class="left arrow-icon flex-center">
+                                <i class="fas fa-chevron-left"></i>
+                                </span>
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">2023-googleCTF-re-oldshool</span>
+                                    <span class="post-nav-item">上一篇</span>
+                                </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                            rel="next"
+                            href="/2023/07/26/ferris-proxy-663889200af44a809eb773849bd3f1f0/"
+                            >
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">Ferris proxy</span>
+                                    <span class="post-nav-item">下一篇</span>
+                                </span>
+                                <span class="right arrow-icon flex-center">
+                                <i class="fas fa-chevron-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+                <div class="comment-container">
+                    <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;评论</i>
+    </div>
+    
+
+        
+            
+
+        
+    
+</div>
+
+                </div>
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div style="font-size: 1.3rem;margin-top: 0; margin-bottom: 0.8rem; transition-duration: 0.1s;"><i class="fa-solid fa-list"></i> <strong>目录</strong></div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#X87%E6%B5%AE%E7%82%B9%E6%8C%87%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">X87浮点指令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#87-FPU%E5%AF%84%E5%AD%98%E5%99%A8%E6%A0%88%E6%9C%89%E4%B8%80%E5%AE%9A%E6%95%B0%E9%87%8F%E7%9A%84%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%88%E9%80%9A%E5%B8%B8%E6%98%AF8%E4%B8%AA%E6%88%96%E6%9B%B4%E5%A4%9A%EF%BC%8C%E5%8F%96%E5%86%B3%E4%BA%8E%E5%A4%84%E7%90%86%E5%99%A8%EF%BC%89"><span class="nav-number">1.0.1.</span> <span class="nav-text">87 FPU寄存器栈有一定数量的寄存器（通常是8个或更多，取决于处理器）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#x87%E7%AE%80%E4%BB%8B"><span class="nav-number">2.</span> <span class="nav-text">x87简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#x87%E5%AF%84%E5%AD%98%E5%99%A8"><span class="nav-number">3.</span> <span class="nav-text">x87寄存器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#x87%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4"><span class="nav-number">4.</span> <span class="nav-text">x87常用指令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#x87%E9%83%A8%E5%88%86%E6%8C%87%E4%BB%A4%E6%BC%94%E7%A4%BA"><span class="nav-number">5.</span> <span class="nav-text">x87部分指令演示</span></a></li></ol>
+    </div>
+</div>
+            </div>
+        
+    </div>
+</div>
+
 
                 
 

@@ -170,299 +170,190 @@
             <div class="main-content">
 
                 
-                    $avatarWidth = 46px
-$arrow-icon-width = 16px
-$post-nav-max-width = 220px
-$article-title-font-size = 1.6rem
-$temp-toc-width = hexo-config('style.right_side_width')
-$toc-container-width = $temp-toc-width ? convert($temp-toc-width) : 210px
-$without-toc-container-width = calc(100% - 210px)
-.post-page-container{
-  display flex
-  position relative
-  justify-content space-between
-  box-sizing border-box
-  width 100%
-  height 100%
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+            <div class="article-title">
+                <span class="title-hover-animation"><h1 style="font-size:2rem; font-weight: bold; margin: 10px 0;"></h1></span>
+            </div>
 
-  &.show-toc {
-    .toc-content-container {
-      display block
-    }
-
-    .article-content-container {
-      width $without-toc-container-width !important
-    }
-  }
-
-  +redefine-tablet() {
-    .toc-content-container {
-      display none !important
-    }
-
-    .article-content-container {
-      width 100% !important
-    }
-
-    &.show-toc {
-      .toc-content-container {
-        display none
-      }
-
-      .article-content-container {
-        width 100% !important
-      }
-    }
-  }
-
-
-  .article-content-container {
-    width 100%
-    margin-right: 30px
-
-    redefine-container(false, 0, 0, 30px, 30px)
-
-    +redefine-mobile() {
-      padding 1.2rem 0.2rem
-      box-shadow none
-    }
-
-    .article-title {
-      font-family "Noto Sans SC", sans-serif
-      color var(--second-text-color)
-      font-weight 600
-      font-size $article-title-font-size
-
-      +redefine-tablet() {
-        font-size $article-title-font-size * 0.9
-      }
-
-      +redefine-mobile() {
-        font-size $article-title-font-size * 0.8
-      }
-    }
-
-
-    .article-header {
-      font-family "Noto Sans", "Noto Sans SC", sans-serif
-      position relative
-      padding-left $avatarWidth
-      width 100%
-      height $avatarWidth
-      box-sizing border-box
-
-      .avatar {
-        position absolute
-        top 0
-        left 0
-        width $avatarWidth
-        height $avatarWidth
-        padding 1px
-        box-sizing border-box
-        border 1px solid var(--border-color)
-        border-radius 50%
-
-        img {
-          border-radius 50%
-          width 100%
-          height 100%
-          background var(--avatar-background-color)
-        }
-
-      }
-
-
-      .info {
-        padding 2px 0
-        margin-left 10px
-        box-sizing border-box
-        display flex
-        flex-direction column
-        justify-content space-between
-        width 100%
-        height 100%
-
-        .author {
-          font-weight regular
-          font-size 1.18rem
-          display flex
-          align-items center
-
-          .name {
-            color var(--default-text-color)
-          }
-
-          .author-label {
-            margin-left 10px
-            font-size 0.8rem
-            font-weight 500
-            padding 0 5px
-            border-radius 6px
-            color #fff
-            background var(--selection-color)
-          }
-
-        }
-      }
-
-    }
-
-
-    .article-header, .article-header-meta-info {
-      margin-top 16px
-      +redefine-tablet() {
-        transform scale(0.9)
-        transform-origin left top
-      }
-    }
-
-
-    .article-content {
-      margin-top $component-spacing-value
-      padding-bottom 10px
-      word-wrap break-word
-      border-bottom 1px solid var(--border-color)
-      color var(--default-text-color)
-    }
-
-
-    .post-tags-box {
-      display none
-      margin-top 1.6rem
-      justify-content center
-      font-size 1.1rem
-
-      +redefine-tablet() {
-        display flex
-      }
-
-      +redefine-mobile() {
-        margin-top 1.2rem
-        font-size 1rem
-      }
-
-
-      .tag-item {
-        margin 0 0.25rem
-      }
-    }
-
-    .post-copyright-info {
-      margin-top $component-spacing-value
-      width 100%
-
-      +redefine-tablet() {
-        margin-top $component-spacing-value * 0.8
-      }
-    }
-
-
-    .article-nav {
-      height 40px
-      margin-top $component-spacing-value
-
-      .article-prev, .article-next {
-        max-width $post-nav-max-width
-        height 100%
-        box-sizing border-box
-
-        redefine-container(true, 1.03, 1.03, 10px, 0)
-
-        a {
-          position relative
-          display block
-          width 100%
-          height 100%
-          box-sizing border-box
-
-          &.prev {
-            padding-left $arrow-icon-width
-          }
-
-          &.next {
-            padding-right $arrow-icon-width
-          }
-
-          .arrow-icon {
-            position absolute
-            top 0
-            height 100%
-            width $arrow-icon-width
-
-            &.left {
-              left 0
-            }
-
-            &.right {
-              right 0
-            }
-          }
-
-          .title {
-            width 100%
-            height 100%
-          }
-        }
-
-      }
-
-      .article-prev {
-        float left
-      }
-
-      .article-next {
-        float right
-      }
-
-      .post-nav-item {
-        display none
-
-        +redefine-tablet() {
-          display inline-block
-        }
-
-      }
-
-
-      .post-nav-title-item {
-        overflow hidden
-        text-overflow ellipsis
-        white-space nowrap
-
-        +redefine-tablet() {
-          display none
-        }
-      }
-    }
-  }
-
-  .toc-content-container {
-    position sticky
-    top $header-height + $component-spacing-value
-    //border-radius 18px
-    border-radius 0
-    display none
-    width $toc-container-width
-    height auto
-    max-height calc(100vh - 210px)
-    //z-index $z-index-6
-    overflow-y auto
-    float right
-    padding 10px
-    box-sizing border-box
-    box-shadow none !important
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/7.webp">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">二木</span>
+                            
+                                <span class="author-label">王者</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-duotone fa-pen-line"></i>&nbsp;
+        <span class="pc">2023-03-31 20:20:29</span>
+        <span class="mobile">2023-03-31 20:20</span>
+    </span>
+    
     
 
-    hover-style(false, 0, 0)
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>666 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>2 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
 
-    transition-t("display", "0", "0.3", "ease-out")
+                        </div>
+                    </div>
+                </div>
+            
 
-    +redefine-tablet() {
-      left 0 !important
-      display none !important
-    }
-  }
-}
+            <div class="article-content markdown-body">
+                <h1 id="Baby-rust"><a href="#Baby-rust" class="headerlink" title="Baby_rust"></a>Baby_rust</h1><p>打开ida进行分析，打开sting窗口进行分析。</p>
+<p>查找字符串</p>
+<p><img lazyload src="/images/loading.svg" data-src="/Baby_rust%20e260f95a1b13424885ade8b00efe4b2f/Untitled.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/Baby_rust%20e260f95a1b13424885ade8b00efe4b2f/Untitled%201.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/Baby_rust%20e260f95a1b13424885ade8b00efe4b2f/Untitled%202.png" alt="Untitled"></p>
+<p>这里应该就是我们的main函数了，进入函数进行分析。</p>
+<p>rust语言，说是专注于安全的语言，确实，用ida进行反汇编，根本看不了，所以我们只能对汇编进行分析。</p>
+<p>我们可以从这里发现，一串字符串之后，紧跟着的就是调用memcmp函数，我们就可以大致猜出，这里的字符串就是我们的密文。，前面有一条sub-1C(28)指令,为数据开辟28个空间，我们就可以推测出我们flag的长度为28</p>
+<p><img lazyload src="/images/loading.svg" data-src="/Baby_rust%20e260f95a1b13424885ade8b00efe4b2f/Untitled%203.png" alt="Untitled"></p>
+<p><img lazyload src="/images/loading.svg" data-src="/Baby_rust%20e260f95a1b13424885ade8b00efe4b2f/Untitled%204.png" alt="Untitled"></p>
+<p>我们可以发现这里有一大长串的程序块</p>
+<p><img lazyload src="/images/loading.svg" data-src="/Baby_rust%20e260f95a1b13424885ade8b00efe4b2f/Untitled%205.png" alt="Untitled"></p>
+<p>我们能发现，这些块的结构很相似都是先进行异或0x30然后再加上0xD3，然后后面再cmp1,2,3,4……，这里我们数一下，刚好28块，cmp也比较到了28.</p>
+<p><img lazyload src="/images/loading.svg" data-src="/Baby_rust%20e260f95a1b13424885ade8b00efe4b2f/Untitled%206.png" alt="Untitled"></p>
+<p>这里我们可以知道，这里是对我们的flag进行了单字节加密。</p>
+<p>我们进行动态调试可以发现，在对flag单字节加密之前，会先运行到这个块。</p>
+<p><img lazyload src="/images/loading.svg" data-src="/Baby_rust%20e260f95a1b13424885ade8b00efe4b2f/Untitled%207.png" alt="Untitled"></p>
+<p>到这里，有两种方法，一种是进行动态调试，将其当做黑盒分析，输入多组数据，然后总结规律。</p>
+<p>另一种就是手撕SSE2汇编代码。</p>
+<p>这里我找到了一个大佬写对SSE2汇编得很好的总结，在此放个链接。</p>
+<p><a class="link" target="_blank" rel="noopener" href="https://blog.csdn.net/hksoobe/article/details/100638536">(49条消息) SSE2指令集_cvtsi2ss_hksoobe的博客-CSDN博客<i class="fas fa-external-link-alt"></i></a></p>
+<p>通过汇编代码，我们可以分析得出大致逻辑为，判断输入数据是否大于70，若大于70则减40，若小于70则加40.</p>
+<p>到此处，我们可以写下我们的解题脚本。</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> i<span class="token punctuation">;</span>
+    <span class="token keyword">char</span> data<span class="token punctuation">[</span><span class="token number">28</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+        <span class="token number">0x29</span><span class="token punctuation">,</span> <span class="token number">0x26</span><span class="token punctuation">,</span> <span class="token number">0x6E</span><span class="token punctuation">,</span> <span class="token number">0x5F</span><span class="token punctuation">,</span> <span class="token number">0x71</span><span class="token punctuation">,</span> <span class="token number">0x46</span><span class="token punctuation">,</span> <span class="token number">0x62</span><span class="token punctuation">,</span> <span class="token number">0x27</span><span class="token punctuation">,</span> <span class="token number">0x4E</span><span class="token punctuation">,</span> <span class="token number">0x5A</span><span class="token punctuation">,</span> <span class="token number">0x58</span><span class="token punctuation">,</span> <span class="token number">0x70</span><span class="token punctuation">,</span> <span class="token number">0x6A</span><span class="token punctuation">,</span> <span class="token number">0x29</span><span class="token punctuation">,</span> <span class="token number">0x2A</span><span class="token punctuation">,</span> <span class="token number">0x62</span><span class="token punctuation">,</span>
+        <span class="token number">0x4C</span><span class="token punctuation">,</span> <span class="token number">0x44</span><span class="token punctuation">,</span> <span class="token number">0x6D</span><span class="token punctuation">,</span> <span class="token number">0x4C</span><span class="token punctuation">,</span> <span class="token number">0x6E</span><span class="token punctuation">,</span> <span class="token number">0x56</span><span class="token punctuation">,</span> <span class="token number">0x6A</span><span class="token punctuation">,</span> <span class="token number">0x5D</span><span class="token punctuation">,</span> <span class="token number">0x40</span><span class="token punctuation">,</span> <span class="token number">0x5E</span><span class="token punctuation">,</span> <span class="token number">0x5F</span><span class="token punctuation">,</span> <span class="token number">0x48</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">28</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>data<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&lt;</span> <span class="token number">70</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            data<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">+=</span> <span class="token number">40</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">else</span>
+            data<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">-=</span> <span class="token number">40</span><span class="token punctuation">;</span>
+        data<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">-=</span> <span class="token number">0xd3</span><span class="token punctuation">;</span>
+        data<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">^=</span> <span class="token number">0X30</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">28</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%c "</span><span class="token punctuation">,</span> data<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>到此次，我们还是不能得出flag</p>
+<p><img lazyload src="/images/loading.svg" data-src="/Baby_rust%20e260f95a1b13424885ade8b00efe4b2f/Untitled%208.png" alt="Untitled"></p>
+<p>可以知道，我们对于Rust逆向出来的加密还是缺失了一些步骤，还有两个字节的数据没有出来。</p>
+<p>正所谓，做逆向，十题九猜，这里我们就可以使用我们的猜猜大法，NOWa?BaCK,这里应该是他们的战队名nowayback，为Y或者y。R?ST，这里不出意料就是U，或者u，这样总共四种情况，分别试一下即可。</p>
+<p>可得N K C T F { W L c o m E _ N O W a y B a C k _ R u S T }</p>
+
+            </div>
+
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                            rel="prev"
+                            href="/2023/03/31/not-a-like/"
+                            >
+                                <span class="left arrow-icon flex-center">
+                                <i class="fas fa-chevron-left"></i>
+                                </span>
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item"></span>
+                                    <span class="post-nav-item">上一篇</span>
+                                </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                            rel="next"
+                            href="/2023/03/30/pmkf/"
+                            >
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item"></span>
+                                    <span class="post-nav-item">下一篇</span>
+                                </span>
+                                <span class="right arrow-icon flex-center">
+                                <i class="fas fa-chevron-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+                <div class="comment-container">
+                    <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;评论</i>
+    </div>
+    
+
+        
+            
+
+        
+    
+</div>
+
+                </div>
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div style="font-size: 1.3rem;margin-top: 0; margin-bottom: 0.8rem; transition-duration: 0.1s;"><i class="fa-solid fa-list"></i> <strong>目录</strong></div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Baby-rust"><span class="nav-number">1.</span> <span class="nav-text">Baby_rust</span></a></li></ol>
+    </div>
+</div>
+            </div>
+        
+    </div>
+</div>
+
 
                 
 
