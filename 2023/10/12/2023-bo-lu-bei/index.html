@@ -9,7 +9,7 @@
     
     <title>
         
-            2022-鹏城杯-rota |
+            2023-柏鹭杯-re1-imm |
         
         二木的博客小屋
     </title>
@@ -176,7 +176,7 @@
     <div class="post-page-container">
         <div class="article-content-container">
             <div class="article-title">
-                <span class="title-hover-animation"><h1 style="font-size:2rem; font-weight: bold; margin: 10px 0;">2022-鹏城杯-rota</h1></span>
+                <span class="title-hover-animation"><h1 style="font-size:2rem; font-weight: bold; margin: 10px 0;">2023-柏鹭杯-re1-imm</h1></span>
             </div>
 
             
@@ -195,8 +195,8 @@
                             <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fa-duotone fa-pen-line"></i>&nbsp;
-        <span class="pc">2023-10-09 15:06:51</span>
-        <span class="mobile">2023-10-09 15:06</span>
+        <span class="pc">2023-10-12 10:28:02</span>
+        <span class="mobile">2023-10-12 10:28</span>
     </span>
     
     
@@ -204,12 +204,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>1k 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>606 字</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>4 分钟</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>2 分钟</span>
         </span>
     
     
@@ -225,38 +225,26 @@
             
 
             <div class="article-content markdown-body">
-                <p>我们拿到题，我们可以直接发现我们最后的对比数据</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2023/10/09/2022-peng-cheng-bei-rato/image-20231009151020000.png" alt="image-20231009151020000"></p>
-<p>跟踪我们输入的数据，我们可以很容易的识别这个是一个base64换表的加密</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2023/10/09/2022-peng-cheng-bei-rato/image-20231009151155784.png"></p>
-<p>这里，我们会发现许多很花的伪代码，也不好分析是干什么的，这里，我们使用我们的动态调试</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/image-20231009151323193.png" alt="image-20231009151323193"></p>
-<p>经分析这里的a2就是我们的前面加密后的数据，我们在这之前下一个断点。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/image-20231009151643476.png" alt="image-20231009151643476"></p>
-<p>我们输入24个A，动态调试之后，我们可以发现，我们的输入被加密成了如下样子，我们拿脚本解来看看。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/image-20231009151605430.png" alt="image-20231009151605430"></p>
-<div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"></span><br><span class="line">str1 = <span class="string">"M9uiM9uiM9uiM9uiM9uiM9uiM9uiM9uiXXXXXXXXXXX="</span></span><br><span class="line">str2 = <span class="string">'ksPhS/34MXifj+Ibtjud2Tikj5HkA7iTpbaNELBebOaIm'</span></span><br><span class="line">str3 = <span class="string">"W6slMFL/TSPXeZuWqGxMjcKTV2OemQUq+AhjbYIV4fpIm"</span></span><br><span class="line"></span><br><span class="line">string1 = <span class="string">"XiIzDuAoGlaK6JcjM3g/9YQmHBOsxn1hLZ4w7Tt0PV5pNqUFC+rE2dSfyvWe8kRb="</span></span><br><span class="line">string2 = <span class="string">"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> (base64.b64decode(str1.translate(<span class="built_in">str</span>.maketrans(string1,string2))))</span><br></pre></td></tr></tbody></table></figure></div>
+                <p>我们拿到这道题,判断输入，可以知道验证我们的输入为64个字节，存储在buffer中,下面有一个判断，我们可以知道我们输入的字符范围为0 ~ 9，A ~ F.</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2023/10/12/2023-bo-lu-bei/image-20231012103158670.png" alt="image-20231012103158670"></p>
+<p>其实我们通过整体来看，我们可以发现，在这个大的while循环中就只对这个encode返回的值进行判断，然后break，然后通过后面的flag输出，我们可以推断出主要的逻辑就是，将我们的输入的64进行一系列的操作，与对比，之后再做一系列的操作运算出我们的flag.也就是说我们的加密与对比逻辑就在这个encode函数之中。</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2023/10/12/2023-bo-lu-bei/image-20231012103510111.png" alt="image-20231012103510111"></p>
+<p>我们进入encode函数，我们会发现以下三段的汇编代码，如果学过一点点汇编，对1与3的汇编代码还是好理解，第一个mov,与xor，就是将我们的数据与上面的字符进行异或。</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/image-20231012103953758.png" alt="image-20231012103953758"></p>
+<p>第三段汇编，cmp,mov,zero，很能看出，这里实现的操作就是将加密后的结果，与其上面的数据进行对比</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/image-20231012104011950.png" alt="image-20231012104011950"></p>
+<p>对于第二段汇编，视乎X86体系并不常见，经过搜索，我们可以得知这个汇编实现的操作就是这样。</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/image-20231012104002124.png" alt="image-20231012104002124"></p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">32</span>; ++i)</span><br><span class="line"> {</span><br><span class="line">     a[i] = flag[index[i]];</span><br><span class="line"> }</span><br></pre></td></tr></tbody></table></figure></div>
 
-<p><img lazyload="" src="/images/loading.svg" data-src="/image-20231009152019580.png" alt="image-20231009152019580"></p>
-<p>可以发现，就是通过换表的base64,进行加密的，我们可以再输入32个A，进行测试，通过两次调试结果我们可以发现，那一部分很花的代码，实现的效果就是将我们的输入补齐，补齐到32位，，由此，我们可以大致推测出，我们的flag的长度就是32位。</p>
-<p>下面我们分析下面这两个函数，这两个函数需要联合分析。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/image-20231009152343563.png" alt="image-20231009152343563"></p>
-<p>点开上面的data函数，我们也会发现很花的代码，作者开的优化有点高，这里我们动态调试与分析，我们可以知道，a1生成的其实就是一个类似S盒的一个表，会在待会儿的加密中进行使用。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/image-20231009152434187.png" alt="image-20231009152434187"></p>
-<p>对于下面的加密函数，我们从整体来看，我们可以发现，用一个循环，一次循环有四个着相同的加密块，也就是说一次循环加密四个数据，因为加密块相同，我们就只需要分析一个加密块即可。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/image-20231009152718771.png" alt="image-20231009152718771"></p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/image-20231009152815407.png" alt="image-20231009152815407"></p>
-<p>对于每个加密块的前面的一个循环，其逻辑就是实现一个查表，然后返回数据的索引功能</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/image-20231009153020747.png" alt="image-20231009153020747"></p>
-<p>下面的这部分，对于a1中的128是不是很熟悉？就是上面生成a1时候，就使用了128，这里实现的逻辑就是将索引与循环相加，作为索引，取出a1前半部分的值，然后由此作为索引，有去找a1后半部分的值，将其作为索引，去找table里面的值。就是作者自定义的一个查表加密，开的优化有点高，造成分析相对变难了。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/image-20231009153207159.png" alt="image-20231009153207159"></p>
-<p>复原的逻辑就是这样</p>
-<div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">9</span>):</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):</span><br><span class="line">        idx = Maps.find(inp[j*<span class="number">5</span>+i])</span><br><span class="line">        <span class="keyword">if</span> idx == -<span class="number">1</span>: </span><br><span class="line">            idx = <span class="number">0</span></span><br><span class="line">        v12 = (idx_2 + box1[(idx_1 + idx) &amp; <span class="number">0x3f</span>]) &amp; <span class="number">0x3f</span></span><br><span class="line">        v14 = box3[(idx_3 + box2[v12]) &amp; <span class="number">0x3f</span>]</span><br><span class="line">        out[j*<span class="number">5</span>+i] = Maps[v14]</span><br><span class="line">        </span><br><span class="line">        idx_1 = (idx_1 + <span class="number">1</span>) &amp; <span class="number">0x3F</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure></div>
+<p>就是将上面的数据作为索引，然后去我们flag里面去寻找对于字符。实现就是将我们原来的数据进行打乱。</p>
+<p>由此我们就将加密逻辑分析完了，开始写脚本。</p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="type">void</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">{</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> data[<span class="number">32</span>] = {</span><br><span class="line">        <span class="number">0xCD</span>, <span class="number">0xEB</span>, <span class="number">0x5E</span>, <span class="number">0x76</span>, <span class="number">0x0F</span>, <span class="number">0x22</span>, <span class="number">0xAF</span>, <span class="number">0x31</span>, <span class="number">0x82</span>, <span class="number">0x92</span>, <span class="number">0x3C</span>, <span class="number">0xEF</span>, <span class="number">0xB8</span>, <span class="number">0xC1</span>, <span class="number">0x76</span>, <span class="number">0x06</span>,</span><br><span class="line">        <span class="number">0x18</span>, <span class="number">0x2F</span>, <span class="number">0xB5</span>, <span class="number">0x7D</span>, <span class="number">0x7F</span>, <span class="number">0x0A</span>, <span class="number">0xEA</span>, <span class="number">0x85</span>, <span class="number">0x92</span>, <span class="number">0x00</span>, <span class="number">0x89</span>, <span class="number">0xA3</span>, <span class="number">0x2C</span>, <span class="number">0xE2</span>, <span class="number">0xE7</span>, <span class="number">0x32</span>};</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> index[<span class="number">32</span>] = {</span><br><span class="line">        <span class="number">0x0A</span>, <span class="number">0x07</span>, <span class="number">0x06</span>, <span class="number">0x0E</span>, <span class="number">0x02</span>, <span class="number">0x0B</span>, <span class="number">0x03</span>, <span class="number">0x0D</span>, <span class="number">0x01</span>, <span class="number">0x09</span>, <span class="number">0x00</span>, <span class="number">0x05</span>, <span class="number">0x04</span>, <span class="number">0x0F</span>, <span class="number">0x08</span>, <span class="number">0x0C</span>,</span><br><span class="line">        <span class="number">0x1B</span>, <span class="number">0x18</span>, <span class="number">0x17</span>, <span class="number">0x1F</span>, <span class="number">0x14</span>, <span class="number">0x1E</span>, <span class="number">0x12</span>, <span class="number">0x13</span>, <span class="number">0x15</span>, <span class="number">0x1D</span>, <span class="number">0x16</span>, <span class="number">0x1C</span>, <span class="number">0x11</span>, <span class="number">0x10</span>, <span class="number">0x19</span>, <span class="number">0x1A</span>};</span><br><span class="line"></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> flag[<span class="number">32</span>] = {</span><br><span class="line">        <span class="number">0x5F</span>, <span class="number">0x91</span>, <span class="number">0x99</span>, <span class="number">0xE8</span>, <span class="number">0x4E</span>, <span class="number">0xD0</span>, <span class="number">0xB0</span>, <span class="number">0x92</span>, <span class="number">0xB1</span>, <span class="number">0x3C</span>, <span class="number">0x4F</span>, <span class="number">0xF4</span>, <span class="number">0x17</span>, <span class="number">0x76</span>, <span class="number">0xDA</span>, <span class="number">0x12</span>,</span><br><span class="line">        <span class="number">0x2A</span>, <span class="number">0x35</span>, <span class="number">0x01</span>, <span class="number">0x15</span>, <span class="number">0xF9</span>, <span class="number">0x97</span>, <span class="number">0x5E</span>, <span class="number">0x19</span>, <span class="number">0x9D</span>, <span class="number">0xC2</span>, <span class="number">0x15</span>, <span class="number">0x99</span>, <span class="number">0x70</span>, <span class="number">0x7D</span>, <span class="number">0x9F</span>, <span class="number">0xCC</span>};</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> a[<span class="number">32</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="type">int</span> c[<span class="number">32</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">32</span>; ++i)</span><br><span class="line">        c[i] = i;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> b[<span class="number">32</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">32</span>; ++i)</span><br><span class="line">    {</span><br><span class="line">        b[c[index[i]]] = flag[i];</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">32</span>; ++i)</span><br><span class="line">    {</span><br><span class="line">        b[i] ^= data[i];</span><br><span class="line">    }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">0</span>; k &lt; <span class="number">32</span>; ++k)</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%X"</span>, b[k]);</span><br><span class="line">    </span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div>
 
-<p>由此，我们逆向，我们可以写出脚本</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">import base64</span><br><span class="line">arr =[ 51, 52, 44, 54, 29, 18, 30, 12, 26, 60, 41, 16, 32, 20, 61, 59, 25, 8, 14, 31, 48, 5, 56, 3, 17, 27, 23, 33, 46, 4, 24, 35, 43, 2, 39, 55, 28, 36, 57, 63, 53, 45, 38, 19, 42, 10, 0, 7, 62, 1, 40, 47, 50, 34, 13, 6, 37, 58, 9, 15, 22, 11, 21, 49, 12, 44, 13, 33, 34, 9, 2, 57, 49, 23, 26, 51, 6, 36, 16, 4, 27, 11, 52, 18, 56, 39, 14, 32, 43, 46, 0, 19, 62, 58, 5, 30, 54, 8, 50, 41, 25, 35, 61, 59, 60, 63, 55, 48, 24, 22, 53, 37, 10, 45, 40, 38, 21, 17, 7, 29, 42, 15, 31, 20, 1, 28, 3, 47, 19, 13, 53, 49, 7, 17, 27, 35, 11, 12, 16, 37, 43, 33, 51, 24, 39, 41, 2, 47, 40, 48, 14, 25, 60, 8, 52, 32, 61, 46, 5, 21, 44, 28, 54, 34, 30, 36, 56, 10, 63, 26, 4, 38, 22, 42, 58, 31, 45, 50, 6, 55, 3, 59, 0, 23, 29, 18, 9, 1, 62, 57, 15, 20, 1, 0, 0, 77, 252, 127, 0, 0, 4, 1, 0, 0, 252, 127, 0, 0, 107, 115, 80, 104, 83, 47, 51, 52, 77, 88, 105, 102, 106, 43, 73, 98, 116, 106, 117, 100, 50, 84, 105, 107, 106, 53, 72, 107, 65, 55, 105, 84, 112, 98, 97, 78, 69, 76, 66, 101, 98, 79, 97, 73, 109, 0, 0, 0]</span><br><span class="line"></span><br><span class="line">base_tab = "XiIzDuAoGlaK6JcjM3g/9YQmHBOsxn1hLZ4w7Tt0PV5pNqUFC+rE2dSfyvWe8kRb="</span><br><span class="line">enc = "ksPhS/34MXifj+Ibtjud2Tikj5HkA7iTpbaNELBebOaIm"</span><br><span class="line">o_table = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"</span><br><span class="line">my_table = "XiIzDuAoGlaK6JcjM3g/9YQmHBOsxn1hLZ4w7Tt0PV5pNqUFC+rE2dSfyvWe8kRb"</span><br><span class="line"></span><br><span class="line">out = ""</span><br><span class="line"></span><br><span class="line">for t in range(0, len(enc) - 1):</span><br><span class="line">    c = enc[t]</span><br><span class="line">    for k in range(0, 64):</span><br><span class="line">        cnt = k</span><br><span class="line">        cnt = arr[(t + cnt)&amp;0x3f] &amp; 0x3f</span><br><span class="line">        cnt = arr[cnt + 64] &amp; 0x3f</span><br><span class="line">        cnt = arr[cnt + 128]</span><br><span class="line">        if c == base_tab[cnt]:</span><br><span class="line">            out += base_tab[k]</span><br><span class="line">            break</span><br><span class="line"></span><br><span class="line">print(base64.b64decode(out.translate(str.maketrans(my_table, o_table))))</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure></div>
-
-<p>解出flag   PCL{8cdd01062b7e90dd372c3ea9977be53e}</p>
+<p>可以得到：825A10C618D636A058AE633FAA539E70655FEB648697FF84A79F4589B5207027</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/image-20231012104914540.png" alt="image-20231012104914540"></p>
+<p>放入程序输入，即可得到我们的flag</p>
+<p> flag{ISEC-a49d6b847bdba62c5bfa0a43b69c8575}</p>
 
             </div>
 
@@ -267,29 +255,14 @@
             
                 <div class="article-nav">
                     
-                        <div class="article-prev">
-                            <a class="prev"
-                            rel="prev"
-                            href="/2023/10/12/2023-bo-lu-bei/"
-                            >
-                                <span class="left arrow-icon flex-center">
-                                <i class="fas fa-chevron-left"></i>
-                                </span>
-                                <span class="title flex-center">
-                                    <span class="post-nav-title-item">2023-柏鹭杯-re1-imm</span>
-                                    <span class="post-nav-item">上一篇</span>
-                                </span>
-                            </a>
-                        </div>
-                    
                     
                         <div class="article-next">
                             <a class="next"
                             rel="next"
-                            href="/2023/10/04/wang-ding-bei-2020-qing-long-zu-jocker/"
+                            href="/2023/10/09/2022-peng-cheng-bei-rato/"
                             >
                                 <span class="title flex-center">
-                                    <span class="post-nav-title-item">网鼎杯-2020-青龙组-jocker</span>
+                                    <span class="post-nav-title-item">2022-鹏城杯-rota</span>
                                     <span class="post-nav-item">下一篇</span>
                                 </span>
                                 <span class="right arrow-icon flex-center">
