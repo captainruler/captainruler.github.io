@@ -230,26 +230,26 @@
 <p>跟踪我们输入的数据，我们可以很容易的识别这个是一个base64换表的加密</p>
 <p><img lazyload="" src="/images/loading.svg" data-src="/2023/10/09/2022-peng-cheng-bei-rato/image-20231009151155784.png"></p>
 <p>这里，我们会发现许多很花的伪代码，也不好分析是干什么的，这里，我们使用我们的动态调试</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/image-20231009151323193.png" alt="image-20231009151323193"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2023/10/09/2022-peng-cheng-bei-rato/image-20231009151323193.png" alt="image-20231009151323193"></p>
 <p>经分析这里的a2就是我们的前面加密后的数据，我们在这之前下一个断点。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/image-20231009151643476.png" alt="image-20231009151643476"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2023/10/09/2022-peng-cheng-bei-rato/image-20231009151643476.png" alt="image-20231009151643476"></p>
 <p>我们输入24个A，动态调试之后，我们可以发现，我们的输入被加密成了如下样子，我们拿脚本解来看看。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/image-20231009151605430.png" alt="image-20231009151605430"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2023/10/09/2022-peng-cheng-bei-rato/image-20231009151605430.png" alt="image-20231009151605430"></p>
 <div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"></span><br><span class="line">str1 = <span class="string">"M9uiM9uiM9uiM9uiM9uiM9uiM9uiM9uiXXXXXXXXXXX="</span></span><br><span class="line">str2 = <span class="string">'ksPhS/34MXifj+Ibtjud2Tikj5HkA7iTpbaNELBebOaIm'</span></span><br><span class="line">str3 = <span class="string">"W6slMFL/TSPXeZuWqGxMjcKTV2OemQUq+AhjbYIV4fpIm"</span></span><br><span class="line"></span><br><span class="line">string1 = <span class="string">"XiIzDuAoGlaK6JcjM3g/9YQmHBOsxn1hLZ4w7Tt0PV5pNqUFC+rE2dSfyvWe8kRb="</span></span><br><span class="line">string2 = <span class="string">"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> (base64.b64decode(str1.translate(<span class="built_in">str</span>.maketrans(string1,string2))))</span><br></pre></td></tr></tbody></table></figure></div>
 
-<p><img lazyload="" src="/images/loading.svg" data-src="/image-20231009152019580.png" alt="image-20231009152019580"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2023/10/09/2022-peng-cheng-bei-rato/image-20231009152019580.png" alt="image-20231009152019580"></p>
 <p>可以发现，就是通过换表的base64,进行加密的，我们可以再输入32个A，进行测试，通过两次调试结果我们可以发现，那一部分很花的代码，实现的效果就是将我们的输入补齐，补齐到32位，，由此，我们可以大致推测出，我们的flag的长度就是32位。</p>
 <p>下面我们分析下面这两个函数，这两个函数需要联合分析。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/image-20231009152343563.png" alt="image-20231009152343563"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2023/10/09/2022-peng-cheng-bei-rato/image-20231009152343563.png" alt="image-20231009152343563"></p>
 <p>点开上面的data函数，我们也会发现很花的代码，作者开的优化有点高，这里我们动态调试与分析，我们可以知道，a1生成的其实就是一个类似S盒的一个表，会在待会儿的加密中进行使用。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/image-20231009152434187.png" alt="image-20231009152434187"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2023/10/09/2022-peng-cheng-bei-rato/image-20231009152434187.png" alt="image-20231009152434187"></p>
 <p>对于下面的加密函数，我们从整体来看，我们可以发现，用一个循环，一次循环有四个着相同的加密块，也就是说一次循环加密四个数据，因为加密块相同，我们就只需要分析一个加密块即可。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/image-20231009152718771.png" alt="image-20231009152718771"></p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/image-20231009152815407.png" alt="image-20231009152815407"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2023/10/09/2022-peng-cheng-bei-rato/image-20231009152718771.png" alt="image-20231009152718771"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2023/10/09/2022-peng-cheng-bei-rato/image-20231009152815407.png" alt="image-20231009152815407"></p>
 <p>对于每个加密块的前面的一个循环，其逻辑就是实现一个查表，然后返回数据的索引功能</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/image-20231009153020747.png" alt="image-20231009153020747"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2023/10/09/2022-peng-cheng-bei-rato/image-20231009153020747.png" alt="image-20231009153020747"></p>
 <p>下面的这部分，对于a1中的128是不是很熟悉？就是上面生成a1时候，就使用了128，这里实现的逻辑就是将索引与循环相加，作为索引，取出a1前半部分的值，然后由此作为索引，有去找a1后半部分的值，将其作为索引，去找table里面的值。就是作者自定义的一个查表加密，开的优化有点高，造成分析相对变难了。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/image-20231009153207159.png" alt="image-20231009153207159"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2023/10/09/2022-peng-cheng-bei-rato/image-20231009153207159.png" alt="image-20231009153207159"></p>
 <p>复原的逻辑就是这样</p>
 <div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">9</span>):</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):</span><br><span class="line">        idx = Maps.find(inp[j*<span class="number">5</span>+i])</span><br><span class="line">        <span class="keyword">if</span> idx == -<span class="number">1</span>: </span><br><span class="line">            idx = <span class="number">0</span></span><br><span class="line">        v12 = (idx_2 + box1[(idx_1 + idx) &amp; <span class="number">0x3f</span>]) &amp; <span class="number">0x3f</span></span><br><span class="line">        v14 = box3[(idx_3 + box2[v12]) &amp; <span class="number">0x3f</span>]</span><br><span class="line">        out[j*<span class="number">5</span>+i] = Maps[v14]</span><br><span class="line">        </span><br><span class="line">        idx_1 = (idx_1 + <span class="number">1</span>) &amp; <span class="number">0x3F</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure></div>
 
