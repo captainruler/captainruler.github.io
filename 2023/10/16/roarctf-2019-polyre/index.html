@@ -9,7 +9,7 @@
     
     <title>
         
-            2023-柏鹭杯-re1-imm |
+            RoarCTF-2019-polyre(控制流平坦化+虚假控制流+CRC32校验) |
         
         二木的博客小屋
     </title>
@@ -176,7 +176,7 @@
     <div class="post-page-container">
         <div class="article-content-container">
             <div class="article-title">
-                <span class="title-hover-animation"><h1 style="font-size:2rem; font-weight: bold; margin: 10px 0;">2023-柏鹭杯-re1-imm</h1></span>
+                <span class="title-hover-animation"><h1 style="font-size:2rem; font-weight: bold; margin: 10px 0;">RoarCTF-2019-polyre(控制流平坦化+虚假控制流+CRC32校验)</h1></span>
             </div>
 
             
@@ -195,8 +195,8 @@
                             <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fa-duotone fa-pen-line"></i>&nbsp;
-        <span class="pc">2023-10-12 10:28:02</span>
-        <span class="mobile">2023-10-12 10:28</span>
+        <span class="pc">2023-10-16 09:03:22</span>
+        <span class="mobile">2023-10-16 09:03</span>
     </span>
     
     
@@ -204,12 +204,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>606 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>281 字</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>2 分钟</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>1 分钟</span>
         </span>
     
     
@@ -225,26 +225,17 @@
             
 
             <div class="article-content markdown-body">
-                <p>我们拿到这道题,判断输入，可以知道验证我们的输入为64个字节，存储在buffer中,下面有一个判断，我们可以知道我们输入的字符范围为0 ~ 9，A ~ F.</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2023/10/12/2023-bo-lu-bei/image-20231012103158670.png" alt="image-20231012103158670"></p>
-<p>其实我们通过整体来看，我们可以发现，在这个大的while循环中就只对这个encode返回的值进行判断，然后break，然后通过后面的flag输出，我们可以推断出主要的逻辑就是，将我们的输入的64进行一系列的操作，与对比，之后再做一系列的操作运算出我们的flag.也就是说我们的加密与对比逻辑就在这个encode函数之中。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2023/10/12/2023-bo-lu-bei/image-20231012103510111.png" alt="image-20231012103510111"></p>
-<p>我们进入encode函数，我们会发现以下三段的汇编代码，如果学过一点点汇编，对1与3的汇编代码还是好理解，第一个mov,与xor，就是将我们的数据与上面的字符进行异或。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2023/10/12/2023-bo-lu-bei/image-20231012103953758.png" alt="image-20231012103953758"></p>
-<p>第三段汇编，cmp,mov,zero，很能看出，这里实现的操作就是将加密后的结果，与其上面的数据进行对比</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2023/10/12/2023-bo-lu-bei/image-20231012104011950.png" alt="image-20231012104011950"></p>
-<p>对于第二段汇编，视乎X86体系并不常见，经过搜索，我们可以得知这个汇编实现的操作就是这样。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2023/10/12/2023-bo-lu-bei/image-20231012104002124.png" alt="image-20231012104002124"></p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">32</span>; ++i)</span><br><span class="line"> {</span><br><span class="line">     a[i] = flag[index[i]];</span><br><span class="line"> }</span><br></pre></td></tr></tbody></table></figure></div>
+                <p>拿到题目我们可以发现，这个是开了ollvm控制流平坦化的题目，</p>
+<p>最后我们可以发现，程序使用的是CRC32的加密校验的方法</p>
+<p>我们可以找到此题加密的CRC32的源码原型</p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">GenerateTable</span><span class="params">(<span class="type">uint32_t</span> polynomial)</span></span><br><span class="line">{</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> byte = <span class="number">0</span>; byte &lt; <span class="number">256</span>; ++byte)</span><br><span class="line">	 {</span><br><span class="line">		<span class="type">uint32_t</span> crc = byte;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> bit = <span class="number">32</span>; bit &gt; <span class="number">0</span>; --bit)</span><br><span class="line">		{</span><br><span class="line">			<span class="keyword">if</span> (crc &amp; <span class="number">0x80000000</span>)</span><br><span class="line">			{</span><br><span class="line">				  crc = (crc &lt;&lt; <span class="number">1</span>) ^ polynomial;</span><br><span class="line">			}</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			{</span><br><span class="line">				  crc &lt;&lt;= <span class="number">1</span>;</span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">		crcTable[byte] = crc;</span><br><span class="line">	 }</span><br><span class="line">}</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure></div>
 
-<p>就是将上面的数据作为索引，然后去我们flag里面去寻找对于字符。实现就是将我们原来的数据进行打乱。</p>
-<p>由此我们就将加密逻辑分析完了，开始写脚本。</p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="type">void</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">{</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> data[<span class="number">32</span>] = {</span><br><span class="line">        <span class="number">0xCD</span>, <span class="number">0xEB</span>, <span class="number">0x5E</span>, <span class="number">0x76</span>, <span class="number">0x0F</span>, <span class="number">0x22</span>, <span class="number">0xAF</span>, <span class="number">0x31</span>, <span class="number">0x82</span>, <span class="number">0x92</span>, <span class="number">0x3C</span>, <span class="number">0xEF</span>, <span class="number">0xB8</span>, <span class="number">0xC1</span>, <span class="number">0x76</span>, <span class="number">0x06</span>,</span><br><span class="line">        <span class="number">0x18</span>, <span class="number">0x2F</span>, <span class="number">0xB5</span>, <span class="number">0x7D</span>, <span class="number">0x7F</span>, <span class="number">0x0A</span>, <span class="number">0xEA</span>, <span class="number">0x85</span>, <span class="number">0x92</span>, <span class="number">0x00</span>, <span class="number">0x89</span>, <span class="number">0xA3</span>, <span class="number">0x2C</span>, <span class="number">0xE2</span>, <span class="number">0xE7</span>, <span class="number">0x32</span>};</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> index[<span class="number">32</span>] = {</span><br><span class="line">        <span class="number">0x0A</span>, <span class="number">0x07</span>, <span class="number">0x06</span>, <span class="number">0x0E</span>, <span class="number">0x02</span>, <span class="number">0x0B</span>, <span class="number">0x03</span>, <span class="number">0x0D</span>, <span class="number">0x01</span>, <span class="number">0x09</span>, <span class="number">0x00</span>, <span class="number">0x05</span>, <span class="number">0x04</span>, <span class="number">0x0F</span>, <span class="number">0x08</span>, <span class="number">0x0C</span>,</span><br><span class="line">        <span class="number">0x1B</span>, <span class="number">0x18</span>, <span class="number">0x17</span>, <span class="number">0x1F</span>, <span class="number">0x14</span>, <span class="number">0x1E</span>, <span class="number">0x12</span>, <span class="number">0x13</span>, <span class="number">0x15</span>, <span class="number">0x1D</span>, <span class="number">0x16</span>, <span class="number">0x1C</span>, <span class="number">0x11</span>, <span class="number">0x10</span>, <span class="number">0x19</span>, <span class="number">0x1A</span>};</span><br><span class="line"></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> flag[<span class="number">32</span>] = {</span><br><span class="line">        <span class="number">0x5F</span>, <span class="number">0x91</span>, <span class="number">0x99</span>, <span class="number">0xE8</span>, <span class="number">0x4E</span>, <span class="number">0xD0</span>, <span class="number">0xB0</span>, <span class="number">0x92</span>, <span class="number">0xB1</span>, <span class="number">0x3C</span>, <span class="number">0x4F</span>, <span class="number">0xF4</span>, <span class="number">0x17</span>, <span class="number">0x76</span>, <span class="number">0xDA</span>, <span class="number">0x12</span>,</span><br><span class="line">        <span class="number">0x2A</span>, <span class="number">0x35</span>, <span class="number">0x01</span>, <span class="number">0x15</span>, <span class="number">0xF9</span>, <span class="number">0x97</span>, <span class="number">0x5E</span>, <span class="number">0x19</span>, <span class="number">0x9D</span>, <span class="number">0xC2</span>, <span class="number">0x15</span>, <span class="number">0x99</span>, <span class="number">0x70</span>, <span class="number">0x7D</span>, <span class="number">0x9F</span>, <span class="number">0xCC</span>};</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> a[<span class="number">32</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="type">int</span> c[<span class="number">32</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">32</span>; ++i)</span><br><span class="line">        c[i] = i;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> b[<span class="number">32</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">32</span>; ++i)</span><br><span class="line">    {</span><br><span class="line">        b[c[index[i]]] = flag[i];</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">32</span>; ++i)</span><br><span class="line">    {</span><br><span class="line">        b[i] ^= data[i];</span><br><span class="line">    }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">0</span>; k &lt; <span class="number">32</span>; ++k)</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%X"</span>, b[k]);</span><br><span class="line">    </span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div>
+<p><a class="link" target="_blank" rel="noopener" href="https://blog.csdn.net/tilblackout/article/details/131198350">CRC校验(2)：CRC32查表法详解、代码实现和CRC反转-CSDN博客<i class="fas fa-external-link-alt"></i></a></p>
+<p>基于正向代码，我们可以写出逆向代码</p>
+<div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">secret = [<span class="number">0xBC8FF26D43536296</span>, <span class="number">0x520100780530EE16</span>, <span class="number">0x4DC0B5EA935F08EC</span>,</span><br><span class="line">          <span class="number">0x342B90AFD853F450</span>, <span class="number">0x8B250EBCAA2C3681</span>, <span class="number">0x55759F81A2C68AE4</span>]</span><br><span class="line">key = <span class="number">0xB0004B7679FA26B3</span></span><br><span class="line"></span><br><span class="line">flag = <span class="string">""</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 产生CRC32查表法所用的表</span></span><br><span class="line"><span class="keyword">for</span> s <span class="keyword">in</span> secret:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">64</span>):</span><br><span class="line">        sign = s &amp; <span class="number">1</span>  <span class="comment"># 数乘以二，必为偶数，再异或上奇数，得奇数 所以最后一位为1的数还原前为负。</span></span><br><span class="line">        <span class="keyword">if</span> sign == <span class="number">1</span>:</span><br><span class="line">            s ^= key</span><br><span class="line">        s //= <span class="number">2</span></span><br><span class="line">        <span class="comment"># 防止负值除2，溢出为正值</span></span><br><span class="line">        <span class="keyword">if</span> sign == <span class="number">1</span>:</span><br><span class="line">            s |= <span class="number">0x8000000000000000</span>  <span class="comment"># 让数回到负数</span></span><br><span class="line"></span><br><span class="line">    j = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> j &lt; <span class="number">8</span>:</span><br><span class="line">        flag += <span class="built_in">chr</span>(s &amp; <span class="number">0xFF</span>)  <span class="comment"># &amp;0xff可以将高的24位置为0，低8位保持原样。</span></span><br><span class="line">        s &gt;&gt;= <span class="number">8</span></span><br><span class="line">        j += <span class="number">1</span></span><br><span class="line"><span class="built_in">print</span>(flag)</span><br></pre></td></tr></tbody></table></figure></div>
 
-<p>可以得到：825A10C618D636A058AE633FAA539E70655FEB648697FF84A79F4589B5207027</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2023/10/12/2023-bo-lu-bei/image-20231012104914540.png" alt="image-20231012104914540"></p>
-<p>放入程序输入，即可得到我们的flag</p>
-<p> flag{ISEC-a49d6b847bdba62c5bfa0a43b69c8575}</p>
+<p>可以解出flag</p>
+<p>flag{6ff29390-6c20-4c56-ba70-a95758e3d1f8}</p>
 
             </div>
 
@@ -258,13 +249,13 @@
                         <div class="article-prev">
                             <a class="prev"
                             rel="prev"
-                            href="/2023/10/16/roarctf-2019-polyre/"
+                            href="/2023/10/16/2023re4/"
                             >
                                 <span class="left arrow-icon flex-center">
                                 <i class="fas fa-chevron-left"></i>
                                 </span>
                                 <span class="title flex-center">
-                                    <span class="post-nav-title-item">RoarCTF-2019-polyre(控制流平坦化+虚假控制流+CRC32校验)</span>
+                                    <span class="post-nav-title-item">2023-re4(SEH异常控制流+花指令+异或)</span>
                                     <span class="post-nav-item">上一篇</span>
                                 </span>
                             </a>
@@ -274,10 +265,10 @@
                         <div class="article-next">
                             <a class="next"
                             rel="next"
-                            href="/2023/10/09/2022-peng-cheng-bei-rato/"
+                            href="/2023/10/12/2023-bo-lu-bei/"
                             >
                                 <span class="title flex-center">
-                                    <span class="post-nav-title-item">2022-鹏城杯-rota</span>
+                                    <span class="post-nav-title-item">2023-柏鹭杯-re1-imm</span>
                                     <span class="post-nav-item">下一篇</span>
                                 </span>
                                 <span class="right arrow-icon flex-center">
