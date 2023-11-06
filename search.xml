@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>re(安卓逆向+广播问题+四大组件)</title>
+      <link href="/2023/11/06/re-guang-bo-b4c4e7a68e964011a8de0a8bdbfa0b59/"/>
+      <url>/2023/11/06/re-guang-bo-b4c4e7a68e964011a8de0a8bdbfa0b59/</url>
+      
+        <content type="html"><![CDATA[<h1 id="re-广播"><a href="#re-广播" class="headerlink" title="re-广播"></a>re-广播</h1><p>关于广播，就是相当于系统发一段通知，然后所有程序收到对应信号之后，对于特定的标识进行特定的反应</p><p>对于广播的触发点，我们一般写广播都会重写**<code>onReceive</code>，因此我们直接搜索这个函数**</p><p>可以找到我们的逻辑，需要输入一个用户名，然后进行哈希验证，成功就打印我们的flag</p><p>因此在use这个变量名后面需要接入用户名</p><p><img lazyload="" src="/images/loading.svg" data-src="/2023/11/06/re-guang-bo-b4c4e7a68e964011a8de0a8bdbfa0b59/Untitled.png" alt="Untitled"></p><p>对于创建一个广播，我们还需要知道类型。</p><p>我们去写一个广播来看看</p><p>书写之后可以知道一般会写一个**<code>onCreate</code> 函数来进行声明**</p><p><img lazyload="" src="/images/loading.svg" data-src="/./Untitled%201.png" alt="Untitled"></p><p>这里就找到了我们的广播类型</p><p>接下来，手机连接之后</p><p>在adb中输入我们刚刚得到的信息，然后发送广播</p><p>adb shell am broadcast -a com.examp1e.oc4an -e user “admin”</p><p>发生广播之后</p><p>查看手机</p><p><img lazyload="" src="/images/loading.svg" data-src="/2023/11/06/re-guang-bo-b4c4e7a68e964011a8de0a8bdbfa0b59/Untitled.jpeg" alt="Untitled"></p><p>发送成功</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>re-ti(迷宫+迷宫步骤解密)</title>
       <link href="/2023/11/05/re-tiger/"/>
       <url>/2023/11/05/re-tiger/</url>
