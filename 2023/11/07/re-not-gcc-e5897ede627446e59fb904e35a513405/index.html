@@ -9,7 +9,7 @@
     
     <title>
         
-            re(安卓逆向+广播问题+四大组件) |
+            re-not_gcc(.bc后缀文件+中间编译+数独) |
         
         二木的博客小屋
     </title>
@@ -176,7 +176,7 @@
     <div class="post-page-container">
         <div class="article-content-container">
             <div class="article-title">
-                <span class="title-hover-animation"><h1 style="font-size:2rem; font-weight: bold; margin: 10px 0;">re(安卓逆向+广播问题+四大组件)</h1></span>
+                <span class="title-hover-animation"><h1 style="font-size:2rem; font-weight: bold; margin: 10px 0;">re-not_gcc(.bc后缀文件+中间编译+数独)</h1></span>
             </div>
 
             
@@ -195,8 +195,8 @@
                             <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fa-duotone fa-pen-line"></i>&nbsp;
-        <span class="pc">2023-11-06 12:58:14</span>
-        <span class="mobile">2023-11-06 12:58</span>
+        <span class="pc">2023-11-07 02:43:52</span>
+        <span class="mobile">2023-11-07 02:43</span>
     </span>
     
     
@@ -204,12 +204,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>249 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>543 字</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>1 分钟</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>2 分钟</span>
         </span>
     
     
@@ -225,23 +225,39 @@
             
 
             <div class="article-content markdown-body">
-                <h1 id="re-广播"><a href="#re-广播" class="headerlink" title="re-广播"></a>re-广播</h1><p>关于广播，就是相当于系统发一段通知，然后所有程序收到对应信号之后，对于特定的标识进行特定的反应</p>
-<p>对于广播的触发点，我们一般写广播都会重写**<code>onReceive</code>，因此我们直接搜索这个函数**</p>
-<p>可以找到我们的逻辑，需要输入一个用户名，然后进行哈希验证，成功就打印我们的flag</p>
-<p>因此在use这个变量名后面需要接入用户名</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2023/11/06/re-guang-bo-b4c4e7a68e964011a8de0a8bdbfa0b59/Untitled.png" alt="Untitled"></p>
-<p>对于创建一个广播，我们还需要知道类型。</p>
-<p>我们去写一个广播来看看</p>
-<p>书写之后可以知道一般会写一个**<code>onCreate</code> 函数来进行声明**</p>
+                <h1 id="re-not-gcc"><a href="#re-not-gcc" class="headerlink" title="re-not_gcc"></a>re-not_gcc</h1><p>拿到题目我们可以发现是.bc文件</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2023/11/07/re-not-gcc-e5897ede627446e59fb904e35a513405/Untitled.png" alt="Untitled"></p>
+<p>经过搜索我们可以知道，bc文件为LLVM IR bitcode文件，所谓LLVM IR bitcode文件，就是代码到可执行文件的中间码。我们可以使用命令将其继续编译下去，生成可执行文件</p>
+<p>在linux下，我们使用命令</p>
+<p>clang not_gcc.bc -o not_gcc(这里文件需要改名，题目文件有空格，将其改为_)</p>
 <p><img lazyload="" src="/images/loading.svg" data-src="/./Untitled%201.png" alt="Untitled"></p>
-<p>这里就找到了我们的广播类型</p>
-<p>接下来，手机连接之后</p>
-<p>在adb中输入我们刚刚得到的信息，然后发送广播</p>
-<p>adb shell am broadcast -a com.examp1e.oc4an -e user “admin”</p>
-<p>发生广播之后</p>
-<p>查看手机</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2023/11/06/re-guang-bo-b4c4e7a68e964011a8de0a8bdbfa0b59/Untitled.jpeg" alt="Untitled"></p>
-<p>发送成功</p>
+<p>生成可执行文件</p>
+<p>我们放入ida中进行分析</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./Untitled%202.png" alt="Untitled"></p>
+<p>各种跳转，有点花，不好厘清逻辑</p>
+<p>动态调试，厘清一下思路</p>
+<p>先判断字符长度，81位</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./Untitled%203.png" alt="Untitled"></p>
+<p>判断第一个输入的字符是否为0</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./Untitled%204.png" alt="Untitled"></p>
+<p>判断输入，输入字符的都必须满足1~9</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./Untitled%205.png" alt="Untitled"></p>
+<p>进入关键逻辑</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./Untitled%206.png" alt="Untitled"></p>
+<p>函数内部，分析逻辑可以知道，是生成了9*9的数独盘，以0为标志，作为未填充</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./Untitled%207.png" alt="Untitled"></p>
+<p>因此需要我们写脚本将数独解出。</p>
+<div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">is_valid</span>(<span class="params">board, row, col, num</span>):</span><br><span class="line">    <span class="keyword">if</span> num <span class="keyword">in</span> board[row * <span class="number">9</span>: (row + <span class="number">1</span>) * <span class="number">9</span>]:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">if</span> num <span class="keyword">in</span> [board[i * <span class="number">9</span> + col] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">9</span>)]:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    start_row, start_col = <span class="number">3</span> * (row // <span class="number">3</span>), <span class="number">3</span> * (col // <span class="number">3</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(start_row, start_row + <span class="number">3</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(start_col, start_col + <span class="number">3</span>):</span><br><span class="line">            <span class="keyword">if</span> board[i * <span class="number">9</span> + j] == num:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"><span class="comment">#解数独</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">solve_sudoku</span>(<span class="params">board</span>):</span><br><span class="line">    <span class="keyword">for</span> row <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">9</span>):</span><br><span class="line">        <span class="keyword">for</span> col <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">9</span>):</span><br><span class="line">            <span class="keyword">if</span> board[row * <span class="number">9</span> + col] == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">for</span> num <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">10</span>):</span><br><span class="line">                    <span class="keyword">if</span> is_valid(board, row, col, num):</span><br><span class="line">                        board[row * <span class="number">9</span> + col] = num</span><br><span class="line">                        <span class="keyword">if</span> solve_sudoku(board):</span><br><span class="line">                            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">                        board[row * <span class="number">9</span> + col] = <span class="number">0</span></span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例数独板，0表示需要填充的位置</span></span><br><span class="line">sudoku_board = [<span class="number">0x00000004</span>, <span class="number">0x00000000</span>, <span class="number">0x00000007</span>, <span class="number">0x00000000</span>, <span class="number">0x00000000</span>, <span class="number">0x00000003</span>, <span class="number">0x00000002</span>, <span class="number">0x00000000</span>,</span><br><span class="line">    <span class="number">0x00000008</span>, <span class="number">0x00000005</span>, <span class="number">0x00000000</span>, <span class="number">0x00000000</span>, <span class="number">0x00000000</span>, <span class="number">0x00000002</span>, <span class="number">0x00000000</span>, <span class="number">0x00000009</span>,</span><br><span class="line">    <span class="number">0x00000000</span>, <span class="number">0x00000000</span>, <span class="number">0x00000000</span>, <span class="number">0x00000001</span>, <span class="number">0x00000002</span>, <span class="number">0x00000009</span>, <span class="number">0x00000008</span>, <span class="number">0x00000000</span>,</span><br><span class="line">    <span class="number">0x00000000</span>, <span class="number">0x00000000</span>, <span class="number">0x00000004</span>, <span class="number">0x00000007</span>, <span class="number">0x00000000</span>, <span class="number">0x00000009</span>, <span class="number">0x00000001</span>, <span class="number">0x00000000</span>,</span><br><span class="line">    <span class="number">0x00000004</span>, <span class="number">0x00000008</span>, <span class="number">0x00000000</span>, <span class="number">0x00000000</span>, <span class="number">0x00000000</span>, <span class="number">0x00000006</span>, <span class="number">0x00000001</span>, <span class="number">0x00000000</span>,</span><br><span class="line">    <span class="number">0x00000000</span>, <span class="number">0x00000000</span>, <span class="number">0x00000004</span>, <span class="number">0x00000007</span>, <span class="number">0x00000000</span>, <span class="number">0x00000000</span>, <span class="number">0x00000000</span>, <span class="number">0x00000003</span>,</span><br><span class="line">    <span class="number">0x00000002</span>, <span class="number">0x00000007</span>, <span class="number">0x00000000</span>, <span class="number">0x00000000</span>, <span class="number">0x00000000</span>, <span class="number">0x00000006</span>, <span class="number">0x00000000</span>, <span class="number">0x00000008</span>,</span><br><span class="line">    <span class="number">0x00000006</span>, <span class="number">0x00000003</span>, <span class="number">0x00000000</span>, <span class="number">0x00000000</span>, <span class="number">0x00000000</span>, <span class="number">0x00000004</span>, <span class="number">0x00000000</span>, <span class="number">0x00000000</span>,</span><br><span class="line">    <span class="number">0x00000002</span>, <span class="number">0x00000000</span>, <span class="number">0x00000007</span>, <span class="number">0x00000004</span>, <span class="number">0x00000000</span>, <span class="number">0x00000006</span>, <span class="number">0x00000003</span>, <span class="number">0x00000000</span>,</span><br><span class="line">    <span class="number">0x00000003</span>, <span class="number">0x00000000</span>, <span class="number">0x00000004</span>, <span class="number">0x00000000</span>, <span class="number">0x00000000</span>, <span class="number">0x00000002</span>, <span class="number">0x00000000</span>, <span class="number">0x00000000</span>,</span><br><span class="line">    <span class="number">0x00000000</span>]</span><br><span class="line"><span class="keyword">if</span> solve_sudoku(sudoku_board):</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">9</span>):</span><br><span class="line">        row = sudoku_board[i * <span class="number">9</span>:(i + <span class="number">1</span>) * <span class="number">9</span>]</span><br><span class="line">        <span class="built_in">print</span>(row)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"无解"</span>)</span><br></pre></td></tr></tbody></table></figure></div>
+
+<p>我们可以解出</p>
+<p>497513268538426917612987354759164823261839475843275196986351742125748639374692581</p>
+<p>这个就是我们的解出来的数独，但是由于程序有第一位检测，所以我们需要将第一位的4改我0</p>
+<p>因此</p>
+<p>097513268538426917612987354759164823261839475843275196986351742125748639374692581</p>
+<p>检测</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./Untitled%208.png" alt="Untitled"></p>
+<p>可以发现解成功了。</p>
+<p>交时对数据md5即可</p>
 
             </div>
 
@@ -255,13 +271,13 @@
                         <div class="article-prev">
                             <a class="prev"
                             rel="prev"
-                            href="/2023/11/07/re-not-gcc-e5897ede627446e59fb904e35a513405/"
+                            href="/2023/11/07/xiang-shan-bei-re-url-cong-na-er-lai-91a265c284cd40aa92097843a3c182a6/"
                             >
                                 <span class="left arrow-icon flex-center">
                                 <i class="fas fa-chevron-left"></i>
                                 </span>
                                 <span class="title flex-center">
-                                    <span class="post-nav-title-item">re-not_gcc(.bc后缀文件+中间编译+数独)</span>
+                                    <span class="post-nav-title-item">香山杯RE-URL从哪儿来(生成临时文件+动态调试)</span>
                                     <span class="post-nav-item">上一篇</span>
                                 </span>
                             </a>
@@ -271,10 +287,10 @@
                         <div class="article-next">
                             <a class="next"
                             rel="next"
-                            href="/2023/11/05/re-tiger/"
+                            href="/2023/11/06/re-guang-bo-b4c4e7a68e964011a8de0a8bdbfa0b59/"
                             >
                                 <span class="title flex-center">
-                                    <span class="post-nav-title-item">re-ti(迷宫+迷宫步骤解密)</span>
+                                    <span class="post-nav-title-item">re(安卓逆向+广播问题+四大组件)</span>
                                     <span class="post-nav-item">下一篇</span>
                                 </span>
                                 <span class="right arrow-icon flex-center">
@@ -311,7 +327,7 @@
                 <div class="post-toc-wrap">
     <div class="post-toc">
         <div style="font-size: 1.3rem;margin-top: 0; margin-bottom: 0.8rem; transition-duration: 0.1s;"><i class="fa-solid fa-list"></i> <strong>目录</strong></div>
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#re-%E5%B9%BF%E6%92%AD"><span class="nav-number">1.</span> <span class="nav-text">re-广播</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#re-not-gcc"><span class="nav-number">1.</span> <span class="nav-text">re-not_gcc</span></a></li></ol>
     </div>
 </div>
             </div>

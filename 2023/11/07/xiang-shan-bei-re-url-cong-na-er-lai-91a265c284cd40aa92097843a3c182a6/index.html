@@ -9,7 +9,7 @@
     
     <title>
         
-            re(安卓逆向+广播问题+四大组件) |
+            香山杯RE-URL从哪儿来(生成临时文件+动态调试) |
         
         二木的博客小屋
     </title>
@@ -176,7 +176,7 @@
     <div class="post-page-container">
         <div class="article-content-container">
             <div class="article-title">
-                <span class="title-hover-animation"><h1 style="font-size:2rem; font-weight: bold; margin: 10px 0;">re(安卓逆向+广播问题+四大组件)</h1></span>
+                <span class="title-hover-animation"><h1 style="font-size:2rem; font-weight: bold; margin: 10px 0;">香山杯RE-URL从哪儿来(生成临时文件+动态调试)</h1></span>
             </div>
 
             
@@ -195,8 +195,8 @@
                             <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fa-duotone fa-pen-line"></i>&nbsp;
-        <span class="pc">2023-11-06 12:58:14</span>
-        <span class="mobile">2023-11-06 12:58</span>
+        <span class="pc">2023-11-07 02:48:52</span>
+        <span class="mobile">2023-11-07 02:48</span>
     </span>
     
     
@@ -204,7 +204,7 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>249 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>177 字</span>
         </span>
     
     
@@ -225,23 +225,28 @@
             
 
             <div class="article-content markdown-body">
-                <h1 id="re-广播"><a href="#re-广播" class="headerlink" title="re-广播"></a>re-广播</h1><p>关于广播，就是相当于系统发一段通知，然后所有程序收到对应信号之后，对于特定的标识进行特定的反应</p>
-<p>对于广播的触发点，我们一般写广播都会重写**<code>onReceive</code>，因此我们直接搜索这个函数**</p>
-<p>可以找到我们的逻辑，需要输入一个用户名，然后进行哈希验证，成功就打印我们的flag</p>
-<p>因此在use这个变量名后面需要接入用户名</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2023/11/06/re-guang-bo-b4c4e7a68e964011a8de0a8bdbfa0b59/Untitled.png" alt="Untitled"></p>
-<p>对于创建一个广播，我们还需要知道类型。</p>
-<p>我们去写一个广播来看看</p>
-<p>书写之后可以知道一般会写一个**<code>onCreate</code> 函数来进行声明**</p>
+                <h1 id="香山杯RE-URL从哪儿来"><a href="#香山杯RE-URL从哪儿来" class="headerlink" title="香山杯RE-URL从哪儿来"></a>香山杯RE-URL从哪儿来</h1><p>把题放入IDA，我们可以分析到大致逻辑就是将对某些字符串进行加密，然后在内存中找到字符串的地址然后运行ou.exe这个程序</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2023/11/07/xiang-shan-bei-re-url-cong-na-er-lai-91a265c284cd40aa92097843a3c182a6/Untitled.png" alt="Untitled"></p>
+<p>由于没有输入，我们直接进行动态调试即可</p>
 <p><img lazyload="" src="/images/loading.svg" data-src="/./Untitled%201.png" alt="Untitled"></p>
-<p>这里就找到了我们的广播类型</p>
-<p>接下来，手机连接之后</p>
-<p>在adb中输入我们刚刚得到的信息，然后发送广播</p>
-<p>adb shell am broadcast -a com.examp1e.oc4an -e user “admin”</p>
-<p>发生广播之后</p>
-<p>查看手机</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/2023/11/06/re-guang-bo-b4c4e7a68e964011a8de0a8bdbfa0b59/Untitled.jpeg" alt="Untitled"></p>
-<p>发送成功</p>
+<p>进入buffer</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./Untitled%202.png" alt="Untitled"></p>
+<p>可以看到，这是将程序临时储存到了C盘。</p>
+<p>我们直接进入这个文件目录</p>
+<p>将其后缀修改为exe</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./Untitled%203.png" alt="Untitled"></p>
+<p>放入IDA分析</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./Untitled%204.png" alt="Untitled"></p>
+<p>直接动态调试</p>
+<p>v13这里有一个可疑数组，我们跟进去</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./Untitled%205.png" alt="Untitled"></p>
+<p>将数据转换一下，转换为地址</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./Untitled%206.png" alt="Untitled"></p>
+<p>可以看到到lflag的地址</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./Untitled%207.png" alt="Untitled"></p>
+<p>可以发现flag</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./Untitled%208.png" alt="Untitled"></p>
+<p>flag{6469616e-6369-626f-7169-746170617761}</p>
 
             </div>
 
@@ -252,29 +257,14 @@
             
                 <div class="article-nav">
                     
-                        <div class="article-prev">
-                            <a class="prev"
-                            rel="prev"
-                            href="/2023/11/07/re-not-gcc-e5897ede627446e59fb904e35a513405/"
-                            >
-                                <span class="left arrow-icon flex-center">
-                                <i class="fas fa-chevron-left"></i>
-                                </span>
-                                <span class="title flex-center">
-                                    <span class="post-nav-title-item">re-not_gcc(.bc后缀文件+中间编译+数独)</span>
-                                    <span class="post-nav-item">上一篇</span>
-                                </span>
-                            </a>
-                        </div>
-                    
                     
                         <div class="article-next">
                             <a class="next"
                             rel="next"
-                            href="/2023/11/05/re-tiger/"
+                            href="/2023/11/07/re-not-gcc-e5897ede627446e59fb904e35a513405/"
                             >
                                 <span class="title flex-center">
-                                    <span class="post-nav-title-item">re-ti(迷宫+迷宫步骤解密)</span>
+                                    <span class="post-nav-title-item">re-not_gcc(.bc后缀文件+中间编译+数独)</span>
                                     <span class="post-nav-item">下一篇</span>
                                 </span>
                                 <span class="right arrow-icon flex-center">
@@ -311,7 +301,7 @@
                 <div class="post-toc-wrap">
     <div class="post-toc">
         <div style="font-size: 1.3rem;margin-top: 0; margin-bottom: 0.8rem; transition-duration: 0.1s;"><i class="fa-solid fa-list"></i> <strong>目录</strong></div>
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#re-%E5%B9%BF%E6%92%AD"><span class="nav-number">1.</span> <span class="nav-text">re-广播</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A6%99%E5%B1%B1%E6%9D%AFRE-URL%E4%BB%8E%E5%93%AA%E5%84%BF%E6%9D%A5"><span class="nav-number">1.</span> <span class="nav-text">香山杯RE-URL从哪儿来</span></a></li></ol>
     </div>
 </div>
             </div>
