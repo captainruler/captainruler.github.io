@@ -231,17 +231,17 @@
 <p>控制流平坦化，这个看过都知道，不去混淆根本就看不了</p>
 <p>去除混淆我们有一个大佬写的一个脚本，感觉还是非常有用的</p>
 <p>一个简单的版本</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/./Untitled%201.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2023/12/25/ollvm-xiang-guan-ni-xiang-ti-mu-de-jie-jue-fang-fa-e169461974154ef2b13378877ee5b2c8/Untitled1.png" alt="Untitled"></p>
 <p>一个困难版本</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/./Untitled%202.png" alt="Untitled"></p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/./Untitled%203.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2023/12/25/ollvm-xiang-guan-ni-xiang-ti-mu-de-jie-jue-fang-fa-e169461974154ef2b13378877ee5b2c8/Untitled2.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2023/12/25/ollvm-xiang-guan-ni-xiang-ti-mu-de-jie-jue-fang-fa-e169461974154ef2b13378877ee5b2c8/Untitled3.png" alt="Untitled"></p>
 <p><a href="ollvm%E7%9B%B8%E5%85%B3%E9%80%86%E5%90%91%E9%A2%98%E7%9B%AE%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%20e169461974154ef2b13378877ee5b2c8/am_graph.py">am_graph.py</a></p>
 <p><a href="ollvm%E7%9B%B8%E5%85%B3%E9%80%86%E5%90%91%E9%A2%98%E7%9B%AE%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%20e169461974154ef2b13378877ee5b2c8/deflat.py">deflat.py</a></p>
 <p>脚本的具体使用：</p>
 <div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 deflat.py attachment <span class="number">0x005290</span>   <span class="comment">#python版本+脚本名+文件名+平坦化（main）起始地址</span></span><br></pre></td></tr></tbody></table></figure></div>
 
 <p>去除之后感觉还是非常清晰的</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/./Untitled%204.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2023/12/25/ollvm-xiang-guan-ni-xiang-ti-mu-de-jie-jue-fang-fa-e169461974154ef2b13378877ee5b2c8/Untitled4.png" alt="Untitled"></p>
 <h1 id="虚假控制流"><a href="#虚假控制流" class="headerlink" title="虚假控制流"></a>虚假控制流</h1><p>对于虚假控制流，我们简单了解一下其原理。虚假控制流混淆通过加入含不透明谓词的条件跳转和永远不可以到达的基本块，来干扰IDA的控制流分析和反汇编。</p>
 <p>下面有一个大佬对不透明谓词的解释。</p>
 <p><a class="link" target="_blank" rel="noopener" href="https://www.zhihu.com/question/46259412/answer/199689652">(65 封私信 / 22 条消息) 利用不透明谓词混淆代码的原理是什么？ - 知乎 (zhihu.com)<i class="fas fa-external-link-alt"></i></a></p>
@@ -251,7 +251,7 @@
 <p>这个if下，在永真条件下，打印我们的2222是永远到达不了的，在逻辑上我们很好理解，但是会干扰我们的IDA控制分析，而且在一大串的混淆之下，不去除的话会让我们花很多时间在分析上。</p>
 <p>就看一个实际例子[RoarCTF 2019]polyre</p>
 <p>前面有个控制流平坦化去除平坦化之后我们可以发现，这题下面有很多永真但是没有执行的代码，但是因为它多，而且ida分析出来很混乱，会造成我分析起来很困难。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/./Untitled%205.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2023/12/25/ollvm-xiang-guan-ni-xiang-ti-mu-de-jie-jue-fang-fa-e169461974154ef2b13378877ee5b2c8/Untitled5.png" alt="Untitled"></p>
 <p>理解虚假控制流的原理，其实我们思考起来，想要去除它很简单。它不是有永真条件嘛，也就是说当我们运行一遍程序之后，走的路径全是需要执行的，因此只要我标记一下没有走的地方，将其全部nop掉即可。我们会想到一种方式就是通过我们的angr来模拟执行一下代码，然后将不执行的代码全部nop掉。</p>
 <p>一个大佬写的关于此的研究文章，非常不错。</p>
 <p><a class="link" target="_blank" rel="noopener" href="https://bbs.kanxue.com/thread-266005.htm">[原创]利用angr符号执行去除虚假控制流-软件逆向-看雪-安全社区|安全招聘|kanxue.com<i class="fas fa-external-link-alt"></i></a></p>
@@ -259,7 +259,7 @@
 <div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> idaapi</span><br><span class="line"><span class="keyword">import</span> idc</span><br><span class="line"></span><br><span class="line">st = <span class="number">0x403580</span>    //需要处理函数的起始地址</span><br><span class="line">end = <span class="number">0x4055FE</span>   //需要处理函数的结束地址</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">patch_nop</span>(<span class="params">start, end</span>):</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(start, end):</span><br><span class="line">        idaapi.patch_byte(i, <span class="number">0x90</span>)  <span class="comment"># 修改指定地址处的指令 0x90是最简单的1字节nop</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">next_instr</span>(<span class="params">addr</span>):</span><br><span class="line">    <span class="keyword">return</span> addr + idaapi.get_item_size(addr)  <span class="comment"># get_item_size获取指令或数据长度，这个函数的作用就是去往下一条指令</span></span><br><span class="line"></span><br><span class="line">addr = st</span><br><span class="line"><span class="keyword">while</span> addr &lt; end:</span><br><span class="line">    <span class="built_in">next</span> = next_instr(addr)</span><br><span class="line">    <span class="keyword">if</span> <span class="string">"ds:dword_603054"</span> <span class="keyword">in</span> idc.GetDisasm(addr):  <span class="comment"># GetDisasm(addr)得到addr的反汇编语句</span></span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            addr = <span class="built_in">next</span></span><br><span class="line">            <span class="built_in">next</span> = next_instr(addr)</span><br><span class="line">            <span class="keyword">if</span> <span class="string">"jnz"</span> <span class="keyword">in</span> idc.GetDisasm(addr):</span><br><span class="line">                dest = idc.get_operand_value(addr, <span class="number">0</span>)  <span class="comment"># 使用idc.get_operand_value来获取操作数</span></span><br><span class="line">                idaapi.patch_byte(addr, <span class="number">0xe9</span>)</span><br><span class="line">                idaapi.patch_byte(addr + <span class="number">5</span>, <span class="number">0x90</span>)</span><br><span class="line">                offset = dest - (addr + <span class="number">5</span>)</span><br><span class="line">                idaapi.patch_dword(addr + <span class="number">1</span>, offset)</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">"patch bcf: 0x%x"</span> % addr)</span><br><span class="line">                addr = <span class="built_in">next</span></span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        addr = <span class="built_in">next</span></span><br></pre></td></tr></tbody></table></figure></div>
 
 <p>我们看一下处理之后的代码，可以发现还是很清爽的。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/./Untitled%206.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2023/12/25/ollvm-xiang-guan-ni-xiang-ti-mu-de-jie-jue-fang-fa-e169461974154ef2b13378877ee5b2c8/Untitled6.png" alt="Untitled"></p>
 <h1 id="指令替换"><a href="#指令替换" class="headerlink" title="指令替换"></a>指令替换</h1><p>所谓指令替换，就是将我们的原来的计算指令，从一个简单易懂的，变成难以理解的，但是等效的代码指令。</p>
 <p>举一个简单的例子</p>
 <div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2</span> = <span class="number">1</span>+<span class="number">1</span></span><br><span class="line"><span class="number">2</span> = （<span class="number">10</span>+<span class="number">5</span>-<span class="number">12</span>）*<span class="number">12</span>-<span class="number">34</span></span><br></pre></td></tr></tbody></table></figure></div>
@@ -267,17 +267,17 @@
 <p>这样就会加大我们的分析难度，下面有一个推荐的博客，介绍了一下常见的指令替换</p>
 <p><a class="link" target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42308741/article/details/114579940">ollvm源码分析之指令替换（1）_ollvm 花指令-CSDN博客<i class="fas fa-external-link-alt"></i></a></p>
 <p>以2023楚慧杯 babyre这道题为例子，我们去除了前面的控制流平坦化之后，我们进入我们的加密函数，可以发现一大串难以识别具体加密的混淆，可能通过逆向经验能猜出这个加密，但是如果遇到我们不熟悉的加密就有点困难了。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/./Untitled%207.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2023/12/25/ollvm-xiang-guan-ni-xiang-ti-mu-de-jie-jue-fang-fa-e169461974154ef2b13378877ee5b2c8/Untitled7.png" alt="Untitled"></p>
 <p>对于我们的指令替换的处理，有个大佬写一个ida的插件，关于去除指令替换的插件</p>
 <p>d801插件（网上能下的）：</p>
 <p><a href="ollvm%E7%9B%B8%E5%85%B3%E9%80%86%E5%90%91%E9%A2%98%E7%9B%AE%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%20e169461974154ef2b13378877ee5b2c8/d810-master.zip">d810-master.zip</a></p>
 <p>只需要将这个解压之后的文件，复制到我们的ida插件文件夹里面就行。</p>
 <p>具体使用方法就是</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/./Untitled%208.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2023/12/25/ollvm-xiang-guan-ni-xiang-ti-mu-de-jie-jue-fang-fa-e169461974154ef2b13378877ee5b2c8/Untitled8.png" alt="Untitled"></p>
 <p>接着它会自动识别，我们只需要点击star即可</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/./Untitled%209.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2023/12/25/ollvm-xiang-guan-ni-xiang-ti-mu-de-jie-jue-fang-fa-e169461974154ef2b13378877ee5b2c8/Untitled9.png" alt="Untitled"></p>
 <p>然后针对伪代码，我们按f5重新分析即可</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="/./Untitled%2010.png" alt="Untitled"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/2023/12/25/ollvm-xiang-guan-ni-xiang-ti-mu-de-jie-jue-fang-fa-e169461974154ef2b13378877ee5b2c8/Untitled10.png" alt="Untitled"></p>
 <p>解完我们的指令替换，看起来舒服多了。</p>
 <p>上面是针对一下比较标准的ollvm混淆，如果题目作者研究过ollvm混淆，针对原版混淆的解密可能就会失效了。对于做题倒是够用了，如果真的魔改了，到那个时候再学学，或者直接关闭ida吧.</p>
 
@@ -297,7 +297,7 @@
                             href="/2023/12/04/zuo-zhi-you-zhi-jiang-wang-zhi-zuo-zhi-yin-yong-you-zhi-yin-yong-de-gui-na-yu-bian-xi-ff54a3ed8db64167a97c79bd50ffe6e5/"
                             >
                                 <span class="title flex-center">
-                                    <span class="post-nav-title-item"></span>
+                                    <span class="post-nav-title-item">左值，右值，将亡值，左值引用，右值引用的归纳与辨析</span>
                                     <span class="post-nav-item">下一篇</span>
                                 </span>
                                 <span class="right arrow-icon flex-center">
