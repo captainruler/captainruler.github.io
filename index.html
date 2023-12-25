@@ -218,6 +218,218 @@
                 
 
                 <h3 class="home-article-title">
+                    <a href="/2023/12/25/ollvm-xiang-guan-ni-xiang-ti-mu-de-jie-jue-fang-fa-e169461974154ef2b13378877ee5b2c8/">
+                        ollvm相关逆向题目的解决方法
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        ollvm相关逆向题目的解决方法对于我们常见的ollvm混淆无非就三种，一种是控制流平坦化，一种是指令替换，一种是虚假控制流。针对这三种混淆，我们可以分别利用不同的方式来进行清除，在一定程度上有利于我们的分析，毕竟那那些让让望而生却的代码，感觉有点头...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon Dec 25 2023 05:34:06 GMT+0800">2023-12-25</span></span>
+        
+        
+    </div>
+
+    <a href="/2023/12/25/ollvm-xiang-guan-ni-xiang-ti-mu-de-jie-jue-fang-fa-e169461974154ef2b13378877ee5b2c8/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2023/12/04/zuo-zhi-you-zhi-jiang-wang-zhi-zuo-zhi-yin-yong-you-zhi-yin-yong-de-gui-na-yu-bian-xi-ff54a3ed8db64167a97c79bd50ffe6e5/">
+                        
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        左值，右值，将亡值，左值引用，右值引用的归纳与辨析Owner: 二木
+什么是左值，右值，将亡值？这个见字知意，简单的来说所谓左值，就是处于等号左边的值，右值就是等号右边的值。
+比如
+1int a = 10;
+
+a就是左值，10就是右值，这个是简单的理...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon Dec 04 2023 09:10:12 GMT+0800">2023-12-04</span></span>
+        
+        
+    </div>
+
+    <a href="/2023/12/04/zuo-zhi-you-zhi-jiang-wang-zhi-zuo-zhi-yin-yong-you-zhi-yin-yong-de-gui-na-yu-bian-xi-ff54a3ed8db64167a97c79bd50ffe6e5/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2023/12/04/std-move-xiang-jie-7ef52dbec8fd49ca9521157a058ca556/">
+                        
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        std::move详解Owner: 二木
+在我们使用移动构造函数的时候,我们会用到move
+例如:
+12 MyVector vec2(std::move(vec1));
+
+将我们的vec1从左值强制转换为右值
+std::move源码这里运用到了模板的...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon Dec 04 2023 08:53:16 GMT+0800">2023-12-04</span></span>
+        
+        
+    </div>
+
+    <a href="/2023/12/04/std-move-xiang-jie-7ef52dbec8fd49ca9521157a058ca556/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2023/12/04/guan-yu-typename-yu-using-typedef-de-shi-yong-gui-na-43f9f49137134a508d0bf0315fc31f27/">
+                        
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        关于typename与using/typedef的使用归纳Owner: 二木
+typename其实对于typename.在以前的编程中并没有typename这个关键字的，在以前我们写模板时，使用的
+都是class这个关键字
+12345678templ...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon Dec 04 2023 08:38:50 GMT+0800">2023-12-04</span></span>
+        
+        
+    </div>
+
+    <a href="/2023/12/04/guan-yu-typename-yu-using-typedef-de-shi-yong-gui-na-43f9f49137134a508d0bf0315fc31f27/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2023/12/01/gou-zao-han-shu-xiang-guan-zhi-shi-76466d74d74d493b8cbf7cd2d7eaf438/">
+                        
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        构造函数相关知识关于普通构造函数的两种写法一种是我们常见的普通写法
+123456789101112131415161718192021222324#include&lt;bits/stdc++.h&gt; using namespace std;cl...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Dec 01 2023 04:23:00 GMT+0800">2023-12-01</span></span>
+        
+        
+    </div>
+
+    <a href="/2023/12/01/gou-zao-han-shu-xiang-guan-zhi-shi-76466d74d74d493b8cbf7cd2d7eaf438/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2023/11/24/c-ming-ming-kong-jian/">
+                        c++命名空间（std::）
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        什么需要命名空间？我们知道，在我们写大型项目的时候，可能需要合作，这个时候就可能出现，文件一中有一个swap函数，文件二中也有一个swap函数，当我们写主程序的时候，调用swap,那会调用哪个swap函数呢？为了解决像这样的问题，我们出现了命名空间
+...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Nov 24 2023 06:52:20 GMT+0800">2023-11-24</span></span>
+        
+        
+    </div>
+
+    <a href="/2023/11/24/c-ming-ming-kong-jian/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2023/11/22/mo-ban-zhi-shi/">
+                        
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        模板知识模板，学习c++，只要深入一点，我们都会解接触到的，然而，就简单的函数模板来说，理解起来并不困难，但是随着深入的学习，我们会发现，c++就开始变成”天书”，各种组合让人难以理解，或者说，得花一些时间去分析才知道它到底是什么？刚开始学习c++的...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Wed Nov 22 2023 14:25:58 GMT+0800">2023-11-22</span></span>
+        
+        
+    </div>
+
+    <a href="/2023/11/22/mo-ban-zhi-shi/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
                     <a href="/2023/11/07/xiang-shan-bei-re-url-cong-na-er-lai-91a265c284cd40aa92097843a3c182a6/">
                         香山杯RE-URL从哪儿来(生成临时文件+动态调试)
                     </a>
@@ -371,229 +583,6 @@
     </div>
 
     <a href="/2023/10/24/2023-si-chuan-sheng-sheng-sai-re/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2023/10/16/2023re4/">
-                        2023-re4(SEH异常控制流+花指令+异或)
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                         拿到题我们可以发现，有一个简单的反调试，调试很好过，我们直接NOP或者进行附加调试皆可
-
-限制了输入，指定输入的flag的长度为40.
-
-这一部分实现了SHE异常处理，人为的做出了访问不可地址的访问。
-
-如果是熟悉SEH这个考点的话，那就方向其实很...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon Oct 16 2023 18:34:02 GMT+0800">2023-10-16</span></span>
-        
-        
-    </div>
-
-    <a href="/2023/10/16/2023re4/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2023/10/16/roarctf-2019-polyre/">
-                        RoarCTF-2019-polyre(控制流平坦化+虚假控制流+CRC32校验)
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        拿到题目我们可以发现，这个是开了ollvm控制流平坦化的题目,优化有点高，不好直接进行分析。
-
-对于ollvm控制流平坦化，对于一般的开得比较少的，没有控制流没有那么复杂的，一般的的我们都在最后进行下断点，然后直接分析汇编代码即可，对于像这种，我们就...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon Oct 16 2023 09:03:22 GMT+0800">2023-10-16</span></span>
-        
-        
-    </div>
-
-    <a href="/2023/10/16/roarctf-2019-polyre/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2023/10/12/2023-bo-lu-bei/">
-                        2023-柏鹭杯-re1-imm
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        我们拿到这道题,判断输入，可以知道验证我们的输入为64个字节，存储在buffer中,下面有一个判断，我们可以知道我们输入的字符范围为0 ~ 9，A ~ F.
-
-其实我们通过整体来看，我们可以发现，在这个大的while循环中就只对这个encode返回的...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu Oct 12 2023 10:28:02 GMT+0800">2023-10-12</span></span>
-        
-        
-    </div>
-
-    <a href="/2023/10/12/2023-bo-lu-bei/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2023/10/09/2022-peng-cheng-bei-rato/">
-                        2022-鹏城杯-rota
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        我们拿到题，我们可以直接发现我们最后的对比数据
-
-跟踪我们输入的数据，我们可以很容易的识别这个是一个base64换表的加密
-
-这里，我们会发现许多很花的伪代码，也不好分析是干什么的，这里，我们使用我们的动态调试
-
-经分析这里的a2就是我们的前面加密后...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon Oct 09 2023 15:06:51 GMT+0800">2023-10-09</span></span>
-        
-        
-    </div>
-
-    <a href="/2023/10/09/2022-peng-cheng-bei-rato/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2023/10/04/wang-ding-bei-2020-qing-long-zu-jocker/">
-                        网鼎杯-2020-青龙组-jocker
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        (SMC自解密+XOR+猜!)
-正如这道题的名字,我做的时候就挺jocker的,题不是很难,但是最后的猜猜大法才能出flag是我没想到的,而且就算是把flag解出来了,给程序也不会有正确的回显,这就挺…..jocker
-IDA打开,很容易知道flag...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Wed Oct 04 2023 18:08:54 GMT+0800">2023-10-04</span></span>
-        
-        
-    </div>
-
-    <a href="/2023/10/04/wang-ding-bei-2020-qing-long-zu-jocker/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2023/09/25/gwctf-2019-re3/">
-                        GWCTF-2019-re3
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        题不是很难，但是自己做的时候过于Sb了，也不能这样说，害，就是自己想多了，不久前自己魔改了一下AES，所以一直想得是魔改的AES，在哪儿整了半天，越想越不对，其实就是没有魔改AES，调试一下把KEY调试出来即可。我去看了一些WP,有点离谱，有些把密钥...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon Sep 25 2023 20:35:27 GMT+0800">2023-09-25</span></span>
-        
-        
-    </div>
-
-    <a href="/2023/09/25/gwctf-2019-re3/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2023/09/25/di-wu-kong-jian-2021-strangelanguage/">
-                        第五空间-2021-StrangeLanguage
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        (py打包+brainfuck语言+bf反编译+异或）我们拿到这道题，看这个图标我们就可以知道，就是PY打包的。
-
-我们使用 pyinstxtractor.py 将其解包
-
-可以得到如图的文件夹
-将其反编译
-
-网上找一个pyc反编译网站
-
-我们可以看...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon Sep 25 2023 08:45:32 GMT+0800">2023-09-25</span></span>
-        
-        
-    </div>
-
-    <a href="/2023/09/25/di-wu-kong-jian-2021-strangelanguage/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>

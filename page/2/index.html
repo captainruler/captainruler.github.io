@@ -178,6 +178,229 @@
                 
 
                 <h3 class="home-article-title">
+                    <a href="/2023/10/16/2023re4/">
+                        2023-re4(SEH异常控制流+花指令+异或)
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                         拿到题我们可以发现，有一个简单的反调试，调试很好过，我们直接NOP或者进行附加调试皆可
+
+限制了输入，指定输入的flag的长度为40.
+
+这一部分实现了SHE异常处理，人为的做出了访问不可地址的访问。
+
+如果是熟悉SEH这个考点的话，那就方向其实很...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon Oct 16 2023 18:34:02 GMT+0800">2023-10-16</span></span>
+        
+        
+    </div>
+
+    <a href="/2023/10/16/2023re4/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2023/10/16/roarctf-2019-polyre/">
+                        RoarCTF-2019-polyre(控制流平坦化+虚假控制流+CRC32校验)
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        拿到题目我们可以发现，这个是开了ollvm控制流平坦化的题目,优化有点高，不好直接进行分析。
+
+对于ollvm控制流平坦化，对于一般的开得比较少的，没有控制流没有那么复杂的，一般的的我们都在最后进行下断点，然后直接分析汇编代码即可，对于像这种，我们就...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon Oct 16 2023 09:03:22 GMT+0800">2023-10-16</span></span>
+        
+        
+    </div>
+
+    <a href="/2023/10/16/roarctf-2019-polyre/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2023/10/12/2023-bo-lu-bei/">
+                        2023-柏鹭杯-re1-imm
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        我们拿到这道题,判断输入，可以知道验证我们的输入为64个字节，存储在buffer中,下面有一个判断，我们可以知道我们输入的字符范围为0 ~ 9，A ~ F.
+
+其实我们通过整体来看，我们可以发现，在这个大的while循环中就只对这个encode返回的...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu Oct 12 2023 10:28:02 GMT+0800">2023-10-12</span></span>
+        
+        
+    </div>
+
+    <a href="/2023/10/12/2023-bo-lu-bei/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2023/10/09/2022-peng-cheng-bei-rato/">
+                        2022-鹏城杯-rota
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        我们拿到题，我们可以直接发现我们最后的对比数据
+
+跟踪我们输入的数据，我们可以很容易的识别这个是一个base64换表的加密
+
+这里，我们会发现许多很花的伪代码，也不好分析是干什么的，这里，我们使用我们的动态调试
+
+经分析这里的a2就是我们的前面加密后...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon Oct 09 2023 15:06:51 GMT+0800">2023-10-09</span></span>
+        
+        
+    </div>
+
+    <a href="/2023/10/09/2022-peng-cheng-bei-rato/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2023/10/04/wang-ding-bei-2020-qing-long-zu-jocker/">
+                        网鼎杯-2020-青龙组-jocker
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        (SMC自解密+XOR+猜!)
+正如这道题的名字,我做的时候就挺jocker的,题不是很难,但是最后的猜猜大法才能出flag是我没想到的,而且就算是把flag解出来了,给程序也不会有正确的回显,这就挺…..jocker
+IDA打开,很容易知道flag...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Wed Oct 04 2023 18:08:54 GMT+0800">2023-10-04</span></span>
+        
+        
+    </div>
+
+    <a href="/2023/10/04/wang-ding-bei-2020-qing-long-zu-jocker/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2023/09/25/gwctf-2019-re3/">
+                        GWCTF-2019-re3
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        题不是很难，但是自己做的时候过于Sb了，也不能这样说，害，就是自己想多了，不久前自己魔改了一下AES，所以一直想得是魔改的AES，在哪儿整了半天，越想越不对，其实就是没有魔改AES，调试一下把KEY调试出来即可。我去看了一些WP,有点离谱，有些把密钥...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon Sep 25 2023 20:35:27 GMT+0800">2023-09-25</span></span>
+        
+        
+    </div>
+
+    <a href="/2023/09/25/gwctf-2019-re3/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2023/09/25/di-wu-kong-jian-2021-strangelanguage/">
+                        第五空间-2021-StrangeLanguage
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        (py打包+brainfuck语言+bf反编译+异或）我们拿到这道题，看这个图标我们就可以知道，就是PY打包的。
+
+我们使用 pyinstxtractor.py 将其解包
+
+可以得到如图的文件夹
+将其反编译
+
+网上找一个pyc反编译网站
+
+我们可以看...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon Sep 25 2023 08:45:32 GMT+0800">2023-09-25</span></span>
+        
+        
+    </div>
+
+    <a href="/2023/09/25/di-wu-kong-jian-2021-strangelanguage/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
                     <a href="/2023/09/24/gkctf-2021-crash/">
                         GKCTF-2021-Crash
                     </a>
@@ -326,217 +549,6 @@
     </div>
 
     <a href="/2023/09/02/2021-chang-an-bei-xue-sheng-zu-snake-dedaca130c6e4381aa5ea85dcaa8674f/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2023/08/09/hua-zhi-ling-zong-jie-7789b9f63bcd41f2828df0aa7fa2fa23/">
-                        花指令总结
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        花指令总结1.PDF
-做花指令的题，主要是看汇编代码，将那些可疑的代码patch掉，多patch，说不一定就patch出来了，有些题就比较恶心，出现一大堆花，人肉去花非常麻烦，只能使用脚本。
-什么是花指令？所谓花指令就是指程序中完全冗余，不影响程序功...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Wed Aug 09 2023 15:28:31 GMT+0800">2023-08-09</span></span>
-        
-        
-    </div>
-
-    <a href="/2023/08/09/hua-zhi-ling-zong-jie-7789b9f63bcd41f2828df0aa7fa2fa23/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2023/08/02/ez-code-f470f8b01209484b8ebc3ceb62f6bb3d/">
-                        EZ_CODE
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        EZ_CODE我们打开会发现是一些莫名的代码，如果能被称为代码的话，这个代码是混淆过后的powershell代码，拿到手其实是没什么思路的。
-
-我们使用，powershell ISE（windous自带的的一个书写powershell脚本与4）打开这...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Wed Aug 02 2023 10:31:33 GMT+0800">2023-08-02</span></span>
-        
-        
-    </div>
-
-    <a href="/2023/08/02/ez-code-f470f8b01209484b8ebc3ceb62f6bb3d/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2023/07/30/2023-googlectf-re-oldshool-5f1694092f51492d9cc6cc1042d4039e/">
-                        2023-googleCTF-re-oldshool
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        2023-googleCTF-re-oldshool本题叫用给出的用户名，逆向，写出注册机，来批量生成密码，50个用户名，50个密码。
-刚刚拿到手，还打开不了，一直报错说窗口有问题，后来摸索了好久才知道，需要调整终端大小才能适应。而且这道题也是用Nc...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sun Jul 30 2023 15:46:43 GMT+0800">2023-07-30</span></span>
-        
-        
-    </div>
-
-    <a href="/2023/07/30/2023-googlectf-re-oldshool-5f1694092f51492d9cc6cc1042d4039e/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2023/07/29/x87-fu-dian-zhi-ling-a99676d69c184da3b447c5bd7754a8a0/">
-                        X87浮点指令
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        X87浮点指令87 FPU寄存器栈有一定数量的寄存器（通常是8个或更多，取决于处理器）x87简介x87指令集是用于处理浮点数运算的指令集，它是Intel 8087数学协处理器的指令集的扩展，后来成为x86处理器家族的一部分。x87指令集为浮点运算提供...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sat Jul 29 2023 19:42:09 GMT+0800">2023-07-29</span></span>
-        
-        
-    </div>
-
-    <a href="/2023/07/29/x87-fu-dian-zhi-ling-a99676d69c184da3b447c5bd7754a8a0/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2023/07/26/ferris-proxy-663889200af44a809eb773849bd3f1f0/">
-                        Ferris proxy
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        
-按照着wp的思路，照着走一遍之后，大致理清楚了这道题的加密思路
-
-通过wireshark我们可以将server发送到clientd的数据提取出来
-
-通过分析我们可以得知，对于整个TCP流，是运用了rc4的加密方式，通过动态调试，我们可以调试出密钥为...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Wed Jul 26 2023 14:03:33 GMT+0800">2023-07-26</span></span>
-        
-        
-    </div>
-
-    <a href="/2023/07/26/ferris-proxy-663889200af44a809eb773849bd3f1f0/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2023/06/18/qiang-wang-bei-2022-gamemaster-110de77af2d24015be62f1704ce21b76/">
-                        强网杯-2022-GameMaster
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        强网杯-2022-GameMaster刚开始看这道题的时候，其实是有点懵的，还是自己做的题太少了T _ T.就此为了加深印象，复现这道题。
-丢进Exeinfo PE中，可以发现是c#写的.net程序，我们用Dnspy打开（一个专门反编译c#，.net...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sun Jun 18 2023 10:29:56 GMT+0800">2023-06-18</span></span>
-        
-        
-    </div>
-
-    <a href="/2023/06/18/qiang-wang-bei-2022-gamemaster-110de77af2d24015be62f1704ce21b76/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2023/06/14/2019-hong-mao-bei-childre-c-ni-xiang-han-shu-diao-yong-yue-ding-c-xiu-shi-fu-zhuan-huan-yi-huo-hei-he-fen-xi-bao-po-119141f5973c4a7780d21de7909182c0/">
-                        2019红帽杯-CHILDRE(c++逆向+函数调用约定+c++修饰符转换+异或+黑盒分析+爆破)
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        [2019红帽杯]CHILDRE(c++逆向+函数调用约定+c++修饰符转换+异或+黑盒分析+爆破)
-
-
-这里就直接用z3写脚本将我们的outoutstring爆出来。
-outputString =&nbsp;private: char * __th...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Wed Jun 14 2023 09:45:43 GMT+0800">2023-06-14</span></span>
-        
-        
-    </div>
-
-    <a href="/2023/06/14/2019-hong-mao-bei-childre-c-ni-xiang-han-shu-diao-yong-yue-ding-c-xiu-shi-fu-zhuan-huan-yi-huo-hei-he-fen-xi-bao-po-119141f5973c4a7780d21de7909182c0/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
