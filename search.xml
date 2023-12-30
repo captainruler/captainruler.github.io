@@ -4,6 +4,32 @@
   
     
     <entry>
+      <title>2022-SWPUCTFandroid2(反射+xor)</title>
+      <link href="/2023/12/30/2022-swpuctfandroid2-fan-she-xor-088f1be837a2497ba49f10bae154dff6/"/>
+      <url>/2023/12/30/2022-swpuctfandroid2-fan-she-xor-088f1be837a2497ba49f10bae154dff6/</url>
+      
+        <content type="html"><![CDATA[<h1 id="2022-SWPUCTFandroid2-反射-xor"><a href="#2022-SWPUCTFandroid2-反射-xor" class="headerlink" title="2022-SWPUCTFandroid2(反射+xor)"></a>2022-SWPUCTFandroid2(反射+xor)</h1><p>这道题主要有个很bug的地方,因为我平常习惯使用c来写一些简单的解密,这里就出现坑了,因为java中使用的编码的unicode编码,而我们的c语言使用的是ascii码,因此直接声明char类型数组是解不出来我们的数据的.</p><p><img lazyload="" src="/images/loading.svg" data-src="/2023/12/30/2022-swpuctfandroid2-fan-she-xor-088f1be837a2497ba49f10bae154dff6/Untitled.png" alt="Untitled"></p><p>这里为了避免麻烦,我们直接使用py来写脚本,python使用的是也是unicode编码,因此我直接写进去解我们的数据即可,都不需要转换</p><p>这里还有一个坑,就是</p><p>我们在这里可以发现这里出现了我们的key,但是,是解不出来我们的数据的</p><p><img lazyload="" src="/images/loading.svg" data-src="/2023/12/30/2022-swpuctfandroid2-fan-she-xor-088f1be837a2497ba49f10bae154dff6/Untitled1.png" alt="Untitled"></p><p>这里会调用反射,使用反射将我们的key修改了,因此我们在写脚本的时候,需要将这个值改一手</p><p><img lazyload="" src="/images/loading.svg" data-src="/2023/12/30/2022-swpuctfandroid2-fan-she-xor-088f1be837a2497ba49f10bae154dff6/Untitled2.png" alt="Untitled"></p><p>脚本</p><div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">enc=<span class="string">"棿棢棢棲棥棷棊棐棁棚棨棨棵棢棌"</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">hex</span>(<span class="built_in">ord</span>(enc[<span class="number">0</span>])))</span><br><span class="line">key=<span class="number">0x3ADE68B1</span></span><br><span class="line">flag=<span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(enc)):</span><br><span class="line">    flag+=(<span class="built_in">chr</span>(<span class="built_in">ord</span>(enc[i])^key &amp; <span class="number">0xFFFF</span>))</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br></pre></td></tr></tbody></table></figure></div><p>得到flag</p><p>NSSCTF{apkYYDS}</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>2022HNCTF-Easy_Android（jeb调试）</title>
+      <link href="/2023/12/29/hnctf-2022-week2-easy-android-16f347d361354a2fa088fc1f724ab18f/"/>
+      <url>/2023/12/29/hnctf-2022-week2-easy-android-16f347d361354a2fa088fc1f724ab18f/</url>
+      
+        <content type="html"><![CDATA[<h1 id="HNCTF-2022-WEEK2-Easy-Android"><a href="#HNCTF-2022-WEEK2-Easy-Android" class="headerlink" title="HNCTF-2022-WEEK2-Easy_Android"></a>HNCTF-2022-WEEK2-Easy_Android</h1><p>这是去年一道非常简单的一道安卓题目，现在准备捡一捡安卓相关的知识，就从简单的开始对安卓题目进行学习。</p><p>记录这道题主要是记录一下关于jeb安卓调试。</p><p>将文件放入jeb中进行分析</p><p>找到mainactivity这个类，我们找到这个checkSN这个函数，代码逻辑很容易看懂，就是将我们前的用户名进行md5运算之后，取其奇数索引的字符，与我们输入的flag｛｝里面的内容进行对比，我们直接写代码进行逆向是是否简单的</p><p><img lazyload="" src="/images/loading.svg" data-src="/2023/12/29/hnctf-2022-week2-easy-android-16f347d361354a2fa088fc1f724ab18f/Untitled.png" alt="Untitled"></p><p>下面主要是通过这个例题来记录一下关于jeb对安卓程序的调试</p><p>这里我使用的是真机，做安卓最好使用真机，模拟器很容易出现问题（另外还有就是会与wsl冲突，作为习惯使用wsl的来说,没有wsl是万万不可的）</p><p>首先我们先链接adb ，查看是否连上手机了</p><p><img lazyload="" src="/images/loading.svg" data-src="/2023/12/29/hnctf-2022-week2-easy-android-16f347d361354a2fa088fc1f724ab18f/Untitled1.png" alt="Untitled"></p><p>可以看到这里是连上了</p><p>之后，我们将app安装到我们的手机上使用命令</p><div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb install + apk文件路径</span><br></pre></td></tr></tbody></table></figure></div><p>安装好之后，我们在手机中打开这个app</p><p>现在在jeb中</p><p><img lazyload="" src="/images/loading.svg" data-src="/2023/12/29/hnctf-2022-week2-easy-android-16f347d361354a2fa088fc1f724ab18f/Untitled2.png" alt="Untitled"></p><p>在需要下断点处，按下tab键，转到smali语言下。这里不同与ida，ida能够直接在伪代码中下断点，安卓只能在smali上下断点</p><p><img lazyload="" src="/images/loading.svg" data-src="/2023/12/29/hnctf-2022-week2-easy-android-16f347d361354a2fa088fc1f724ab18f/Untitled3.png" alt="Untitled"></p><p>在需要下断点处按下，ctrl+b打断点</p><p><img lazyload="" src="/images/loading.svg" data-src="/2023/12/29/hnctf-2022-week2-easy-android-16f347d361354a2fa088fc1f724ab18f/Untitled4.png" alt="Untitled"></p><p>这道题就在两处关键下断点即可</p><p><img lazyload="" src="/images/loading.svg" data-src="/2023/12/29/hnctf-2022-week2-easy-android-16f347d361354a2fa088fc1f724ab18f/Untitled5.png" alt="Untitled"></p><p>开始调试</p><p><img lazyload="" src="/images/loading.svg" data-src="/2023/12/29/hnctf-2022-week2-easy-android-16f347d361354a2fa088fc1f724ab18f/Untitled6.png" alt="Untitled"></p><p>因为事先打开了我们需要调试的程序，这里直接就会出现，我们直接点附加调试即可</p><p><img lazyload="" src="/images/loading.svg" data-src="/2023/12/29/hnctf-2022-week2-easy-android-16f347d361354a2fa088fc1f724ab18f/Untitled7.png" alt="Untitled"></p><p>输入22个字符，过检测</p><p>过了之后，我们的断点断下来了，f6单步，f7步过，我们调试即可</p><p><img lazyload="" src="/images/loading.svg" data-src="/2023/12/29/hnctf-2022-week2-easy-android-16f347d361354a2fa088fc1f724ab18f/Untitled8.png" alt="Untitled"></p><p>这旁边的就是我们的数据，与一些线程的东西</p><p><img lazyload="" src="/images/loading.svg" data-src="/2023/12/29/hnctf-2022-week2-easy-android-16f347d361354a2fa088fc1f724ab18f/Untitled9.png" alt="Untitled"></p><p>smali与伪代码交叉着看，我们可以知道这里v6就是计算出来的flag</p><p><img lazyload="" src="/images/loading.svg" data-src="/2023/12/29/hnctf-2022-week2-easy-android-16f347d361354a2fa088fc1f724ab18f/Untitled10.png" alt="Untitled"></p><p>得到flag</p><p>自己也是很少做安卓题目，所以就记录比较详细，防止自己搞忘。</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>ollvm相关逆向题目的解决方法</title>
       <link href="/2023/12/25/ollvm-xiang-guan-ni-xiang-ti-mu-de-jie-jue-fang-fa-e169461974154ef2b13378877ee5b2c8/"/>
       <url>/2023/12/25/ollvm-xiang-guan-ni-xiang-ti-mu-de-jie-jue-fang-fa-e169461974154ef2b13378877ee5b2c8/</url>
